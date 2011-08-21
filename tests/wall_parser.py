@@ -5,7 +5,7 @@
 
 import unittest
 
-from vkfeed.wall_parser import WallPageParser
+from vkfeed.wall_parser import WallPageParser, ParseError
 
 
 class TestWallParser(unittest.TestCase):
@@ -15,16 +15,51 @@ class TestWallParser(unittest.TestCase):
         self.__parser = WallPageParser()
 
 
-    def test_empty_wall(self):
-        """Testing parsing of empty wall."""
+    def test_invalid_page(self):
+        """Testing parsing of invalid page."""
 
-        html = open("wall_parser/empty_wall.html").read().decode("cp1251")
+        self.assertRaises(ParseError, lambda:
+            self.__parser.parse(open("wall_parser/invalid_page.html").read().decode("cp1251")))
 
-        etalon = {
-            "title":     u"Дмитрий Конищев",
-            "wall":      [],
-            "wall_size": 0,
-        }
+
+    def test_group_wall(self):
+        """Testing parsing of group wall"""
+
+        self.__test_parsing(
+            open("wall_parser/group_profile_page.html").read().decode("cp1251"), {
+                "title":     u"Хабрахабр",
+                "wall":      [],
+                "wall_size": 10,
+            }
+        )
+
+
+    def test_user_empty_wall(self):
+        """Testing parsing of empty wall"""
+
+        self.__test_parsing(
+            open("wall_parser/user_profile_page_with_empty_wall.html").read().decode("cp1251"), {
+                "title":     u"Дмитрий Конищев",
+                "wall":      [],
+                "wall_size": 0,
+            }
+        )
+
+
+    def test_user_wall(self):
+        """Testing parsing of user wall"""
+
+        self.__test_parsing(
+            open("wall_parser/user_profile_page.html").read().decode("cp1251"), {
+                "title":     u"Павел Дуров",
+                "wall":      [],
+                "wall_size": 10,
+            }
+        )
+
+
+    def __test_parsing(self, html, etalon):
+        """Runs the test with the specified data."""
 
         clear_run_data = self.__normalize_data(self.__parser.parse(html))
         self.assertEqual(etalon, clear_run_data)
@@ -32,12 +67,6 @@ class TestWallParser(unittest.TestCase):
         dirty_run_data = self.__normalize_data(self.__parser.parse(html))
         self.assertEqual(etalon, clear_run_data)
         self.assertEqual(etalon, dirty_run_data)
-
-
-    def test_filled_wall(self):
-        """Testing parsing of filled wall."""
-
-        # TODO
 
 
     def __normalize_data(self, data):
@@ -53,7 +82,7 @@ class TestWallParser(unittest.TestCase):
 
 if __name__ == '__main__':
     # TODO
-    import logging
-    logging.getLogger().setLevel(logging.DEBUG)
+    #import logging
+    #logging.getLogger().setLevel(logging.DEBUG)
     unittest.main()
 

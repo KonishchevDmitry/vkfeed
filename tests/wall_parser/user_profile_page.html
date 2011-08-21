@@ -1,0 +1,827 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script type="text/javascript" src="/al_loader.php?act=nav&v=4648"></script>
+
+<link rel="shortcut icon" href="/images/faviconnew.ico" />
+
+<meta http-equiv="content-type" content="text/html; charset=windows-1251" />
+<meta name="description" content=" " />
+
+<title>Павел Дуров</title>
+
+<noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.php"></noscript>
+
+<link rel="stylesheet" type="text/css" href="/css/al/common.css?178" />
+<!--[if lte IE 6]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(/css/al/ie6.css?19); /* ]]> */</style><![endif]-->
+<!--[if IE 7]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(/css/al/ie7.css?13); /* ]]> */</style><![endif]-->
+
+<script type="text/javascript">
+var vk = {
+  al: parseInt('4') || 4,
+  id: 0,
+  intnat: '' ? true : false,
+  host: 'vkontakte.ru',
+  lang: 0,
+  rtl: parseInt('') || 0,
+  version: 4648,
+  zero: false,
+  contlen: 49410,
+  loginscheme: 'https',
+  ip_h: '147335987a8beff6d2',
+  navPrefix: '/'
+}
+
+window.locDomain = vk.host.match(/[a-zA-Z]+\.[a-zA-Z]+\.?$/)[0];
+var _ua = navigator.userAgent.toLowerCase();
+if (/opera/i.test(_ua) || !/msie 6/i.test(_ua) || document.domain != locDomain) document.domain = locDomain;
+var ___htest = (location.toString().match(/#(.*)/) || {})[1] || '';
+if (vk.al != 1 && ___htest.length && ___htest.substr(0, 1) == vk.navPrefix) {
+  if (vk.al != 3 || vk.navPrefix != '!') {
+    location.replace(location.protocol + '//' + location.host + '/' + ___htest.replace(/^(\/|!)/, ''));
+  }
+}
+
+var StaticFiles = {
+  'common.js' : {v: 486},
+  'common.css': {v: 178},
+  'ie6.css'   : {v: 19},
+  'ie7.css'   : {v: 13}
+  ,'lang0_0.js':{v:4221},'profile.css':{v:70},'page.css':{v:127},'profile.js':{v:71},'page.js':{v:174}
+}
+
+</script>
+<link type="text/css" rel="stylesheet" href="/css/al/profile.css?70"></link><link type="text/css" rel="stylesheet" href="/css/al/page.css?127"></link><script type="text/javascript" src="/js/al/common.js?486"></script><script type="text/javascript" src="/js/lang0_0.js?4221"></script><script type="text/javascript" src="/js/al/profile.js?71"></script><script type="text/javascript" src="/js/al/page.js?174"></script>
+
+</head>
+
+<body onresize="onBodyResize()" class="is_rtl">
+  <div id="system_msg" class="fixed"></div>
+  <div id="utils"></div>
+
+  <div id="layer_bg" class="fixed"></div><div id="layer_wrap" class="scroll_fix_wrap fixed"><div id="layer"></div></div>
+  <div id="box_layer_bg" class="fixed"></div><div id="box_layer_wrap" class="scroll_fix_wrap fixed"><div id="box_layer"><div id="box_loader"><div class="loader"></div><div class="back"></div></div></div></div>
+
+  <div id="stl_left"></div><div id="stl_side"></div>
+  
+  <script type="text/javascript">domStarted();</script>
+
+  <div class="scroll_fix_wrap" id="page_wrap"><div id="top_info_wrap"></div>
+<div><div class="scroll_fix">
+  <div id="page_layout">
+    <div id="page_header" class="p_head p_head_l0">
+      <div class="back"></div>
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="content">
+        <div id="top_nav" class="head_nav">
+  <a id="top_home_link" class="top_home_link fl_l" href="/" onclick="return nav.go(this, event)" class="fl_l" style=""></a>
+  <div id="top_links">
+    <a id="top_reg_link" class="fl_r top_nav_link" href="/reg0" style="" onclick="return !showBox('al_register.php', {act: 'register_box'}, {params: {width: 514}, stat: ['reg.css']}, event)">Как стать участником?</a>
+    <a id="top_search_link" class="fl_r top_nav_link" href="/search" style="display: none" onclick="return nav.go(this, event)">Поиск друзей</a>
+    <a class="fl_l top_nav_link" href="" id="top_back_link" onclick="return nav.go(this, event, {back: true})"></a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <div id="side_bar" class="fl_l" style="">
+      <div id="quick_login">
+  <form method="POST" name="login" id="quick_login_form" action="https://login.vk.com/?act=login" onsubmit="if (vklogin) {return true} else {quick_login();return false;}">
+    <input type="hidden" name="act" value="login" />
+    <input type="hidden" name="q" value="1" />
+    <input type="hidden" name="al_frame" value="1" />
+    <input type="hidden" name="expire" id="quick_expire_input" value="" />
+    <input type="hidden" name="captcha_sid" id="quick_captcha_sid" value="" />
+    <input type="hidden" name="captcha_key" id="quick_captcha_key" value="" />
+    <input type="hidden" name="from_host" value="vkontakte.ru" />
+    <input type="hidden" name="ip_h" value="147335987a8beff6d2" />
+    <div class="label">E-mail или Логин:</div>
+    <div class="labeled"><input type="text" name="email" class="text" onfocus="show('quick_expire')" id="quick_email" /></div>
+    <div class="label">Пароль:</div>
+    <div class="labeled"><input type="password" name="pass" class="text" onfocus="show('quick_expire')" id="quick_pass" /></div>
+    <div class="checkbox" id="quick_expire" onclick="checkbox(this);ge('quick_expire_input').value=isChecked(this)?1:'';"><div></div>Чужой компьютер</div>
+    <input type="submit" class="submit" />
+  </form>
+  <div class="button_blue button_wide"><button id="quick_login_button">Войти</button></div>
+  <div class="clear forgot"><a href="/login?act=forgot" target="_top">Забыли пароль?</a></div>
+</div>
+    </div>
+
+    <div id="page_body" class="fl_r">
+      <div id="header_wrap2">
+        <div id="header_wrap1">
+          <div id="header" style="">
+            <h1 id="title">Павел Дуров</h1>
+          </div>
+        </div>
+      </div>
+      <div id="wrap_between"></div>
+      <div id="wrap3"><div id="wrap2">
+  <div id="wrap1">
+    <div id="content"><div id="profile">
+  
+  <div class="narrow_column fl_l" id="profile_narrow">
+    <div id="profile_avatar"><a id="profile_photo_link" href="/photo1_205600277" onclick="return showPhoto('1_205600277', 'album1_0/rev', {temp: {x_src: &quot;http://cs1495.vkontakte.ru/u00001/69826197/x_18cd9ada.jpg&quot;}}, event)"><img src="http://cs1495.vkontakte.ru/u00001/a_04766c4c.jpg" /></a></div><div class="msg guest_actions">
+Чтобы отправить Павлу сообщение, Вам необходимо <a onclick="focusLoginInput()">войти в систему</a>.
+</div><div id="profile_counts" class="counts_module"><div><a class="photos"onclick="return nav.go(this, event)" href="/tag1"><span class="fl_r thumb"></span><span class="fl_r">4</span>Фотографии с Павлом</a></div><div><a class="videos" onclick="return cur.needLoginBox()" href="/video?section=tagged&id=1"><span class="fl_r thumb"></span><span class="fl_r">1</span>Видеозаписи с Павлом</a></div><div><a class="fans"onclick="return Profile.showFans(event);" href="/fans.php?act=fans&mid=1"><span class="fl_r thumb"></span><span class="fl_r">2<span style="font-size:60%"> </span>551<span style="font-size:60%"> </span>785</span>Подписчики Павла</a></div></div><div class="rate_empty_line"></div><div class="module clear page_list_module" id="profile_idols">
+  <a href="/fans.php?act=idols&mid=1" onclick="return Profile.showIdols(event);" class="module_header">
+  <div class="header_top clear_fix">
+    <span class="right_link fl_r"  onmouseover="this.parentNode.parentNode.href=''" onmouseout="this.parentNode.parentNode.href='/fans.php?act=idols&mid=1'"></span>
+    Подписки
+  </div>
+  <div class="p_header_bottom">
+    <span class="fl_r">Все</span>
+    3 страницы
+  </div>
+</a>
+  <div class="module_body clear_fix">
+    <div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/officialpages" onclick="return nav.go(this, event)"><img src="http://cs11115.vkontakte.ru/g22079806/e_2109f98c.jpg" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="group_name"><a href="/officialpages" onclick="return nav.go(this, event)">Официальные сообщества ВКонтакте</a></div>
+    <div class="group_desc">Интернет</div>
+  </div>
+</div><div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/habr" onclick="return nav.go(this, event)"><img src="http://cs11159.vkontakte.ru/g20629724/e_443fb3be.jpg" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="group_name"><a href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a></div>
+    <div class="group_desc">СМИ</div>
+  </div>
+</div><div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/public26170520" onclick="return nav.go(this, event)"><img src="http://cs5424.vkontakte.ru/g26170520/e_16fc2c77.jpg" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="group_name"><a href="/public26170520" onclick="return nav.go(this, event)">Карлос Кастанеда</a></div>
+    <div class="group_desc">Духовное лицо</div>
+  </div>
+</div>
+  </div>
+</div><div class="module clear album_module" id="profile_albums">
+  <a href="/albums1" onclick="return nav.go(this, event)" class="module_header">
+  <div class="header_top clear_fix">
+    <span class="right_link fl_r"  onmouseover="this.parentNode.parentNode.href=''" onmouseout="this.parentNode.parentNode.href='/albums1'"></span>
+    Фотоальбомы
+  </div>
+  <div class="p_header_bottom">
+    <span class="fl_r">Все</span>
+    2 альбома
+  </div>
+</a>
+  <div class="module_body clear_fix">
+    <div class="fl_l clear_fix clear album_row">
+  <div class="fl_l thumb">
+    <a href="/album1_141167104" onclick="return nav.go(this, event)"><div><img src="http://cs9591.vkontakte.ru/u00001/141167104/s_ba2d617c.jpg" /></div></a>
+  </div>
+  <div class="fl_l info">
+    <div><a href="/album1_141167104" onclick="return nav.go(this, event)">С телефона</a></div>
+    <div class="updated">Обновлён вчера</div>
+  </div>
+</div><div class="fl_l clear_fix clear album_row">
+  <div class="fl_l thumb">
+    <a href="/album1_127202895" onclick="return nav.go(this, event)"><div><img src="http://cs871.vkontakte.ru/u00001/127202895/s_d5bb4880.jpg" /></div></a>
+  </div>
+  <div class="fl_l info">
+    <div><a href="/album1_127202895" onclick="return nav.go(this, event)">Штаб ВКонтакте</a></div>
+    <div class="updated">Обновлён 17 февраля 2011</div>
+  </div>
+</div>
+  </div>
+</div><div class="module clear notes_module" id="profile_notes">
+  <a href="/notes1"  class="module_header">
+  <div class="header_top clear_fix">
+    <span class="right_link fl_r"  onmouseover="this.parentNode.parentNode.href=''" onmouseout="this.parentNode.parentNode.href='/notes1'"></span>
+    Заметки
+  </div>
+  <div class="p_header_bottom">
+    <span class="fl_r">Все</span>
+    5 заметок
+  </div>
+</a>
+  <div class="module_body clear_fix">
+    <div class="clear_fix note_row">
+  <div class="icon fl_l"></div>
+  <div class="info fl_r">
+    <div><a href="/note1_11283622" onclick="return nav.go(this, event)">Лучший путь – Ваш собственный</a></div>
+    <div><small>15 авг в 5:04<span class="divide">|</span><a href="/note1_11283622" onclick="return nav.go(this, event)">0 комментариев</a></small></div>
+  </div>
+</div><div class="clear_fix note_row">
+  <div class="icon fl_l"></div>
+  <div class="info fl_r">
+    <div><a href="/note1_11138884" onclick="return nav.go(this, event)">К вопросу о реформе приватности на списки друзей ВКонтакте</a></div>
+    <div><small>12 июн в 22:17<span class="divide">|</span><a href="/note1_11138884" onclick="return nav.go(this, event)">0 комментариев</a></small></div>
+  </div>
+</div><div class="clear_fix note_row">
+  <div class="icon fl_l"></div>
+  <div class="info fl_r">
+    <div><a href="/note1_11101421" onclick="return nav.go(this, event)">Победа&#33;</a></div>
+    <div><small>31 мая в 2:02<span class="divide">|</span><a href="/note1_11101421" onclick="return nav.go(this, event)">0 комментариев</a></small></div>
+  </div>
+</div>
+  </div>
+</div>
+  </div>
+  <div class="wide_column fl_r" id="profile_wide">
+    <div id="profile_info">
+  <h4 class="simple">
+    <span class="fl_r">СПбГУ</span>
+    Павел  Дуров
+    <div class="clear" id="profile_current_info">Победа предопределена.</div>
+  </h4>
+  <div id="profile_short">
+    <div class="profile_info"><div class="clear_fix ">
+  <div class="label fl_l">День рождения:</div>
+  <div class="labeled fl_l">10 октября 1984 г.</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Языки:</div>
+  <div class="labeled fl_l">Русский, English, Fran&#231;ais, Deutsch, Espa&#241;ol, Italiano, Lingua latina</div>
+</div></div><a class="profile_info_link noselect" onclick="Profile.showFull()">показать подробную информацию</a>
+  </div>
+</div><div id="profile_full_info" style="display: none">
+  <h4>
+  
+  <b>Контактная информация</b>
+</h4>
+<div class="profile_info">
+  <div class="clear_fix ">
+  <div class="label fl_l">Город:</div>
+  <div class="labeled fl_l">Санкт-Петербург</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Twitter:</div>
+  <div class="labeled fl_l"><a href="http://twitter.com/durov" target="_blank">durov</a></div>
+</div>
+</div>
+  <h4>
+  
+  <b>Убеждения</b>
+</h4>
+<div class="profile_info">
+  <div class="clear_fix ">
+  <div class="label fl_l">Полит. взгляды:</div>
+  <div class="labeled fl_l">либертарианские</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Религ. взгляды:</div>
+  <div class="labeled fl_l"><a href="/ru/%D0%9F%D0%B0%D1%81%D1%82%D0%B0%D1%84%D0%B0%D1%80%D0%B8%D0%B0%D0%BD%D1%81%D1%82%D0%B2%D0%BE" onclick="return nav.go(this, event);">Пастафарианство</a></div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Главное в жизни:</div>
+  <div class="labeled fl_l">Совершенствование мира</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Главное в людях:</div>
+  <div class="labeled fl_l">Смелость и упорство</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Отн. к курению:</div>
+  <div class="labeled fl_l">Резко негативное</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Отн. к алкоголю:</div>
+  <div class="labeled fl_l">Резко негативное</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Вдохновляют:</div>
+  <div class="labeled fl_l">Steve Jobs, Алексей Добромыслов, Игорь Жуков, Вася Бабич</div>
+</div>
+</div>
+  <h4>
+  
+  <b>Личная информация</b>
+</h4>
+<div class="profile_info">
+  <div class="clear_fix ">
+  <div class="label fl_l">Любимая музыка:</div>
+  <div class="labeled fl_l">The Prodigy, Rage Against The Machine</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Любимые цитаты:</div>
+  <div class="labeled fl_l">Дорога возникает под шагами идущего.</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">О себе:</div>
+  <div class="labeled fl_l">Hungry underdog</div>
+</div>
+</div>
+  <h4>
+  
+  <b>Образование</b>
+</h4>
+<div class="profile_info">
+  <div class="clear_fix ">
+  <div class="label fl_l">Вуз:</div>
+  <div class="labeled fl_l">СПбГУ</div>
+</div><div class="clear_fix block">
+  <div class="label fl_l">Школа:</div>
+  <div class="labeled fl_l">Sc.Elem. Coppino - Falletti di Barolo<br>Torino</div>
+</div><div class="clear_fix block">
+  <div class="label fl_l">Гимназия:</div>
+  <div class="labeled fl_l">Академическая гимназия (АГ) СПбГУ '01<br>Санкт-Петербург, 1996-2001 (о)<br>Иностранные языки</div>
+</div>
+</div>
+  
+  <h4>
+  
+  <b>Карьера</b>
+</h4>
+<div class="profile_info">
+  <div class="clear_fix ">
+  <div class="label fl_l">Место работы:</div>
+  <div class="labeled fl_l">ООО &quot;В Контакте&quot;<br>Санкт-Петербург, с 2006 г.<br>Генеральный директор</div>
+</div>
+</div>
+  
+</div><div class="module clear photos_module" id="profile_photos_module">
+  <a href="/photos1" onclick="return nav.go(this, event)" class="module_header">
+    <div class="header_top clear_fix">
+      <span class="right_link fl_r">все</span>
+      Фотографии
+    </div>
+  </a>
+  <div id="profile_photos" class="clear_fix profile_photos_other">
+    <table cellspacing="0" cellpadding="0">
+       <tr class="photos"><td><a href="/photo1_266062990?all=1" onclick="return showPhoto('1_266062990', 'photos1', {temp: {x_src: &quot;http://cs9591.vkontakte.ru/u00001/141167104/x_b36d20ad.jpg&quot;, y_src: &quot;http://cs9591.vkontakte.ru/u00001/141167104/y_03893e3d.jpg&quot;, z_src: &quot;http://cs9591.vkontakte.ru/u00001/141167104/z_69d73a4c.jpg&quot;}}, event)">
+  <img src="http://cs9591.vkontakte.ru/u00001/141167104/s_ba2d617c.jpg">
+</a></td></td><td><a href="/photo1_266062989?all=1" onclick="return showPhoto('1_266062989', 'photos1', {temp: {x_src: &quot;http://cs9591.vkontakte.ru/u00001/141167104/x_9be2ac01.jpg&quot;, y_src: &quot;http://cs9591.vkontakte.ru/u00001/141167104/y_959dd59a.jpg&quot;, z_src: &quot;http://cs9591.vkontakte.ru/u00001/141167104/z_ac5cbe03.jpg&quot;}}, event)">
+  <img src="http://cs9591.vkontakte.ru/u00001/141167104/s_0f199a32.jpg">
+</a></td></td><td><a href="/photo1_222740876?all=1" onclick="return showPhoto('1_222740876', 'photos1', {temp: {x_src: &quot;http://cs871.vkontakte.ru/u00001/127202895/x_d3723c47.jpg&quot;, y_src: &quot;http://cs871.vkontakte.ru/u00001/127202895/y_dc09d2c5.jpg&quot;, z_src: &quot;http://cs871.vkontakte.ru/u00001/127202895/z_226aac2a.jpg&quot;}}, event)">
+  <img src="http://cs871.vkontakte.ru/u00001/127202895/s_d5bb4880.jpg">
+</a></td></td><td><a href="/photo1_221668705?all=1" onclick="return showPhoto('1_221668705', 'photos1', {temp: {x_src: &quot;http://cs4726.vkontakte.ru/u00001/127202895/x_2590dee1.jpg&quot;, y_src: &quot;http://cs4726.vkontakte.ru/u00001/127202895/y_4374fb8e.jpg&quot;, z_src: &quot;http://cs4726.vkontakte.ru/u00001/127202895/z_782c2757.jpg&quot;}}, event)">
+  <img src="http://cs4726.vkontakte.ru/u00001/127202895/s_b65fe5fc.jpg">
+</a></td></td><td><a href="/photo1_219406272?all=1" onclick="return showPhoto('1_219406272', 'photos1', {temp: {x_src: &quot;http://cs4726.vkontakte.ru/u00001/127202895/x_652d75b3.jpg&quot;, y_src: &quot;http://cs4726.vkontakte.ru/u00001/127202895/y_ae263eac.jpg&quot;, z_src: &quot;http://cs4726.vkontakte.ru/u00001/127202895/z_0e796c74.jpg&quot;}}, event)">
+  <img src="http://cs4726.vkontakte.ru/u00001/127202895/s_bc07f6f5.jpg">
+</a></td></td></tr>
+       
+    </table>
+  </div>
+</div><div class="wall_module" id="profile_wall">
+  <div class="module_header wall_header">
+  <a id="page_wall_header" class="header_top clear_fix" onclick="if (checkEvent(event)) return true; return wall.switchWall()">
+    <span class="fl_r" id="page_wall_switch"></span>
+    Стена<span id="page_wall_posts_count" onclick="if (checkEvent(event)) return true; nav.go(this.parentNode, event); return cancelEvent(event);"></span>
+  </a>
+</div>
+  
+  <div class="clear_fix"><div id="page_wall_posts" class="wall_posts own"><input type="hidden" id="page_wall_count_all" value="32432" /><input type="hidden" id="page_wall_count_own" value="33" /><div id="post1_44698" class="post all own" onmouseover="wall.postOver('1_44698')" onmouseout="wall.postOut('1_44698')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/durov" onclick="return nav.go(this, event)"><img src="http://cs1495.vkontakte.ru/u00001/e_d0b89a3d.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post1_44698" onclick="wall.markAsSpam('1_44698', '8ecc668267ab318c23');" onmouseover="wall.activeDeletePost('1_44698', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('1_44698')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/durov" onclick="return nav.go(this, event)">Павел Дуров</a> <div class="wall_post_text"><span>Помните те случаи, когда Ваше мнение шло полностью вразрез с мнением окружающих? Это – самые ценные моменты, в которые нужно вцепляться мертвой хваткой. Мир вокруг нас развивается так быстро, что общепринятые убеждения на наших глазах становятся издевательством над здравым смысло<br></span><a style="position: relative; top: 2px;" href=""onclick="hide(this, this.previousSibling);show(this.nextSibling);return false;">показать полностью..</a><span style="display: none">Помните те случаи, когда Ваше мнение шло полностью вразрез с мнением окружающих? Это – самые ценные моменты, в которые нужно вцепляться мертвой хваткой. Мир вокруг нас развивается так быстро, что общепринятые убеждения на наших глазах становятся издевательством над здравым смыслом. Сопротивление шума вокруг – устойчивый ориентир для всех желающих внести весомый вклад в развитие человечества. Слушать внутренний голос не означает оставаться глухим к мнению окружающих. Однако забудьте про демократию среди тех, кто Вас окружает, – голос деятельного мыслителя, меняющего мир, должен быть для Вас стократ более значим, чем голос праздного обывателя с его правом на мнение. Но менее значим, чем Ваш собственный. Ваша вера в возможность иного пути намного важнее для человечества и для всех нас, чем Ваше умение приспосабливаться и вторить безличному эху конформистов.</span></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk1_44698" href="/note1_11283622" onclick="return nav.go(this, event)" onmouseover="wall.postTooltip(this, '1_44698')">
+    <b class="fl_l note"></b>Заметка
+    <span class="a">Лучший путь – Ваш собственный</span>
+  </a>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('1_44698')" onmouseout="wall.likeOut('1_44698')" onclick="wall.like('1_44698', 'ca7f173717c1a53ca7'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link1_44698"></span>
+  <div class=" fl_l" id="like_icon1_44698"></div>
+  <span class="like_count fl_l" id="like_count1_44698">17169</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall1_44698" onclick="return nav.go(this, event)"><span class="rel_date">15 авг  в 5:04</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap1_44698" style="display: none">
+  <div id="replies1_44698"><input type="hidden" id="start_reply1_44698" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post1_44697" class="post all own" onmouseover="wall.postOver('1_44697')" onmouseout="wall.postOut('1_44697')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/durov" onclick="return nav.go(this, event)"><img src="http://cs1495.vkontakte.ru/u00001/e_d0b89a3d.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post1_44697" onclick="wall.markAsSpam('1_44697', '372cf3c13ef5110c7c');" onmouseover="wall.activeDeletePost('1_44697', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('1_44697')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/durov" onclick="return nav.go(this, event)">Павел Дуров</a> <div class="wall_post_text">7 нововведений июля</div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk1_44697" href="/away.php?to=http%3A%2F%2Fvkontakte.ru%2Fblog.php%3Fnid%3D193&h=381c439ffa86ad6412" target="_blank" onmouseover="wall.postTooltip(this, '1_44697')">
+    <b class="fl_l "></b>Ссылка
+    <span class="a">vkontakte.ru</span>
+  </a>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('1_44697')" onmouseout="wall.likeOut('1_44697')" onclick="wall.like('1_44697', '960a26b3d6eab029d0'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link1_44697"></span>
+  <div class=" fl_l" id="like_icon1_44697"></div>
+  <span class="like_count fl_l" id="like_count1_44697">23091</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall1_44697" onclick="return nav.go(this, event)"><span class="rel_date">5 авг  в 4:43</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap1_44697" style="display: none">
+  <div id="replies1_44697"><input type="hidden" id="start_reply1_44697" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post1_44050" class="post all own" onmouseover="wall.postOver('1_44050')" onmouseout="wall.postOut('1_44050')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/durov" onclick="return nav.go(this, event)"><img src="http://cs1495.vkontakte.ru/u00001/e_d0b89a3d.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post1_44050" onclick="wall.markAsSpam('1_44050', 'bbe90c6402dbc0338e');" onmouseover="wall.activeDeletePost('1_44050', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('1_44050')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/durov" onclick="return nav.go(this, event)">Павел Дуров</a> <div class="wall_post_text">Теперь Вы можете скрывать конкретных людей из Вашего списка друзей вместо того, чтобы прятать весь список.</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('1_44050')" onmouseout="wall.likeOut('1_44050')" onclick="wall.like('1_44050', '741e9638dff7b1f057'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link1_44050"></span>
+  <div class=" fl_l" id="like_icon1_44050"></div>
+  <span class="like_count fl_l" id="like_count1_44050">88746</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall1_44050" onclick="return nav.go(this, event)"><span class="rel_date">11 июн  в 18:44</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap1_44050" style="display: none">
+  <div id="replies1_44050"><input type="hidden" id="start_reply1_44050" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post1_44049" class="post all own" onmouseover="wall.postOver('1_44049')" onmouseout="wall.postOut('1_44049')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/durov" onclick="return nav.go(this, event)"><img src="http://cs1495.vkontakte.ru/u00001/e_d0b89a3d.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post1_44049" onclick="wall.markAsSpam('1_44049', 'ed259334abc7c0306b');" onmouseover="wall.activeDeletePost('1_44049', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('1_44049')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/durov" onclick="return nav.go(this, event)">Павел Дуров</a> <div class="wall_post_text">Заработали документы в группах и мультиаттачи в диалогах.</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('1_44049')" onmouseout="wall.likeOut('1_44049')" onclick="wall.like('1_44049', '30e452a50c445167e4'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link1_44049"></span>
+  <div class=" fl_l" id="like_icon1_44049"></div>
+  <span class="like_count fl_l" id="like_count1_44049">66582</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall1_44049" onclick="return nav.go(this, event)"><span class="rel_date">4 июн  в 2:57</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap1_44049" style="display: none">
+  <div id="replies1_44049"><input type="hidden" id="start_reply1_44049" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post1_44048" class="post all own" onmouseover="wall.postOver('1_44048')" onmouseout="wall.postOut('1_44048')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/durov" onclick="return nav.go(this, event)"><img src="http://cs1495.vkontakte.ru/u00001/e_d0b89a3d.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post1_44048" onclick="wall.markAsSpam('1_44048', '86f2e0a0be9d4f3201');" onmouseover="wall.activeDeletePost('1_44048', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('1_44048')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/durov" onclick="return nav.go(this, event)">Павел Дуров</a> <div class="wall_post_text">7 нововведений мая</div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk1_44048" href="/away.php?to=http%3A%2F%2Fvkontakte.ru%2Fblog.php%3Fnid%3D189&h=a2cc3205379fed892d" target="_blank" onmouseover="wall.postTooltip(this, '1_44048')">
+    <b class="fl_l "></b>Ссылка
+    <span class="a">vkontakte.ru</span>
+  </a>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('1_44048')" onmouseout="wall.likeOut('1_44048')" onclick="wall.like('1_44048', '7ca7ed56e5b790a00b'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link1_44048"></span>
+  <div class=" fl_l" id="like_icon1_44048"></div>
+  <span class="like_count fl_l" id="like_count1_44048">59025</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall1_44048" onclick="return nav.go(this, event)"><span class="rel_date">3 июн  в 2:27</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap1_44048" style="display: none">
+  <div id="replies1_44048"><input type="hidden" id="start_reply1_44048" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post1_43835" class="post all own" onmouseover="wall.postOver('1_43835')" onmouseout="wall.postOut('1_43835')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/durov" onclick="return nav.go(this, event)"><img src="http://cs1495.vkontakte.ru/u00001/e_d0b89a3d.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post1_43835" onclick="wall.markAsSpam('1_43835', 'c4864dd4f0ec05af86');" onmouseover="wall.activeDeletePost('1_43835', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('1_43835')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/durov" onclick="return nav.go(this, event)">Павел Дуров</a> <div class="wall_post_text"><span>Сегодня в Орландо на ежегодном всемирном чемпионате по программированию (ACM ICPC) российская команда, которая представляет СПбГУ и полностью состоит из сотрудников ВКонтакте, заняла первое место в Европе и четвертое в мире, завоевав золотую медаль. Команда победителей состоит из<br></span><a style="position: relative; top: 2px;" href=""onclick="hide(this, this.previousSibling);show(this.nextSibling);return false;">показать полностью..</a><span style="display: none">Сегодня в Орландо на ежегодном всемирном чемпионате по программированию (ACM ICPC) российская команда, которая представляет СПбГУ и полностью состоит из сотрудников ВКонтакте, заняла первое место в Европе и четвертое в мире, завоевав золотую медаль. Команда победителей состоит из Алексея Левина, Арсения Смирнова и Валентина Фондаратова – людей, которые подарили нам самообучающийся спам-фильтр, рекомендации в аудиозаписях, возможных друзей, умный подсказчик и многое другое.<br><br>Это победа в ежегодном многоэтапном соревновании, в котором за весь период отборов участвовало 25 000 человек из 2070 университетов 88 стран мира. Олимпиадное движение по программированию в СПбГУ традиционно курирует Андрей Лопатин при поддержке ВКонтакте. Андрей Лопатин и Николай Дуров, главные технические умы ВКонтакте, в 2000 и 2001 году уже становились абсолютными чемпионами мира ACM ICPC.<br><br>В этом году остальные золотые медали (1, 2, 3 место) выиграли китайцы и американцы китайского происхождения, но более половины из всех 12 призовых мест снова заняли команды из славянских стран. Команда СПбГУ получила золотую медаль за 4ое место, на 5м месте – команда из Нижнего Новгорода, на 6м – из Саратова, на 8м – из Донецка (серебро), на 10м – из Москвы, на 11м – с Урала (бронза).<br><br>Мы снова убеждаемся в том, что в России, Украине и Беларуси живут одни из самых умных людей в мире. Поздравляю победителей и желаю дальнейших подвигов&#33;</span></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk1_43835" href="/note1_11101421" onclick="return nav.go(this, event)" onmouseover="wall.postTooltip(this, '1_43835')">
+    <b class="fl_l note"></b>Заметка
+    <span class="a">Победа&#33;</span>
+  </a>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('1_43835')" onmouseout="wall.likeOut('1_43835')" onclick="wall.like('1_43835', '5beb966ca685173b48'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link1_43835"></span>
+  <div class=" fl_l" id="like_icon1_43835"></div>
+  <span class="like_count fl_l" id="like_count1_43835">88816</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall1_43835" onclick="return nav.go(this, event)"><span class="rel_date">31 мая  в 2:02</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap1_43835" style="display: none">
+  <div id="replies1_43835"><input type="hidden" id="start_reply1_43835" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post1_43833" class="post all own" onmouseover="wall.postOver('1_43833')" onmouseout="wall.postOut('1_43833')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/durov" onclick="return nav.go(this, event)"><img src="http://cs1495.vkontakte.ru/u00001/e_d0b89a3d.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post1_43833" onclick="wall.markAsSpam('1_43833', '7f39895e06b3fccc48');" onmouseover="wall.activeDeletePost('1_43833', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('1_43833')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/durov" onclick="return nav.go(this, event)">Павел Дуров</a> <a class="published_by" href="/amirkhanova" onclick="return nav.go(this, event)">Тара Амирханова</a> <div class="wall_post_text"><span>1. Пойми, что тебе по-настоящему нравится. Это и самое главное, и самое сложное. Золотое правило гласит – делай то, что доставляет тебе истинное удовольствие, и тогда ты станешь намного счастливее. Но надо быть готовым к тому, что поиск своего пути – это марафон, который может пр<br></span><a style="position: relative; top: 2px;" href=""onclick="hide(this, this.previousSibling);show(this.nextSibling);return false;">показать полностью..</a><span style="display: none">1. Пойми, что тебе по-настоящему нравится. Это и самое главное, и самое сложное. Золотое правило гласит – делай то, что доставляет тебе истинное удовольствие, и тогда ты станешь намного счастливее. Но надо быть готовым к тому, что поиск своего пути – это марафон, который может продолжаться много (десятков?) лет.  <br><br>
+2. Откажись от мусора, который ты ешь, пьешь и куришь каждый день. Никаких секретов и хитрых диет – просто натуральная пища, фрукты, овощи, вода. Не надо становиться вегетарианцем и полностью завязывать с выпивкой, - достаточно лишь максимально ограничить сахар, муку, кофе, алкоголь и всю пластмассовую еду.  <br><br>
+3. Учи иностранные языки. Это нереально расширит глубину восприятия мира и откроет невиданные перспективы для обучения, развития и карьерного роста. Русскоязычных пользователей интернета 60 миллионов. Англоязычных – миллиард. Центр прогресса сейчас находится по другую сторону границы, в том числе языковой. Знание английского – это уже не просто прихоть интеллигентов, а жизненная необходимость.  <br>
+ <br>
+&#91;&#93;4. Читай книги. Примерный круг – твоя профессиональная область, история, естествознание, личностный рост, социология, психология, биографии, качественная художественная литература. Нет времени читать потому, что ездишь за рулем – слушай аудиокниги. Золотое правило – читай/слушай как минимум одну книгу в неделю. Это 50 книг в год, которые перевернут твою жизнь.  <br><br>
+5. Проводи с толком каждые свои выходные. Сходи в музей, на выставку, займись спортом, съезди за город, прыгни с парашютом, навести родственников, сходи на хороший фильм. Расширяй зону контакта с миром. Когда уже все объездишь и обойдешь, бери с собой друзей и рассказывай им то, что знаешь. Главное – не сиди на месте. Чем больше впечатлений ты пропустишь через себя, тем интереснее будет жизнь, и тем лучше ты будешь разбираться в вещах и явлениях.  <br><br>
+6. Начни вести блог или обычный дневник. Все равно о чем. Не беда, что ты не обладаешь красноречием и у тебя будет не больше 10 читателей. Главное, что на его страницах ты сможешь думать и рассуждать. А если ты просто регулярно пишешь о том, что ты любишь, читатели обязательно придут.  <br><br>
+7. Ставь цели. Фиксируй их на бумаге, в Word’е или блоге. Главное, чтобы они были четкими, понятными и измеримыми. Если поставишь цель, то можешь ее или достигнуть, или нет. Если не поставишь, то вариантов достижения нет вообще.  <br><br>
+8. Научись печатать на клавиатуре вслепую – не уметь этого в 21 веке все равно, что не уметь писать ручкой в 20-м. Время - это одно из немногих сокровищ, которые у тебя есть, и печатать ты должен уметь почти так же быстро, как и думать. А думать ты должен не о том, где находится нужная буква, а о том, что ты пишешь.  <br><br>
+9. Оседлай время. Научись управлять своими делами так, чтобы они работали почти без твоего участия. Для начала почитай Аллена (Getting Things Done) или Глеба Архангельского. Принимай решения быстро, действуй незамедлительно, не откладывай «на потом». Все дела либо делай, либо делегируй кому-то. Старайся, чтобы мяч никогда не задерживался на твоей стороне. Запиши на листе все «долгоиграющие» дела, которые до сих пор не сделаны и мешают тебе жить. Переосмысли, нужны ли они тебе (памятуя о п.1). Сделай то, что осталось, в течение нескольких дней, и ты почувствуешь неимоверную легкость.  <br><br>
+10. Откажись от компьютерных игр, бесцельного сидения в социальных сетях и тупого серфинга в интернете.Минимизируй общенией в соцсетях (вплоть до оптимизации - оставь всего один аккаунт). Уничтожь в квартире телевизионную антенну. Чтобы не тянуло постоянно проверять электронную почту, установить агент, который будет сообщать тебе о входящих сообщениях (в т.ч. на мобильный).  <br><br>
+11. Перестань читать новости. Все равно о ключевых событиях будут говорить все вокруг, а дополнительная шумовая информация не приводит к улучшению качества принятия решений.  <br><br>
+12. Научись рано вставать. Парадокс в том, что в ранние часы ты всегда успеваешь больше, чем в вечерние. Если летом на выходных ты выедешь из Москвы в 7 утра, то к 10 ты уже будешь в Ярославле. Если выедешь в 10, то будешь там в лучшем случае к обеду. То же самое и с шоппингом на выходных. Человеку достаточно 7 часов сна, при условии качественной физической нагрузки и нормальном питании.  <br><br>
+13. Старайся окружать себя порядочными, честными, открытыми умными и успешными людьми. Мы – это наше окружение, у которого мы учимся всему, что знаем. Проводи больше времени с людьми, которых ты уважаешь и у которых можно чему-нибудь научиться (особенно важно, чтобы в категорию таких людей попадало твое начальство). Соответственно, старайся минимизировать общение с людьми негативными, унылыми, пессимистичными и злыми. Чтобы стать выше, ты должен стремиться вверх, и наличие рядом людей, до которых хочется расти, само по себе станет отличным стимулом.  <br><br>
+14. Используй каждый момент времени и каждого человека для того, чтобы узнать что-то новое. Если жизнь сводит тебя с профессионалом в любой области, попытайся понять, что составляет суть его работы, каковы его мотивации и цели. Учись задавать правильные вопросы – даже таксист может стать бесценным источником информации.  <br><br>
+15. Начни путешествовать. Не беда, что нет денег на Аргентину и Новую Зеландию – качество отдыха вообще никак не связано с потраченными деньгами, и лучшие мои путешествия были в регионы, которые совсем не отличаются пафосом и дороговизной. Когда ты увидишь, как разнообразен мир, ты перестанешь зацикливаться на маленьком пространстве вокруг тебя, и станешь толерантнее, спокойнее и мудрее.  <br><br>
+16. Купи фотоаппарат (можно самый простой) и пытайся ловить красоту мира. Когда у тебя получится, ты будешь помнить свои путешествия не только по смутным впечатлениям, но и по красивым фотографиям, которые ты привез с собой. В качестве альтернативы - попробуй рисовать, петь, танцевать, лепить, проектировать. То есть делай то, что заставит тебя взглянуть на мир иными глазами.  <br><br>
+17. Займись спортом. Не обязательно ходить в фитнес-клуб, где тусуются качки, пикаперы, бальзаковские дамы и фрики. Йога, скалолазание, велосипед, турник, брусья, футбол, бег, плиометрика, плавание, функциональные тренировки – лучшие друзья человека, который хочет вернуть тонус телу и получить всплеск эндорфинов. И забудь о том, что такое лифт – если надо пройти пешком меньше 10 этажей, используй ноги. Всего за 3 месяца методичной работы над собой можно изменить тело почти до неузнаваемости.  <br><br>
+18. Делай необычные вещи. Сходи туда, где ни разу не был, езди на работу другой дорогой, разберись в проблеме, о которой вообще ничего не знаешь. Выходи из своей «зоны комфорта», расширяй знания и кругозор. Переставь дома мебель (и делай это примерно раз в год), измени внешность, прическу, имидж.  <br><br>
+19. Инвестируй. В идеале, каждый месяц стоит вкладывать часть своего дохода, ведь богатый человек – это не тот, кто много зарабатывает, а тот, кто много инвестирует. Старайся инвестировать в активы, минимизировать пассивы и контролировать расходы. Если ты поставишь себе финансовую цель и наведешь порядок в личных деньгах, то удивишься тому, как легко ты будешь двигаться к ее достижению  <br><br>
+20. Избавься от барахла. Выброси все вещи, которые не надевал или не использовал в течение последнего года (в следующем году тоже до них не доберешься). Оставь только то, что тебе действительно нравится и нужно. Жалко выбросить – раздай. При покупке новой вещи избавляйся от старой аналогичной, чтобы баланс сохранялся. Меньше вещей – меньше пыли и головной боли.  <br><br>
+21. Отдавай больше, чем берешь. Делись знаниями, опытом и идеями. Человек, который не только берет, но и делится, неимоверно притягателен. Наверняка ты умеешь что-то такое, чему другие очень хотят научиться.   <br>
+22. Принимай мир таким, какой он есть. Откажись от оценочных суждений, принимай все явления как изначально нейтральные. А еще лучше – как однозначно позитивные.  <br><br>
+23. Забудь о том, что было в прошлом. Оно не имеет никакого отношения к твоему будущему. Возьми с собой оттуда только опыт, знания, хорошие отношения и положительные впечатления.  <br><br>
+24. Не бойся. Непреодолимых препятствий нет, и все сомнения живут только в твоей голове. Не обязательно быть воином, достаточно лишь видеть цель, обходить препятствия и знать, что ты добьешься ее без единого шанса испытать неудачу.  <br><br>
+25. Последнее, оно же первое. Делай то, что тебе нравится. Учись. Учи. Развивайся. Меняй себя изнутри. <br>
+Автор: skitalets <a href="/away.php?to=http%3A%2F%2Fskitalets.livejournal.com%2F&h=cfc9fef68756d80505" target="_blank" target="_blank">http://skitalets.livejournal.com/</a></span></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk1_43833" href="/note143733_11030730" onclick="return nav.go(this, event)" onmouseover="wall.postTooltip(this, '1_43833')">
+    <b class="fl_l note"></b>Заметка
+    <span class="a">Новые заповеди:))</span>
+  </a>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('1_43833')" onmouseout="wall.likeOut('1_43833')" onclick="wall.like('1_43833', '621fe0bd2709ce8de6'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link1_43833"></span>
+  <div class=" fl_l" id="like_icon1_43833"></div>
+  <span class="like_count fl_l" id="like_count1_43833">86018</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall1_43833" onclick="return nav.go(this, event)"><span class="rel_date">22 мая  в 14:12</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap1_43833" style="display: none">
+  <div id="replies1_43833"><input type="hidden" id="start_reply1_43833" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post1_43829" class="post all own" onmouseover="wall.postOver('1_43829')" onmouseout="wall.postOut('1_43829')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/durov" onclick="return nav.go(this, event)"><img src="http://cs1495.vkontakte.ru/u00001/e_d0b89a3d.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post1_43829" onclick="wall.markAsSpam('1_43829', 'f03af07006687e1b05');" onmouseover="wall.activeDeletePost('1_43829', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('1_43829')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/durov" onclick="return nav.go(this, event)">Павел Дуров</a> <a class="published_by" href="/andrew" onclick="return nav.go(this, event)">Андрей Рогозов</a> <div class="wall_post_text">Запустили рекомендации в аудиозаписях.</div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk1_43829"  onmouseover="wall.postTooltip(this, '1_43829')">
+    <b class="fl_l poll"></b>Опрос
+    <span class="a">Нравится ли Вам рекомендуемая музыка ВКонтакте?</span>
+  </a>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('1_43829')" onmouseout="wall.likeOut('1_43829')" onclick="wall.like('1_43829', '26bb4e2e56b834feda'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link1_43829"></span>
+  <div class=" fl_l" id="like_icon1_43829"></div>
+  <span class="like_count fl_l" id="like_count1_43829">62386</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall1_43829" onclick="return nav.go(this, event)"><span class="rel_date">17 мая  в 19:44</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap1_43829" style="display: none">
+  <div id="replies1_43829"><input type="hidden" id="start_reply1_43829" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post1_43827" class="post all own" onmouseover="wall.postOver('1_43827')" onmouseout="wall.postOut('1_43827')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/durov" onclick="return nav.go(this, event)"><img src="http://cs1495.vkontakte.ru/u00001/e_d0b89a3d.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post1_43827" onclick="wall.markAsSpam('1_43827', '477e8e9e63bb711b26');" onmouseover="wall.activeDeletePost('1_43827', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('1_43827')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/durov" onclick="return nav.go(this, event)">Павел Дуров</a> <div class="wall_post_text">Выберите из этого списка то, что Вы считаете самым важным в окружающих Вас людях.</div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk1_43827"  onmouseover="wall.postTooltip(this, '1_43827')">
+    <b class="fl_l poll"></b>Опрос
+    <span class="a">Что для Вас главное в людях?</span>
+  </a>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('1_43827')" onmouseout="wall.likeOut('1_43827')" onclick="wall.like('1_43827', '5e21ef006d8b34ee8b'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link1_43827"></span>
+  <div class=" fl_l" id="like_icon1_43827"></div>
+  <span class="like_count fl_l" id="like_count1_43827">75014</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall1_43827" onclick="return nav.go(this, event)"><span class="rel_date">12 мая  в 22:19</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap1_43827" style="display: none">
+  <div id="replies1_43827"><input type="hidden" id="start_reply1_43827" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post1_43826" class="post all own" onmouseover="wall.postOver('1_43826')" onmouseout="wall.postOut('1_43826')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/durov" onclick="return nav.go(this, event)"><img src="http://cs1495.vkontakte.ru/u00001/e_d0b89a3d.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post1_43826" onclick="wall.markAsSpam('1_43826', '0dd6087b4ab41a3716');" onmouseover="wall.activeDeletePost('1_43826', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('1_43826')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/durov" onclick="return nav.go(this, event)">Павел Дуров</a> <div class="wall_post_text">Выберите из этого списка то, что Вы считаете самым важным в Вашей жизни.</div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk1_43826"  onmouseover="wall.postTooltip(this, '1_43826')">
+    <b class="fl_l poll"></b>Опрос
+    <span class="a">Что для Вас главное в жизни?</span>
+  </a>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('1_43826')" onmouseout="wall.likeOut('1_43826')" onclick="wall.like('1_43826', '7b80fc1ccdb6f92179'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link1_43826"></span>
+  <div class=" fl_l" id="like_icon1_43826"></div>
+  <span class="like_count fl_l" id="like_count1_43826">74940</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall1_43826" onclick="return nav.go(this, event)"><span class="rel_date">10 мая  в 21:25</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap1_43826" style="display: none">
+  <div id="replies1_43826"><input type="hidden" id="start_reply1_43826" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div></div><a class="more_link clear" id="wall_more_link" onclick="wall.showMore(10);"><div class="progress" id="wall_more_progress"></div><div>к предыдущим записям</div></a></div>
+</div>
+  </div>
+  <br class="clear" />
+  
+</div></div>
+  </div>
+</div></div>
+    </div>
+
+    <div id="footer_wrap" class="fl_r">
+      <div id="bottom_nav">
+  <a href="/help.php?page=about">о сайте</a>
+  <a href="/techsupp.php">техподдержка</a>
+  <a href="/blog.php">блог</a>
+  <a href="/help.php?page=terms">правила</a>
+  <a href="/ads.php">реклама</a>
+  <a href="/developers.php">разработчикам</a>
+  <a href="/jobs.php">вакансии</a>
+</div>
+<div id="footer" class="clear">
+  <div class="copy_lang"><a href="/help.php?page=about">ВКонтакте</a> &copy; 2006-2011 <a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 0, hash: 'd92dacc9c9d7866208'})">Русский</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 1, hash: 'd92dacc9c9d7866208'})">Українська</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 2, hash: 'd92dacc9c9d7866208'})">Беларуская (тарашкевiца)</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 3, hash: 'd92dacc9c9d7866208'})">English</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 11, hash: 'd92dacc9c9d7866208'})">Српски</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 10, hash: 'd92dacc9c9d7866208'})">Magyar</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 57, hash: 'd92dacc9c9d7866208'})">Az&#601;rbaycan</a><a onclick="showBox('lang.php', {act: 'lang_dialog'}, {noreload: true})">все языки &raquo;</a></div>
+  <div>
+    
+    
+  </div>
+</div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div></div></div>
+  <div class="progress" id="global_prg"></div>
+
+  <script type="text/javascript">
+    if (parent && parent != window && (browser.msie || browser.opera || browser.mozilla || browser.chrome || browser.safari || browser.iphone)) {
+      document.getElementsByTagName('body')[0].innerHTML = '';
+    } else {
+      domReady();
+      updateMoney(false);
+gSearch.init();
+if (window.qArr && qArr[5]) qArr[5] = [5, "по товарам", "", "goods", 0x00000100];var qf = ge('quick_login_form'), ql = ge('quick_login'), qe = ge('quick_email'), qp = ge('quick_pass');
+
+window.onload = function() {
+  setTimeout(function() {
+    ql.insertBefore(ce('div', {innerHTML: '<iframe class="upload_frame" id="quick_login_frame" name="quick_login_frame"></iframe>'}), qf);
+    qf.target = 'quick_login_frame';
+  }, 1);
+}
+
+qf.onsubmit = function() {
+  if (!ge('quick_login_frame')) return false;
+  if (!trim(qe.value)) {
+    elfocus(qe);
+    return false;
+  } else if (!trim(qp.value)) {
+    elfocus(qp);
+    return false;
+  }
+  return true;
+}
+
+window.focusLoginInput = function() {
+  scrollToTop(0);
+  notaBene('quick_email');
+}
+window.changeQuickRegButton = function(noShow) {
+  if (noShow) {
+    hide('top_reg_link');
+    show('top_search_link');
+  } else {
+    hide('top_search_link');
+    show('top_reg_link');
+  }
+}
+window.submitQuickLoginForm = function(email, pass) {
+  ge('quick_email').value = email;
+  ge('quick_pass').value = pass;
+  ge('quick_login_form').submit();
+}
+
+var qlb = ge('quick_login_button');
+if (qlb) {
+  qlb.onclick = function() { if (qf.onsubmit()) qf.submit(); };
+}
+
+if (browser.opera_mobile) show('quick_expire');
+
+cur.needLoginBox = function() {
+  setTimeout(showFastBox('Предупреждениe', 'Чтобы просматривать эту страницу, нужно зайти на сайт.').hide, 2000);
+  return false;
+};
+cur.lang = extend(cur.lang || {}, {
+  show_full: 'показать подробную информацию',
+  hide_full: 'скрыть подробную информацию',
+  sure_delete_photo: 'Вы уверены, что хотите удалить фотографию?',
+  change_current_info: 'изменить статус',
+  share_current_info: 'Рассказать друзьям',
+  create_poll: 'Опрос',
+  dont_attach: 'Не прикреплять'
+});
+Profile.init({"user_id":"1","loc":"durov","back":"Павел Дуров","reply_names":[],"max_post_len":280,"post_hash":"c8f9fb664c03127b26","media_types":false,"wall_type":"own","wall_counts":["","%s запись","%s записи","%s записей"],"all_link":"к записям Павла","own_link":"ко всем записям","share":{"url":false,"hash":false,"rhash":false},"photos_count":6,"skip_one":0,"photos":[],"info":["<div class=\"profile_info\"><div class=\"clear_fix \">\n  <div class=\"label fl_l\">День рождения:<\/div>\n  <div class=\"labeled fl_l\">10 октября 1984 г.<\/div>\n<\/div><div class=\"clear_fix miniblock\">\n  <div class=\"label fl_l\">Языки:<\/div>\n  <div class=\"labeled fl_l\">Русский, English, Fran&#231;ais, Deutsch, Espa&#241;ol, Italiano, Lingua latina<\/div>\n<\/div><\/div><a class=\"profile_info_link noselect\" onclick=\"Profile.showFull()\">показать подробную информацию<\/a>","<div class=\"profile_info\"><div class=\"clear_fix \">\n  <div class=\"label fl_l\">День рождения:<\/div>\n  <div class=\"labeled fl_l\">10 октября 1984 г.<\/div>\n<\/div><div class=\"clear_fix miniblock\">\n  <div class=\"label fl_l\">Языки:<\/div>\n  <div class=\"labeled fl_l\">Русский, English, Fran&#231;ais, Deutsch, Espa&#241;ol, Italiano, Lingua latina<\/div>\n<\/div><\/div><a class=\"profile_info_link noselect\" onclick=\"Profile.hideFull()\">скрыть подробную информацию<\/a>"],"mail_cache":"","fr_click":null});
+zNav({}, {});
+handlePageParams({"id":0,"level":2,"loc":"?subdir=durov"});
+    }
+  </script>
+</body>
+
+</html>

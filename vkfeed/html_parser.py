@@ -112,19 +112,19 @@ class HTMLPageParser(HTMLParser):
         logging.debug("%s", data)
 
 
-    def handle_root_tag_end(self, tag):
-        """Handles end of a tag inside of the root of the document."""
-
-        logging.debug("</%s>", tag["name"])
-
-
-    def handle_root_tag_start(self, tag, attrs, empty):
-        """Handles start of a tag inside of the root of the document."""
+    def handle_root_new_tag(self, tag, attrs, empty):
+        """Handles a tag inside of the root of the document."""
 
         logging.debug("<%s %s%s>", tag["name"], attrs, "/" if empty else "")
-        tag["start_tag_handler"] = self.handle_root_tag_start
+        tag["new_tag_handler"] = self.handle_root_new_tag
         tag["data_handler"] = self.handle_root_data
         tag["end_tag_handler"] = self.handle_root_tag_end
+
+
+    def handle_root_tag_end(self, tag):
+        """Handles end of the root of the document."""
+
+        logging.debug("</%s>", tag["name"])
 
 
     def handle_startendtag(self, tag, attrs):
@@ -147,7 +147,7 @@ class HTMLPageParser(HTMLParser):
         self.__tag_stack = [{
             # Add fake root tag
             "name":              None,
-            "start_tag_handler": self.handle_root_tag_start,
+            "new_tag_handler":   self.handle_root_new_tag,
             "data_handler":      self.handle_root_data,
             "end_tag_handler":   self.handle_root_tag_end,
         }]
@@ -190,7 +190,7 @@ class HTMLPageParser(HTMLParser):
         """Handles start of any tag."""
 
         tag = { "name": tag_name }
-        handler = self.__get_cur_tag().get("start_tag_handler")
+        handler = self.__get_cur_tag().get("new_tag_handler")
 
         if handler is not None:
             attrs = self.__parse_attrs(attrs)

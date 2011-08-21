@@ -1,1 +1,7 @@
+/.vim
+/cscope.files
+/cscope.out
+/gae
+/tags
+
 *.pyc

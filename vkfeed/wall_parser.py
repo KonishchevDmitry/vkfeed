@@ -6,6 +6,13 @@ from vkfeed.core import Error
 from vkfeed.html_parser import HTMLPageParser
 
 
+class ParseError(Error):
+    """Raised if we are unable to parse a gotten data."""
+
+    def __init__(self, *args, **kwargs):
+        Error.__init__(self, *args, **kwargs)
+
+
 class WallPageParser(HTMLPageParser):
     """Parses a vk.com wall page."""
 
@@ -24,15 +31,15 @@ class WallPageParser(HTMLPageParser):
         """Handles data inside of the root of the document."""
 
 
-    def handle_root_tag_end(self, tag):
-        """Handles end of a tag inside of the root of the document."""
-
-
-    def handle_root_tag_start(self, tag, attrs, empty):
-        """Handles start of a tag inside of the root of the document."""
+    def handle_root_new_tag(self, tag, attrs, empty):
+        """Handles a tag inside of the root of the document."""
 
         if tag["name"] == "html":
-            tag["start_tag_handler"] = self.__handle_html_tag_start
+            tag["new_tag_handler"] = self.__handle_html_new_tag
+
+
+    def handle_root_tag_end(self, tag):
+        """Handles end of the root of the document."""
 
 
     def parse(self, html):
@@ -43,29 +50,29 @@ class WallPageParser(HTMLPageParser):
         HTMLPageParser.parse(self, html)
 
         if "title" not in self.__data:
-            raise Error("Unable to find the page title.")
+            raise ParseError("Unable to find the page title.")
 
         if "wall" not in self.__data:
-            raise Error("Unable to find the wall.")
+            raise ParseError("Unable to find the wall.")
 
         if not self.__data["wall"] and not self.__private_data.get("wall_is_empty"):
-            raise Error("Unable to find the wall posts.")
+            raise ParseError("Unable to find the wall posts.")
 
         return self.__data
 
 
 
-    def __handle_html_tag_start(self, tag, attrs, empty):
-        """Handles start of a tag inside of <html>."""
+    def __handle_html_new_tag(self, tag, attrs, empty):
+        """Handles a tag inside of <html>."""
 
         if tag["name"] == "head":
-            tag["start_tag_handler"] = self.__handle_head_tag_start
+            tag["new_tag_handler"] = self.__handle_head_new_tag
         elif tag["name"] == "body":
-            tag["start_tag_handler"] = self.__handle_body_tag_start
+            tag["new_tag_handler"] = self.__handle_body_new_tag
 
 
-    def __handle_head_tag_start(self, tag, attrs, empty):
-        """Handles start of a tag inside of <head>."""
+    def __handle_head_new_tag(self, tag, attrs, empty):
+        """Handles a tag inside of <head>."""
 
         if tag["name"] == "title":
             tag["data_handler"] = self.__handle_title_data
@@ -76,26 +83,144 @@ class WallPageParser(HTMLPageParser):
 
         data = data.strip()
         if not data:
-            raise Error("The title is empty.")
+            raise ParseError("The title is empty.")
 
         self.__data["title"] = data
 
 
 
-    def __handle_body_tag_start(self, tag, attrs, empty):
-        """Handles start of a tag inside of <body>."""
+    def __handle_body_new_tag(self, tag, attrs, empty):
+        """Handles a tag inside of <body>."""
 
         if tag["name"] == "div" and attrs.get("id") == "page_wall_posts":
-            tag["start_tag_handler"] = self.__handle_page_wall_posts
+            tag["new_tag_handler"] = self.__handle_page_wall_posts
             self.__data["wall"] = []
         else:
             if "wall" not in self.__data:
-                tag["start_tag_handler"] = self.__handle_body_tag_start
+                tag["new_tag_handler"] = self.__handle_body_new_tag
 
 
     def __handle_page_wall_posts(self, tag, attrs, empty):
-        """Handles start of a tag inside of <div id="page_wall_posts">."""
+        """Handles a tag inside of <div id="page_wall_posts">."""
 
-        if tag["name"] == "div" and attrs.get("id") == "page_no_wall":
+        if (
+            tag["name"] == "div" and
+            attrs.get("id", "").startswith("post") and
+            len(attrs["id"]) > len("post") and
+            self.__has_class(attrs, "post")
+        ):
+            if empty:
+                raise ParseError("Post '%s' div tag is empty.", attrs["id"])
+
+            tag["new_tag_handler"] = self.__handle_post
+            tag["end_tag_handler"] = self.__handle_post_end
+
+            self.__add_post( attrs["id"][len("post"):] )
+        elif tag["name"] == "div" and attrs.get("id") == "page_no_wall":
             self.__private_data["wall_is_empty"] = True
+        else:
+            tag["new_tag_handler"] = self.__handle_page_wall_posts
+
+
+    def __handle_post(self, tag, attrs, empty):
+        """Handles a tag inside of <div id="post...">."""
+
+        if tag["name"] == "table" and self.__has_class(attrs, "post_table"):
+            tag["new_tag_handler"] = self.__handle_post_table
+        else:
+            if not self.__get_cur_post()["text"]:
+                tag["new_tag_handler"] = self.__handle_post
+
+
+    def __handle_post_table(self, tag, attrs, empty):
+        """Handles a tag inside of <table class="post_table">."""
+
+        if tag["name"] == "tr":
+            tag["new_tag_handler"] = self.__handle_post_table_row
+
+
+    def __handle_post_table_row(self, tag, attrs, empty):
+        """Handles a tag inside of <table class="post_table"><tr>."""
+
+        if tag["name"] == "td" and self.__has_class(attrs, "info"):
+            tag["new_tag_handler"] = self.__handle_post_table_row_info
+
+
+    def __handle_post_table_row_info(self, tag, attrs, empty):
+        """Handles a tag inside of <table class="post_table"><tr><td class="info">."""
+
+        if tag["name"] == "div" and self.__has_class(attrs, "text"):
+            tag["new_tag_handler"] = self.__handle_post_text
+        else:
+            tag["new_tag_handler"] = self.__handle_post_table_row_info
+
+
+    def __handle_post_text(self, tag, attrs, empty):
+        """Handles a tag inside of <table class="post_table"><tr><td class="info"><div class="text">."""
+
+        if tag["name"] == "div":
+            self.__handle_post_data_container(tag, attrs, empty)
+
+
+    def __handle_post_data_container(self, tag, attrs, empty):
+        """Handles a tag inside of post data tag."""
+
+        self.__get_cur_post()["text"] += self.__escape_tag(tag["name"], attrs, empty)
+        tag["new_tag_handler"] = self.__handle_post_data_container
+        tag["data_handler"] = self.__handle_post_data
+        if not empty:
+            tag["end_tag_handler"] = self.__handle_post_data_end
+
+
+    def __handle_post_data(self, tag, data):
+        """Handles data inside of post data tag."""
+
+        self.__get_cur_post()["text"] += data
+
+
+    def __handle_post_data_end(self, tag):
+        """Handles end of a post data tag."""
+
+        self.__get_cur_post()["text"] += "</%s>" % tag["name"]
+
+
+    def __handle_post_end(self, tag):
+        """Handles end of <div id="post...">."""
+
+        cur_post = self.__get_cur_post()
+
+        if not cur_post["text"]:
+            raise ParseError("Post '%s' is empty.", cur_post["id"])
+
+
+
+    def __add_post(self, post_id):
+        """Adds a new post to the wall."""
+
+        self.__data["wall"].append({
+            "id":   post_id,
+            "text": "",
+        })
+
+
+    def __escape_tag(self, tag_name, attrs, empty):
+        """Escapes the specified tag and its attributes."""
+
+        # TODO
+        return "<%s%s>" % (tag_name, "/" if empty else "")
+
+
+    def __get_cur_post(self):
+        """Returns current post."""
+
+        return self.__data["wall"][-1]
+
+
+    def __has_class(self, attrs, class_name):
+        """
+        Checks whether a tag with the specified attributes has the specified
+        class.
+        """
+
+        return class_name in attrs.get("class", "").split(" ")
 
