@@ -13,6 +13,7 @@ class ParseError(Error):
         Error.__init__(self, *args, **kwargs)
 
 
+
 class WallPageParser(HTMLPageParser):
     """Parses a vk.com wall page."""
 
