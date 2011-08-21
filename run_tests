@@ -1,0 +1,14 @@
+#!/bin/sh -e
+#
+# Runs all application's tests.
+#
+
+# Force python2.5 for Google App Engine if available.
+PYTHON="$(which python2.5 || echo -n python)"
+
+cd tests
+
+for test_module in *.py; do
+    PYTHONPATH=.. "$PYTHON" "$test_module"
+done
+
