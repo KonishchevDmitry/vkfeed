@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block title %}Error{% endblock %}
+
+{% block body %}
+    Unable to generate a feed for <a href="{{ feed_source }}">{{ feed_source }}</a>. {{ error }}
+{% endblock %}
