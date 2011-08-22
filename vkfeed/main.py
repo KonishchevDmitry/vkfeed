@@ -11,7 +11,7 @@ def main():
 
     run_wsgi_app(WSGIApplication(
         [
-            ( "/feed/(.*)", Feed ),
+            ( "/wall/(.*)", Feed ),
         ],
         # TODO
         debug = True

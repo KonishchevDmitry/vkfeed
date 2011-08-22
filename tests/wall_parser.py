@@ -8,6 +8,7 @@ import unittest
 from vkfeed.wall_parser import WallPageParser, ParseError
 
 
+# TODO: describe comments
 class TestWallParser(unittest.TestCase):
     """Tests vk.com wall parser."""
 
@@ -27,9 +28,8 @@ class TestWallParser(unittest.TestCase):
 
         self.__test_parsing(
             open("wall_parser/group_profile_page.html").read().decode("cp1251"), {
-                "title":     u"Хабрахабр",
-                "wall":      [],
-                "wall_size": 10,
+                "user":  u"Хабрахабр",
+                "posts": 10,
             }
         )
 
@@ -39,9 +39,8 @@ class TestWallParser(unittest.TestCase):
 
         self.__test_parsing(
             open("wall_parser/user_profile_page_with_empty_wall.html").read().decode("cp1251"), {
-                "title":     u"Дмитрий Конищев",
-                "wall":      [],
-                "wall_size": 0,
+                "user":  u"Дмитрий Конищев",
+                "posts": 0,
             }
         )
 
@@ -51,9 +50,8 @@ class TestWallParser(unittest.TestCase):
 
         self.__test_parsing(
             open("wall_parser/user_profile_page.html").read().decode("cp1251"), {
-                "title":     u"Павел Дуров",
-                "wall":      [],
-                "wall_size": 10,
+                "user":  u"Павел Дуров",
+                "posts": 10,
             }
         )
 
@@ -72,9 +70,10 @@ class TestWallParser(unittest.TestCase):
     def __normalize_data(self, data):
         """Removes fields that don't exist in the etalon."""
 
-        if "wall" in data:
-            data["wall_size"] = len(data["wall"])
-            data["wall"] = []
+        if "posts" in data:
+            for post in data["posts"]:
+                self.assertNotEqual(post["text"].strip(), "")
+            data["posts"] = len(data["posts"])
 
         return data
 

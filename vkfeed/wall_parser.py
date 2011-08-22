@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
+
 """Parses a vk.com wall page."""
 
 import logging
+import re
 
 from vkfeed.core import Error
 from vkfeed.html_parser import HTMLPageParser
@@ -18,10 +21,14 @@ class WallPageParser(HTMLPageParser):
     """Parses a vk.com wall page."""
 
     __data = None
-    """The wall data."""
+    """The page data."""
 
     __private_data = None
     """Various state data."""
+
+
+    __show_more_regex = re.compile(r"<a" + HTMLPageParser.tag_attrs_regex + ur">показать полностью\.*</a>", re.IGNORECASE)
+    """Regular expression for "Show more..." link."""
 
 
     def __init__(self):
@@ -50,14 +57,14 @@ class WallPageParser(HTMLPageParser):
         self.__private_data = {}
         HTMLPageParser.parse(self, html)
 
-        if "title" not in self.__data:
-            raise ParseError("Unable to find the page title.")
+        if "user" not in self.__data:
+            raise ParseError("Unable to find the user name.")
 
-        if "wall" not in self.__data:
+        if "posts" not in self.__data:
             raise ParseError("Unable to find the wall.")
 
-        if not self.__data["wall"] and not self.__private_data.get("wall_is_empty"):
-            raise ParseError("Unable to find the wall posts.")
+        if not self.__data["posts"] and not self.__private_data.get("wall_is_empty"):
+            raise ParseError("Unable to find wall posts.")
 
         return self.__data
 
@@ -86,7 +93,7 @@ class WallPageParser(HTMLPageParser):
         if not data:
             raise ParseError("The title is empty.")
 
-        self.__data["title"] = data
+        self.__data["user"] = data
 
 
 
@@ -95,9 +102,9 @@ class WallPageParser(HTMLPageParser):
 
         if tag["name"] == "div" and attrs.get("id") == "page_wall_posts":
             tag["new_tag_handler"] = self.__handle_page_wall_posts
-            self.__data["wall"] = []
+            self.__data["posts"] = []
         else:
-            if "wall" not in self.__data:
+            if "posts" not in self.__data:
                 tag["new_tag_handler"] = self.__handle_body_new_tag
 
 
@@ -190,31 +197,45 @@ class WallPageParser(HTMLPageParser):
 
         cur_post = self.__get_cur_post()
 
-        if not cur_post["text"]:
-            raise ParseError("Post '%s' is empty.", cur_post["id"])
+        text = cur_post["text"]
+        text = self.__show_more_regex.sub("", text)
+        cur_post["text"] = text.strip()
 
 
 
     def __add_post(self, post_id):
         """Adds a new post to the wall."""
 
-        self.__data["wall"].append({
+        self.__data["posts"].append({
             "id":   post_id,
             "text": "",
         })
 
 
+        # TODO
     def __escape_tag(self, tag_name, attrs, empty):
         """Escapes the specified tag and its attributes."""
 
-        # TODO
+        data = "<" + tag_name
+
+        for attr, value in attrs.iteritems():
+            if (
+                tag_name == "img" and attr == "src" or
+                tag_name == "a" and attr == "href"
+            ):
+                if not re.match("[a-z]+://", value):
+                    value = "http://vk.com/" + value
+                data += " " + attr + "='" + value + "'"
+
+        return data + "%s>" % ("/" if empty else "")
+
         return "<%s%s>" % (tag_name, "/" if empty else "")
 
 
     def __get_cur_post(self):
         """Returns current post."""
 
-        return self.__data["wall"][-1]
+        return self.__data["posts"][-1]
 
 
     def __has_class(self, attrs, class_name):

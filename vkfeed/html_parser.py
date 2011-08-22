@@ -8,63 +8,62 @@ import re
 class HTMLPageParser(HTMLParser):
     """A convenient class for parsing HTML pages."""
 
-    __tag_stack = None
-    """Stack of currently opened HTML tags."""
+    tag_name_regex = "[a-zA-Z][-.a-zA-Z0-9:_]*"
+    """A regular expression for tag name."""
+
+    attribute_name_regex = tag_name_regex
+    """A regular expression for attribute name."""
+
+    tag_attrs_regex = re.sub(r"\s*", "", r"""
+        (?:\s+
+          """ + attribute_name_regex + r"""
+          (?:\s*=\s*
+            (?:
+              '[^']*'
+              |"[^"]*"
+              |[^'"/>\s]+
+            )
+          )?
+        )*
+    """)
+    """A regular expression for tag attributes."""
 
 
-    __script_regex = re.compile(r"""
-        <script                        # tag name
-          (?:\s+                       # whitespace before attribute name
-            [a-zA-Z_][-.:a-zA-Z0-9_]*  # attribute name
-            (?:\s*=\s*                 # value indicator
-              (?:
-                '[^']*'                # LITA-enclosed value
-                |"[^"]*"               # LIT-enclosed value
-                |[^'"/>\s]+            # bare value
-              )
-            )?
-          )*
-        >
-        .*?
-        </script>
-    """, flags = re.DOTALL | re.VERBOSE)
+    __script_regex = re.compile("<script" + tag_attrs_regex + ">.*?</script>", re.DOTALL | re.IGNORECASE)
     """A regular expression for matching scripts."""
-
 
     __invalid_tag_attrs_regex = re.compile(r"""
         (
           # Tag name
-          <[a-zA-Z][-.a-zA-Z0-9:_]*
+          <""" + tag_name_regex + r"""
 
           # Zero or several attributes
-          (?:\s+                       # whitespace before attribute name
-            [a-zA-Z_][-.:a-zA-Z0-9_]*  # attribute name
-            (?:\s*=\s*                 # value indicator
-              (?:
-                '[^']*'                # LITA-enclosed value
-                |"[^"]*"               # LIT-enclosed value
-                |[^'"/>\s]+            # bare value
-              )
-            )?
-          )*
+          """ + tag_attrs_regex + r"""
 
           # Two attributes without a space between them
-          \s+                          # whitespace before attribute name
-          [a-zA-Z_][-.:a-zA-Z0-9_]*    # attribute name
-          \s*=\s*                      # value indicator
+          \s+                                # whitespace before attribute name
+          """ + attribute_name_regex + r"""  # attribute name
+          \s*=\s*                            # value indicator
           (?:
-            '[^']*'                    # LITA-enclosed value
-            |"[^"]*"                  # LIT-enclosed value
+            '[^']*'                          # LITA-enclosed value
+            |"[^"]*"                         # LIT-enclosed value
           )
         )
         (
           [^\s/>]
         )
-    """, flags = re.VERBOSE)
+    """, re.VERBOSE)
     """
     A regular expression for matching a common error in specifying tag
     attributes.
     """
+
+    __misopened_tag_regex = re.compile(r"<(br|hr|img)" + tag_attrs_regex + r"\s*>", re.IGNORECASE)
+    """A regular expression for matching opened tags that should be closed."""
+
+
+    __tag_stack = None
+    """Stack of currently opened HTML tags."""
 
 
     def __init__(self):
@@ -159,6 +158,7 @@ class HTMLPageParser(HTMLParser):
         # Fixing various things that may confuse the python's HTML parser
         html = self.__script_regex.sub("", html)
         html = self.__invalid_tag_attrs_regex.sub(r"\1 \2", html)
+        html = self.__misopened_tag_regex.sub(r"<\1/>", html)
 
         # Run the parser
         self.reset()
