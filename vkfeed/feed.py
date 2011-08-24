@@ -21,6 +21,7 @@ class Feed(webapp.RequestHandler):
     def get(self, profile_name):
         """Processes the request."""
 
+# TODO: check profile_name
         logging.info("Requested feed for '%s'.", profile_name)
 
         url = "http://vk.com/" + profile_name

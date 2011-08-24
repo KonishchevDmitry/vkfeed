@@ -27,7 +27,7 @@ class WallPageParser(HTMLPageParser):
     """Various state data."""
 
 
-    __show_more_regex = re.compile(r"<a" + HTMLPageParser.tag_attrs_regex + ur">показать полностью\.*</a>", re.IGNORECASE)
+    __show_all_regex = re.compile(r"<a" + HTMLPageParser.tag_attrs_regex + ur">(показать полностью|show all)\.*</a>", re.IGNORECASE)
     """Regular expression for "Show more..." link."""
 
 
@@ -198,7 +198,7 @@ class WallPageParser(HTMLPageParser):
         cur_post = self.__get_cur_post()
 
         text = cur_post["text"]
-        text = self.__show_more_regex.sub("", text)
+        text = self.__show_all_regex.sub("", text)
         cur_post["text"] = text.strip()
 
 
