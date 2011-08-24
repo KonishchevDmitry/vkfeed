@@ -1,0 +1,144 @@
+                        PyRSS2Gen-1.0
+
+       A Python library for generating RSS 2.0 feeds.
+
+Requires Python 2.3.  (Uses the datetime module for timestamps.)
+
+To install:
+
+  % python setup.py install
+
+This uses the standard Python installer.  For more details, read
+
+    http://docs.python.org/inst/inst.html
+
+(And there's only one file, so you could just copy it wherever you
+need it.)
+
+NOTE: PyRSS2Gen 1.0 is a maintainence release for version 0.1 released
+in September 2003.
+
+
+  ======  ======  ======  ======  ======  ======  ======  ======
+
+I've finally decided to catch up with 1999 and play around a bit with
+RSS.  I looked around, and while there are many ways to read RSS there
+are remarkably few which write them.  I could use a DOM or other
+construct, but I want the code to feel like Python.  There are more
+Pythonic APIs I might use, like the effbot's ElementTree, but I also
+wanted integers, dates, and lists to be real integers, dates, and
+lists.  (And I want bug-eyed monsters from Alpha Centauri to be *real*
+bug-eyed monsters from Alpha Centauri - is that too much I ask you?)
+
+The RSS generators I found were built around print statements.
+Workable, but they almost invariably left out proper HTML escaping the
+sort which leads to Mark Pilgrim's to write feed_parser, to make sense
+of documents which are neither XML nor HTML.  Annoying, but sadly all
+too common.
+
+So I messed around a bit with the spec from
+ http://blogs.law.harvard.edu/tech/rss
+
+The result looks like this:
+
+import datetime
+import PyRSS2Gen
+
+rss = PyRSS2Gen.RSS2(
+    title = "Andrew's PyRSS2Gen feed",
+    link = "http://www.dalkescientific.com/Python/PyRSS2Gen.html",
+    description = "The latest news about PyRSS2Gen, a "
+                  "Python library for generating RSS2 feeds",
+
+    lastBuildDate = datetime.datetime.now(),
+
+    items = [
+       PyRSS2Gen.RSSItem(
+         title = "PyRSS2Gen-0.0 released",
+         link = "http://www.dalkescientific.com/news/030906-PyRSS2Gen.html",
+         description = "Dalke Scientific today announced PyRSS2Gen-0.0, "
+                       "a library for generating RSS feeds for Python.  ",
+         guid = PyRSS2Gen.Guid("http://www.dalkescientific.com/news/"
+                          "030906-PyRSS2Gen.html"),
+         pubDate = datetime.datetime(2003, 9, 6, 21, 31)),
+       PyRSS2Gen.RSSItem(
+         title = "Thoughts on RSS feeds for bioinformatics",
+         link = "http://www.dalkescientific.com/writings/diary/"
+                "archive/2003/09/06/RSS.html",
+         description = "One of the reasons I wrote PyRSS2Gen was to "
+                       "experiment with RSS for data collection in "
+                       "bioinformatics.  Last year I came across...",
+         guid = PyRSS2Gen.Guid("http://www.dalkescientific.com/writings/"
+                               "diary/archive/2003/09/06/RSS.html"),
+         pubDate = datetime.datetime(2003, 9, 6, 21, 49)),
+    ])
+
+rss.write_xml(open("pyrss2gen.xml", "w"))
+
+
+The output does not contain newlines, so if you want to read it,
+you'll need to use your favorite XML tools to reformat it.
+
+RSS is not a fixed format.  People are free to add various metadata,
+like Dublin Core elements.
+
+The RSS objects are converted to XML using the 'publish' method, which
+takes a SAX2 ContentHandler.  If you want different output, implement
+your own 'publish'.  The "simple" data types which takes a string,
+int, or date, can be replaced with a publishable object, so you can
+add metadata to, say, the "description" field.  To support new
+elements for RSS and RSSItem, derive from them and use the
+'publish_extensions" hook.  To add your own attributes (needed for
+namespace declarations), redefine 'element_attrs' or 'rss_attrs' in
+your subclass.
+
+To use a different encoding, create your own ContentHandler instead of
+using the helper methods 'to_xml' and 'write_xml.'  You'll need to
+make sure the 'characters' method in the handler does the appropriate
+translation.
+
+The "categories" list is somewhat special.  It needs to be a list and
+doesn't have a publish method.  That's because the RSS spec doesnt'
+have an explicit concept for the set of categories -- an RSS2 channel
+can have 0 or more 'category' elements, but doesn't have a "list of
+categories" -- my "categories" attribute is an API fiction.
+
+BUGS:
+
+Several people have used this package since its first release in
+September of 2003 and reported a couple of bugs.  All those are fixed.
+There are no known bugs.
+
+The name PyRSS2Gen is a mouthful.  It didn't think it was useful to
+come up with a cute name.  You might consider having
+
+   import PyRSS2Gen as RSS2
+
+in any code which uses this module.  I'm not changing the name because
+anyone who reads "RSS2" will likely think it's a parser and not a
+generator.  Plus, the current name is very easy to find via a web
+search.
+
+LICENSE:
+
+This is copyright (c) by Dalke Scientific Software, LLC
+and released under the BSD license.  See the file LICENSE
+in the distribution or 
+  http://www.opensource.org/licenses/bsd-license.php
+for details.
+
+CHANGES for 1.0:
+  - many people (Richard Chamberlain, Daniel Hsu, Leonart Richardson
+  and Daniel Holth) pointed out that Guid sets "isPermaLink" (with a
+  "L" not "l").  Fixed, and changed it so the isPermaLink RSS attribute
+  is always either "true" or "false" instead of assuming empty means false.
+
+  - Added patches from Erik de Jonge and MATSUNO Tokuhiro to set the
+  output encoding.
+
+  - Implemented a suggestion by Daniel Hoth to convert the enclosure
+  length to a string.
+
+CHANGES for 0.1.1:
+  - retrospectively renamed "0.0" to "0.1"
+  - fixed bug in Image height.  Patch thanks to Edward Dale.

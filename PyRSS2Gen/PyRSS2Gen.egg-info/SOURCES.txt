@@ -1,0 +1,11 @@
+PyRSS2Gen.py
+README
+setup.py
+./PyRSS2Gen.py
+./example.py
+./test.py
+PyRSS2Gen.egg-info/PKG-INFO
+PyRSS2Gen.egg-info/SOURCES.txt
+PyRSS2Gen.egg-info/dependency_links.txt
+PyRSS2Gen.egg-info/requires.txt
+PyRSS2Gen.egg-info/top_level.txt
