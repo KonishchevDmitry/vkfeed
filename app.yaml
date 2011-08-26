@@ -4,5 +4,27 @@ runtime: python
 api_version: 1
 
 handlers:
+- url: /css
+  static_dir: css
+
+- url: /favicon.ico
+  static_files: images/favicon.ico
+  upload: favicon.ico
+
+- url: /images
+  static_dir: images
+
 - url: /.*
   script: vkfeed/main.py
+
+skip_files:
+- ^(.*/)?app\.yaml
+- ^(.*/)?app\.yml
+- ^(.*/)?index\.yaml
+- ^(.*/)?index\.yml
+- ^(.*/)?#.*#
+- ^(.*/)?.*~
+- ^(.*/)?.*\.py[co]
+- ^(.*/)?.*/RCS/.*
+- ^(.*/)?\..*
+- ^images.orig(/.*)?

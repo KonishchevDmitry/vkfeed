@@ -48,7 +48,7 @@ def fetch_url(url):
         raise Error('The server returned a page in invalid encoding.')
 
 
-def render_template(name, params):
+def render_template(name, params = {}):
     '''Renders the specified template.'''
 
     return template.render(os.path.join('../templates', name), params)

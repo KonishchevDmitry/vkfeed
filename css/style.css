@@ -1,0 +1,51 @@
+body {
+    font-size: 10pt;
+}
+
+
+div.block:first-child {
+    margin-top: 0px;
+}
+
+div.block {
+    margin-top: 1em;
+}
+
+span.error_balloon {
+    color: red;
+}
+
+
+p {
+    margin-bottom: 0px;
+}
+
+p:first-child {
+    margin-top: 0px;
+}
+
+p+ul {
+    margin-top: 0px;
+}
+
+
+a {
+    color: #45688e;
+    text-decoration: none;
+}
+
+
+img {
+    border-width: 0px;
+}
+
+
+input {
+    border: #a9a9a9 1px solid;
+    padding: 4px;
+}
+
+input[type="submit"] {
+    background: #dddddd;
+}
+

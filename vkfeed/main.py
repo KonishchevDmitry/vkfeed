@@ -3,8 +3,9 @@
 from google.appengine.ext.webapp import WSGIApplication
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-from vkfeed.feed import Feed
-from vkfeed.main_page import MainPage
+from vkfeed.pages.main import MainPage
+from vkfeed.pages.not_found import NotFoundPage
+from vkfeed.pages.wall import WallPage
 
 
 def main():
@@ -13,8 +14,9 @@ def main():
     run_wsgi_app(WSGIApplication(
         [
             # TODO: test slashes
-            ( '/wall/(.*)', Feed ),
-#            ( '/', MainPage ),
+            ( '/wall/(.*)', WallPage ),
+            ( '/', MainPage ),
+            ( '/.*', NotFoundPage ),
         ],
         # TODO
         debug = True

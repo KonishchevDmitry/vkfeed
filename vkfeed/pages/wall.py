@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-'''Generates an RSS feed.'''
+'''Generates an RSS feed with wall posts.'''
 
 import cgi
 import httplib
@@ -19,7 +19,7 @@ from vkfeed.wall_parser import WallPageParser, ParseError
 # TODO: quotes
 
 
-class Feed(webapp.RequestHandler):
+class WallPage(webapp.RequestHandler):
     '''Generates an RSS feed.'''
 
 

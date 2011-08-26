@@ -1,8 +1,37 @@
-<html>
-  <head>
-    <title>{% block title %}{% endblock %} - VKontakte Feed</title>
-  </head>
-  <body>
-    {% block body %}{% endblock %}
-  </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+        <title>
+            {% block no_title %}
+                {% block title %}{% endblock %} -
+            {% endblock %}
+            ВКонтакте RSS
+        </title>
+
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+
+        {% block head %}{% endblock %}
+    </head>
+
+<!-- TODO -->
+    <body lang="ru">
+        <table width='100%' height='100%'>
+        <tr><td align='center' valign='center'><div style='max-width: 600px;'>
+        <table><tr><td>
+        <a href="/"><img src="/images/vk-logo.png"><img style="margin-left: 5px" src="/images/vk-rss.png"></a>
+        </td></tr>
+        <tr><td>
+        <div style="border:2px solid #dddddd; padding: 20px">
+        {% block body %}{% endblock %}
+        </div>
+    </td></tr>
+    <tr><td><center>
+    &copy; <a href="mailto:Dmitry Konishchev &lt;konishchev@gmail.com&gt;">Дмитрий Конищев</a>, <!-- TODO --><a href="" target="_blank">Исходный код</a>, Технологии <a href="http://code.google.com/appengine/" target="_blank">Google App Engine</a>.<br>Права на логотип ВКонтакте принадлежат ООО &laquo;В Контакте&raquo;.</td></tr>
+    </table>
+    </td></tr></table>
+    </body>
 </html>
