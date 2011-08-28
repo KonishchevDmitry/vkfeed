@@ -23,6 +23,7 @@ class MainPage(webapp.RequestHandler):
 
         profile_url = self.request.get('profile_url')
 
+# TODO
         match = re.match(r'''^
             \s*
             (?:https?://(?:vk\.com|vkontakte\.ru)/)?
@@ -32,7 +33,7 @@ class MainPage(webapp.RequestHandler):
 
 #TODO
         if match:
-            self.redirect('wall/' + match.group('profile_id'))
+            self.redirect('/feed/' + match.group('profile_id') + '/wall')
         else:
             self.response.out.write(vkfeed.util.render_template('main.html', {
                 'post_error': u'''

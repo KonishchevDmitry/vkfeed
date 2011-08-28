@@ -5,12 +5,12 @@
 
 import unittest
 
-from vkfeed.wall_parser import WallPageParser, ParseError
+from vkfeed.tools.wall_parser import WallPageParser, ParseError
 
 
-# TODO: describe comments
 class TestWallParser(unittest.TestCase):
     '''Tests vk.com wall parser.'''
+
 
     def setUp(self):
         self.__parser = WallPageParser()
@@ -28,8 +28,9 @@ class TestWallParser(unittest.TestCase):
 
         self.__test_parsing(
             open('wall_parser/group_profile_page.html').read().decode('cp1251'), {
-                'user_name': u'Хабрахабр',
-                'posts':     10,
+                'user_name':  u'Хабрахабр',
+                'user_photo': 'http://cs11159.vk.com/g20629724/a_ba3bb3dc.jpg',
+                'posts':      10,
             }
         )
 
@@ -39,8 +40,9 @@ class TestWallParser(unittest.TestCase):
 
         self.__test_parsing(
             open('wall_parser/user_profile_page_with_empty_wall.html').read().decode('cp1251'), {
-                'user_name': u'Дмитрий Конищев',
-                'posts': 0,
+                'user_name':  u'Дмитрий Конищев',
+                'user_photo': 'http://cs9567.vkontakte.ru/u122138358/a_4fd18ce6.jpg',
+                'posts':      0,
             }
         )
 
@@ -50,8 +52,9 @@ class TestWallParser(unittest.TestCase):
 
         self.__test_parsing(
             open('wall_parser/user_profile_page.html').read().decode('cp1251'), {
-                'user_name': u'Павел Дуров',
-                'posts':     10,
+                'user_name':  u'Павел Дуров',
+                'user_photo': 'http://cs1495.vkontakte.ru/u00001/a_04766c4c.jpg',
+                'posts':      10,
             }
         )
 
@@ -80,8 +83,10 @@ class TestWallParser(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # TODO
+    # For test debugging
     #import logging
     #logging.getLogger().setLevel(logging.DEBUG)
+    #logging.getLogger("vkfeed").addHandler(logging.StreamHandler())
+
     unittest.main()
 

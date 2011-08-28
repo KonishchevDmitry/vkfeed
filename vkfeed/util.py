@@ -8,11 +8,15 @@ import os
 import google.appengine.api.urlfetch as urlfetch
 from google.appengine.ext.webapp import template
 
+from vkfeed.core import Error
+
+LOG = logging.getLogger(__name__)
+
 
 def fetch_url(url):
     '''Fetches the specified URL.'''
 
-    logging.info('Fetching "%s"...', url)
+    LOG.info('Fetching "%s"...', url)
 
     try:
         page = urlfetch.fetch(url)
@@ -20,7 +24,7 @@ def fetch_url(url):
         raise Error('Failed to fetch the page: %s.', e)
     else:
         if page.status_code == httplib.OK:
-            logging.info('"%s" has been successfully fetched.', url)
+            LOG.info('"%s" has been successfully fetched.', url)
         else:
             raise Error('The server returned error: %s (%s).',
                 httplib.responses.get(page.status_code, 'Unknown error'), page.status_code)

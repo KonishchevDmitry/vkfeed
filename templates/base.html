@@ -4,12 +4,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-        <title>
-            {% block no_title %}
-                {% block title %}{% endblock %} -
-            {% endblock %}
-            ВКонтакте RSS
-        </title>
+        <title>{% block no_title %}{% block title %}{% endblock %} - {% endblock %}ВКонтакте RSS</title>
 
         <link rel="stylesheet" href="/css/style.css" />
         <link rel="shortcut icon" href="/favicon.ico" />
@@ -17,7 +12,8 @@
         {% block head %}{% endblock %}
     </head>
 
-<!-- TODO -->
+<!-- TODO body -->
+<!-- TODO +1 button -->
     <body lang="ru">
         <table width='100%' height='100%'>
         <tr><td align='center' valign='center'><div style='max-width: 600px;'>

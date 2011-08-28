@@ -13,13 +13,11 @@ def main():
 
     run_wsgi_app(WSGIApplication(
         [
-            # TODO: test slashes
-            ( '/wall/(.*)', WallPage ),
-            ( '/', MainPage ),
-            ( '/.*', NotFoundPage ),
+            ( '/feed/([^/]+)/wall/?', WallPage ),
+            ( '/',                    MainPage ),
+            ( '.*',                   NotFoundPage ),
         ],
-        # TODO
-        debug = True
+        #debug = True
     ))
 
 

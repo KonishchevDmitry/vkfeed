@@ -15,7 +15,7 @@ from PyRSS2Gen import PyRSS2Gen
 from vkfeed import constants
 from vkfeed.core import Error
 import vkfeed.util
-from vkfeed.wall_parser import WallPageParser, ParseError
+from vkfeed.tools.wall_parser import WallPageParser, ParseError
 # TODO: quotes
 
 
@@ -32,45 +32,53 @@ class WallPage(webapp.RequestHandler):
         try:
             logging.info('Requested feed for "%s".', profile_name)
 
-            url = 'http://vk.com/' + profile_name
+            url = constants.VK_URL + profile_name
 
             try:
                 profile_page = vkfeed.util.fetch_url(url)
             except Error:
+                # TODO: more descriptive
                 user_error = u'Не удалось загрузить страницу <a href="%s" target="_blank">%s</a>.' % (url, url)
                 raise
 
             try:
+            # TODO: why not API
                 data = WallPageParser().parse(profile_page)
             except ParseError, e:
                 user_error = (
                     u'Сервер вернул страницу, на которой не удалось найти стену с сообщениями пользователя. '
                     u'Пожалуйста, убедитесь, что вы правильно указали профиль пользователя/группы. '
                     u'Если все указано верно, и ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:%s">администратором</a>.'
-                    % (cgi.escape(constants.admin_email, quote = True))
+                    % (cgi.escape(constants.ADMIN_EMAIL, quote = True))
                 )
                 raise
 
             data['url'] = url
             # TODO
-            match = re.search(r'''<div id="public_avatar.+?<img src="([^"]+)"''', profile_page, re.DOTALL)
-            data['image'] = match.group(1)
+            #match = re.search(r'''<div id="public_avatar.+?<img src="([^"]+)"''', profile_page, re.DOTALL)
+            if 'user_photo' not in data:
+                data['user_photo'] = constants.APP_URL + 'images/vk-rss-logo.png'
             feed = self.__generate_feed(data)
         except Exception, e:
-            logging.error('Unable to generate a feed for "%s": %s.', url, e)
+            # TODO
+            if isinstance(e, Error):
+                logging.error('Unable to generate a feed for "%s": %s.', url, e)
+            else:
+                logging.exception('Unable to generate a feed for "%s": %s.', url, e)
 
             if user_error:
                 self.error(httplib.BAD_GATEWAY)
-                error = u'Ошибка при генерации RSS-ленты. %s' % (user_error),
+                error = u'Ошибка при генерации RSS-ленты. %s' % (user_error)
             else:
                 self.error(httplib.INTERNAL_SERVER_ERROR)
                 error = (
                     u'При генерации RSS-ленты произошла внутренняя ошибка сервера. '
                     u'Если ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:%s">администратором</a>.'
-                    % (cgi.escape(constants.admin_email, quote = True))
+                    % (cgi.escape(constants.ADMIN_EMAIL, quote = True))
                 )
 
-            self.response.out.write(vkfeed.util.render_template('feed_error.html', {
+            self.response.out.write(vkfeed.util.render_template('error.html', {
+            # TODO
                 'feed_source': url,
                 'error':       error,
             }))
@@ -88,23 +96,18 @@ class WallPage(webapp.RequestHandler):
             description = u'Сообщения со стены пользователя %s' % data['user_name'],
 
             image = PyRSS2Gen.Image(
-                # TODO
-                url = data['image'],
+                url = data['user_photo'],
                 title = data['user_name'],
                 link = data['url'],
-                width = None, # def: 88, max 144
-                height = None, # def: 31, max 400
                 description = u'Сообщения со стены пользователя %s' % data['user_name']
             ),
 
             items = [
                 PyRSS2Gen.RSSItem(
                   title = data['user_name'],
-                  # TODO
-                  link = 'http://no-url.com/',
+                  link = post['url'],
                   description = post['text'],
-                  # TODO
-                  guid = PyRSS2Gen.Guid('http://' + post['id'])
+                  guid = PyRSS2Gen.Guid(post['url'])
                 ) for post in data['posts']
             ]
         )

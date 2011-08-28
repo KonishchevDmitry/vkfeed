@@ -4,6 +4,10 @@ from HTMLParser import HTMLParser
 import logging
 import re
 
+from vkfeed.core import Error
+
+LOG = logging.getLogger(__name__)
+
 
 class HTMLPageParser(HTMLParser):
     '''A convenient class for parsing HTML pages.'''
@@ -28,9 +32,9 @@ class HTMLPageParser(HTMLParser):
     ''')
     '''A regular expression for tag attributes.'''
 
-
-    __script_regex = re.compile('<script' + tag_attrs_regex + '>.*?</script>', re.DOTALL | re.IGNORECASE)
+    script_regex = re.compile('<script' + tag_attrs_regex + '>.*?</script>', re.DOTALL | re.IGNORECASE)
     '''A regular expression for matching scripts.'''
+
 
     __invalid_tag_attrs_regex = re.compile(r'''
         (
@@ -58,12 +62,15 @@ class HTMLPageParser(HTMLParser):
     attributes.
     '''
 
-    __misopened_tag_regex = re.compile(r'<(br|hr|img)' + tag_attrs_regex + r'\s*>', re.IGNORECASE)
+    __empty_tags = 'area|base|basefont|br|col|frame|hr|img|input|link|meta|param'
+    '''A list of all HTML empty tags.'''
+
+    __misopened_tag_regex = re.compile(r'<(' + __empty_tags + tag_attrs_regex + r')\s*>', re.IGNORECASE)
     '''A regular expression for matching opened tags that should be closed.'''
 
 
     __tag_stack = None
-    '''Stack of currently opened HTML tags.'''
+    '''A stack of currently opened HTML tags.'''
 
 
     def __init__(self):
@@ -77,11 +84,10 @@ class HTMLPageParser(HTMLParser):
         handler = tag.get('data_handler')
 
         if handler is not None:
-            # TODO
-            logging.debug('Data "%s" in "%s" with handler %s.',
+            LOG.debug('Data "%s" in "%s" with handler %s.',
                 data, tag['name'], handler.func_name)
 
-            handler(self.__get_cur_tag(), data)
+            handler(tag, data)
 
 
     def handle_endtag(self, tag_name):
@@ -99,31 +105,28 @@ class HTMLPageParser(HTMLParser):
                     self.__close_tag(self.__tag_stack.pop())
                     break
             else:
-                logging.debug('Dropping excess end tag "%s"...', tag_name)
-
-        # TODO
-        logging.debug('Current tag: %s', self.__get_cur_tag())
+                LOG.debug('Dropping excess end tag "%s"...', tag_name)
 
 
     def handle_root_data(self, tag, data):
         '''Handles data inside of the root of the document.'''
 
-        logging.debug('%s', data)
+        LOG.debug('%s', data)
 
 
-    def handle_root_new_tag(self, tag, attrs, empty):
+    def handle_root(self, tag, attrs, empty):
         '''Handles a tag inside of the root of the document.'''
 
-        logging.debug('<%s %s%s>', tag['name'], attrs, '/' if empty else '')
-        tag['new_tag_handler'] = self.handle_root_new_tag
+        LOG.debug('<%s %s%s>', tag['name'], attrs, '/' if empty else '')
+        tag['new_tag_handler'] = self.handle_root
         tag['data_handler'] = self.handle_root_data
-        tag['end_tag_handler'] = self.handle_root_tag_end
+        tag['end_tag_handler'] = self.handle_root_end
 
 
-    def handle_root_tag_end(self, tag):
+    def handle_root_end(self, tag):
         '''Handles end of the root of the document.'''
 
-        logging.debug('</%s>', tag['name'])
+        LOG.debug('</%s>', tag['name'])
 
 
     def handle_startendtag(self, tag, attrs):
@@ -146,38 +149,56 @@ class HTMLPageParser(HTMLParser):
         self.__tag_stack = [{
             # Add fake root tag
             'name':              None,
-            'new_tag_handler':   self.handle_root_new_tag,
+            'new_tag_handler':   self.handle_root,
             'data_handler':      self.handle_root_data,
-            'end_tag_handler':   self.handle_root_tag_end,
+            'end_tag_handler':   self.handle_root_end,
         }]
 
 
     def parse(self, html):
         '''Parses the specified HTML page.'''
 
-        # Fixing various things that may confuse the python's HTML parser
-        html = self.__script_regex.sub('', html)
-        html = self.__invalid_tag_attrs_regex.sub(r'\1 \2', html)
-        html = self.__misopened_tag_regex.sub(r'<\1/>', html)
+        # Fixing various things which may confuse the Python's HTML parser
+        # -->
+        html = self.script_regex.sub('', html)
 
-        # Run the parser
+        for i in xrange(0, 10):
+            new_html = self.__invalid_tag_attrs_regex.sub(r'\1 \2', html)
+
+            if new_html == html:
+                break
+            else:
+                html = new_html
+        else:
+            raise Error('Too many errors in the HTML or infinite loop.')
+
+        html = self.__misopened_tag_regex.sub(r'<\1 />', html)
+        # <--
+
         self.reset()
-        self.feed(html)
-        self.close()
 
-        # Close all unclosed tags
-        for tag in self.__tag_stack[1:]:
-            self.__close_tag(tag, True)
+        try:
+            # Run the parser
+            self.feed(html)
+            self.close()
+        finally:
+            # Close all unclosed tags
+            for tag in self.__tag_stack[1:]:
+                self.__close_tag(tag, True)
 
 
     def __close_tag(self, tag, forced = False):
         '''Forces closing of an unclosed tag.'''
 
         if forced:
-            logging.debug('Force closing of unclosed tag "%s".', tag['name'])
+            LOG.debug('Force closing of unclosed tag "%s".', tag['name'])
+        else:
+            LOG.debug('Tag %s closed.', tag)
 
         if 'end_tag_handler' in tag:
             tag['end_tag_handler'](tag)
+
+        LOG.debug('Current tag: %s.', self.__get_cur_tag())
 
 
     def __get_cur_tag(self):
@@ -195,8 +216,7 @@ class HTMLPageParser(HTMLParser):
         if handler is not None:
             attrs = self.__parse_attrs(attrs)
 
-            # TODO
-            logging.debug('Start tag: %s %s with handler %s.',
+            LOG.debug('Start tag: %s %s with handler %s.',
                 tag, attrs, handler.func_name)
 
             handler(tag, attrs, empty)
