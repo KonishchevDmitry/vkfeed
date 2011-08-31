@@ -12,6 +12,7 @@ from vkfeed.core import Error
 from vkfeed.tools.html_parser import HTMLPageParser
 
 LOG = logging.getLogger(__name__)
+LOG.setLevel(logging.INFO)
 
 
 class ParseError(Error):
@@ -350,6 +351,6 @@ class WallPageParser(HTMLPageParser):
 
         return (
             tag_data + '%s>' % (' /' if empty else ''),
-            u'%s</%s>' % (data, tag_name)
+            '' if empty else u'%s</%s>' % (data, tag_name)
         )
 

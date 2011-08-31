@@ -7,6 +7,7 @@ import re
 from vkfeed.core import Error
 
 LOG = logging.getLogger(__name__)
+LOG.setLevel(logging.INFO)
 
 
 class HTMLPageParser(HTMLParser):

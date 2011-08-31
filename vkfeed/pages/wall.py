@@ -16,7 +16,8 @@ from vkfeed import constants
 from vkfeed.core import Error
 import vkfeed.util
 from vkfeed.tools.wall_parser import WallPageParser, ParseError
-# TODO: quotes
+
+LOG = logging.getLogger(__name__)
 
 
 class WallPage(webapp.RequestHandler):
@@ -24,64 +25,55 @@ class WallPage(webapp.RequestHandler):
 
 
     def get(self, profile_name):
-        '''Processes the request.'''
+        '''Processes the request.
+
+        We don't use VKontakte API because it requires authorization and gives
+        tokens with expiration time which is not suitable for RSS generator.
+        '''
 
         user_error = None
 
-# TODO: check profile_name
         try:
-            logging.info('Requested feed for "%s".', profile_name)
+            LOG.info('Requested feed for "%s".', profile_name)
 
-            url = constants.VK_URL + profile_name
+            url = constants.VK_URL + cgi.escape(profile_name)
 
             try:
                 profile_page = vkfeed.util.fetch_url(url)
             except Error:
-                # TODO: more descriptive
                 user_error = u'Не удалось загрузить страницу <a href="%s" target="_blank">%s</a>.' % (url, url)
                 raise
 
             try:
-            # TODO: why not API
                 data = WallPageParser().parse(profile_page)
             except ParseError, e:
-                user_error = (
-                    u'Сервер вернул страницу, на которой не удалось найти стену с сообщениями пользователя. '
-                    u'Пожалуйста, убедитесь, что вы правильно указали профиль пользователя/группы. '
-                    u'Если все указано верно, и ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:%s">администратором</a>.'
-                    % (cgi.escape(constants.ADMIN_EMAIL, quote = True))
-                )
+                user_error = u'Сервер вернул страницу, на которой не удалось найти стену с сообщениями пользователя.'
                 raise
 
             data['url'] = url
-            # TODO
-            #match = re.search(r'''<div id="public_avatar.+?<img src="([^"]+)"''', profile_page, re.DOTALL)
             if 'user_photo' not in data:
                 data['user_photo'] = constants.APP_URL + 'images/vk-rss-logo.png'
+
             feed = self.__generate_feed(data)
         except Exception, e:
-            # TODO
-            if isinstance(e, Error):
-                logging.error('Unable to generate a feed for "%s": %s.', url, e)
-            else:
-                logging.exception('Unable to generate a feed for "%s": %s.', url, e)
+            (LOG.error if isinstance(e, Error) else LOG.exception)(
+                'Unable to generate a feed for "%s": %s.', url, e)
 
             if user_error:
                 self.error(httplib.BAD_GATEWAY)
-                error = u'Ошибка при генерации RSS-ленты. %s' % (user_error)
+                error = u'''
+                    Ошибка при генерации RSS-ленты. %s
+                    Пожалуйста, убедитесь, что вы правильно указали профиль пользователя/группы.
+                    Если все указано верно, и ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:%s">администратором</a>.
+                ''' % (user_error, cgi.escape(constants.ADMIN_EMAIL, quote = True))
             else:
                 self.error(httplib.INTERNAL_SERVER_ERROR)
-                error = (
-                    u'При генерации RSS-ленты произошла внутренняя ошибка сервера. '
-                    u'Если ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:%s">администратором</a>.'
-                    % (cgi.escape(constants.ADMIN_EMAIL, quote = True))
-                )
+                error = u'''
+                    При генерации RSS-ленты произошла внутренняя ошибка сервера.
+                    Если ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:%s">администратором</a>.
+                ''' % (cgi.escape(constants.ADMIN_EMAIL, quote = True))
 
-            self.response.out.write(vkfeed.util.render_template('error.html', {
-            # TODO
-                'feed_source': url,
-                'error':       error,
-            }))
+            self.response.out.write(vkfeed.util.render_template('error.html', { 'error': error }))
         else:
             self.response.headers['Content-Type'] = 'application/rss+xml'
             self.response.out.write(feed)

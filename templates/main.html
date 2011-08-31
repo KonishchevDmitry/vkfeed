@@ -3,7 +3,7 @@
 {% block no_title %}{% endblock %}
 
 {% block head %}
-    <script>
+    <script type="text/javascript">
         var formInputFocused = false;
 
         function setFormInputFocus() {
@@ -13,34 +13,34 @@
     </script>
 {% endblock %}
 
-<!-- TODO radius -->
 {% block body %}
     <div class="block">
-        Данный сайт является неофициальным дополнением к сайту
+        Данный сервис является неофициальным дополнением к сайту
         <a href="http://vkontakte.ru/" target="_blank">vkontakte.ru</a>
-        и позволяет получать сообщения с публично-доступных стен в формате RSS.
+        и позволяет получать сообщения с публично-доступных стен в формате
+        <a href="http://orss.ru/" target="_blank">RSS</a>.
     </div>
 
     <div class="block">
         <form name="profile_url_form" action="/" method="post">
             Введите URL страницы пользователя или группы:
 
-            <table width="100%" cellpadding="0">
-                <tr width="100%">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
                     <td width="100%">
                         <input type="text" name="profile_url" style="width: 100%" onfocus="formInputFocused = true;" /></td>
                     <td>
-                        <input type="submit" value="Сгенерировать RSS-ленту" />
+                        <input type="submit" style="margin-left: 0" value="Сгенерировать RSS-ленту" />
                     </td>
                 </tr>
             </table>
 
             {% if post_error %}
-                <span class="error_balloon">* {{ post_error }}</span>
+                <div class="error_balloon">* {{ post_error }}</div>
             {% endif %}
         </form>
 
-        <script>
+        <script type="text/javascript">
             setFormInputFocus();
         </script>
     </div>
