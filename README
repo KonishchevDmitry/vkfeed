@@ -1,0 +1,4 @@
+vkfeed is a Google App Engine application that allows you to subscribe to
+vk.com public wall posts via RSS.
+
+It is hosted at http://vkontakte-feed.appspot.com/.
