@@ -48,6 +48,8 @@ class WallPage(webapp.RequestHandler):
                 data = WallPageParser().parse(profile_page)
             except ParseError, e:
                 user_error = u'Сервер вернул страницу, на которой не удалось найти стену с сообщениями пользователя.'
+                # TODO
+                LOG.debug(u'Page contents:\n%s', profile_page)
                 raise
 
             data['url'] = url
@@ -96,7 +98,7 @@ class WallPage(webapp.RequestHandler):
 
             items = [
                 PyRSS2Gen.RSSItem(
-                  title = data['user_name'],
+                  title = post['title'],
                   link = post['url'],
                   description = post['text'],
                   guid = PyRSS2Gen.Guid(post['url'])

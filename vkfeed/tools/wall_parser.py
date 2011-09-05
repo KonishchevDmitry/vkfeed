@@ -98,6 +98,7 @@ class WallPageParser(HTMLPageParser):
         except StopParsing:
             pass
 
+
         if 'user_name' not in self.__data:
             raise ParseError('Unable to find the user name.')
 
@@ -107,8 +108,15 @@ class WallPageParser(HTMLPageParser):
         if not self.__data['posts'] and not self.__private_data.get('wall_is_empty'):
             raise ParseError('Unable to find wall posts.')
 
+
         if 'user_photo' not in self.__data:
             LOG.error('Unable to find a user photo on the page.')
+
+        for post in self.__data['posts']:
+            if 'title' not in post:
+                LOG.error('Unable to find a title for post %s.', post['url'])
+                post['title'] = self.__data['user_name']
+
 
         return self.__data
 
@@ -216,8 +224,19 @@ class WallPageParser(HTMLPageParser):
     def __handle_post_text(self, tag, attrs, empty):
         '''Handles a tag inside of <table class="post_table"><tr><td class="info"><div class="text">.'''
 
-        if tag['name'] == 'div' or tag['name'] == 'span' and attrs.get('class') == 'explain':
+        if tag['name'] == 'a' and self.__has_class(attrs, 'author'):
+            tag['data_handler'] = self.__handle_post_author
+        elif tag['name'] == 'div' or tag['name'] == 'span' and attrs.get('class') == 'explain':
             self.__handle_post_data_container(tag, attrs, empty)
+
+
+    def __handle_post_author(self, tag, data):
+        '''Handles data inside of a post author tag.'''
+
+        data = data.strip()
+
+        if data:
+            self.__get_cur_post()['title'] = data
 
 
     def __handle_post_data_container(self, tag, attrs, empty):
