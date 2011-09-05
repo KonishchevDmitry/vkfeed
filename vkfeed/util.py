@@ -19,7 +19,7 @@ def fetch_url(url):
     LOG.info('Fetching "%s"...', url)
 
     try:
-        page = urlfetch.fetch(url)
+        page = urlfetch.fetch(url, headers = { 'Accept-Language': 'ru,en' })
     except urlfetch.Error, e:
         raise Error('Failed to fetch the page: %s.', e)
     else:
