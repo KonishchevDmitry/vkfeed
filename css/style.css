@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-size: 10pt;
+    font-family: "Ubuntu", sans-serif;
 }
 
 
@@ -13,8 +14,11 @@ div.page {
 div.main_block {
     padding: 20px;
     margin-top: 5px;
+
     border: 1px solid #dddddd;
     border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
 }
 
 div.footer {
@@ -39,6 +43,26 @@ div.block {
 div.error_balloon {
     color: red;
     margin-top: 0.4em;
+}
+
+
+span.logo {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Ubuntu", sans-serif;
+
+    vertical-align: middle;
+    margin-left: 7px;
+}
+
+img.logo {
+    vertical-align: middle;
+}
+
+span.logo_beta {
+    margin-left: 0.3em;
+    vertical-align: top;
+    color: gray;
 }
 
 
@@ -76,7 +100,7 @@ input[type="submit"] {
 }
 
 input[type="text"], input[type="submit"] {
-    padding-top: 0px 4px;
+    padding: 0px 4px;
 }
 
 input[type="text"], input[type="submit"]{

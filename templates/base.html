@@ -10,14 +10,16 @@
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <link rel="shortcut icon" href="/favicon.ico" />
 
+        <link href="http://fonts.googleapis.com/css?family=Ubuntu:400,700&amp;subset=latin,cyrillic" rel="stylesheet" type="text/css" />
+
         <!-- Google +1 button -->
         <script type="text/javascript">
-            window.___gcfg = {lang: 'ru'};
+            window.___gcfg = {lang: "ru"};
 
             (function() {
-                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                po.src = 'https://apis.google.com/js/plusone.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;
+                po.src = "https://apis.google.com/js/plusone.js";
+                var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);
             })();
         </script>
 
@@ -31,19 +33,17 @@
     <body lang="ru">
         <div class="center page">
             <table width="100%" cellspacing="0" cellpadding="0"><tr>
-                <td width="100%" valign="bottom">
+                <td width="100%" valign="middle">
                     <!-- Site logo -->
-                    <a href="/"><img
-                        src="/images/vk-logo.png" alt="ВКонтакте" width="161" height="40" /><img
-                        style="margin-left: 5px" src="/images/vk-rss.png" alt="RSS" width="40" height="40"
-                    /></a>
-                </td>
-                <td valign="bottom">
+                    <a href="/">
+                        <img class="logo" src="/images/vk-rss.png" width="40" height="40" alt="" />
+                        <span class="logo">ВКонтакте RSS</span><span class="logo_beta">Beta</span>
+                    </a>
+                </td><td valign="bottom">
                     <!-- VKontakte like button -->
                     <div id="vk_like"></div>
                     <script type="text/javascript">VK.Widgets.Like("vk_like", {type: "mini"});</script>
-                </td>
-                <td valign="bottom">
+                </td><td valign="bottom">
                     <!-- Google +1 button -->
                     <div class="g-plusone" data-size="medium" data-annotation="none"></div>
                 </td>
@@ -54,10 +54,9 @@
             </div>
 
             <div class="footer">
-                &copy; <a href="mailto:Dmitry Konishchev &lt;konishchev@gmail.com&gt;">Дмитрий Конищев</a>,
-                <a href="https://github.com/KonishchevDmitry/vkfeed" target="_blank">Исходный код</a>,
-                Технологии <a href="http://code.google.com/appengine/" target="_blank">Google App Engine</a>.<br />
-                Права на логотип ВКонтакте принадлежат ООО &laquo;В Контакте&raquo;.
+                &copy; <a href="mailto:Dmitry Konishchev &lt;konishchev@gmail.com&gt;" target="_blank">Дмитрий Конищев</a>&nbsp;&nbsp;
+                <a href="https://github.com/KonishchevDmitry/vkfeed" target="_blank">Исходный код</a>&nbsp;&nbsp;
+                Технологии <a href="http://code.google.com/appengine/" target="_blank">Google App Engine</a>
             </div>
         </div>
     </body>

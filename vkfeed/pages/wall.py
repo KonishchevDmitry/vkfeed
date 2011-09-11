@@ -48,7 +48,6 @@ class WallPage(webapp.RequestHandler):
                 data = WallPageParser().parse(profile_page)
             except ParseError, e:
                 user_error = u'Сервер вернул страницу, на которой не удалось найти стену с сообщениями пользователя.'
-                # TODO
                 LOG.debug(u'Page contents:\n%s', profile_page)
                 raise
 
@@ -64,9 +63,10 @@ class WallPage(webapp.RequestHandler):
             if user_error:
                 self.error(httplib.BAD_GATEWAY)
                 error = u'''
-                    Ошибка при генерации RSS-ленты. %s
-                    Пожалуйста, убедитесь, что вы правильно указали профиль пользователя/группы.
-                    Если все указано верно, и ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:%s">администратором</a>.
+                    <p>Ошибка при генерации RSS-ленты. %s</p>
+
+                    <p>Пожалуйста, убедитесь, что вы правильно указали профиль пользователя или группы.
+                    Если все указано верно, и ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:%s">администратором</a>.</p>
                 ''' % (user_error, cgi.escape(constants.ADMIN_EMAIL, quote = True))
             else:
                 self.error(httplib.INTERNAL_SERVER_ERROR)
