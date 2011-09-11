@@ -317,23 +317,6 @@ class WallPageParser(HTMLPageParser):
             # Reject this tags
             return
 
-        data = ''
-
-        # If this is an audio related <input> tag, we can obtain an audio URL
-        # from it.
-        if tag_name == 'input' and attrs.get('id', '').startswith('audio_info'):
-            match = re.match(r'^(https?://.+)(?:,\d+)$', attrs.get('value', ''))
-            if match:
-                # That's it. Forge a link to the audio.
-                tag_name = 'a'
-                attrs = { 'href': match.group(1), 'style': 'margin-right: 0.5em' }
-                data = u'''<img src="%s"
-                    style="border-width: 0px"
-                    width="32" height="32"
-                    alt="Слушать"
-                />''' % (constants.APP_URL + 'images/play.png')
-                empty = False
-
         tag_data = '<' + tag_name
 
         # Stripping the tag attributes -->
@@ -370,6 +353,6 @@ class WallPageParser(HTMLPageParser):
 
         return (
             tag_data + '%s>' % (' /' if empty else ''),
-            '' if empty else u'%s</%s>' % (data, tag_name)
+            '' if empty else '</%s>' % tag_name
         )
 
