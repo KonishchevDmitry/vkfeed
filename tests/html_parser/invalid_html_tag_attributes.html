@@ -1,0 +1,1051 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script type="text/javascript" src="/al_loader.php?act=nav&v=4710"></script>
+
+<link rel="shortcut icon" href="/images/faviconvknew.ico" />
+
+<meta http-equiv="content-type" content="text/html; charset=windows-1251" />
+<meta name="description" content=" " />
+
+<title>Андрей Манько</title>
+
+<noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.php"></noscript>
+
+<link rel="stylesheet" type="text/css" href="/css/al/common.css?178" />
+<!--[if lte IE 6]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(/css/al/ie6.css?19); /* ]]> */</style><![endif]-->
+<!--[if IE 7]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(/css/al/ie7.css?13); /* ]]> */</style><![endif]-->
+
+<script type="text/javascript">
+var vk = {
+  al: parseInt('4') || 4,
+  id: 0,
+  intnat: '1' ? true : false,
+  host: 'vk.com',
+  lang: 0,
+  rtl: parseInt('') || 0,
+  version: 4710,
+  zero: false,
+  contlen: 58082,
+  loginscheme: 'https',
+  ip_h: '147335987a8beff6d2',
+  navPrefix: '/'
+}
+
+window.locDomain = vk.host.match(/[a-zA-Z]+\.[a-zA-Z]+\.?$/)[0];
+var _ua = navigator.userAgent.toLowerCase();
+if (/opera/i.test(_ua) || !/msie 6/i.test(_ua) || document.domain != locDomain) document.domain = locDomain;
+var ___htest = (location.toString().match(/#(.*)/) || {})[1] || '';
+if (vk.al != 1 && ___htest.length && ___htest.substr(0, 1) == vk.navPrefix) {
+  if (vk.al != 3 || vk.navPrefix != '!') {
+    location.replace(location.protocol + '//' + location.host + '/' + ___htest.replace(/^(\/|!)/, ''));
+  }
+}
+
+var StaticFiles = {
+  'common.js' : {v: 490},
+  'common.css': {v: 178},
+  'ie6.css'   : {v: 19},
+  'ie7.css'   : {v: 13}
+  ,'lang0_0.js':{v:4274},'profile.css':{v:71},'page.css':{v:129},'profile.js':{v:71},'page.js':{v:174}
+}
+
+</script>
+<link type="text/css" rel="stylesheet" href="/css/al/profile.css?71"></link><link type="text/css" rel="stylesheet" href="/css/al/page.css?129"></link><script type="text/javascript" src="/js/al/common.js?490"></script><script type="text/javascript" src="/js/lang0_0.js?4274"></script><script type="text/javascript" src="/js/al/profile.js?71"></script><script type="text/javascript" src="/js/al/page.js?174"></script>
+
+</head>
+
+<body onresize="onBodyResize()" class="is_rtl">
+  <div id="system_msg" class="fixed"></div>
+  <div id="utils"></div>
+
+  <div id="layer_bg" class="fixed"></div><div id="layer_wrap" class="scroll_fix_wrap fixed"><div id="layer"></div></div>
+  <div id="box_layer_bg" class="fixed"></div><div id="box_layer_wrap" class="scroll_fix_wrap fixed"><div id="box_layer"><div id="box_loader"><div class="loader"></div><div class="back"></div></div></div></div>
+
+  <div id="stl_left"></div><div id="stl_side"></div>
+  
+  <script type="text/javascript">domStarted();</script>
+
+  <div class="scroll_fix_wrap" id="page_wrap"><div id="top_info_wrap"></div>
+<div><div class="scroll_fix">
+  <div id="page_layout">
+    <div id="page_header" class="p_head1 p_head_l0">
+      <div class="back"></div>
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="content">
+        <div id="top_nav" class="head_nav">
+  <a id="top_home_link" class="top_home_link fl_l" href="/" onclick="return nav.go(this, event)" class="fl_l" style=""></a>
+  <div id="top_links">
+    <a id="top_search_link" class="fl_r top_nav_link" href="/search" style="display: none" onclick="return nav.go(this, event)">Поиск друзей</a>
+    <a class="fl_l top_nav_link" href="" id="top_back_link" onclick="return nav.go(this, event, {back: true})"></a>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <div id="side_bar" class="fl_l" style="">
+      <div id="quick_login">
+  <form method="POST" name="login" id="quick_login_form" action="https://login.vk.com/?act=login" onsubmit="if (vklogin) {return true} else {quick_login();return false;}">
+    <input type="hidden" name="act" value="login" />
+    <input type="hidden" name="q" value="1" />
+    <input type="hidden" name="al_frame" value="1" />
+    <input type="hidden" name="expire" id="quick_expire_input" value="" />
+    <input type="hidden" name="captcha_sid" id="quick_captcha_sid" value="" />
+    <input type="hidden" name="captcha_key" id="quick_captcha_key" value="" />
+    <input type="hidden" name="from_host" value="vk.com" />
+    <input type="hidden" name="ip_h" value="147335987a8beff6d2" />
+    <div class="label">E-mail или Логин:</div>
+    <div class="labeled"><input type="text" name="email" class="text" onfocus="show('quick_expire')" id="quick_email" /></div>
+    <div class="label">Пароль:</div>
+    <div class="labeled"><input type="password" name="pass" class="text" onfocus="show('quick_expire')" id="quick_pass" /></div>
+    <div class="checkbox" id="quick_expire" onclick="checkbox(this);ge('quick_expire_input').value=isChecked(this)?1:'';"><div></div>Чужой компьютер</div>
+    <input type="submit" class="submit" />
+  </form>
+  <div class="button_blue button_wide"><button id="quick_login_button">Войти</button></div>
+  <div class="clear forgot"><a href="/login?act=forgot" target="_top">Забыли пароль?</a></div>
+</div>
+    </div>
+
+    <div id="page_body" class="fl_r">
+      <div id="header_wrap2">
+        <div id="header_wrap1">
+          <div id="header" style="">
+            <h1 id="title">Андрей Манько</h1>
+          </div>
+        </div>
+      </div>
+      <div id="wrap_between"></div>
+      <div id="wrap3"><div id="wrap2">
+  <div id="wrap1">
+    <div id="content"><div id="profile">
+  
+  <div class="narrow_column fl_l" id="profile_narrow">
+    <div id="profile_avatar"><a id="profile_photo_link" href="/photo58238998_266228124" onclick="return showPhoto('58238998_266228124', 'album58238998_0/rev', {temp: {x_src: &quot;http://cs5320.vk.com/u4244845/138354196/x_5c2772a3.jpg&quot;, y_src: &quot;http://cs5320.vk.com/u4244845/138354196/y_25bdb84d.jpg&quot;, z_src: &quot;http://cs5320.vk.com/u4244845/138354196/z_69b9b120.jpg&quot;}}, event)"><img src="http://cs5320.vk.com/u58238998/a_3039522d.jpg" /></a></div><div class="msg guest_actions">
+Чтобы отправить Андрею сообщение, Вам необходимо <a onclick="focusLoginInput()">войти в систему</a>.
+</div><div id="profile_counts" class="counts_module"><div><a class="videos" onclick="return cur.needLoginBox()" href="/video?section=tagged&id=58238998"><span class="fl_r thumb"></span><span class="fl_r">20</span>Видеозаписи с Андреем</a></div></div><div class="rate_empty_line"></div><div class="module clear page_list_module" id="profile_idols">
+  <a href="/fans.php?act=idols&mid=58238998" onclick="return Profile.showIdols(event);" class="module_header">
+  <div class="header_top clear_fix">
+    <span class="right_link fl_r"  onmouseover="this.parentNode.parentNode.href=''" onmouseout="this.parentNode.parentNode.href='/fans.php?act=idols&mid=58238998'"></span>
+    Подписки
+  </div>
+  <div class="p_header_bottom">
+    <span class="fl_r">Все</span>
+    6 страниц
+  </div>
+</a>
+  <div class="module_body clear_fix">
+    <div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/public27055529" onclick="return nav.go(this, event)"><img src="http://cs10982.vk.com/g27055529/e_d9291ec2.jpg" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="group_name"><a href="/public27055529" onclick="return nav.go(this, event)">Центр Страхования Жуковский</a></div>
+    <div class="group_desc">Страхование</div>
+  </div>
+</div><div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/semashko_street" onclick="return nav.go(this, event)"><img src="http://cs4309.vk.com/g29478373/e_ccf418a8.jpg" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="group_name"><a href="/semashko_street" onclick="return nav.go(this, event)">Есть на карте мира улица Семашко :)</a></div>
+    <div class="group_desc">Общественное движение</div>
+  </div>
+</div><div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/bianka" onclick="return nav.go(this, event)"><img src="http://cs10735.vk.com/u1034876/e_aa3214b7.jpg" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="people_name"><a href="/bianka" onclick="return nav.go(this, event)">Александра Бургундская</a></div>
+    <div class="people_extra">Хочу в то время, когда ..</div>
+  </div>
+</div><div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/id4244845" onclick="return nav.go(this, event)"><img src="http://cs11225.vk.com/u4244845/e_606a0a91.jpg" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="people_name"><a href="/id4244845" onclick="return nav.go(this, event)">Алексей Климкин</a></div>
+    <div class="people_extra">Кто говорит, что нет ни..</div>
+  </div>
+</div><div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/public23678290" onclick="return nav.go(this, event)"><img src="http://cs878.vk.com/g23678290/e_d9b23441.jpg" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="group_name"><a href="/public23678290" onclick="return nav.go(this, event)">Шоко Дам Шоу</a></div>
+    <div class="group_desc">Шоу</div>
+  </div>
+</div>
+  </div>
+</div><div class="module clear album_module" id="profile_albums">
+  <a href="/albums58238998" onclick="return nav.go(this, event)" class="module_header">
+  <div class="header_top clear_fix">
+    <span class="right_link fl_r"  onmouseover="this.parentNode.parentNode.href=''" onmouseout="this.parentNode.parentNode.href='/albums58238998'"></span>
+    Фотоальбомы
+  </div>
+  <div class="p_header_bottom">
+    <span class="fl_r">Все</span>
+    5 альбомов
+  </div>
+</a>
+  <div class="module_body clear_fix">
+    <div class="fl_l clear_fix clear album_row">
+  <div class="fl_l thumb">
+    <a href="/album58238998_100094901" onclick="return nav.go(this, event)"><div><img src="http://cs4566.vk.com/u58238998/100094901/s_bfe24cac.jpg" /></div></a>
+  </div>
+  <div class="fl_l info">
+    <div><a href="/album58238998_100094901" onclick="return nav.go(this, event)">Все прошло на ура&#33;</a></div>
+    <div class="updated">Обновлён 12 декабря 2009</div>
+  </div>
+</div><div class="fl_l clear_fix clear album_row">
+  <div class="fl_l thumb">
+    <a href="/album58238998_105503071" onclick="return nav.go(this, event)"><div><img src="http://cs4804.vk.com/u58238998/105503071/s_c00b15da.jpg" /></div></a>
+  </div>
+  <div class="fl_l info">
+    <div><a href="/album58238998_105503071" onclick="return nav.go(this, event)">Зима 2010</a></div>
+    <div class="updated">Обновлён 9 марта 2010</div>
+  </div>
+</div>
+  </div>
+</div>
+  </div>
+  <div class="wide_column fl_r" id="profile_wide">
+    <div id="profile_info">
+  <h4 class="simple">
+    <span class="fl_r"><a id="profile_full_link" onclick="Profile.hideFull()">скрыть подробную информацию</a></span>
+    Андрей &quot;С@ныч&quot; Манько
+    
+  </h4>
+  <div id="profile_short">
+    <div class="profile_info"><div class="clear_fix ">
+  <div class="label fl_l">День рождения:</div>
+  <div class="labeled fl_l">4 мая 1987 г.</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Родной город:</div>
+  <div class="labeled fl_l">Жуковский</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Семейное положение:</div>
+  <div class="labeled fl_l">не женат</div>
+</div></div>
+  </div>
+</div><div id="profile_full_info" style="">
+  <h4>
+  
+  <b>Контактная информация</b>
+</h4>
+<div class="profile_info">
+  <div class="clear_fix ">
+  <div class="label fl_l">Город:</div>
+  <div class="labeled fl_l">Жуковский</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Моб. телефон:</div>
+  <div class="labeled fl_l"><span>Информация скрыта</span></div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">ICQ:</div>
+  <div class="labeled fl_l">566273015</div>
+</div>
+</div>
+  <h4>
+  
+  <b>Убеждения</b>
+</h4>
+<div class="profile_info">
+  <div class="clear_fix ">
+  <div class="label fl_l">Полит. взгляды:</div>
+  <div class="labeled fl_l">Умеренные</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Религ. взгляды:</div>
+  <div class="labeled fl_l"><a href="/ru/%D0%9F%D1%80%D0%B0%D0%B2%D0%BE%D1%81%D0%BB%D0%B0%D0%B2%D0%B8%D0%B5" onclick="return nav.go(this, event);">Православие</a></div>
+</div>
+</div>
+  <h4>
+  
+  <b>Личная информация</b>
+</h4>
+<div class="profile_info">
+  <div class="clear_fix ">
+  <div class="label fl_l">Деятельность:</div>
+  <div class="labeled fl_l">Работаем все&#33;</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Интересы:</div>
+  <div class="labeled fl_l">Музыка, машины, пиво, горные лыжи, и красивые девушки&#33;</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Любимая музыка:</div>
+  <div class="labeled fl_l">Ленинград, Ария, Сергей Трофимов, Король и Шут, Наив, Тараканы&#33;, Депрессия&#33;Люмен, Кипелов, Nihtwish, Эпидемия&#33;&#33;&#33;&#33;&#33;&#33;&#33;</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Любимые фильмы:</div>
+  <div class="labeled fl_l">Кошмар на улице Вязов, Евро тур, Детройт-город рока&#33;</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Любимые телешоу:</div>
+  <div class="labeled fl_l">Наша -раша, и всякая хрень&#33;</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Любимые книги:</div>
+  <div class="labeled fl_l">В дебрях Уссурийского края&#33;</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Любимые игры:</div>
+  <div class="labeled fl_l">Рыбалка, CounterStrike, Мафия, CALL OF DUTY</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">Любимые цитаты:</div>
+  <div class="labeled fl_l">Кто в армии служил, тот в цирке не смеётся &#33;&#33;&#33;. Жизнь прекрасна&#33;<br>Жизнь человеку дается, один раз, так надо прожить ее достойно и чтобы тебя запомнили&#33;</div>
+</div><div class="clear_fix miniblock">
+  <div class="label fl_l">О себе:</div>
+  <div class="labeled fl_l">Сволочь редкостная&#33;&#33;&#33;&#33;)))<br></div>
+</div>
+</div>
+  <h4>
+  
+  <b>Образование</b>
+</h4>
+<div class="profile_info">
+  <div class="clear_fix ">
+  <div class="label fl_l">Школа:</div>
+  <div class="labeled fl_l">№ 8 '02<br>Жуковский, 1994-2002</div>
+</div>
+</div>
+  
+  
+  
+</div><div class="module clear photos_module" id="profile_photos_module">
+  <a href="/photos58238998" onclick="return nav.go(this, event)" class="module_header">
+    <div class="header_top clear_fix">
+      <span class="right_link fl_r">все</span>
+      Фотографии
+    </div>
+  </a>
+  <div id="profile_photos" class="clear_fix profile_photos_other">
+    <table cellspacing="0" cellpadding="0">
+       <tr class="photos"><td><a href="/photo58238998_189489022?all=1" onclick="return showPhoto('58238998_189489022', 'photos58238998', {temp: {x_src: &quot;http://cs409.vk.com/u58238998/98772137/x_026382a3.jpg&quot;, y_src: &quot;http://cs409.vk.com/u58238998/98772137/y_bcf59473.jpg&quot;, z_src: &quot;http://cs409.vk.com/u58238998/98772137/z_e4a21b7d.jpg&quot;}}, event)">
+  <img src="http://cs409.vk.com/u58238998/98772137/s_24ea0c87.jpg">
+</a></td></td><td><a href="/photo58238998_189489019?all=1" onclick="return showPhoto('58238998_189489019', 'photos58238998', {temp: {x_src: &quot;http://cs409.vk.com/u58238998/98772137/x_152a23e5.jpg&quot;, y_src: &quot;http://cs409.vk.com/u58238998/98772137/y_18bf26f1.jpg&quot;, z_src: &quot;http://cs409.vk.com/u58238998/98772137/z_a15ed356.jpg&quot;}}, event)">
+  <img src="http://cs409.vk.com/u58238998/98772137/s_6a0ab26b.jpg">
+</a></td></td><td><a href="/photo58238998_189489018?all=1" onclick="return showPhoto('58238998_189489018', 'photos58238998', {temp: {x_src: &quot;http://cs409.vk.com/u58238998/98772137/x_8967c676.jpg&quot;, y_src: &quot;http://cs409.vk.com/u58238998/98772137/y_2dcc90fe.jpg&quot;, z_src: &quot;http://cs409.vk.com/u58238998/98772137/z_ddccf84f.jpg&quot;}}, event)">
+  <img src="http://cs409.vk.com/u58238998/98772137/s_7916f734.jpg">
+</a></td></td><td><a href="/photo58238998_189489016?all=1" onclick="return showPhoto('58238998_189489016', 'photos58238998', {temp: {x_src: &quot;http://cs409.vk.com/u58238998/98772137/x_838fd622.jpg&quot;, y_src: &quot;http://cs409.vk.com/u58238998/98772137/y_bea301a5.jpg&quot;, z_src: &quot;http://cs409.vk.com/u58238998/98772137/z_648c4af1.jpg&quot;}}, event)">
+  <img src="http://cs409.vk.com/u58238998/98772137/s_97fddff4.jpg">
+</a></td></td><td><a href="/photo58238998_189489015?all=1" onclick="return showPhoto('58238998_189489015', 'photos58238998', {temp: {x_src: &quot;http://cs409.vk.com/u58238998/98772137/x_3d75d6cb.jpg&quot;, y_src: &quot;http://cs409.vk.com/u58238998/98772137/y_5c9217ec.jpg&quot;, z_src: &quot;http://cs409.vk.com/u58238998/98772137/z_47b6f8b7.jpg&quot;}}, event)">
+  <img src="http://cs409.vk.com/u58238998/98772137/s_bb962d35.jpg">
+</a></td></td></tr>
+       
+    </table>
+  </div>
+</div><div class="wall_module" id="profile_wall">
+  <div class="module_header wall_header">
+  <a id="page_wall_header" class="header_top clear_fix" onclick="if (checkEvent(event)) return true; return wall.switchWall()">
+    <span class="fl_r" id="page_wall_switch"></span>
+    Стена<span id="page_wall_posts_count" onclick="if (checkEvent(event)) return true; nav.go(this.parentNode, event); return cancelEvent(event);"></span>
+  </a>
+</div>
+  
+  <div class="clear_fix"><div id="page_wall_posts" class="wall_posts all"><input type="hidden" id="page_wall_count_all" value="370" /><input type="hidden" id="page_wall_count_own" value="19" /><div id="post58238998_542" class="post all" onmouseover="wall.postOver('58238998_542')" onmouseout="wall.postOut('58238998_542')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/id131730505" onclick="return nav.go(this, event)"><img src="http://cs10413.vk.com/u131730505/e_3ca88136.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_542" onclick="wall.markAsSpam('58238998_542', '0f28c33a613a14c522');" onmouseover="wall.activeDeletePost('58238998_542', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_542')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/id131730505" onclick="return nav.go(this, event)">Марина Неборсина</a> <div class="wall_post_text">ни фига себе&#33; Дрюх реальная штучка  (^.^)  <a href="http://vkontakte.ru/app2447607?36766">http://vkontakte.ru/app2447607?36766</a></div><div class="post_media clear_fix" ><a class="photo" onclick="return showPhoto('131730505_266241966', 'a101b6c6e1c141ce93', {temp: {x_src: &quot;http://cs9827.vk.com/u131730505/-5/x_cf6db4d7.jpg&quot;}}, event)"><img src="http://cs9827.vk.com/u131730505/-5/m_87ae8207.jpg" /></a></div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_542')" onmouseout="wall.likeOut('58238998_542')" onclick="wall.like('58238998_542', 'b654fb3f0ad2ccd2d8'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_542"></span>
+  <div class="no_likes fl_l" id="like_icon58238998_542"></div>
+  <span class="like_count fl_l" id="like_count58238998_542"></span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_542" onclick="return nav.go(this, event)"><span class="rel_date">23 авг  в 8:54</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_542" style="display: none">
+  <div id="replies58238998_542"><input type="hidden" id="start_reply58238998_542" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_541" class="post all" onmouseover="wall.postOver('58238998_541')" onmouseout="wall.postOut('58238998_541')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/id10847771" onclick="return nav.go(this, event)"><img src="http://cs10329.vk.com/u10847771/e_e7ed1d13.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_541" onclick="wall.markAsSpam('58238998_541', '4f7de60b06404a363d');" onmouseover="wall.activeDeletePost('58238998_541', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_541')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/id10847771" onclick="return nav.go(this, event)">Александр Киселев</a> <div class="wall_post_text">Андрей, нажми на картинку и помоги мне получить это</div><div class="post_media clear_fix" ><a class="app photo"/app2283568_58238998?from_id=10847771 onclick="return cur.needLoginBox()"><img src="http://cs10476.vk.com/u135560423/b0c68b8x.gif" class="icon fl_l" /><img src="http://cs5291.vk.com/u10847771/-5/m_75e08445.jpg" /></a></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk58238998_541" href="/app2283568" onmouseover="wall.postTooltip(this, '58238998_541', {i: -1})">
+    <b class="fl_l app"></b>через приложение
+    <span class="a">Армейка</span>
+  </a>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_541')" onmouseout="wall.likeOut('58238998_541')" onclick="wall.like('58238998_541', '62d6a4caf0bb60334f'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_541"></span>
+  <div class="no_likes fl_l" id="like_icon58238998_541"></div>
+  <span class="like_count fl_l" id="like_count58238998_541"></span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_541" onclick="return nav.go(this, event)"><span class="rel_date">20 авг  в 14:01</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_541" style="display: none">
+  <div id="replies58238998_541"><input type="hidden" id="start_reply58238998_541" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_540" class="post all" onmouseover="wall.postOver('58238998_540')" onmouseout="wall.postOut('58238998_540')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/mihaliych" onclick="return nav.go(this, event)"><img src="http://cs10164.vk.com/u4419230/e_ef28e8a9.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_540" onclick="wall.markAsSpam('58238998_540', '743789771f934ab96d');" onmouseover="wall.activeDeletePost('58238998_540', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_540')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/mihaliych" onclick="return nav.go(this, event)">Илья Мискарян</a> <div class="wall_post_text">чОткий музончик :) :) :)</div><div class="post_media clear_fix" ><div class="audio" id="audio4419230_114906107_58238998_540">
+  <table cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+      <td>
+        <a onclick="playAudioNew('4419230_114906107_58238998_540')"><div class="play_new" id="play4419230_114906107_58238998_540"></div></a>
+        <input type="hidden" id="audio_info4419230_114906107_58238998_540" value="http://cs4835.vk.com/u6076813/audio/6adce87e0ebc.mp3,260" />
+      </td>
+      <td class="info">
+        <div class="duration fl_r">4:20</div>
+        <div class="audio_title_wrap fl_l"><b><a href="/search?c[section]=audio&c[q]=%D0%A0%D0%B2%D0%B8+%D0%9C%D0%B5%D1%85%D0%B0+%D0%9E%D1%80%D0%BA%D0%B5%D1%81%D1%82%D1%80">Рви Меха Оркестр</a></b> - <span id="title4419230_114906107_58238998_540">Регги пацанов на районе</span></div>
+      </td>
+      
+    </tr>
+  </table>
+  <div class="player_wrap">
+    <div id="line4419230_114906107_58238998_540" class="playline"><div></div></div>
+    <div id="player4419230_114906107_58238998_540" class="player" ondragstart="return false;" onselectstart="return false;">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr valign="top" id="audio_tr4419230_114906107_58238998_540">
+          <td style="width:100%;padding:0px;position:relative;">
+            <div id="audio_white_line4419230_114906107_58238998_540" class="audio_white_line" onmousedown="audioPlayer.prClick(event);"></div>
+            <div id="audio_load_line4419230_114906107_58238998_540" class="audio_load_line" onmousedown="audioPlayer.prClick(event);"><!-- --></div>
+            <div id="audio_progress_line4419230_114906107_58238998_540" class="audio_progress_line" onmousedown="audioPlayer.prClick(event);">
+              <div id="audio_pr_slider4419230_114906107_58238998_540" class="audio_pr_slider"><!-- --></div>
+            </div>
+          </td>
+          <td id="audio_vol4419230_114906107_58238998_540" style="position: relative;"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div></div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_540')" onmouseout="wall.likeOut('58238998_540')" onclick="wall.like('58238998_540', 'b94bf2e1c58b8598c9'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_540"></span>
+  <div class=" fl_l" id="like_icon58238998_540"></div>
+  <span class="like_count fl_l" id="like_count58238998_540">1</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_540" onclick="return nav.go(this, event)"><span class="rel_date">15 авг  в 23:35</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_540" style="display: none">
+  <div id="replies58238998_540"><input type="hidden" id="start_reply58238998_540" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_539" class="post all own" onmouseover="wall.postOver('58238998_539')" onmouseout="wall.postOut('58238998_539')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/id58238998" onclick="return nav.go(this, event)"><img src="http://cs5320.vk.com/u58238998/e_f7149de5.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_539" onclick="wall.markAsSpam('58238998_539', '368778c1b1883fa21a');" onmouseover="wall.activeDeletePost('58238998_539', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_539')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/id58238998" onclick="return nav.go(this, event)">Андрей Манько</a> <span class="explain">обновил фотографию на странице:</span><div class="post_media clear_fix" ><a class="photo" href="/photo58238998_266228124" onclick="return showPhoto('58238998_266228124', 'd0402b48f86163cde3', {temp: {x_src: &quot;http://cs5320.vk.com/u4244845/138354196/x_5c2772a3.jpg&quot;, y_src: &quot;http://cs5320.vk.com/u4244845/138354196/y_25bdb84d.jpg&quot;, z_src: &quot;http://cs5320.vk.com/u4244845/138354196/z_69b9b120.jpg&quot;}}, event)"><img src="http://cs5320.vk.com/u4244845/138354196/m_18e8653a.jpg" /></a></div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_539')" onmouseout="wall.likeOut('58238998_539')" onclick="wall.like('58238998_539', 'a0717149c4bf1ab962'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_539"></span>
+  <div class=" fl_l" id="like_icon58238998_539"></div>
+  <span class="like_count fl_l" id="like_count58238998_539">4</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_539" onclick="return nav.go(this, event)"><span class="rel_date">15 авг  в 18:59</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_539" style="display: none">
+  <div id="replies58238998_539"><input type="hidden" id="start_reply58238998_539" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_538" class="post all own" onmouseover="wall.postOver('58238998_538')" onmouseout="wall.postOut('58238998_538')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/id58238998" onclick="return nav.go(this, event)"><img src="http://cs5320.vk.com/u58238998/e_f7149de5.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_538" onclick="wall.markAsSpam('58238998_538', '26f00038d02e7ccd4d');" onmouseover="wall.activeDeletePost('58238998_538', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_538')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/id58238998" onclick="return nav.go(this, event)">Андрей Манько</a> <span class="explain">обновил фотографию на странице:</span><div class="post_media clear_fix" ><a class="photo" href="/photo58238998_266135149" onclick="return showPhoto('58238998_266135149', '2536a4415ae8eb617f', {temp: {x_src: &quot;http://cs9616.vk.com/u4419230/127128693/x_24992237.jpg&quot;, y_src: &quot;http://cs9616.vk.com/u4419230/127128693/y_966e149e.jpg&quot;, z_src: &quot;http://cs9616.vk.com/u4419230/127128693/z_d03908ef.jpg&quot;}}, event)"><img src="http://cs9616.vk.com/u4419230/127128693/m_0967d056.jpg" /></a></div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_538')" onmouseout="wall.likeOut('58238998_538')" onclick="wall.like('58238998_538', 'df92bca8dc67a43e6d'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_538"></span>
+  <div class=" fl_l" id="like_icon58238998_538"></div>
+  <span class="like_count fl_l" id="like_count58238998_538">4</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_538" onclick="return nav.go(this, event)"><span class="rel_date">13 авг  в 16:42</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_538" style="display: none">
+  <div id="replies58238998_538"><input type="hidden" id="start_reply58238998_538" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_532" class="post all" onmouseover="wall.postOver('58238998_532')" onmouseout="wall.postOut('58238998_532')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/russkihas" onclick="return nav.go(this, event)"><img src="http://cs9408.vk.com/u2381857/e_4a310835.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_532" onclick="wall.markAsSpam('58238998_532', '47d32ca364e0303d5e');" onmouseover="wall.activeDeletePost('58238998_532', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_532')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/russkihas" onclick="return nav.go(this, event)">Андрей Русских</a> <div class="wall_post_text">Добавляйся ко мне в соседи в игре Аэропорт-Сити&#33; Будем помогать друг другу.</div><div class="post_media clear_fix" ><a class="app photo"/app2322149_58238998?from_id=2381857&loc=addneighbour onclick="return cur.needLoginBox()"><img src="http://cs10654.vk.com/u81232260/cb8c724x.gif" class="icon fl_l" /><img src="http://cs10676.vk.com/u84396908/134420076/m_b75915a7.jpg" /></a></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk58238998_532" href="/app2322149" onmouseover="wall.postTooltip(this, '58238998_532', {i: -1})">
+    <b class="fl_l app"></b>через приложение
+    <span class="a">Аэропорт-Сити</span>
+  </a>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_532')" onmouseout="wall.likeOut('58238998_532')" onclick="wall.like('58238998_532', '50ff6edbaadfea896e'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_532"></span>
+  <div class="no_likes fl_l" id="like_icon58238998_532"></div>
+  <span class="like_count fl_l" id="like_count58238998_532"></span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_532" onclick="return nav.go(this, event)"><span class="rel_date">27 июл  в 15:26</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_532" style="display: none">
+  <div id="replies58238998_532"><input type="hidden" id="start_reply58238998_532" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_531" class="post all" onmouseover="wall.postOver('58238998_531')" onmouseout="wall.postOut('58238998_531')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/mihaliych" onclick="return nav.go(this, event)"><img src="http://cs10164.vk.com/u4419230/e_ef28e8a9.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_531" onclick="wall.markAsSpam('58238998_531', 'e7bb36a5f0a4b92f1f');" onmouseover="wall.activeDeletePost('58238998_531', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_531')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/mihaliych" onclick="return nav.go(this, event)">Илья Мискарян</a> <div class="wall_post_text">Ленинград — Верность</div><div class="post_media clear_fix" ><a class="video fl_l" href="video4419230_160432827" onclick="return showVideo('4419230_160432827', 'bff944e73737ac5def', {autoplay: 1}, event);"><div><span class="bg fl_r">3:10</span></div><div><span class="fl_r">3:10</span></div><img src="http://cs4646.vkontakte.ru/u1189132/video/s_48f5213c.jpg" /></a></div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_531')" onmouseout="wall.likeOut('58238998_531')" onclick="wall.like('58238998_531', '1be2e10278f81e60e2'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_531"></span>
+  <div class=" fl_l" id="like_icon58238998_531"></div>
+  <span class="like_count fl_l" id="like_count58238998_531">1</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_531" onclick="return nav.go(this, event)"><span class="rel_date">26 июл  в 18:36</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_531" style="display: none">
+  <div id="replies58238998_531"><input type="hidden" id="start_reply58238998_531" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_529" class="post all" onmouseover="wall.postOver('58238998_529')" onmouseout="wall.postOut('58238998_529')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/mihaliych" onclick="return nav.go(this, event)"><img src="http://cs10164.vk.com/u4419230/e_ef28e8a9.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_529" onclick="wall.markAsSpam('58238998_529', '09b6d68db66eb6433c');" onmouseover="wall.activeDeletePost('58238998_529', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_529')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/mihaliych" onclick="return nav.go(this, event)">Илья Мискарян</a> <div class="wall_post_text">еееееее, пасиба братэлла =))))))))</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_529')" onmouseout="wall.likeOut('58238998_529')" onclick="wall.like('58238998_529', 'b87aca96e801fb8e3a'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_529"></span>
+  <div class="no_likes fl_l" id="like_icon58238998_529"></div>
+  <span class="like_count fl_l" id="like_count58238998_529"></span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_529" onclick="return nav.go(this, event)"><span class="rel_date">24 июл  в 11:06</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_529" style="display: none">
+  <div id="replies58238998_529"><input type="hidden" id="start_reply58238998_529" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_528" class="post all own" onmouseover="wall.postOver('58238998_528')" onmouseout="wall.postOut('58238998_528')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/id58238998" onclick="return nav.go(this, event)"><img src="http://cs5320.vk.com/u58238998/e_f7149de5.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_528" onclick="wall.markAsSpam('58238998_528', 'b6431b12e318dc2b37');" onmouseover="wall.activeDeletePost('58238998_528', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_528')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/id58238998" onclick="return nav.go(this, event)">Андрей Манько</a> <span class="explain">обновил фотографию на странице:</span><div class="post_media clear_fix" ><a class="photo" href="/photo58238998_265189944" onclick="return showPhoto('58238998_265189944', '98447d0984e43d8c1d', {temp: {x_src: &quot;http://cs11225.vk.com/u4244845/138692362/x_c8f4cd31.jpg&quot;, y_src: &quot;http://cs11225.vk.com/u4244845/138692362/y_1f2e4cbe.jpg&quot;, z_src: &quot;http://cs11225.vk.com/u4244845/138692362/z_01f252a7.jpg&quot;}}, event)"><img src="http://cs11225.vk.com/u4244845/138692362/m_ff9228ae.jpg" /></a></div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_528')" onmouseout="wall.likeOut('58238998_528')" onclick="wall.like('58238998_528', '46facd6befabfbfb25'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_528"></span>
+  <div class=" fl_l" id="like_icon58238998_528"></div>
+  <span class="like_count fl_l" id="like_count58238998_528">3</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_528" onclick="return nav.go(this, event)"><span class="rel_date">22 июл  в 3:22</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_528" style="display: none">
+  <div id="replies58238998_528"><input type="hidden" id="start_reply58238998_528" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_527" class="post all" onmouseover="wall.postOver('58238998_527')" onmouseout="wall.postOut('58238998_527')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/mihaliych" onclick="return nav.go(this, event)"><img src="http://cs10164.vk.com/u4419230/e_ef28e8a9.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_527" onclick="wall.markAsSpam('58238998_527', '2dc44c60dde833b7b6');" onmouseover="wall.activeDeletePost('58238998_527', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_527')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/mihaliych" onclick="return nav.go(this, event)">Илья Мискарян</a> <div class="post_media clear_fix" ><div class="audio" id="audio4419230_112426469_58238998_527">
+  <table cellspacing="0" cellpadding="0" width="100%">
+    <tr>
+      <td>
+        <a onclick="playAudioNew('4419230_112426469_58238998_527')"><div class="play_new" id="play4419230_112426469_58238998_527"></div></a>
+        <input type="hidden" id="audio_info4419230_112426469_58238998_527" value="http://cs4432.vk.com/u15744402/audio/2a6ee1ccddc0.mp3,262" />
+      </td>
+      <td class="info">
+        <div class="duration fl_r">4:22</div>
+        <div class="audio_title_wrap fl_l"><b><a href="/search?c[section]=audio&c[q]=Van+Canto">Van Canto</a></b> - <span id="title4419230_112426469_58238998_527">Wishmaster (Nigthwish cover)  Просто улётная штука. В группе 1 ударник и 5 вокалистов&#33; Гитары, клавиши, соляки, всё делается вокалом&#33;</span></div>
+      </td>
+      
+    </tr>
+  </table>
+  <div class="player_wrap">
+    <div id="line4419230_112426469_58238998_527" class="playline"><div></div></div>
+    <div id="player4419230_112426469_58238998_527" class="player" ondragstart="return false;" onselectstart="return false;">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr valign="top" id="audio_tr4419230_112426469_58238998_527">
+          <td style="width:100%;padding:0px;position:relative;">
+            <div id="audio_white_line4419230_112426469_58238998_527" class="audio_white_line" onmousedown="audioPlayer.prClick(event);"></div>
+            <div id="audio_load_line4419230_112426469_58238998_527" class="audio_load_line" onmousedown="audioPlayer.prClick(event);"><!-- --></div>
+            <div id="audio_progress_line4419230_112426469_58238998_527" class="audio_progress_line" onmousedown="audioPlayer.prClick(event);">
+              <div id="audio_pr_slider4419230_112426469_58238998_527" class="audio_pr_slider"><!-- --></div>
+            </div>
+          </td>
+          <td id="audio_vol4419230_112426469_58238998_527" style="position: relative;"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div></div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_527')" onmouseout="wall.likeOut('58238998_527')" onclick="wall.like('58238998_527', '91d78c971c8a7ad2f1'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_527"></span>
+  <div class="no_likes fl_l" id="like_icon58238998_527"></div>
+  <span class="like_count fl_l" id="like_count58238998_527"></span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_527" onclick="return nav.go(this, event)"><span class="rel_date">21 июл  в 22:37</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_527" style="display: none">
+  <div id="replies58238998_527"><input type="hidden" id="start_reply58238998_527" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_525" class="post own" onmouseover="wall.postOver('58238998_525')" onmouseout="wall.postOut('58238998_525')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/id58238998" onclick="return nav.go(this, event)"><img src="http://cs5320.vk.com/u58238998/e_f7149de5.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_525" onclick="wall.markAsSpam('58238998_525', '6ef9ef912880f8d8e0');" onmouseover="wall.activeDeletePost('58238998_525', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_525')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/id58238998" onclick="return nav.go(this, event)">Андрей Манько</a> <span class="explain">обновил фотографию на странице:</span><div class="post_media clear_fix" ><a class="photo" href="/photo58238998_264783617" onclick="return showPhoto('58238998_264783617', '824de86d4c1ce00ca8', {temp: {x_src: &quot;http://cs5320.vk.com/u4244845/138354196/x_5c2772a3.jpg&quot;, y_src: &quot;http://cs5320.vk.com/u4244845/138354196/y_25bdb84d.jpg&quot;, z_src: &quot;http://cs5320.vk.com/u4244845/138354196/z_69b9b120.jpg&quot;}}, event)"><img src="http://cs5320.vk.com/u4244845/138354196/m_18e8653a.jpg" /></a></div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_525')" onmouseout="wall.likeOut('58238998_525')" onclick="wall.like('58238998_525', 'dfd091c03b407b01ff'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_525"></span>
+  <div class=" fl_l" id="like_icon58238998_525"></div>
+  <span class="like_count fl_l" id="like_count58238998_525">4</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_525" onclick="return nav.go(this, event)"><span class="rel_date">11 июл  в 21:55</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_525" style="display: none">
+  <div id="replies58238998_525"><input type="hidden" id="start_reply58238998_525" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_510" class="post own" onmouseover="wall.postOver('58238998_510')" onmouseout="wall.postOut('58238998_510')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/id58238998" onclick="return nav.go(this, event)"><img src="http://cs5320.vk.com/u58238998/e_f7149de5.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_510" onclick="wall.markAsSpam('58238998_510', '42ba8c0a383494fa72');" onmouseover="wall.activeDeletePost('58238998_510', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_510')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/id58238998" onclick="return nav.go(this, event)">Андрей Манько</a> <span class="explain">обновил фотографию на странице:</span><div class="post_media clear_fix" ><a class="photo" href="/photo58238998_263954672" onclick="return showPhoto('58238998_263954672', 'b730bd1d454b192028', {temp: {x_src: &quot;http://cs9361.vk.com/u4419230/111930914/x_9b4506b4.jpg&quot;, y_src: &quot;http://cs9361.vk.com/u4419230/111930914/y_f4160ff6.jpg&quot;, z_src: &quot;http://cs9361.vk.com/u4419230/111930914/z_37900ff2.jpg&quot;}}, event)"><img src="http://cs9361.vk.com/u4419230/111930914/m_636e216f.jpg" /></a></div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_510')" onmouseout="wall.likeOut('58238998_510')" onclick="wall.like('58238998_510', 'af3954c8534e813203'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_510"></span>
+  <div class=" fl_l" id="like_icon58238998_510"></div>
+  <span class="like_count fl_l" id="like_count58238998_510">1</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_510" onclick="return nav.go(this, event)"><span class="rel_date">21 июн  в 0:04</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_510" style="display: none">
+  <div id="replies58238998_510"><input type="hidden" id="start_reply58238998_510" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_506" class="post own" onmouseover="wall.postOver('58238998_506')" onmouseout="wall.postOut('58238998_506')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/id58238998" onclick="return nav.go(this, event)"><img src="http://cs5320.vk.com/u58238998/e_f7149de5.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_506" onclick="wall.markAsSpam('58238998_506', '4a25022c012f29c367');" onmouseover="wall.activeDeletePost('58238998_506', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_506')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/id58238998" onclick="return nav.go(this, event)">Андрей Манько</a> <div class="group_share clear">
+  <div class="photo fl_l">
+    <a href="/public27055529" onclick="return nav.go(this, event);"><img src="http://cs10982.vk.com/g27055529/d_96dfb4b6.jpg"/></a>
+  </div>
+  <div class="info fl_l">
+    <div class="title">
+      <a href="/public27055529" onclick="return nav.go(this, event);">Центр Страхования Жуковский</a>
+    </div>
+    <div class="desc">
+      &quot;Центр Страхования&quot;, мы работаем только с надёжными компаниями. Застраховавшись у нас, Вы будите спокойны за своё имущество. Компании с которыми мы работаем платят всегда&#33;&#33;&#33;
+    </div>
+  </div>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_506')" onmouseout="wall.likeOut('58238998_506')" onclick="wall.like('58238998_506', '64079d89cb3804a345'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_506"></span>
+  <div class="no_likes fl_l" id="like_icon58238998_506"></div>
+  <span class="like_count fl_l" id="like_count58238998_506"></span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_506" onclick="return nav.go(this, event)"><span class="rel_date">23 мая  в 23:55</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_506" style="display: none">
+  <div id="replies58238998_506"><input type="hidden" id="start_reply58238998_506" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_504" class="post own" onmouseover="wall.postOver('58238998_504')" onmouseout="wall.postOut('58238998_504')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/id58238998" onclick="return nav.go(this, event)"><img src="http://cs5320.vk.com/u58238998/e_f7149de5.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_504" onclick="wall.markAsSpam('58238998_504', '3d33f2c4c57f3a5b20');" onmouseover="wall.activeDeletePost('58238998_504', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_504')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/id58238998" onclick="return nav.go(this, event)">Андрей Манько</a> <div class="group_share clear">
+  <div class="photo fl_l">
+    <a href="/public27055529" onclick="return nav.go(this, event);"><img src="http://cs10982.vk.com/g27055529/d_96dfb4b6.jpg"/></a>
+  </div>
+  <div class="info fl_l">
+    <div class="title">
+      <a href="/public27055529" onclick="return nav.go(this, event);">Центр Страхования Жуковский</a>
+    </div>
+    <div class="desc">
+      &quot;Центр Страхования&quot;, мы работаем только с надёжными компаниями. Застраховавшись у нас, Вы будите спокойны за своё имущество. Компании с которыми мы работаем платят всегда&#33;&#33;&#33;
+    </div>
+  </div>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_504')" onmouseout="wall.likeOut('58238998_504')" onclick="wall.like('58238998_504', '894b8885ecaab4926d'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_504"></span>
+  <div class="no_likes fl_l" id="like_icon58238998_504"></div>
+  <span class="like_count fl_l" id="like_count58238998_504"></span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_504" onclick="return nav.go(this, event)"><span class="rel_date">16 мая  в 21:48</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_504" style="display: none">
+  <div id="replies58238998_504"><input type="hidden" id="start_reply58238998_504" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_503" class="post own" onmouseover="wall.postOver('58238998_503')" onmouseout="wall.postOut('58238998_503')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/id58238998" onclick="return nav.go(this, event)"><img src="http://cs5320.vk.com/u58238998/e_f7149de5.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_503" onclick="wall.markAsSpam('58238998_503', '032c4caabfb631a3b1');" onmouseover="wall.activeDeletePost('58238998_503', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_503')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/id58238998" onclick="return nav.go(this, event)">Андрей Манько</a> <div class="group_share clear">
+  <div class="photo fl_l">
+    <a href="/public27055529" onclick="return nav.go(this, event);"><img src="http://cs10982.vk.com/g27055529/d_96dfb4b6.jpg"/></a>
+  </div>
+  <div class="info fl_l">
+    <div class="title">
+      <a href="/public27055529" onclick="return nav.go(this, event);">Центр Страхования Жуковский</a>
+    </div>
+    <div class="desc">
+      &quot;Центр Страхования&quot;, мы работаем только с надёжными компаниями. Застраховавшись у нас, Вы будите спокойны за своё имущество. Компании с которыми мы работаем платят всегда&#33;&#33;&#33;
+    </div>
+  </div>
+</div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_503')" onmouseout="wall.likeOut('58238998_503')" onclick="wall.like('58238998_503', 'a950eb3c87110a93e9'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_503"></span>
+  <div class=" fl_l" id="like_icon58238998_503"></div>
+  <span class="like_count fl_l" id="like_count58238998_503">1</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_503" onclick="return nav.go(this, event)"><span class="rel_date">16 мая  в 21:46</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_503" style="display: none">
+  <div id="replies58238998_503"><input type="hidden" id="start_reply58238998_503" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_466" class="post own" onmouseover="wall.postOver('58238998_466')" onmouseout="wall.postOut('58238998_466')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/id58238998" onclick="return nav.go(this, event)"><img src="http://cs5320.vk.com/u58238998/e_f7149de5.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_466" onclick="wall.markAsSpam('58238998_466', '3158dd47ddbe494588');" onmouseover="wall.activeDeletePost('58238998_466', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_466')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/id58238998" onclick="return nav.go(this, event)">Андрей Манько</a> <span class="explain">обновил фотографию на странице:</span><div class="post_media clear_fix" ><a class="photo" href="/photo58238998_256930201" onclick="return showPhoto('58238998_256930201', '37a882ac53347cfb7e', {temp: {x_src: &quot;http://cs10081.vk.com/u4244845/127334947/x_47020649.jpg&quot;, y_src: &quot;http://cs10081.vk.com/u4244845/127334947/y_33af4dbc.jpg&quot;, z_src: &quot;http://cs10081.vk.com/u4244845/127334947/z_cb3a5291.jpg&quot;}}, event)"><img src="http://cs10081.vk.com/u4244845/127334947/m_f807a976.jpg" /></a></div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_466')" onmouseout="wall.likeOut('58238998_466')" onclick="wall.like('58238998_466', '98587829367b1b5abb'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_466"></span>
+  <div class=" fl_l" id="like_icon58238998_466"></div>
+  <span class="like_count fl_l" id="like_count58238998_466">10</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_466" onclick="return nav.go(this, event)"><span class="rel_date">29 апр  в 17:39</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_466" style="display: none">
+  <div id="replies58238998_466"><input type="hidden" id="start_reply58238998_466" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div><div id="post58238998_460" class="post own" onmouseover="wall.postOver('58238998_460')" onmouseout="wall.postOut('58238998_460')">
+  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+     <td class="image">
+       <a class="post_image" href="/id58238998" onclick="return nav.go(this, event)"><img src="http://cs5320.vk.com/u58238998/e_f7149de5.jpg" /></a>
+       
+     </td>
+     <td class="info">
+       <div class="fl_r">
+  <div class="delete_post">
+    <div id="delete_post58238998_460" onclick="wall.markAsSpam('58238998_460', '70961353c6871a8856');" onmouseover="wall.activeDeletePost('58238998_460', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('58238998_460')"></div>
+  </div>
+</div>
+       <div class="text"><a class="author" href="/id58238998" onclick="return nav.go(this, event)">Андрей Манько</a> <table cellpadding="0" cellspacing="0" class="published_by_wrap">
+  <tr>
+    <td>
+      <a class="published_by_photo" href="/spyreality" onclick="return nav.go(this, event)"><img src="http://cs9802.vk.com/u6261627/e_7c4ed119.jpg" class="published_by_photo" /></a>
+    </td>
+    <td>
+      <a class="published_by" href="/spyreality" onclick="return nav.go(this, event)">Игорь Павленко</a>
+      
+      <div class="published_by_date"><a class="published_by_date" href="/wall6261627_9280" onclick="return nav.go(this, event);">1 дек 2010 в 19:48</a></div>
+    </td>
+  </tr>
+</table><div class="wall_post_text">Нажмите &quot;Мне нравится&quot; и затем &quot;рассказать друзьям* и картинка появится на вашей стене :)))</div><div class="post_media clear_fix" ><a class="graffiti" href="graffiti260083768?from_id=6261627" onclick="return !showBox('al_wall.php', {act: 'graffiti', post: '58238998_460', i: 1}, {cache: 1}, event)"><img src="http://cs9452.vk.com/u6261627/s_f0af5213.png" /></a></div></div>
+       <div class="like_wrap fl_r" onmouseover="wall.likeOver('58238998_460')" onmouseout="wall.likeOut('58238998_460')" onclick="wall.like('58238998_460', 'c98b90bef25698cff3'); event.cancelBubble = true;">
+  <span class="like_link fl_l" id="like_link58238998_460"></span>
+  <div class=" fl_l" id="like_icon58238998_460"></div>
+  <span class="like_count fl_l" id="like_count58238998_460">2</span>
+</div>
+       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
+  <small><a href="/wall58238998_460" onclick="return nav.go(this, event)"><span class="rel_date">10 апр  в 23:14</span></a></small>
+</div>
+<div class="replies_wrap" id="replies_wrap58238998_460" style="display: none">
+  <div id="replies58238998_460"><input type="hidden" id="start_reply58238998_460" value=""/></div>
+  
+</div></div>
+     </td>
+    </tr>
+  </table>
+</div></div><a class="more_link clear" id="wall_more_link" onclick="wall.showMore(10);"><div class="progress" id="wall_more_progress"></div><div>к предыдущим записям</div></a></div>
+</div>
+  </div>
+  <br class="clear" />
+  
+</div></div>
+  </div>
+</div></div>
+    </div>
+
+    <div id="footer_wrap" class="fl_r">
+      <p id="footer">
+  <div class="copy_lang"><a href="/help.php?page=about">ВКонтакте</a> &copy; 2006-2011 <a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 3, hash: 'd92dacc9c9d7866208'})">English</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 0, hash: 'd92dacc9c9d7866208'})">Русский</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 1, hash: 'd92dacc9c9d7866208'})">Українська</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 4, hash: 'd92dacc9c9d7866208'})">Espa&#241;ol</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 6, hash: 'd92dacc9c9d7866208'})">Deutsch</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 18, hash: 'd92dacc9c9d7866208'})">&#27721;&#35821;</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 12, hash: 'd92dacc9c9d7866208'})">Portugu&#234;s</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 16, hash: 'd92dacc9c9d7866208'})">Fran&#231;ais</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 20, hash: 'd92dacc9c9d7866208'})">&#26085;&#26412;&#35486;</a><a onclick="showBox('lang.php', {act: 'lang_dialog'}, {noreload: true})">все языки &raquo;</a></div>
+  <div>
+    
+    
+  </div>
+</p>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div></div></div>
+  <div class="progress" id="global_prg"></div>
+
+  <script type="text/javascript">
+    if (parent && parent != window && (browser.msie || browser.opera || browser.mozilla || browser.chrome || browser.safari || browser.iphone)) {
+      document.getElementsByTagName('body')[0].innerHTML = '';
+    } else {
+      domReady();
+      updateMoney(false);
+gSearch.init();
+if (window.qArr && qArr[5]) qArr[5] = [5, "по товарам", "", "goods", 0x00000100];var qf = ge('quick_login_form'), ql = ge('quick_login'), qe = ge('quick_email'), qp = ge('quick_pass');
+
+window.onload = function() {
+  setTimeout(function() {
+    ql.insertBefore(ce('div', {innerHTML: '<iframe class="upload_frame" id="quick_login_frame" name="quick_login_frame"></iframe>'}), qf);
+    qf.target = 'quick_login_frame';
+  }, 1);
+}
+
+qf.onsubmit = function() {
+  if (!ge('quick_login_frame')) return false;
+  if (!trim(qe.value)) {
+    elfocus(qe);
+    return false;
+  } else if (!trim(qp.value)) {
+    elfocus(qp);
+    return false;
+  }
+  return true;
+}
+
+window.focusLoginInput = function() {
+  scrollToTop(0);
+  notaBene('quick_email');
+}
+window.changeQuickRegButton = function(noShow) {
+  if (noShow) {
+    hide('top_reg_link');
+    show('top_search_link');
+  } else {
+    hide('top_search_link');
+    show('top_reg_link');
+  }
+}
+window.submitQuickLoginForm = function(email, pass) {
+  ge('quick_email').value = email;
+  ge('quick_pass').value = pass;
+  ge('quick_login_form').submit();
+}
+
+var qlb = ge('quick_login_button');
+if (qlb) {
+  qlb.onclick = function() { if (qf.onsubmit()) qf.submit(); };
+}
+
+if (browser.opera_mobile) show('quick_expire');
+
+cur.needLoginBox = function() {
+  setTimeout(showFastBox('Предупреждениe', 'Чтобы просматривать эту страницу, нужно зайти на сайт.').hide, 2000);
+  return false;
+};
+cur.lang = extend(cur.lang || {}, {
+  show_full: 'показать подробную информацию',
+  hide_full: 'скрыть подробную информацию',
+  sure_delete_photo: 'Вы уверены, что хотите удалить фотографию?',
+  change_current_info: 'изменить статус',
+  share_current_info: 'Рассказать друзьям',
+  create_poll: 'Опрос',
+  dont_attach: 'Не прикреплять'
+});
+Profile.init({"user_id":58238998,"loc":null,"back":"Андрей Манько","reply_names":[],"max_post_len":280,"post_hash":"6577a0644bd2c2efe9","media_types":false,"wall_type":"all","wall_counts":["","%s запись","%s записи","%s записей"],"all_link":"к записям Андрея","own_link":"ко всем записям","share":{"url":false,"hash":false,"rhash":false},"photos_count":26,"skip_one":0,"photos":[],"info":["<div class=\"profile_info\"><div class=\"clear_fix \">\n  <div class=\"label fl_l\">День рождения:<\/div>\n  <div class=\"labeled fl_l\">4 мая 1987 г.<\/div>\n<\/div><div class=\"clear_fix miniblock\">\n  <div class=\"label fl_l\">Родной город:<\/div>\n  <div class=\"labeled fl_l\">Жуковский<\/div>\n<\/div><div class=\"clear_fix miniblock\">\n  <div class=\"label fl_l\">Семейное положение:<\/div>\n  <div class=\"labeled fl_l\">не женат<\/div>\n<\/div><\/div>","<div class=\"profile_info\"><div class=\"clear_fix \">\n  <div class=\"label fl_l\">День рождения:<\/div>\n  <div class=\"labeled fl_l\">4 мая 1987 г.<\/div>\n<\/div><div class=\"clear_fix miniblock\">\n  <div class=\"label fl_l\">Родной город:<\/div>\n  <div class=\"labeled fl_l\">Жуковский<\/div>\n<\/div><div class=\"clear_fix miniblock\">\n  <div class=\"label fl_l\">Семейное положение:<\/div>\n  <div class=\"labeled fl_l\">не женат<\/div>\n<\/div><\/div>"],"mail_cache":"","fr_click":null});
+zNav({}, {});
+handlePageParams({"id":0,"level":2,"loc":"?id=58238998"});
+    }
+  </script>
+</body>
+
+</html>

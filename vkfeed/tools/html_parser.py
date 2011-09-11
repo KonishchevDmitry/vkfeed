@@ -37,7 +37,7 @@ class HTMLPageParser(HTMLParser):
     '''A regular expression for matching scripts.'''
 
 
-    __invalid_tag_attrs_regex = re.compile(r'''
+    __invalid_tag_attr_spacing_regex = re.compile(r'''
         (
           # Tag name
           <''' + tag_name_regex + r'''
@@ -54,14 +54,37 @@ class HTMLPageParser(HTMLParser):
             |"[^"]*"                         # LIT-enclosed value
           )
         )
-        (
-          [^\s/>]
-        )
+        ([^\s>])                             # Do not include / to make the preparation replacement for __invalid_tag_attr_regex
     ''', re.VERBOSE)
     '''
     A regular expression for matching a common error in specifying tag
     attributes.
     '''
+
+    __invalid_tag_attr_regex = re.compile(r'''
+        (
+          # Tag name
+          <''' + tag_name_regex + r'''
+
+          # Zero or several attributes
+          ''' + tag_attrs_regex + r'''
+        )
+        \s+(?:
+            # Invalid characters instead of an attribute
+            [^\sa-zA-Z/>]\S*
+            |
+            # Sole slash
+            /\s
+            |
+            # Invalid characters starting from slash instead of an attribute
+            /[^>\s]+
+        )
+    ''', re.VERBOSE)
+    '''
+    A regular expression for matching HTML errors like:
+    <a class="app photo"/app2322149_58238998?from_id=2381857&loc=addneighbour onclick="return cur.needLoginBox()">
+    '''
+
 
     __empty_tags = 'area|base|basefont|br|col|frame|hr|img|input|link|meta|param'
     '''A list of all HTML empty tags.'''
@@ -159,22 +182,7 @@ class HTMLPageParser(HTMLParser):
     def parse(self, html):
         '''Parses the specified HTML page.'''
 
-        # Fixing various things which may confuse the Python's HTML parser
-        # -->
-        html = self.script_regex.sub('', html)
-
-        for i in xrange(0, 10):
-            new_html = self.__invalid_tag_attrs_regex.sub(r'\1 \2', html)
-
-            if new_html == html:
-                break
-            else:
-                html = new_html
-        else:
-            raise Error('Too many errors in the HTML or infinite loop.')
-
-        html = self.__misopened_tag_regex.sub(r'<\1 />', html)
-        # <--
+        html = self.__fix_html(html)
 
         self.reset()
 
@@ -200,6 +208,30 @@ class HTMLPageParser(HTMLParser):
             tag['end_tag_handler'](tag)
 
         LOG.debug('Current tag: %s.', self.__get_cur_tag())
+
+
+    def __fix_html(self, html):
+        '''Fixes various things that may confuse the Python's HTML parser.'''
+
+        html = self.script_regex.sub('', html)
+
+        loop_replacements = (
+            lambda html: self.__invalid_tag_attr_spacing_regex.subn(r'\1 \2', html),
+            lambda html: self.__invalid_tag_attr_regex.subn(r'\1 ', html),
+        )
+
+        for loop_replacement in loop_replacements:
+            for i in xrange(0, 1000):
+                html, changed = loop_replacement(html)
+
+                if not changed:
+                    break
+            else:
+                raise Error('Too many errors in the HTML or infinite loop.')
+
+        html = self.__misopened_tag_regex.sub(r'<\1 />', html)
+
+        return html
 
 
     def __get_cur_tag(self):
