@@ -85,7 +85,7 @@ class WallPage(webapp.RequestHandler):
             else:
                 log_function = LOG.exception
 
-            log_function('Unable to generate a feed for "%s": %s.', url, e)
+            log_function('Unable to generate a feed for "%s": %s', url, e)
 
             if user_error:
                 self.error(http_status)
