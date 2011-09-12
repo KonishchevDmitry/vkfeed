@@ -7,12 +7,16 @@ handlers:
 - url: /css
   static_dir: css
 
-- url: /favicon.ico
+- url: /favicon\.ico
   static_files: images/favicon.ico
   upload: favicon.ico
 
 - url: /images
   static_dir: images
+
+- url: /((?:google|yandex).*\.html)
+  static_files: verifications/\1
+  upload: verifications
 
 - url: /.*
   script: vkfeed/main.py
