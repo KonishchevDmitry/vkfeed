@@ -13,6 +13,13 @@ from vkfeed.core import Error
 LOG = logging.getLogger(__name__)
 
 
+class HTTPNotFoundError(Error):
+    '''Raised on HTTP Page Not Found error.'''
+
+    def __init__(self, *args, **kwargs):
+        Error.__init__(self, *args, **kwargs)
+
+
 def fetch_url(url):
     '''Fetches the specified URL.'''
 
@@ -26,7 +33,8 @@ def fetch_url(url):
         if page.status_code == httplib.OK:
             LOG.info('"%s" has been successfully fetched.', url)
         else:
-            raise Error('The server returned error: %s (%s).',
+            error_class = HTTPNotFoundError if page.status_code == httplib.NOT_FOUND else Error
+            raise error_class('The server returned error: %s (%s).',
                 httplib.responses.get(page.status_code, 'Unknown error'), page.status_code)
 
     content_encoding = 'UTF-8'

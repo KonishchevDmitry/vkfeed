@@ -22,6 +22,24 @@ class ParseError(Error):
         Error.__init__(self, *args, **kwargs)
 
 
+class ProfileDeleted(Error):
+    '''
+    Raised if the provided page indicates that the user's profile has been
+    deleted.
+    '''
+
+    def __init__(self):
+        Error.__init__(self, "The user's profile page has been deleted.")
+
+
+class ServerError(Error):
+    '''Raised if the provided page contains a user friendly server error.'''
+
+    def __init__(self, server_error):
+        Error.__init__(self, "Server returned an error.")
+        self.server_error = server_error
+
+
 class StopParsing(Exception):
     '''Raised to stop parsing process.'''
 
@@ -90,36 +108,84 @@ class WallPageParser(HTMLPageParser):
     def parse(self, html):
         '''Parses the specified HTML.'''
 
-        self.__data = {}
-        self.__private_data = {}
-
         try:
-            HTMLPageParser.parse(self, html)
-        except StopParsing:
-            pass
+            self.__data = {}
+            self.__private_data = {}
+
+            try:
+                HTMLPageParser.parse(self, html)
+            except StopParsing:
+                pass
 
 
-        if 'user_name' not in self.__data:
-            raise ParseError('Unable to find the user name.')
+            if 'user_name' not in self.__data:
+                raise ParseError('Unable to find the user name.')
 
-        if 'posts' not in self.__data:
-            raise ParseError('Unable to find the wall.')
+            if 'posts' not in self.__data:
+                raise ParseError('Unable to find the wall.')
 
-        if not self.__data['posts'] and not self.__private_data.get('wall_is_empty'):
-            raise ParseError('Unable to find wall posts.')
-
-
-        if 'user_photo' not in self.__data:
-            LOG.error('Unable to find a user photo on the page.')
-
-        for post in self.__data['posts']:
-            if 'title' not in post:
-                LOG.error('Unable to find a title for post %s.', post['url'])
-                post['title'] = self.__data['user_name']
+            if not self.__data['posts'] and not self.__private_data.get('wall_is_empty'):
+                raise ParseError('Unable to find wall posts.')
 
 
-        return self.__data
+            if 'user_photo' not in self.__data:
+                LOG.error('Unable to find a user photo on the page.')
 
+            for post in self.__data['posts']:
+                if 'title' not in post:
+                    LOG.error('Unable to find a title for post %s.', post['url'])
+                    post['title'] = self.__data['user_name']
+
+
+            return self.__data
+        except ParseError:
+            # Try to understand why we haven't found the wall on the page
+
+            class_attr_regex_template = r'''
+                \s+class=(?:
+                    %(class)s
+                    |
+                    '(?:[^']*\s+)?%(class)s(?:\s+[^']*)?'
+                    |
+                    "(?:[^"]*\s+)?%(class)s(?:\s+[^"]*)?"
+                )
+            '''
+
+            # User's profile may be deleted -->
+            if re.search(r'''
+                <div''' +
+                    self.tag_attrs_regex +
+                    class_attr_regex_template % { 'class': 'profile_deleted' } +
+                    self.tag_attrs_regex + r'''
+                \s*>
+            ''', html, re.IGNORECASE | re.VERBOSE):
+                raise ProfileDeleted()
+            # User's profile may be deleted <--
+
+
+            # The server is on maintenance or returned a user friendly error -->
+            match = re.search(r'''
+                <title''' + self.tag_attrs_regex + ur'''\s*>
+                    \s*Ошибка\s*
+                </title>
+                .*
+                <div''' +
+                    self.tag_attrs_regex +
+                    class_attr_regex_template % { 'class': 'body' } +
+                    self.tag_attrs_regex + r'''
+                \s*>
+                    (.*?)
+                </?div
+            ''', html, re.VERBOSE | re.DOTALL | re.IGNORECASE)
+
+            if match:
+                raise ServerError(
+                    re.sub('<[^>]*>', '', match.group(1)).replace('<', '').replace('>', '').strip())
+            # The server is on maintenance or returned a user friendly error <--
+
+
+            # Other errors
+            raise
 
 
     def __handle_head(self, tag, attrs, empty):

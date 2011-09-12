@@ -6,7 +6,6 @@
 import cgi
 import httplib
 import logging
-import re
 
 from google.appengine.ext import webapp
 
@@ -15,7 +14,7 @@ from PyRSS2Gen import PyRSS2Gen
 from vkfeed import constants
 from vkfeed.core import Error
 import vkfeed.util
-from vkfeed.tools.wall_parser import WallPageParser, ParseError
+from vkfeed.tools.wall_parser import WallPageParser, ParseError, ProfileDeleted, ServerError
 
 LOG = logging.getLogger(__name__)
 
@@ -31,24 +30,45 @@ class WallPage(webapp.RequestHandler):
         tokens with expiration time which is not suitable for RSS generator.
         '''
 
+        http_status = None
         user_error = None
+        unknown_user_error = False
 
         try:
             LOG.info('Requested feed for "%s".', profile_name)
 
             url = constants.VK_URL + cgi.escape(profile_name)
+            url_html = '<a href="%s" target="_blank">%s</a>' % (url, url)
 
             try:
                 profile_page = vkfeed.util.fetch_url(url)
+            except vkfeed.util.HTTPNotFoundError:
+                http_status = httplib.NOT_FOUND
+                user_error = u'Пользователя или группы %s не существует.' % url_html
+                raise
             except Error:
-                user_error = u'Не удалось загрузить страницу <a href="%s" target="_blank">%s</a>.' % (url, url)
+                http_status = httplib.BAD_GATEWAY
+                user_error = u'Не удалось загрузить страницу %s.' % url_html
+                unknown_user_error = True
                 raise
 
             try:
                 data = WallPageParser().parse(profile_page)
-            except ParseError, e:
-                user_error = u'Сервер вернул страницу, на которой не удалось найти стену с сообщениями пользователя.'
+            except ProfileDeleted, e:
+                http_status = httplib.NOT_FOUND
+                user_error = u'Страница пользователя %s удалена.' % url_html
+                raise
+            except ServerError, e:
                 LOG.debug(u'Page contents:\n%s', profile_page)
+                http_status = httplib.BAD_GATEWAY
+                user_error = u'Сервер %s вернул ошибку%s' % (url_html, ':<br />' + e.server_error if e.server_error else '.')
+                unknown_user_error = True
+                raise
+            except ParseError, e:
+                LOG.debug(u'Page contents:\n%s', profile_page)
+                http_status = httplib.NOT_FOUND
+                user_error = u'Сервер вернул страницу, на которой не удалось найти стену с сообщениями пользователя.'
+                unknown_user_error = True
                 raise
 
             data['url'] = url
@@ -61,13 +81,13 @@ class WallPage(webapp.RequestHandler):
                 'Unable to generate a feed for "%s": %s.', url, e)
 
             if user_error:
-                self.error(httplib.BAD_GATEWAY)
-                error = u'''
-                    <p>Ошибка при генерации RSS-ленты. %s</p>
-
-                    <p>Пожалуйста, убедитесь, что вы правильно указали профиль пользователя или группы.
-                    Если все указано верно, и ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:%s">администратором</a>.</p>
-                ''' % (user_error, cgi.escape(constants.ADMIN_EMAIL, quote = True))
+                self.error(http_status)
+                error = u'<p>Ошибка при генерации RSS-ленты.</p><p>%s</p>' % user_error
+                if unknown_user_error:
+                    error += u'''
+                        <p>Пожалуйста, убедитесь, что вы правильно указали профиль пользователя или группы.
+                        Если все указано верно, и ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:%s">администратором</a>.</p>
+                    ''' % cgi.escape(constants.ADMIN_EMAIL, quote = True)
             else:
                 self.error(httplib.INTERNAL_SERVER_ERROR)
                 error = u'''
