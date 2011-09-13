@@ -91,10 +91,13 @@ class WallPage(webapp.RequestHandler):
                 self.error(http_status)
                 error = u'<p>Ошибка при генерации RSS-ленты.</p><p>%s</p>' % user_error
                 if unknown_user_error:
-                    error += u'''
-                        <p>Пожалуйста, убедитесь, что вы правильно указали профиль пользователя или группы.
-                        Если все указано верно, и ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:%s">администратором</a>.</p>
-                    ''' % cgi.escape(constants.ADMIN_EMAIL, quote = True)
+                    error += u'''<p>
+                        Пожалуйста, убедитесь, что вы правильно указали профиль
+                        пользователя или группы, и что данный профиль является
+                        общедоступным. Если все указано верно, и ошибка
+                        повторяется, пожалуйста, свяжитесь с <a
+                        href="mailto:%s">администратором</a>.
+                    </p>''' % cgi.escape(constants.ADMIN_EMAIL, quote = True)
             else:
                 self.error(httplib.INTERNAL_SERVER_ERROR)
                 error = u'''
