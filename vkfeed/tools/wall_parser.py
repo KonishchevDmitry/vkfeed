@@ -209,7 +209,7 @@ class WallPageParser(HTMLPageParser):
     def __handle_body(self, tag, attrs, empty):
         '''Handles a tag inside of <body>.'''
 
-        if tag['name'] == 'div' and attrs.get('id') in ('profile_avatar', 'public_avatar'):
+        if tag['name'] == 'div' and attrs.get('id') in ('group_avatar', 'profile_avatar', 'public_avatar'):
             tag['new_tag_handler'] = self.__handle_avatar
         elif tag['name'] == 'div' and attrs.get('id') == 'page_wall_posts':
             tag['new_tag_handler'] = self.__handle_page_wall_posts
