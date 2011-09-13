@@ -96,26 +96,33 @@ class HTMLPageParser(HTMLParser):
     __tag_stack = None
     '''A stack of currently opened HTML tags.'''
 
+    __cur_data = None
+    '''
+    Accumulates data between handle_charref(), handle_entityref() and
+    handle_data() calls.
+    '''
+
 
     def __init__(self):
         HTMLParser.__init__(self)
 
 
+    def handle_charref(self, name):
+        '''Handles a character reference of the form &#ref;.'''
+
+        self.__accumulate_data('&#' + name + ';')
+
+
     def handle_data(self, data):
         '''Handles data.'''
 
-        tag = self.__get_cur_tag()
-        handler = tag.get('data_handler')
-
-        if handler is not None:
-            LOG.debug('Data "%s" in "%s" with handler %s.',
-                data, tag['name'], handler.func_name)
-
-            handler(tag, data)
+        self.__accumulate_data(data)
 
 
     def handle_endtag(self, tag_name):
         '''Handles end of a tag.'''
+
+        self.__handle_data_if_exists()
 
         if self.__get_cur_tag()['name'] == tag_name:
             self.__close_tag(self.__tag_stack.pop())
@@ -130,6 +137,12 @@ class HTMLPageParser(HTMLParser):
                     break
             else:
                 LOG.debug('Dropping excess end tag "%s"...', tag_name)
+
+
+    def handle_entityref(self, name):
+        '''Handles a general entity reference of the form &name;.'''
+
+        self.__accumulate_data('&' + name + ';')
 
 
     def handle_root_data(self, tag, data):
@@ -156,12 +169,14 @@ class HTMLPageParser(HTMLParser):
     def handle_startendtag(self, tag, attrs):
         '''Handles start of an XHTML-style empty tag.'''
 
+        self.__handle_data_if_exists()
         self.__handle_start_tag(tag, attrs, True)
 
 
     def handle_starttag(self, tag, attrs):
         '''Handles start of a tag.'''
 
+        self.__handle_data_if_exists()
         self.__handle_start_tag(tag, attrs, False)
 
 
@@ -194,6 +209,18 @@ class HTMLPageParser(HTMLParser):
             # Close all unclosed tags
             for tag in self.__tag_stack[1:]:
                 self.__close_tag(tag, True)
+
+
+    def __accumulate_data(self, data):
+        '''
+        Accumulates data between handle_charref(), handle_entityref() and
+        handle_data() calls.
+        '''
+
+        if self.__cur_data is None:
+            self.__cur_data = data
+        else:
+            self.__cur_data += data
 
 
     def __close_tag(self, tag, forced = False):
@@ -238,6 +265,25 @@ class HTMLPageParser(HTMLParser):
         '''Returns currently opened tag.'''
 
         return self.__tag_stack[-1]
+
+
+    def __handle_data_if_exists(self):
+        '''Handles accumulated data (if exists).'''
+
+        data = self.__cur_data
+        if data is None:
+            return
+
+        self.__cur_data = None
+
+        tag = self.__get_cur_tag()
+        handler = tag.get('data_handler')
+
+        if handler is not None:
+            LOG.debug('Data "%s" in "%s" with handler %s.',
+                data, tag['name'], handler.func_name)
+
+            handler(tag, data)
 
 
     def __handle_start_tag(self, tag_name, attrs, empty):
