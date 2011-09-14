@@ -22,7 +22,14 @@ class ParseError(Error):
         Error.__init__(self, *args, **kwargs)
 
 
-class ProfileDeleted(Error):
+class PrivateGroupError(Error):
+    '''Raised if the provided page is a private group.'''
+
+    def __init__(self):
+        Error.__init__(self, "This is a private group.")
+
+
+class ProfileDeletedError(Error):
     '''
     Raised if the provided page indicates that the user's profile has been
     deleted.
@@ -40,7 +47,7 @@ class ServerError(Error):
         self.server_error = server_error
 
 
-class StopParsing(Exception):
+class _StopParsing(Exception):
     '''Raised to stop parsing process.'''
 
     def __init__(self):
@@ -114,7 +121,7 @@ class WallPageParser(HTMLPageParser):
 
             try:
                 HTMLPageParser.parse(self, html)
-            except StopParsing:
+            except _StopParsing:
                 pass
 
 
@@ -151,7 +158,18 @@ class WallPageParser(HTMLPageParser):
                 )
             '''
 
-            # User's profile may be deleted -->
+            # It may be a private group
+            if re.search(r'''
+                <h1''' +
+                    self.tag_attrs_regex + r'''
+                    \s+id=(?:title|'title'|"title")''' +
+                    self.tag_attrs_regex + ur'''
+                \s*>
+                    \s*Закрытая\s+группа
+            ''', html, re.IGNORECASE | re.VERBOSE):
+                raise PrivateGroupError()
+
+            # User's profile may be deleted
             if re.search(r'''
                 <div''' +
                     self.tag_attrs_regex +
@@ -159,8 +177,8 @@ class WallPageParser(HTMLPageParser):
                     self.tag_attrs_regex + r'''
                 \s*>
             ''', html, re.IGNORECASE | re.VERBOSE):
-                raise ProfileDeleted()
-            # User's profile may be deleted <--
+                raise ProfileDeletedError()
+
 
 
             # The server is on maintenance or returned a user friendly error -->
@@ -218,7 +236,7 @@ class WallPageParser(HTMLPageParser):
             if 'posts' in self.__data and 'user_photo' in self.__data:
                 # We've found all data we need, so stop parsing to save a
                 # little CPU.
-                raise StopParsing()
+                raise _StopParsing()
 
             tag['new_tag_handler'] = self.__handle_body
 
