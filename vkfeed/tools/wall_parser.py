@@ -306,14 +306,14 @@ class WallPageParser(HTMLPageParser):
     def __handle_post_table_row_info(self, tag, attrs, empty):
         '''Handles a tag inside of <table class="post_table"><tr><td class="info">.'''
 
-        if tag['name'] == 'div' and self.__has_class(attrs, 'text'):
+        if tag['name'] == 'div' and self.__has_class(attrs, 'text', 'wall_text'):
             tag['new_tag_handler'] = self.__handle_post_text
         else:
             tag['new_tag_handler'] = self.__handle_post_table_row_info
 
 
     def __handle_post_text(self, tag, attrs, empty):
-        '''Handles a tag inside of <table class="post_table"><tr><td class="info"><div class="text">.'''
+        '''Handles a tag inside of <table class="post_table"><tr><td class="info"><div class="wall_text">.'''
 
         if tag['name'] == 'a' and self.__has_class(attrs, 'author'):
             tag['data_handler'] = self.__handle_post_author
@@ -386,13 +386,14 @@ class WallPageParser(HTMLPageParser):
         return self.__data['posts'][-1]
 
 
-    def __has_class(self, attrs, class_name):
+    def __has_class(self, attrs, *class_names):
         '''
         Checks whether a tag with the specified attributes has at least one of
         the specified classes.
         '''
 
-        return class_name in attrs.get('class', '').split(' ')
+        tag_classes = set(attrs.get('class', '').strip().split(' '))
+        return bool(tag_classes.intersection(set(class_names)))
 
 
     def __strip_tag(self, tag_name, attrs, empty):
