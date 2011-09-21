@@ -14,7 +14,6 @@ from PyRSS2Gen import PyRSS2Gen
 from vkfeed import constants
 from vkfeed.core import Error
 import vkfeed.util
-from vkfeed.tools.wall_parser import WALL_TYPE_PROFILE_PAGE, WALL_TYPE_WALL_PAGE
 from vkfeed.tools.wall_parser import WallPageParser, ParseError, PrivateGroupError, ProfileDeletedError, ServerError
 
 LOG = logging.getLogger(__name__)
@@ -54,12 +53,7 @@ class WallPage(webapp.RequestHandler):
                 raise
 
             try:
-                if profile_name.startswith("wall-"):
-                    wall_type = WALL_TYPE_WALL_PAGE
-                else:
-                    wall_type = WALL_TYPE_PROFILE_PAGE
-
-                data = WallPageParser().parse(profile_page, wall_type)
+                data = WallPageParser().parse(profile_page)
             except PrivateGroupError, e:
                 http_status = httplib.NOT_FOUND
                 user_error = u'Группа %s является закрытой группой.' % url_html
