@@ -422,7 +422,7 @@ class WallPageParser(HTMLPageParser):
 
                 away_to_prefix = constants.VK_URL + 'away.php?to='
                 if value.startswith(away_to_prefix):
-                    value = urllib.unquote(value[len(away_to_prefix):])
+                    value = urllib.unquote(value.split('&')[0][len(away_to_prefix):])
             elif tag_name == 'a' and attr == 'onclick' and not attrs.get('href', '').strip():
                 if value.startswith('playAudio'):
                     # Ignore this link and all its contents - we'll try to get
