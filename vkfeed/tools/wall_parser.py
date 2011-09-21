@@ -15,6 +15,13 @@ LOG = logging.getLogger(__name__)
 LOG.setLevel(logging.INFO)
 
 
+WALL_TYPE_PROFILE_PAGE = "profile-page"
+"""A user profile page."""
+
+WALL_TYPE_WALL_PAGE = "wall-page"
+"""A plain wall page."""
+
+
 class ParseError(Error):
     '''Raised if we are unable to parse a gotten data.'''
 
@@ -112,7 +119,7 @@ class WallPageParser(HTMLPageParser):
         '''Handles end of the root of the document.'''
 
 
-    def parse(self, html):
+    def parse(self, html, wall_type = WALL_TYPE_PROFILE_PAGE):
         '''Parses the specified HTML.'''
 
         try:
@@ -135,7 +142,7 @@ class WallPageParser(HTMLPageParser):
                 raise ParseError('Unable to find wall posts.')
 
 
-            if 'user_photo' not in self.__data:
+            if 'user_photo' not in self.__data and wall_type != WALL_TYPE_WALL_PAGE:
                 LOG.error('Unable to find a user photo on the page.')
 
             for post in self.__data['posts']:
@@ -381,8 +388,8 @@ class WallPageParser(HTMLPageParser):
 
     def __has_class(self, attrs, class_name):
         '''
-        Checks whether a tag with the specified attributes has the specified
-        class.
+        Checks whether a tag with the specified attributes has at least one of
+        the specified classes.
         '''
 
         return class_name in attrs.get('class', '').split(' ')
