@@ -40,6 +40,11 @@ class WallPage(webapp.RequestHandler):
             url = constants.VK_URL + cgi.escape(profile_name)
             url_html = '<a href="%s" target="_blank">%s</a>' % (url, url)
 
+            if profile_name == 'feed':
+                http_status = httplib.NOT_FOUND
+                user_error = u'Страница %s не является профилем пользователя или группы.' % url_html
+                raise Error('Unsupported page.')
+
             try:
                 profile_page = vkfeed.util.fetch_url(url)
             except vkfeed.util.HTTPNotFoundError:
