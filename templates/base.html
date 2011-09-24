@@ -12,20 +12,22 @@
 
         <link href="http://fonts.googleapis.com/css?family=Ubuntu:400,700&amp;subset=latin,cyrillic" rel="stylesheet" type="text/css" />
 
-        <!-- Google +1 button -->
-        <script type="text/javascript">
-            window.___gcfg = {lang: "ru"};
+        {% if show_like_buttons %}
+            <!-- Google +1 button -->
+            <script type="text/javascript">
+                window.___gcfg = {lang: "ru"};
 
-            (function() {
-                var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;
-                po.src = "https://apis.google.com/js/plusone.js";
-                var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);
-            })();
-        </script>
+                (function() {
+                    var po = document.createElement("script"); po.type = "text/javascript"; po.async = true;
+                    po.src = "https://apis.google.com/js/plusone.js";
+                    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(po, s);
+                })();
+            </script>
 
-        <!-- VKontakte "like" button -->
-        <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?34"></script>
-        <script type="text/javascript">VK.init({apiId: 2456008, onlyWidgets: true});</script>
+            <!-- VKontakte "like" button -->
+            <script type="text/javascript" src="http://userapi.com/js/api/openapi.js?34"></script>
+            <script type="text/javascript">VK.init({apiId: 2456008, onlyWidgets: true});</script>
+        {% endif %}
 
         {% block head %}{% endblock %}
     </head>
@@ -39,14 +41,18 @@
                         <img class="logo" src="/images/vk-rss.png" width="40" height="40" alt="" />
                         <span class="logo">ВКонтакте RSS</span> <span class="logo_beta">Beta</span>
                     </a>
-                </td><td valign="bottom">
-                    <!-- VKontakte like button -->
-                    <div id="vk_like"></div>
-                    <script type="text/javascript">VK.Widgets.Like("vk_like", {type: "mini"});</script>
-                </td><td valign="bottom">
-                    <!-- Google +1 button -->
-                    <div class="g-plusone" data-size="medium"></div>
                 </td>
+                {% if show_like_buttons %}
+                    <td valign="bottom">
+                        <!-- VKontakte like button -->
+                        <div id="vk_like"></div>
+                        <script type="text/javascript">VK.Widgets.Like("vk_like", {type: "mini"});</script>
+                    </td>
+                    <td valign="bottom">
+                        <!-- Google +1 button -->
+                        <div class="g-plusone" data-size="medium"></div>
+                    </td>
+                {% endif %}
             </tr></table>
 
             <div class="main_block">

@@ -16,7 +16,8 @@ class MainPage(webapp.RequestHandler):
     def get(self):
         '''Processes a GET request.'''
 
-        self.response.out.write(vkfeed.util.render_template('main.html'))
+        self.response.out.write(vkfeed.util.render_template('main.html', {
+            'show_like_buttons': True }))
 
 
     def post(self):
@@ -39,6 +40,7 @@ class MainPage(webapp.RequestHandler):
                     Неверно указан URL профиля.
                     Адрес должен быть вида http://vkontakte.ru/имя_профиля.
                     Имя профиля должно удовлетворять требованиям, предъявляемым администрацией ВКонтакте.
-                '''
+                ''',
+                'show_like_buttons': True,
             }))
 
