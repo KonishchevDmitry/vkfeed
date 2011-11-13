@@ -29,14 +29,14 @@ class PrivateGroupError(Error):
         Error.__init__(self, "This is a private group.")
 
 
-class ProfileDeletedError(Error):
+class ProfileNotAvailableError(Error):
     '''
     Raised if the provided page indicates that the user's profile has been
-    deleted.
+    deleted or is available only to authorized users.
     '''
 
     def __init__(self):
-        Error.__init__(self, "The user's profile page has been deleted.")
+        Error.__init__(self, "The user's profile page is not available.")
 
 
 class ServerError(Error):
@@ -174,7 +174,7 @@ class WallPageParser(HTMLPageParser):
                     self.tag_attrs_regex + r'''
                 \s*>
             ''', html, re.IGNORECASE | re.VERBOSE):
-                raise ProfileDeletedError()
+                raise ProfileNotAvailableError()
 
 
 
