@@ -272,7 +272,7 @@ class WallPageParser(HTMLPageParser):
     def __handle_post(self, tag, attrs, empty):
         '''Handles a tag inside of <div id="post...">.'''
 
-        if tag['name'] == 'table' and self.__has_class(attrs, 'post_table'):
+        if tag['name'] == 'div' and self.__has_class(attrs, 'post_table'):
             tag['new_tag_handler'] = self.__handle_post_table
         else:
             if not self.__get_cur_post()['text']:
@@ -280,30 +280,23 @@ class WallPageParser(HTMLPageParser):
 
 
     def __handle_post_table(self, tag, attrs, empty):
-        '''Handles a tag inside of <table class="post_table">.'''
+        '''Handles a tag inside of <div class="post_table">.'''
 
-        if tag['name'] == 'tr':
-            tag['new_tag_handler'] = self.__handle_post_table_row
-
-
-    def __handle_post_table_row(self, tag, attrs, empty):
-        '''Handles a tag inside of <table class="post_table"><tr>.'''
-
-        if tag['name'] == 'td' and self.__has_class(attrs, 'info'):
-            tag['new_tag_handler'] = self.__handle_post_table_row_info
+        if tag['name'] == 'div' and self.__has_class(attrs, 'post_info'):
+            tag['new_tag_handler'] = self.__handle_post_table_info
 
 
-    def __handle_post_table_row_info(self, tag, attrs, empty):
-        '''Handles a tag inside of <table class="post_table"><tr><td class="info">.'''
+    def __handle_post_table_info(self, tag, attrs, empty):
+        '''Handles a tag inside of <div class="post_table"><div class="post_info">.'''
 
         if tag['name'] == 'div' and self.__has_class(attrs, 'text', 'wall_text'):
             tag['new_tag_handler'] = self.__handle_post_text
         else:
-            tag['new_tag_handler'] = self.__handle_post_table_row_info
+            tag['new_tag_handler'] = self.__handle_post_table_info
 
 
     def __handle_post_text(self, tag, attrs, empty):
-        '''Handles a tag inside of <table class="post_table"><tr><td class="info"><div class="wall_text">.'''
+        '''Handles a tag inside of <div class="post_table"><div class="post_table"><div class="wall_text">.'''
 
         if tag['name'] == 'a' and self.__has_class(attrs, 'author'):
             tag['data_handler'] = self.__handle_post_author
