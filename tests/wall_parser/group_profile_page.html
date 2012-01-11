@@ -3,9 +3,9 @@
 
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<script type="text/javascript" src="/al_loader.php?act=nav&v=4648"></script>
+<script type="text/javascript" src="/js/loader_nav7295_0.js"></script>
 
-<link rel="shortcut icon" href="/images/faviconvknew.ico" />
+<link rel="shortcut icon" href="/images/faviconvnew.ico" />
 
 <meta http-equiv="content-type" content="text/html; charset=windows-1251" />
 <meta name="description" content=" " />
@@ -14,24 +14,29 @@
 
 <noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.php"></noscript>
 
-<link rel="stylesheet" type="text/css" href="/css/al/common.css?178" />
+<link rel="stylesheet" type="text/css" href="/css/al/common.css?253" />
 <!--[if lte IE 6]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(/css/al/ie6.css?19); /* ]]> */</style><![endif]-->
 <!--[if IE 7]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(/css/al/ie7.css?13); /* ]]> */</style><![endif]-->
 
 <script type="text/javascript">
 var vk = {
+  ad: 1,
+  adupd: 120000, // 2 min
   al: parseInt('4') || 4,
   id: 0,
   intnat: '1' ? true : false,
   host: 'vk.com',
   lang: 0,
   rtl: parseInt('') || 0,
-  version: 4648,
+  version: 7295,
   zero: false,
-  contlen: 58192,
+  contlen: 95222,
   loginscheme: 'https',
   ip_h: '147335987a8beff6d2',
-  navPrefix: '/'
+  vc_h: '2cac0652c8d215c492ef596c5dc9e536',
+  navPrefix: '/',
+  dt: parseInt('') || 0,
+  time: [2012, 1, 11, 23, 33]
 }
 
 window.locDomain = vk.host.match(/[a-zA-Z]+\.[a-zA-Z]+\.?$/)[0];
@@ -45,15 +50,15 @@ if (vk.al != 1 && ___htest.length && ___htest.substr(0, 1) == vk.navPrefix) {
 }
 
 var StaticFiles = {
-  'common.js' : {v: 486},
-  'common.css': {v: 178},
+  'common.js' : {v: 691},
+  'common.css': {v: 253},
   'ie6.css'   : {v: 19},
   'ie7.css'   : {v: 13}
-  ,'lang0_0.js':{v:4221},'public.css':{v:25},'page.css':{v:127},'public.js':{v:21},'page.js':{v:174}
+  ,'lang0_0.js':{v:5501},'public.css':{v:31},'page.css':{v:250},'public.js':{v:26},'page.js':{v:312}
 }
 
 </script>
-<link type="text/css" rel="stylesheet" href="/css/al/public.css?25"></link><link type="text/css" rel="stylesheet" href="/css/al/page.css?127"></link><script type="text/javascript" src="/js/al/common.js?486"></script><script type="text/javascript" src="/js/lang0_0.js?4221"></script><script type="text/javascript" src="/js/al/public.js?21"></script><script type="text/javascript" src="/js/al/page.js?174"></script>
+<link type="text/css" rel="stylesheet" href="/css/al/public.css?31"></link><link type="text/css" rel="stylesheet" href="/css/al/page.css?250"></link><script type="text/javascript" src="/js/al/common.js?691"></script><script type="text/javascript" src="/js/lang0_0.js?5501"></script><script type="text/javascript" src="/js/al/public.js?26"></script><script type="text/javascript" src="/js/al/page.js?312"></script>
 
 </head>
 
@@ -65,21 +70,23 @@ var StaticFiles = {
   <div id="box_layer_bg" class="fixed"></div><div id="box_layer_wrap" class="scroll_fix_wrap fixed"><div id="box_layer"><div id="box_loader"><div class="loader"></div><div class="back"></div></div></div></div>
 
   <div id="stl_left"></div><div id="stl_side"></div>
-  
+
   <script type="text/javascript">domStarted();</script>
 
-  <div class="scroll_fix_wrap" id="page_wrap"><div id="top_info_wrap"></div>
+  <div class="scroll_fix_wrap" id="page_wrap">
 <div><div class="scroll_fix">
-  <div id="page_layout">
+  <div id="page_layout" style="width: 791px;">
     <div id="page_header" class="p_head1 p_head_l0">
       <div class="back"></div>
       <div class="left"></div>
       <div class="right"></div>
       <div class="content">
         <div id="top_nav" class="head_nav">
-  <a id="top_home_link" class="top_home_link fl_l" href="/" onclick="return nav.go(this, event)" class="fl_l" style=""></a>
+  <a id="top_home_link" class="top_home_link fl_l" href="/" class="fl_l" style=""></a>
   <div id="top_links">
-    <a id="top_search_link" class="fl_r top_nav_link" href="/search" style="display: none" onclick="return nav.go(this, event)">Поиск друзей</a>
+    <div class="fl_r" id="top_menu_wrap" style="">
+      <a id="top_reg_link" class="fl_r top_nav_link" href="/join" style="" onclick="return !showBox('join.php', {act: 'box', from: nav.strLoc}, {}, event)">регистрация</a>
+    </div>
     <a class="fl_l top_nav_link" href="" id="top_back_link" onclick="return nav.go(this, event, {back: true})"></a>
   </div>
 </div>
@@ -96,8 +103,9 @@ var StaticFiles = {
     <input type="hidden" name="captcha_sid" id="quick_captcha_sid" value="" />
     <input type="hidden" name="captcha_key" id="quick_captcha_key" value="" />
     <input type="hidden" name="from_host" value="vk.com" />
+    <input type="hidden" name="from_protocol" value="http" />
     <input type="hidden" name="ip_h" value="147335987a8beff6d2" />
-    <div class="label">E-mail или Логин:</div>
+    <div class="label">Телефон или e-mail:</div>
     <div class="labeled"><input type="text" name="email" class="text" onfocus="show('quick_expire')" id="quick_email" /></div>
     <div class="label">Пароль:</div>
     <div class="labeled"><input type="password" name="pass" class="text" onfocus="show('quick_expire')" id="quick_pass" /></div>
@@ -105,11 +113,12 @@ var StaticFiles = {
     <input type="submit" class="submit" />
   </form>
   <div class="button_blue button_wide"><button id="quick_login_button">Войти</button></div>
-  <div class="clear forgot"><a href="/login?act=forgot" target="_top">Забыли пароль?</a></div>
+  <div class="button_blue button_wide" id="quick_reg_button" style=""><button onclick="top.showBox('join.php', {act: 'box', from: nav.strLoc})">Регистрация</button></div>
+  <div class="clear forgot"><a href="/restore" target="_top">Забыли пароль?</a></div>
 </div>
     </div>
 
-    <div id="page_body" class="fl_r">
+    <div id="page_body" class="fl_r" style="width: 631px;">
       <div id="header_wrap2">
         <div id="header_wrap1">
           <div id="header" style="">
@@ -135,7 +144,7 @@ var StaticFiles = {
   <div id="info_module_tab" class="info_tab fl_l"><div class="public_info" id="public_short">
   <div class="clear_fix ">
   <div class="label fl_l">О компании:</div>
-  <div class="labeled_text fl_l"><span><span class="short_text">Хабрахабр основан в 2006 году. Издателем проекта является компания «Тематические Медиа».<br><br>Аудитория проекта — прогрессивно мыслящие люди, интересующиеся будущим IT-рынка в целом и интернет-экономики...<br/><a href="" onclick="addClass(geByClass('short_text', this.parentNode.parentNode)[0], 'unshown');removeClass(geByClass('full_text', this.parentNode.parentNode)[0], 'unshown');return false;">показать полностью..</a></span><span class="full_text unshown">Хабрахабр основан в 2006 году. Издателем проекта является компания «Тематические Медиа».<br><br>Аудитория проекта — прогрессивно мыслящие люди, интересующиеся будущим IT-рынка в целом и интернет-экономики в частности. Хабрахабр будет одинаково интересен программистам и журналистам, рекламщикам и верстальщикам, аналитикам и копирайтерам, менеджерам высшего и среднего звена, владельцам крупных компаний и небольших фирм, а также всем тем, для кого IT — это не просто две буквы алфавита.</span></span></div>
+  <div class="labeled_text fl_l"><span><span class="short_text">Хабрахабр основан в 2006 году. Издателем проекта является компания «Тематические Медиа».<br><br>Аудитория проекта — прогрессивно мыслящие люди, интересующиеся будущим IT-рынка в целом и интернет-экономики...<br/><a href="" onclick="addClass(geByClass('short_text', this.parentNode.parentNode)[0], 'unshown');removeClass(geByClass('full_text', this.parentNode.parentNode)[0], 'unshown');return false;">Показать полностью..</a></span><span class="full_text unshown">Хабрахабр основан в 2006 году. Издателем проекта является компания «Тематические Медиа».<br><br>Аудитория проекта — прогрессивно мыслящие люди, интересующиеся будущим IT-рынка в целом и интернет-экономики в частности. Хабрахабр будет одинаково интересен программистам и журналистам, рекламщикам и верстальщикам, аналитикам и копирайтерам, менеджерам высшего и среднего звена, владельцам крупных компаний и небольших фирм, а также всем тем, для кого IT — это не просто две буквы алфавита.</span></span></div>
 </div><div class="clear_fix ">
   <div class="label fl_l">Веб-сайт:</div>
   <div class="labeled_text fl_l"><a href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2F&h=2bc6058d791107c988" target="_blank" target="_blank">http://habrahabr.ru/</a></div>
@@ -145,742 +154,968 @@ var StaticFiles = {
 </div>
 </div><div class="wall_module" id="public_wall">
   <div class="module_header wall_header">
-  <a id="page_wall_header" class="header_top clear_fix" onclick="if (checkEvent(event)) return true; return wall.switchWall()">
-    <span class="fl_r" id="page_wall_switch"></span>
-    Новости<span id="page_wall_posts_count" onclick="if (checkEvent(event)) return true; nav.go(this.parentNode, event); return cancelEvent(event);"></span>
+  <a id="page_wall_header" class="header_top clear_fix">
+    <span class="right_link fl_r" id="page_wall_switch" onclick="if (checkEvent(event)) return true; return wall.switchWall(event);"></span>
+    <b id="page_wall_posts_count">7148 сообщений</b>
   </a>
 </div>
   
-  <div class="clear_fix"><div id="page_wall_posts" class="wall_posts own"><input type="hidden" id="page_wall_count_own" value="4828" /><div id="post-20629724_40861" class="post all own" onmouseover="wall.postOver('-20629724_40861')" onmouseout="wall.postOut('-20629724_40861')">
-  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-     <td class="image">
-       <a class="post_image" href="/habr" onclick="return nav.go(this, event)"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" /></a>
-       
-     </td>
-     <td class="info">
-       <div class="fl_r">
+  <div class="clear_fix"><div id="page_wall_posts" class="wall_posts own"><input type="hidden" id="page_wall_count_own" value="7148" /><div id="post-20629724_73803" class="post all own" onmouseover="wall.postOver('-20629724_73803')" onmouseout="wall.postOut('-20629724_73803')" onclick="wall.postClick('-20629724_73803', event)">
+  <div class="post_table">
+    <div class="post_image">
+      <a class="post_image" href="/habr"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" width="50" height="50"/></a>
+      
+    </div>
+    <div class="post_info">
+      <div class="fl_r delete_post_wrap">
   <div class="delete_post">
-    <div id="delete_post-20629724_40861" onclick="wall.markAsSpam('-20629724_40861', 'eee1ff9cbbfed44382');" onmouseover="wall.activeDeletePost('-20629724_40861', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_40861')"></div>
+    <div id="delete_post-20629724_73803" onclick="wall.markAsSpam('-20629724_73803', 'c3734178cb8a165f55');" onmouseover="wall.activeDeletePost('-20629724_73803', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_73803')"></div>
   </div>
 </div>
-       <div class="text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <div class="wall_post_text">Блог компании TrendClub / Полный обзор ASUS EEE Pad Transformer</div><div class="post_media" ><a class="photo" onclick="return showPhoto('-20629724_266221258', 'a2e95abb92fcc5c1d5', {temp: {x_src: &quot;http://cs4649.vk.com/u93388/-5/x_8dcbf2ee.jpg&quot;}}, event)"><img src="http://cs4649.vk.com/u93388/-5/s_a786da5f.jpg" /></a></div><div class="media_desc">
-  <a class="lnk" id="post_media_lnk-20629724_40861" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fcompany%2Fasus%2Fblog%2F126762%2F&h=063b48d0b3e0c4f26f" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_40861')">
+      <div class="wall_text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <span class="explain"> &raquo; <a class="lnk" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fmobiledev%2F136042%2F&h=809c9f4f5fb7f971aa&post=-20629724_73803" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73803', {i: -1})"><span class="a">Mobile Development / Опубликован исходный код и инструменты разработчика для мобильной..</span></a></span><div id="wpt-20629724_73803"><div class="wall_post_text">  На Хабре некоторое время назад уже упоминалось о проекте Tizen, который представляет из себя операционную систему для мобильных устройств. Несколько..</div><div class="post_media clear_fix post_thumbs_num1" ><div class="page_media_thumb page_media_photo page_media_thumb1 fl_l"><a class="photo" onclick="return showPhoto('-20629724_275607814', 'wall-20629724_73803', {temp: {x_src: &quot;http://cs6071.vk.com/u93388/-5/x_c993f5ff.jpg&quot;}}, event)"><img src="http://cs6071.vk.com/u93388/-5/x_c993f5ff.jpg" /></a></div></div></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk-20629724_73803_-1" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fmobiledev%2F136042%2F&h=809c9f4f5fb7f971aa&post=-20629724_73803" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73803', {i: '-1'})">
     <b class="fl_l "></b>Ссылка
     <span class="a">habrahabr.ru</span>
   </a>
 </div></div>
-       <div class="like_wrap fl_r" onmouseover="wall.likeOver('-20629724_40861')" onmouseout="wall.likeOut('-20629724_40861')" onclick="wall.like('-20629724_40861', '9e46c7a9e84775aeff'); event.cancelBubble = true;">
-  <span class="like_link fl_l" id="like_link-20629724_40861"></span>
-  <div class=" fl_l" id="like_icon-20629724_40861"></div>
-  <span class="like_count fl_l" id="like_count-20629724_40861">10</span>
-</div>
-       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
-  <small><a href="/wall-20629724_40861" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 19:19" time="1313939974">Два часа назад</span></a></small>
-</div>
-<div class="replies_wrap" id="replies_wrap-20629724_40861" style="">
-  <div id="replies-20629724_40861"><a class="wr_header" onclick="return wall.showReplies('-20629724_40861', false, false, event);" offs="3/7" href="/wall-20629724_40861?offset=last&f=replies">
-  <div class="wrh_text" id="wrh_text-20629724_40861">Показать все 7 комментариев</div>
-  <div class="progress wrh_prg" id="wrh_prg-20629724_40861"></div>
-</a><div id="post-20629724_40877" class="reply clear" onmouseover="wall.actsOver('-20629724_40877')" onmouseout="wall.actsOut('-20629724_40877')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/vfr13" onclick="return nav.go(this, event)">
-          <img border="0" src="http://vk.com/images/question_c.gif" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/vfr13" onclick="return nav.go(this, event)">Владимир Фролов</a>
-          <div class="wall_reply_text">Супер аппарат&#33;&#33;&#33;</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40877"><a onclick="wall.markAsSpam('-20629724_40877', 'b6c4b10732b2aa55da');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40861?reply=40877" onclick="return nav.go(this, event)">сегодня в 19:58</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40896" class="reply clear" onmouseover="wall.actsOver('-20629724_40896')" onmouseout="wall.actsOut('-20629724_40896')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/sulin.artem" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs10409.vk.com/u26832294/e_6c27222e.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/sulin.artem" onclick="return nav.go(this, event)">Артём Сулин</a>
-          <div class="wall_reply_text">linux на него и все отлично</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40896"><a onclick="wall.markAsSpam('-20629724_40896', 'e27b150fdb4857a604');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40861?reply=40896" onclick="return nav.go(this, event)">сегодня в 21:31</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40897" class="reply clear" onmouseover="wall.actsOver('-20629724_40897')" onmouseout="wall.actsOut('-20629724_40897')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/id47511967" onclick="return nav.go(this, event)">
-          <img border="0" src="http://vk.com/images/question_c.gif" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/id47511967" onclick="return nav.go(this, event)">Guf Guf</a>
-          <div class="wall_reply_text">Введите любую фамилию жителя России и Вы будете сильно удивлени<br><a href="/away.php?to=http%3A%2F%2Fxn---2011-1012-9qi5qmb.com&h=8c017545198ccd0b3b" target="_blank" target="_blank">xn---2011-1012-9qi5qmb.com</a></div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40897"><a onclick="wall.markAsSpam('-20629724_40897', '1c6b11afcd38a387be');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40861?reply=40897" onclick="return nav.go(this, event)">сегодня в 21:39</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><input type="hidden" id="start_reply-20629724_40861" value="40877"/></div>
-  
-</div></div>
-     </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40829" class="post all own" onmouseover="wall.postOver('-20629724_40829')" onmouseout="wall.postOut('-20629724_40829')">
-  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-     <td class="image">
-       <a class="post_image" href="/habr" onclick="return nav.go(this, event)"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" /></a>
-       
-     </td>
-     <td class="info">
-       <div class="fl_r">
-  <div class="delete_post">
-    <div id="delete_post-20629724_40829" onclick="wall.markAsSpam('-20629724_40829', 'fa99a6cd165cff19f7');" onmouseover="wall.activeDeletePost('-20629724_40829', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_40829')"></div>
+      <div class="post_like_wrap fl_r" onmouseover="wall.postLikeOver('-20629724_73803')" onmouseout="wall.postLikeOut('-20629724_73803')" onclick="wall.like('-20629724_73803', 'c6a1fc4fc015348201'); event.cancelBubble = true;">
+  <div class="post_like">
+    <span class="post_like_link fl_l" id="like_link-20629724_73803"></span>
+    <i class="post_like_icon  fl_l" id="like_icon-20629724_73803"></i>
+    <span class="post_like_count fl_l" id="like_count-20629724_73803">7</span>
   </div>
 </div>
-       <div class="text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <div class="wall_post_text">Блог компании e-Legion Ltd. / Отчёт о седьмой встрече Apple Developers Community</div><div class="post_media" ><a class="photo" onclick="return showPhoto('-20629724_266216495', '76d8f91edcd19c3f27', {temp: {x_src: &quot;http://cs4656.vk.com/u93388/-5/x_4ff76665.jpg&quot;}}, event)"><img src="http://cs4656.vk.com/u93388/-5/s_d60aac5b.jpg" /></a></div><div class="media_desc">
-  <a class="lnk" id="post_media_lnk-20629724_40829" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fcompany%2Fe-Legion%2Fblog%2F126750%2F&h=0578ebb3c022816361" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_40829')">
+      <div class="replies"><div class="reply_link_wrap" id="wpe_bottom-20629724_73803">
+  <small><a href="/wall-20629724_73803" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 23:13" time="1326309193">20 минут назад</span></a></small>
+</div>
+<div class="replies_wrap clear" id="replies_wrap-20629724_73803" style="">
+  <div id="replies-20629724_73803"><a class="wr_header" onclick="return wall.showReplies('-20629724_73803', false, false, event);" offs="3/14" href="/wall-20629724_73803?offset=last&f=replies">
+  <div class="wrh_text" id="wrh_text-20629724_73803">Показать все 14 комментариев</div>
+  <div class="progress wrh_prg" id="wrh_prg-20629724_73803"></div>
+</a><input type="hidden" id="start_reply-20629724_73803" value="73824"/><div id="post-20629724_73824" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73824')" onmouseout="wall.actsOut('-20629724_73824')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/olololosha1488">
+      <img src="http://cs9809.vk.com/u5660307/e_0c84beef.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73824" onclick="wall.markAsSpam('-20629724_73824', 'df3d4febbb4124c60e')" onmouseover="wall.activeDeletePost('-20629724_73824', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73824')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/olololosha1488">Евгений Островский</a>
+        <div class="wall_reply_text">И да, HTC Sync и KIES-фигня.<br>Marat, в чем?:)</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73824', '04072020bf261df631'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73824')" onmouseout="wall.likeOut('-20629724_wall_reply73824')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73824"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73824"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73824"><span class="like_link" id="like_link-20629724_wall_reply73824" onclick="wall.like('-20629724_wall_reply73824', '04072020bf261df631'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73824')" onmouseout="wall.likeOut('-20629724_wall_reply73824', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73803?reply=73824" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 23:31" time="1326310275">две минуты назад</span></a> <a href="/lollipuf" class="reply_to" onclick="return wall.showReply('-20629724_73803', '-20629724_73823')">Марату</a>
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73825" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73825')" onmouseout="wall.actsOut('-20629724_73825')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/alterra07">
+      <img src="http://cs10490.vk.com/u26137831/e_2a013016.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73825" onclick="wall.markAsSpam('-20629724_73825', 'e77cbec0c1a3517a22')" onmouseover="wall.activeDeletePost('-20629724_73825', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73825')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/alterra07">Алим Глашев</a>
+        <div class="wall_reply_text"><a class="wall_reply_greeting" href="/olololosha1488" onclick="return wall.showReply('-20629724_73803', '-20629724_73824')">Евгений</a>, как киес, вытащил флешку, всунул в ноут, скопировал чо надо. Менюшки вполне сексуальные. Разные устройства следствие популярности</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73825', '4ef56aa2a94ace1c70'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73825')" onmouseout="wall.likeOut('-20629724_wall_reply73825')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73825"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73825"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73825"><span class="like_link" id="like_link-20629724_wall_reply73825" onclick="wall.like('-20629724_wall_reply73825', '4ef56aa2a94ace1c70'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73825')" onmouseout="wall.likeOut('-20629724_wall_reply73825', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73803?reply=73825" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 23:32" time="1326310373">49 секунд назад</span></a> <a href="/olololosha1488" class="reply_to" onclick="return wall.showReply('-20629724_73803', '-20629724_73824')">Евгению</a>
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73826" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73826')" onmouseout="wall.actsOut('-20629724_73826')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/lollipuf">
+      <img src="http://cs10655.vk.com/u9844012/e_e3afaa81.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73826" onclick="wall.markAsSpam('-20629724_73826', '39114a3b630ee6d572')" onmouseover="wall.activeDeletePost('-20629724_73826', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73826')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/lollipuf">Марат Бакин</a>
+        <div class="wall_reply_text"><a class="wall_reply_greeting" href="/olololosha1488" onclick="return wall.showReply('-20629724_73803', '-20629724_73824')">Евгений</a>, извините за столь интимный опрос, а чем вы пользуетесь для синхронизации контактов?)</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73826', '8f94dcfdeba20a373c'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73826')" onmouseout="wall.likeOut('-20629724_wall_reply73826')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73826"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73826"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73826"><span class="like_link" id="like_link-20629724_wall_reply73826" onclick="wall.like('-20629724_wall_reply73826', '8f94dcfdeba20a373c'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73826')" onmouseout="wall.likeOut('-20629724_wall_reply73826', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73803?reply=73826" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 23:33" time="1326310382">40 секунд назад</span></a> <a href="/olololosha1488" class="reply_to" onclick="return wall.showReply('-20629724_73803', '-20629724_73824')">Евгению</a>
+      </div>
+    </div>
+  </div>
+</div></div>
+  
+</div></div>
+    </div>
+  </div>
+</div><div id="post-20629724_73776" class="post all own" onmouseover="wall.postOver('-20629724_73776')" onmouseout="wall.postOut('-20629724_73776')" onclick="wall.postClick('-20629724_73776', event)">
+  <div class="post_table">
+    <div class="post_image">
+      <a class="post_image" href="/habr"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" width="50" height="50"/></a>
+      
+    </div>
+    <div class="post_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73776" onclick="wall.markAsSpam('-20629724_73776', '0bc5bd1b1c0a42537b');" onmouseover="wall.activeDeletePost('-20629724_73776', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_73776')"></div>
+  </div>
+</div>
+      <div class="wall_text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <span class="explain"> &raquo; <a class="lnk" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fgadgets%2F136036%2F&h=18685f40794e493787&post=-20629724_73776" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73776', {i: -1})"><span class="a">Гаджеты. Устройства для гиков / DROID RAZR MAXX или «Наконец-то Android смартфон..</span></a></span><div id="wpt-20629724_73776"><div class="wall_post_text">Motorola Mobility в скором времени приступит к продажам своего нового Android смартфона, в котором решена главная проблема этой ОС. В новом DROID RAZR..</div><div class="post_media clear_fix post_thumbs_num1" ><div class="page_media_thumb page_media_photo page_media_thumb1 fl_l"><a class="photo" onclick="return showPhoto('-20629724_275606131', 'wall-20629724_73776', {temp: {x_src: &quot;http://cs6054.vk.com/u93388/-5/x_7174ba79.jpg&quot;}}, event)"><img src="http://cs6054.vk.com/u93388/-5/x_7174ba79.jpg" /></a></div></div></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk-20629724_73776_-1" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fgadgets%2F136036%2F&h=18685f40794e493787&post=-20629724_73776" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73776', {i: '-1'})">
     <b class="fl_l "></b>Ссылка
     <span class="a">habrahabr.ru</span>
   </a>
 </div></div>
-       <div class="like_wrap fl_r" onmouseover="wall.likeOver('-20629724_40829')" onmouseout="wall.likeOut('-20629724_40829')" onclick="wall.like('-20629724_40829', 'f206b6ef59b407a40b'); event.cancelBubble = true;">
-  <span class="like_link fl_l" id="like_link-20629724_40829"></span>
-  <div class=" fl_l" id="like_icon-20629724_40829"></div>
-  <span class="like_count fl_l" id="like_count-20629724_40829">5</span>
-</div>
-       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
-  <small><a href="/wall-20629724_40829" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 17:39</span></a></small>
-</div>
-<div class="replies_wrap" id="replies_wrap-20629724_40829" style="display: none">
-  <div id="replies-20629724_40829"><input type="hidden" id="start_reply-20629724_40829" value=""/></div>
-  
-</div></div>
-     </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40797" class="post all own" onmouseover="wall.postOver('-20629724_40797')" onmouseout="wall.postOut('-20629724_40797')">
-  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-     <td class="image">
-       <a class="post_image" href="/habr" onclick="return nav.go(this, event)"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" /></a>
-       
-     </td>
-     <td class="info">
-       <div class="fl_r">
-  <div class="delete_post">
-    <div id="delete_post-20629724_40797" onclick="wall.markAsSpam('-20629724_40797', 'b53fe30b8cae14eba1');" onmouseover="wall.activeDeletePost('-20629724_40797', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_40797')"></div>
+      <div class="post_like_wrap fl_r" onmouseover="wall.postLikeOver('-20629724_73776')" onmouseout="wall.postLikeOut('-20629724_73776')" onclick="wall.like('-20629724_73776', '822f67e43ddcc016b6'); event.cancelBubble = true;">
+  <div class="post_like">
+    <span class="post_like_link fl_l" id="like_link-20629724_73776"></span>
+    <i class="post_like_icon  fl_l" id="like_icon-20629724_73776"></i>
+    <span class="post_like_count fl_l" id="like_count-20629724_73776">36</span>
   </div>
 </div>
-       <div class="text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <div class="wall_post_text">Информационная безопасность / Подключение зашифрованных контейнеров TrueCrypt с помощью USB накопителя</div><div class="post_media" ><a class="photo" onclick="return showPhoto('-20629724_266214007', '87fa32fcdaee192b1d', {temp: {x_src: &quot;http://cs4631.vk.com/u93388/-5/x_3807d508.jpg&quot;}}, event)"><img src="http://cs4631.vk.com/u93388/-5/s_9b6335fb.jpg" /></a></div><div class="media_desc">
-  <a class="lnk" id="post_media_lnk-20629724_40797" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Finfosecurity%2F126751%2F&h=31b61ae9738d8d312c" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_40797')">
+      <div class="replies"><div class="reply_link_wrap" id="wpe_bottom-20629724_73776">
+  <small><a href="/wall-20629724_73776" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 22:49" time="1326307749">44 минуты назад</span></a></small>
+</div>
+<div class="replies_wrap clear" id="replies_wrap-20629724_73776" style="">
+  <div id="replies-20629724_73776"><a class="wr_header" onclick="return wall.showReplies('-20629724_73776', false, false, event);" offs="3/19" href="/wall-20629724_73776?offset=last&f=replies">
+  <div class="wrh_text" id="wrh_text-20629724_73776">Показать все 19 комментариев</div>
+  <div class="progress wrh_prg" id="wrh_prg-20629724_73776"></div>
+</a><input type="hidden" id="start_reply-20629724_73776" value="73795"/><div id="post-20629724_73795" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73795')" onmouseout="wall.actsOut('-20629724_73795')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/adam.move.itch">
+      <img src="http://cs11057.vk.com/u9233042/e_8c48d4b8.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73795" onclick="wall.markAsSpam('-20629724_73795', '18846c98cf6e4ff657')" onmouseover="wall.activeDeletePost('-20629724_73795', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73795')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/adam.move.itch">Adam Itch</a>
+        <div class="wall_reply_text"><a class="wall_reply_greeting" href="/ctacbl4" onclick="return wall.showReply('-20629724_73776', '-20629724_73786')">Стас</a>, Какую идею?</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73795', '27ebe46dc2fd192377'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73795')" onmouseout="wall.likeOut('-20629724_wall_reply73795')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73795"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73795"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73795"><span class="like_link" id="like_link-20629724_wall_reply73795" onclick="wall.like('-20629724_wall_reply73795', '27ebe46dc2fd192377'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73795')" onmouseout="wall.likeOut('-20629724_wall_reply73795', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73776?reply=73795" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 23:07" time="1326308873">25 минут назад</span></a> <a href="/ctacbl4" class="reply_to" onclick="return wall.showReply('-20629724_73776', '-20629724_73786')">Стасу</a>
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73796" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73796')" onmouseout="wall.actsOut('-20629724_73796')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/ctacbl4">
+      <img src="http://cs5323.vk.com/u63253179/e_7bbaf335.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73796" onclick="wall.markAsSpam('-20629724_73796', '892cc01a4fb0a3881d')" onmouseover="wall.activeDeletePost('-20629724_73796', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73796')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/ctacbl4">Стас Винклер</a>
+        <div class="wall_reply_text">... и люди к тебе потянутся</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73796', '8ef0117583f112674d'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73796')" onmouseout="wall.likeOut('-20629724_wall_reply73796')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73796"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73796"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73796"><span class="like_link" id="like_link-20629724_wall_reply73796" onclick="wall.like('-20629724_wall_reply73796', '8ef0117583f112674d'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73796')" onmouseout="wall.likeOut('-20629724_wall_reply73796', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73776?reply=73796" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 23:07" time="1326308879">25 минут назад</span></a> <a href="/mx_ar" class="reply_to" onclick="return wall.showReply('-20629724_73776', '-20629724_73794')">Олегу</a>
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73799" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73799')" onmouseout="wall.actsOut('-20629724_73799')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/ctacbl4">
+      <img src="http://cs5323.vk.com/u63253179/e_7bbaf335.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73799" onclick="wall.markAsSpam('-20629724_73799', '9d998375fa7a761d0e')" onmouseover="wall.activeDeletePost('-20629724_73799', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73799')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/ctacbl4">Стас Винклер</a>
+        <div class="wall_reply_text">суровый такой у тебя сарказм получился XD</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73799', 'f5d3d94395c14bbff6'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73799')" onmouseout="wall.likeOut('-20629724_wall_reply73799')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73799"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73799"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73799"><span class="like_link" id="like_link-20629724_wall_reply73799" onclick="wall.like('-20629724_wall_reply73799', 'f5d3d94395c14bbff6'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73799')" onmouseout="wall.likeOut('-20629724_wall_reply73799', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73776?reply=73799" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 23:11" time="1326309109">21 минуту назад</span></a> <a href="/mx_ar" class="reply_to" onclick="return wall.showReply('-20629724_73776', '-20629724_73794')">Олегу</a>
+      </div>
+    </div>
+  </div>
+</div></div>
+  
+</div></div>
+    </div>
+  </div>
+</div><div id="post-20629724_73775" class="post all own" onmouseover="wall.postOver('-20629724_73775')" onmouseout="wall.postOut('-20629724_73775')" onclick="wall.postClick('-20629724_73775', event)">
+  <div class="post_table">
+    <div class="post_image">
+      <a class="post_image" href="/habr"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" width="50" height="50"/></a>
+      
+    </div>
+    <div class="post_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73775" onclick="wall.markAsSpam('-20629724_73775', '3e27eca5560c5a35d8');" onmouseover="wall.activeDeletePost('-20629724_73775', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_73775')"></div>
+  </div>
+</div>
+      <div class="wall_text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <span class="explain"> &raquo; <a class="lnk" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Flinux%2F136043%2F&h=cc093c559393f59149&post=-20629724_73775" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73775', {i: -1})"><span class="a">Linux для всех / Corel выпустила в свет редактор изображений AfterShot Pro, схожий..</span></a></span><div id="wpt-20629724_73775"><div class="wall_post_text">  Наконец-то гиганты IT начинают обращать внимание на такую платформу как линукс.Corel выпустила редактор изображений под три основные платформы, созданный..</div><div class="post_media clear_fix post_thumbs_num1" ><div class="page_media_thumb page_media_photo page_media_thumb1 fl_l"><a class="photo" onclick="return showPhoto('-20629724_275606130', 'wall-20629724_73775', {temp: {x_src: &quot;http://cs6025.vk.com/u93388/-5/x_1a1a45d4.jpg&quot;}}, event)"><img src="http://cs6025.vk.com/u93388/-5/x_1a1a45d4.jpg" /></a></div></div></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk-20629724_73775_-1" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Flinux%2F136043%2F&h=cc093c559393f59149&post=-20629724_73775" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73775', {i: '-1'})">
     <b class="fl_l "></b>Ссылка
     <span class="a">habrahabr.ru</span>
   </a>
 </div></div>
-       <div class="like_wrap fl_r" onmouseover="wall.likeOver('-20629724_40797')" onmouseout="wall.likeOut('-20629724_40797')" onclick="wall.like('-20629724_40797', '85ca570d5dc765b4d3'); event.cancelBubble = true;">
-  <span class="like_link fl_l" id="like_link-20629724_40797"></span>
-  <div class=" fl_l" id="like_icon-20629724_40797"></div>
-  <span class="like_count fl_l" id="like_count-20629724_40797">8</span>
-</div>
-       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
-  <small><a href="/wall-20629724_40797" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 16:49</span></a></small>
-</div>
-<div class="replies_wrap" id="replies_wrap-20629724_40797" style="">
-  <div id="replies-20629724_40797"><a class="wr_header" onclick="return wall.showReplies('-20629724_40797', false, false, event);" offs="3/74" href="/wall-20629724_40797?offset=last&f=replies">
-  <div class="wrh_text" id="wrh_text-20629724_40797">Показать все 74 комментария</div>
-  <div class="progress wrh_prg" id="wrh_prg-20629724_40797"></div>
-</a><div id="post-20629724_40892" class="reply clear" onmouseover="wall.actsOver('-20629724_40892')" onmouseout="wall.actsOut('-20629724_40892')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/id143201233" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs10849.vk.com/u143201233/e_b81a437b.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/id143201233" onclick="return nav.go(this, event)">Мем Мемыч</a>
-          <div class="wall_reply_text">И?</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40892"><a onclick="wall.markAsSpam('-20629724_40892', 'c7a87e9b799f1f38e5');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40797?reply=40892" onclick="return nav.go(this, event)">сегодня в 20:30</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40893" class="reply clear" onmouseover="wall.actsOver('-20629724_40893')" onmouseout="wall.actsOut('-20629724_40893')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/asaelko" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs9987.vk.com/u1757536/e_127f597e.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/asaelko" onclick="return nav.go(this, event)">Глеб Богдевич</a>
-          <div class="wall_reply_text">кстати, насколько я понимаю, там не &quot;один злобный модер&quot;. И статья висит, пока не понравится хотя бы одному из них, и он не отправит инвайт.<br>Поправьте, если не прав)</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40893"><a onclick="wall.markAsSpam('-20629724_40893', 'b96950010a3c5df531');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40797?reply=40893" onclick="return nav.go(this, event)">сегодня в 20:39</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40895" class="reply clear" onmouseover="wall.actsOver('-20629724_40895')" onmouseout="wall.actsOut('-20629724_40895')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/sulin.artem" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs10409.vk.com/u26832294/e_6c27222e.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/sulin.artem" onclick="return nav.go(this, event)">Артём Сулин</a>
-          <div class="wall_reply_text">да ребята, не найдете тут инвайта, жмоты тут сидят и &quot;вахтёры&quot;.</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40895"><a onclick="wall.markAsSpam('-20629724_40895', '8a8faa957db503bb09');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40797?reply=40895" onclick="return nav.go(this, event)">сегодня в 21:31</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><input type="hidden" id="start_reply-20629724_40797" value="40892"/></div>
-  
-</div></div>
-     </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40790" class="post all own" onmouseover="wall.postOver('-20629724_40790')" onmouseout="wall.postOut('-20629724_40790')">
-  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-     <td class="image">
-       <a class="post_image" href="/habr" onclick="return nav.go(this, event)"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" /></a>
-       
-     </td>
-     <td class="info">
-       <div class="fl_r">
-  <div class="delete_post">
-    <div id="delete_post-20629724_40790" onclick="wall.markAsSpam('-20629724_40790', '6b691611ade1975318');" onmouseover="wall.activeDeletePost('-20629724_40790', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_40790')"></div>
+      <div class="post_like_wrap fl_r" onmouseover="wall.postLikeOver('-20629724_73775')" onmouseout="wall.postLikeOut('-20629724_73775')" onclick="wall.like('-20629724_73775', 'c3d31a75043448550a'); event.cancelBubble = true;">
+  <div class="post_like">
+    <span class="post_like_link fl_l" id="like_link-20629724_73775"></span>
+    <i class="post_like_icon  fl_l" id="like_icon-20629724_73775"></i>
+    <span class="post_like_count fl_l" id="like_count-20629724_73775">22</span>
   </div>
 </div>
-       <div class="text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <div class="wall_post_text">Блог компании TrendClub / И снова об экзоскелетах</div><div class="post_media" ><a class="photo" onclick="return showPhoto('-20629724_266211413', '9bc5fdfc15f05e7e13', {temp: {x_src: &quot;http://cs4652.vk.com/u93388/-5/x_a8c00403.jpg&quot;}}, event)"><img src="http://cs4652.vk.com/u93388/-5/s_3d321b3d.jpg" /></a></div><div class="media_desc">
-  <a class="lnk" id="post_media_lnk-20629724_40790" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fcompany%2Fasus%2Fblog%2F126752%2F&h=1ee053af31510ccee6" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_40790')">
+      <div class="replies"><div class="reply_link_wrap" id="wpe_bottom-20629724_73775">
+  <small><a href="/wall-20629724_73775" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 22:49" time="1326307748">44 минуты назад</span></a></small>
+</div>
+<div class="replies_wrap clear" id="replies_wrap-20629724_73775" style="">
+  <div id="replies-20629724_73775"><a class="wr_header" onclick="return wall.showReplies('-20629724_73775', false, false, event);" offs="3/14" href="/wall-20629724_73775?offset=last&f=replies">
+  <div class="wrh_text" id="wrh_text-20629724_73775">Показать все 14 комментариев</div>
+  <div class="progress wrh_prg" id="wrh_prg-20629724_73775"></div>
+</a><input type="hidden" id="start_reply-20629724_73775" value="73819"/><div id="post-20629724_73819" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73819')" onmouseout="wall.actsOut('-20629724_73819')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/odmen">
+      <img src="http://cs10064.vk.com/u71408472/e_de2bde03.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73819" onclick="wall.markAsSpam('-20629724_73819', 'dd88e8e1a74988463f')" onmouseover="wall.activeDeletePost('-20629724_73819', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73819')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/odmen">Максим Омаров</a>
+        <div class="wall_reply_text"><a class="wall_reply_greeting" href="/alterra07" onclick="return wall.showReply('-20629724_73775', '-20629724_73818')">Алим</a>, спс. Значит я сделал правильный выбор.</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73819', '0c429b0f687cf0e39d'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73819')" onmouseout="wall.likeOut('-20629724_wall_reply73819')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73819"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73819"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73819"><span class="like_link" id="like_link-20629724_wall_reply73819" onclick="wall.like('-20629724_wall_reply73819', '0c429b0f687cf0e39d'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73819')" onmouseout="wall.likeOut('-20629724_wall_reply73819', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73775?reply=73819" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 23:25" time="1326309953">7 минут назад</span></a> <a href="/alterra07" class="reply_to" onclick="return wall.showReply('-20629724_73775', '-20629724_73818')">Алиму</a>
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73820" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73820')" onmouseout="wall.actsOut('-20629724_73820')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/paulfcdd">
+      <img src="http://cs10581.vk.com/u3892621/e_58f35be8.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73820" onclick="wall.markAsSpam('-20629724_73820', '5de09ae8f36d64418b')" onmouseover="wall.activeDeletePost('-20629724_73820', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73820')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/paulfcdd">Паша Новиков</a>
+        <div class="wall_reply_text">на убунту стал нормально) теперь надо дождаться, вдруг кто кряк сделает)</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73820', '7a2834e3ecc8b08421'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73820')" onmouseout="wall.likeOut('-20629724_wall_reply73820')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73820"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73820"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73820"><span class="like_link" id="like_link-20629724_wall_reply73820" onclick="wall.like('-20629724_wall_reply73820', '7a2834e3ecc8b08421'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73820')" onmouseout="wall.likeOut('-20629724_wall_reply73820', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73775?reply=73820" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 23:27" time="1326310024">6 минут назад</span></a> 
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73821" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73821')" onmouseout="wall.actsOut('-20629724_73821')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/paulfcdd">
+      <img src="http://cs10581.vk.com/u3892621/e_58f35be8.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73821" onclick="wall.markAsSpam('-20629724_73821', '63cb207106a2830129')" onmouseover="wall.activeDeletePost('-20629724_73821', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73821')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/paulfcdd">Паша Новиков</a>
+        <div class="wall_reply_text">но интерфейс конечно говенный</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73821', 'cb5e78b8e51979efef'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73821')" onmouseout="wall.likeOut('-20629724_wall_reply73821')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73821"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73821"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73821"><span class="like_link" id="like_link-20629724_wall_reply73821" onclick="wall.like('-20629724_wall_reply73821', 'cb5e78b8e51979efef'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73821')" onmouseout="wall.likeOut('-20629724_wall_reply73821', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73775?reply=73821" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 23:27" time="1326310072">5 минут назад</span></a> 
+      </div>
+    </div>
+  </div>
+</div></div>
+  
+</div></div>
+    </div>
+  </div>
+</div><div id="post-20629724_73763" class="post all own" onmouseover="wall.postOver('-20629724_73763')" onmouseout="wall.postOut('-20629724_73763')" onclick="wall.postClick('-20629724_73763', event)">
+  <div class="post_table">
+    <div class="post_image">
+      <a class="post_image" href="/habr"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" width="50" height="50"/></a>
+      
+    </div>
+    <div class="post_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73763" onclick="wall.markAsSpam('-20629724_73763', 'a0f7b498aa20b893c3');" onmouseover="wall.activeDeletePost('-20629724_73763', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_73763')"></div>
+  </div>
+</div>
+      <div class="wall_text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <span class="explain"> &raquo; <a class="lnk" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fjava%2F136033%2F&h=8ece847ccaef2c9c7a&post=-20629724_73763" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73763', {i: -1})"><span class="a">JAVA / Веб-редактор кода на Kotlin, с примерами и компиляцией в JavaScript&#33;</span></a></span><div id="wpt-20629724_73763"><div class="wall_post_text">Слышали про Kotlin? Это новый JVM-ориентированный язык программирования от JetBrains?  До вчерашнего дня о Kotlin можно было только почитать и пофантазировать...</div><div class="post_media clear_fix post_thumbs_num1" ><div class="page_media_thumb page_media_photo page_media_thumb1 fl_l"><a class="photo" onclick="return showPhoto('-20629724_275599429', 'wall-20629724_73763', {temp: {x_src: &quot;http://cs6042.vk.com/u93388/-5/x_fe639dc9.jpg&quot;}}, event)"><img src="http://cs6042.vk.com/u93388/-5/x_fe639dc9.jpg" /></a></div></div></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk-20629724_73763_-1" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fjava%2F136033%2F&h=8ece847ccaef2c9c7a&post=-20629724_73763" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73763', {i: '-1'})">
     <b class="fl_l "></b>Ссылка
     <span class="a">habrahabr.ru</span>
   </a>
 </div></div>
-       <div class="like_wrap fl_r" onmouseover="wall.likeOver('-20629724_40790')" onmouseout="wall.likeOut('-20629724_40790')" onclick="wall.like('-20629724_40790', 'b859977bffbaed305e'); event.cancelBubble = true;">
-  <span class="like_link fl_l" id="like_link-20629724_40790"></span>
-  <div class=" fl_l" id="like_icon-20629724_40790"></div>
-  <span class="like_count fl_l" id="like_count-20629724_40790">19</span>
-</div>
-       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
-  <small><a href="/wall-20629724_40790" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 15:39</span></a></small>
-</div>
-<div class="replies_wrap" id="replies_wrap-20629724_40790" style="">
-  <div id="replies-20629724_40790"><div id="post-20629724_40793" class="reply clear" onmouseover="wall.actsOver('-20629724_40793')" onmouseout="wall.actsOut('-20629724_40793')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/maniere" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs11183.vk.com/u5484524/e_474eb1e8.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/maniere" onclick="return nav.go(this, event)">Илья Кеба</a>
-          <div class="wall_reply_text">мда, возможности поражают.</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40793"><a onclick="wall.markAsSpam('-20629724_40793', '1aaeb20e0e5964b540');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40790?reply=40793" onclick="return nav.go(this, event)">сегодня в 16:17</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40796" class="reply clear" onmouseover="wall.actsOver('-20629724_40796')" onmouseout="wall.actsOut('-20629724_40796')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/parketgo" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs9782.vk.com/u7547730/e_ac7c5b22.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/parketgo" onclick="return nav.go(this, event)">Кирилл Гаврилюк</a>
-          <div class="wall_reply_text">Интересно про ДВС и 8 часов работы без дозаправки. Интересно реально в него атомный реактор всунуть...</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40796"><a onclick="wall.markAsSpam('-20629724_40796', '764468a74db4cec9c5');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40790?reply=40796" onclick="return nav.go(this, event)">сегодня в 16:42</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><input type="hidden" id="start_reply-20629724_40790" value="40793"/></div>
-  
-</div></div>
-     </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40777" class="post all own" onmouseover="wall.postOver('-20629724_40777')" onmouseout="wall.postOut('-20629724_40777')">
-  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-     <td class="image">
-       <a class="post_image" href="/habr" onclick="return nav.go(this, event)"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" /></a>
-       
-     </td>
-     <td class="info">
-       <div class="fl_r">
-  <div class="delete_post">
-    <div id="delete_post-20629724_40777" onclick="wall.markAsSpam('-20629724_40777', '4101d9c7259dc1acab');" onmouseover="wall.activeDeletePost('-20629724_40777', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_40777')"></div>
+      <div class="post_like_wrap fl_r" onmouseover="wall.postLikeOver('-20629724_73763')" onmouseout="wall.postLikeOut('-20629724_73763')" onclick="wall.like('-20629724_73763', '7f2d1b6fa2c529e911'); event.cancelBubble = true;">
+  <div class="post_like">
+    <span class="post_like_link fl_l" id="like_link-20629724_73763"></span>
+    <i class="post_like_icon  fl_l" id="like_icon-20629724_73763"></i>
+    <span class="post_like_count fl_l" id="like_count-20629724_73763">33</span>
   </div>
 </div>
-       <div class="text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <div class="wall_post_text">Управление проектами / Наём VS Аутсорсинг (в проектах малого бизнеса)</div><div class="media_desc">
-  <a class="lnk" id="post_media_lnk-20629724_40777" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fpm%2F126744%2F&h=887c1296c2843d0b0f" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_40777')">
+      <div class="replies"><div class="reply_link_wrap" id="wpe_bottom-20629724_73763">
+  <small><a href="/wall-20629724_73763" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 21:13" time="1326301993">два часа назад</span></a></small>
+</div>
+<div class="replies_wrap clear" id="replies_wrap-20629724_73763" style="">
+  <div id="replies-20629724_73763"><a class="wr_header" onclick="return wall.showReplies('-20629724_73763', false, false, event);" offs="3/6" href="/wall-20629724_73763?offset=last&f=replies">
+  <div class="wrh_text" id="wrh_text-20629724_73763">Показать все 6 комментариев</div>
+  <div class="progress wrh_prg" id="wrh_prg-20629724_73763"></div>
+</a><input type="hidden" id="start_reply-20629724_73763" value="73768"/><div id="post-20629724_73768" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73768')" onmouseout="wall.actsOut('-20629724_73768')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/alexschedrov">
+      <img src="http://cs5317.vk.com/u28861892/e_d43a108e.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73768" onclick="wall.markAsSpam('-20629724_73768', '81c6044c8b7cfec1c1')" onmouseover="wall.activeDeletePost('-20629724_73768', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73768')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/alexschedrov">Александр Щедров</a>
+        <div class="wall_reply_text">Круто, тут уж ничего не скажешь.</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73768', '95d8b4fa92fadfe170'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73768')" onmouseout="wall.likeOut('-20629724_wall_reply73768')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73768"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73768"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73768"><span class="like_link" id="like_link-20629724_wall_reply73768" onclick="wall.like('-20629724_wall_reply73768', '95d8b4fa92fadfe170'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73768')" onmouseout="wall.likeOut('-20629724_wall_reply73768', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73763?reply=73768" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 21:36" time="1326303381">час назад</span></a> 
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73774" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73774')" onmouseout="wall.actsOut('-20629724_73774')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/id1233654">
+      <img src="http://cs10507.vk.com/u1233654/e_07a8afd6.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73774" onclick="wall.markAsSpam('-20629724_73774', '3351fdd855048f2ae9')" onmouseover="wall.activeDeletePost('-20629724_73774', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73774')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/id1233654">Дмитрий Андреевич</a>
+        <div class="wall_reply_text">интерфейс похож на страницу Вконтакте..</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73774', '2ca69c58d91255c3b0'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73774')" onmouseout="wall.likeOut('-20629724_wall_reply73774')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73774"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73774"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73774"><span class="like_link" id="like_link-20629724_wall_reply73774" onclick="wall.like('-20629724_wall_reply73774', '2ca69c58d91255c3b0'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73774')" onmouseout="wall.likeOut('-20629724_wall_reply73774', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73763?reply=73774" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 22:25" time="1326306341">час назад</span></a> 
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73797" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73797')" onmouseout="wall.actsOut('-20629724_73797')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/v.olexienko">
+      <img src="http://cs9298.vk.com/u8603949/e_e79d317d.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73797" onclick="wall.markAsSpam('-20629724_73797', '7fa1bcf3bfaac03682')" onmouseover="wall.activeDeletePost('-20629724_73797', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73797')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/v.olexienko">Валерій Олексієнко</a>
+        <div class="wall_reply_text">круто )))</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73797', 'acf01ee6b3a7cf2eab'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73797')" onmouseout="wall.likeOut('-20629724_wall_reply73797')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73797"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73797"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73797"><span class="like_link" id="like_link-20629724_wall_reply73797" onclick="wall.like('-20629724_wall_reply73797', 'acf01ee6b3a7cf2eab'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73797')" onmouseout="wall.likeOut('-20629724_wall_reply73797', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73763?reply=73797" onclick="return nav.go(this, event)"><span class="rel_date rel_date_needs_update" abs_time="сегодня в 23:10" time="1326309004">23 минуты назад</span></a> 
+      </div>
+    </div>
+  </div>
+</div></div>
+  
+</div></div>
+    </div>
+  </div>
+</div><div id="post-20629724_73738" class="post all own" onmouseover="wall.postOver('-20629724_73738')" onmouseout="wall.postOut('-20629724_73738')" onclick="wall.postClick('-20629724_73738', event)">
+  <div class="post_table">
+    <div class="post_image">
+      <a class="post_image" href="/habr"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" width="50" height="50"/></a>
+      
+    </div>
+    <div class="post_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73738" onclick="wall.markAsSpam('-20629724_73738', '548ee01937283a23bc');" onmouseover="wall.activeDeletePost('-20629724_73738', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_73738')"></div>
+  </div>
+</div>
+      <div class="wall_text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <span class="explain"> &raquo; <a class="lnk" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fjavascript%2F136027%2F&h=da60b97f6ebd4c5397&post=-20629724_73738" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73738', {i: -1})"><span class="a">JavaScript / Backbone Boilerplate</span></a></span><div id="wpt-20629724_73738"><div class="wall_post_text">Компания Bocoup прославилась как разработчик «пуленепробиваемого» шаблона для разработки HTML5-сайтов HTML5 Boilerplate, и продолжает свою ударную деятельность...</div></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk-20629724_73738_-1" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fjavascript%2F136027%2F&h=da60b97f6ebd4c5397&post=-20629724_73738" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73738', {i: '-1'})">
     <b class="fl_l "></b>Ссылка
     <span class="a">habrahabr.ru</span>
   </a>
 </div></div>
-       <div class="like_wrap fl_r" onmouseover="wall.likeOver('-20629724_40777')" onmouseout="wall.likeOut('-20629724_40777')" onclick="wall.like('-20629724_40777', 'b1a332f7d908e99461'); event.cancelBubble = true;">
-  <span class="like_link fl_l" id="like_link-20629724_40777"></span>
-  <div class=" fl_l" id="like_icon-20629724_40777"></div>
-  <span class="like_count fl_l" id="like_count-20629724_40777">8</span>
-</div>
-       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
-  <small><a href="/wall-20629724_40777" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 12:39</span></a></small>
-</div>
-<div class="replies_wrap" id="replies_wrap-20629724_40777" style="display: none">
-  <div id="replies-20629724_40777"><input type="hidden" id="start_reply-20629724_40777" value=""/></div>
-  
-</div></div>
-     </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40751" class="post all own" onmouseover="wall.postOver('-20629724_40751')" onmouseout="wall.postOut('-20629724_40751')">
-  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-     <td class="image">
-       <a class="post_image" href="/habr" onclick="return nav.go(this, event)"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" /></a>
-       
-     </td>
-     <td class="info">
-       <div class="fl_r">
-  <div class="delete_post">
-    <div id="delete_post-20629724_40751" onclick="wall.markAsSpam('-20629724_40751', '2f7c8b8cff0bca2d98');" onmouseover="wall.activeDeletePost('-20629724_40751', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_40751')"></div>
+      <div class="post_like_wrap fl_r" onmouseover="wall.postLikeOver('-20629724_73738')" onmouseout="wall.postLikeOut('-20629724_73738')" onclick="wall.like('-20629724_73738', '5b91cc00a209c78f3f'); event.cancelBubble = true;">
+  <div class="post_like">
+    <span class="post_like_link fl_l" id="like_link-20629724_73738"></span>
+    <i class="post_like_icon  fl_l" id="like_icon-20629724_73738"></i>
+    <span class="post_like_count fl_l" id="like_count-20629724_73738">8</span>
   </div>
 </div>
-       <div class="text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <div class="wall_post_text">Вопросы безопасности в веб-технологиях / [Из песочницы] Эксплуатируемая уязвимость в почте <a href="/away.php?to=http%3A%2F%2FMail.ru&h=102ed92d3bd3b376f5" target="_blank" target="_blank">Mail.ru</a></div><div class="media_desc">
-  <a class="lnk" id="post_media_lnk-20629724_40751" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fweb_security%2F126740%2F&h=1af296de6e5b48c3ad" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_40751')">
+      <div class="replies"><div class="reply_link_wrap" id="wpe_bottom-20629724_73738">
+  <small><a href="/wall-20629724_73738" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 18:37</span></a></small>
+</div>
+<div class="replies_wrap clear" id="replies_wrap-20629724_73738" style="display: none">
+  <div id="replies-20629724_73738"><input type="hidden" id="start_reply-20629724_73738" value=""/></div>
+  
+</div></div>
+    </div>
+  </div>
+</div><div id="post-20629724_73722" class="post all own" onmouseover="wall.postOver('-20629724_73722')" onmouseout="wall.postOut('-20629724_73722')" onclick="wall.postClick('-20629724_73722', event)">
+  <div class="post_table">
+    <div class="post_image">
+      <a class="post_image" href="/habr"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" width="50" height="50"/></a>
+      
+    </div>
+    <div class="post_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73722" onclick="wall.markAsSpam('-20629724_73722', 'f27dc40d93ae936018');" onmouseover="wall.activeDeletePost('-20629724_73722', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_73722')"></div>
+  </div>
+</div>
+      <div class="wall_text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <span class="explain"> &raquo; <a class="lnk" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fcompany%2Fnomobile%2Fblog%2F136023%2F&h=6a6416402371de1622&post=-20629724_73722" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73722', {i: -1})"><span class="a">Блог компании Nomobile.Ru / CES 2012 // Huawei P1 и P1 S</span></a></span><div id="wpt-20629724_73722"><div class="wall_post_text">Китайцы заполоняют и порабощают, и скоро мы все там будем — это факт. Это видно не только по Lenovo, но и массе других брендов. Например, по Huawei, которые..</div></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk-20629724_73722_-1" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fcompany%2Fnomobile%2Fblog%2F136023%2F&h=6a6416402371de1622&post=-20629724_73722" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73722', {i: '-1'})">
     <b class="fl_l "></b>Ссылка
     <span class="a">habrahabr.ru</span>
   </a>
 </div></div>
-       <div class="like_wrap fl_r" onmouseover="wall.likeOver('-20629724_40751')" onmouseout="wall.likeOut('-20629724_40751')" onclick="wall.like('-20629724_40751', '17f14dab05c113854d'); event.cancelBubble = true;">
-  <span class="like_link fl_l" id="like_link-20629724_40751"></span>
-  <div class=" fl_l" id="like_icon-20629724_40751"></div>
-  <span class="like_count fl_l" id="like_count-20629724_40751">28</span>
-</div>
-       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
-  <small><a href="/wall-20629724_40751" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 9:29</span></a></small>
-</div>
-<div class="replies_wrap" id="replies_wrap-20629724_40751" style="">
-  <div id="replies-20629724_40751"><div id="post-20629724_40766" class="reply clear" onmouseover="wall.actsOver('-20629724_40766')" onmouseout="wall.actsOut('-20629724_40766')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/backdoor" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs10110.vk.com/u12846859/e_d2d3dd69.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/backdoor" onclick="return nav.go(this, event)">Сергей Мазур</a>
-          <div class="wall_reply_text">почему-то не удивлен</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40766"><a onclick="wall.markAsSpam('-20629724_40766', 'fe2900cc074f2417cf');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40751?reply=40766" onclick="return nav.go(this, event)">сегодня в 11:45</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40800" class="reply clear" onmouseover="wall.actsOver('-20629724_40800')" onmouseout="wall.actsOut('-20629724_40800')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/id96618018" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs11149.vk.com/u96618018/e_42b9026a.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/id96618018" onclick="return nav.go(this, event)">Максим Мейтарджян</a>
-          <div class="wall_reply_text">я её эксплуатировал.))</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40800"><a onclick="wall.markAsSpam('-20629724_40800', '04f4f3945aa63679a2');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40751?reply=40800" onclick="return nav.go(this, event)">сегодня в 16:55</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><input type="hidden" id="start_reply-20629724_40751" value="40766"/></div>
-  
-</div></div>
-     </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40735" class="post all own" onmouseover="wall.postOver('-20629724_40735')" onmouseout="wall.postOut('-20629724_40735')">
-  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-     <td class="image">
-       <a class="post_image" href="/habr" onclick="return nav.go(this, event)"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" /></a>
-       
-     </td>
-     <td class="info">
-       <div class="fl_r">
-  <div class="delete_post">
-    <div id="delete_post-20629724_40735" onclick="wall.markAsSpam('-20629724_40735', '5ea088a89e5d4c7dca');" onmouseover="wall.activeDeletePost('-20629724_40735', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_40735')"></div>
+      <div class="post_like_wrap fl_r" onmouseover="wall.postLikeOver('-20629724_73722')" onmouseout="wall.postLikeOut('-20629724_73722')" onclick="wall.like('-20629724_73722', 'c8db9f02bf3a12c225'); event.cancelBubble = true;">
+  <div class="post_like">
+    <span class="post_like_link fl_l" id="like_link-20629724_73722"></span>
+    <i class="post_like_icon  fl_l" id="like_icon-20629724_73722"></i>
+    <span class="post_like_count fl_l" id="like_count-20629724_73722">29</span>
   </div>
 </div>
-       <div class="text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <div class="wall_post_text">Game Development / Написание макроса-бота для браузерной игры</div><div class="post_media" ><a class="photo" onclick="return showPhoto('-20629724_266196873', '37e91c0d95c2eaecc4', {temp: {x_src: &quot;http://cs4630.vk.com/u93388/-5/x_14826070.jpg&quot;}}, event)"><img src="http://cs4630.vk.com/u93388/-5/s_80e51eb0.jpg" /></a></div><div class="media_desc">
-  <a class="lnk" id="post_media_lnk-20629724_40735" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fgdev%2F126739%2F&h=bc704ed57ed822a419" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_40735')">
+      <div class="replies"><div class="reply_link_wrap" id="wpe_bottom-20629724_73722">
+  <small><a href="/wall-20629724_73722" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 17:13</span></a></small>
+</div>
+<div class="replies_wrap clear" id="replies_wrap-20629724_73722" style="">
+  <div id="replies-20629724_73722"><a class="wr_header" onclick="return wall.showReplies('-20629724_73722', false, false, event);" offs="3/4" href="/wall-20629724_73722?offset=last&f=replies">
+  <div class="wrh_text" id="wrh_text-20629724_73722">Показать все 4 комментария</div>
+  <div class="progress wrh_prg" id="wrh_prg-20629724_73722"></div>
+</a><input type="hidden" id="start_reply-20629724_73722" value="73733"/><div id="post-20629724_73733" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73733')" onmouseout="wall.actsOut('-20629724_73733')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/uzumi">
+      <img src="http://cs10603.vk.com/u102672564/e_2076e4a9.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73733" onclick="wall.markAsSpam('-20629724_73733', '275ff7bb6cc7c9da58')" onmouseover="wall.activeDeletePost('-20629724_73733', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73733')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/uzumi">Тамерлан Таов</a>
+        <div class="wall_reply_text">Да уж. О Meizu MX, за которым выстраивались гигантские очереди китайцев, ни сном ни духом, а об этом накатали... Объем памяти и частота процессора сыграли решающую роль?)</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73733', '042fcefe7357d50f0f'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73733')" onmouseout="wall.likeOut('-20629724_wall_reply73733')">
+  <i class=" fl_l" id="like_icon-20629724_wall_reply73733"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73733">2</span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73733"><span class="like_link" id="like_link-20629724_wall_reply73733" onclick="wall.like('-20629724_wall_reply73733', '042fcefe7357d50f0f'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73733')" onmouseout="wall.likeOut('-20629724_wall_reply73733', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73722?reply=73733" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 17:36</span></a> 
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73734" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73734')" onmouseout="wall.actsOut('-20629724_73734')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/id295499">
+      <img src="http://cs4874.vk.com/u295499/e_cda074df.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73734" onclick="wall.markAsSpam('-20629724_73734', 'ae43d56afe6f391d34')" onmouseover="wall.activeDeletePost('-20629724_73734', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73734')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/id295499">Андрей none</a>
+        <div class="wall_reply_text">процессор там уже лучше чем в моем компе ) + карта памяти, usb host, питание от адаптера - учитывая китайскую стоимость (не этого девайса, а вообще), скоро будет отличный заменитель Raspberry Pi</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73734', '3397c5da27001a43b4'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73734')" onmouseout="wall.likeOut('-20629724_wall_reply73734')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73734"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73734"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73734"><span class="like_link" id="like_link-20629724_wall_reply73734" onclick="wall.like('-20629724_wall_reply73734', '3397c5da27001a43b4'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73734')" onmouseout="wall.likeOut('-20629724_wall_reply73734', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73722?reply=73734" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 17:38</span></a> 
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73739" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73739')" onmouseout="wall.actsOut('-20629724_73739')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/id156852815">
+      <img src="http://cs303907.vk.com/u156852815/e_40ae828d.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73739" onclick="wall.markAsSpam('-20629724_73739', 'a04ed8ac3ca359f445')" onmouseover="wall.activeDeletePost('-20629724_73739', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73739')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/id156852815">Шелдон Купер</a>
+        <div class="wall_reply_text">Кодекс Братана от Барни Стинсона только здесь <a href="http://vkontakte.ru/public33399633">http://vkontakte.ru/public33399633</a></div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73739', 'c3423fade0257ca14a'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73739')" onmouseout="wall.likeOut('-20629724_wall_reply73739')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73739"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73739"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73739"><span class="like_link" id="like_link-20629724_wall_reply73739" onclick="wall.like('-20629724_wall_reply73739', 'c3423fade0257ca14a'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73739')" onmouseout="wall.likeOut('-20629724_wall_reply73739', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73722?reply=73739" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 18:57</span></a> 
+      </div>
+    </div>
+  </div>
+</div></div>
+  
+</div></div>
+    </div>
+  </div>
+</div><div id="post-20629724_73714" class="post all own" onmouseover="wall.postOver('-20629724_73714')" onmouseout="wall.postOut('-20629724_73714')" onclick="wall.postClick('-20629724_73714', event)">
+  <div class="post_table">
+    <div class="post_image">
+      <a class="post_image" href="/habr"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" width="50" height="50"/></a>
+      
+    </div>
+    <div class="post_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73714" onclick="wall.markAsSpam('-20629724_73714', '0017e633269ca53bd3');" onmouseover="wall.activeDeletePost('-20629724_73714', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_73714')"></div>
+  </div>
+</div>
+      <div class="wall_text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <span class="explain"> &raquo; <a class="lnk" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Finfosecurity%2F136014%2F&h=1d5cfd8b61983ae719&post=-20629724_73714" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73714', {i: -1})"><span class="a">Информационная безопасность / О безопасности и адекватности поддержки</span></a></span><div id="wpt-20629724_73714"><div class="wall_post_text">Если честно, не знаю в какую тему отнести этот пост, но мне кажется, что сюда. Забегая вперед, скажу, что пишу пост с чистой совестью, т.к. уведомлял..</div><div class="post_media clear_fix post_thumbs_num1" ><div class="page_media_thumb page_media_photo page_media_thumb1 fl_l"><a class="photo" onclick="return showPhoto('-20629724_275580794', 'wall-20629724_73714', {temp: {x_src: &quot;http://cs6078.vk.com/u93388/-5/x_01e0a292.jpg&quot;}}, event)"><img src="http://cs6078.vk.com/u93388/-5/x_01e0a292.jpg" /></a></div></div></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk-20629724_73714_-1" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Finfosecurity%2F136014%2F&h=1d5cfd8b61983ae719&post=-20629724_73714" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73714', {i: '-1'})">
     <b class="fl_l "></b>Ссылка
     <span class="a">habrahabr.ru</span>
   </a>
 </div></div>
-       <div class="like_wrap fl_r" onmouseover="wall.likeOver('-20629724_40735')" onmouseout="wall.likeOut('-20629724_40735')" onclick="wall.like('-20629724_40735', 'f61c340ebf504b7a88'); event.cancelBubble = true;">
-  <span class="like_link fl_l" id="like_link-20629724_40735"></span>
-  <div class=" fl_l" id="like_icon-20629724_40735"></div>
-  <span class="like_count fl_l" id="like_count-20629724_40735">9</span>
-</div>
-       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
-  <small><a href="/wall-20629724_40735" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 7:29</span></a></small>
-</div>
-<div class="replies_wrap" id="replies_wrap-20629724_40735" style="display: none">
-  <div id="replies-20629724_40735"><input type="hidden" id="start_reply-20629724_40735" value=""/></div>
-  
-</div></div>
-     </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40595" class="post all own" onmouseover="wall.postOver('-20629724_40595')" onmouseout="wall.postOut('-20629724_40595')">
-  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-     <td class="image">
-       <a class="post_image" href="/habr" onclick="return nav.go(this, event)"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" /></a>
-       
-     </td>
-     <td class="info">
-       <div class="fl_r">
-  <div class="delete_post">
-    <div id="delete_post-20629724_40595" onclick="wall.markAsSpam('-20629724_40595', '8b6c7ef9db4c7a5182');" onmouseover="wall.activeDeletePost('-20629724_40595', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_40595')"></div>
+      <div class="post_like_wrap fl_r" onmouseover="wall.postLikeOver('-20629724_73714')" onmouseout="wall.postLikeOut('-20629724_73714')" onclick="wall.like('-20629724_73714', '005a7495eff290cf88'); event.cancelBubble = true;">
+  <div class="post_like">
+    <span class="post_like_link fl_l" id="like_link-20629724_73714"></span>
+    <i class="post_like_icon  fl_l" id="like_icon-20629724_73714"></i>
+    <span class="post_like_count fl_l" id="like_count-20629724_73714">9</span>
   </div>
 </div>
-       <div class="text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <div class="wall_post_text">PHP / [Перевод] Если бы PHP был британским</div><div class="post_media" ><a class="photo" onclick="return showPhoto('-20629724_266195537', 'd36728999816f30170', {temp: {x_src: &quot;http://cs4652.vk.com/u93388/-5/x_8c3b4e23.jpg&quot;}}, event)"><img src="http://cs4652.vk.com/u93388/-5/s_78a03dc2.jpg" /></a></div><div class="media_desc">
-  <a class="lnk" id="post_media_lnk-20629724_40595" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fphp%2F126737%2F&h=f188f09fff4c22fc7a" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_40595')">
+      <div class="replies"><div class="reply_link_wrap" id="wpe_bottom-20629724_73714">
+  <small><a href="/wall-20629724_73714" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 16:37</span></a></small>
+</div>
+<div class="replies_wrap clear" id="replies_wrap-20629724_73714" style="">
+  <div id="replies-20629724_73714"><a class="wr_header" onclick="return wall.showReplies('-20629724_73714', false, false, event);" offs="3/5" href="/wall-20629724_73714?offset=last&f=replies">
+  <div class="wrh_text" id="wrh_text-20629724_73714">Показать все 5 комментариев</div>
+  <div class="progress wrh_prg" id="wrh_prg-20629724_73714"></div>
+</a><input type="hidden" id="start_reply-20629724_73714" value="73719"/><div id="post-20629724_73719" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73719')" onmouseout="wall.actsOut('-20629724_73719')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/odmen">
+      <img src="http://cs10064.vk.com/u71408472/e_de2bde03.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73719" onclick="wall.markAsSpam('-20629724_73719', 'aba9cb8d05f26ddee2')" onmouseover="wall.activeDeletePost('-20629724_73719', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73719')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/odmen">Максим Омаров</a>
+        <div class="wall_reply_text">Я властолюб еще тот))</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73719', '4310390abd7555ecae'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73719')" onmouseout="wall.likeOut('-20629724_wall_reply73719')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73719"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73719"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73719"><span class="like_link" id="like_link-20629724_wall_reply73719" onclick="wall.like('-20629724_wall_reply73719', '4310390abd7555ecae'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73719')" onmouseout="wall.likeOut('-20629724_wall_reply73719', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73714?reply=73719" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 16:53</span></a> 
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73732" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73732')" onmouseout="wall.actsOut('-20629724_73732')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/armenium">
+      <img src="http://cs593.vk.com/u2944308/e_1d96faf5.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73732" onclick="wall.markAsSpam('-20629724_73732', '09757038374b1add78')" onmouseover="wall.activeDeletePost('-20629724_73732', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73732')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/armenium">Армен Ходжоян</a>
+        <div class="wall_reply_text">wetwetert</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73732', '8253709de10bc2bf9f'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73732')" onmouseout="wall.likeOut('-20629724_wall_reply73732')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73732"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73732"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73732"><span class="like_link" id="like_link-20629724_wall_reply73732" onclick="wall.like('-20629724_wall_reply73732', '8253709de10bc2bf9f'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73732')" onmouseout="wall.likeOut('-20629724_wall_reply73732', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73714?reply=73732" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 17:31</span></a> 
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73740" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73740')" onmouseout="wall.actsOut('-20629724_73740')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/id156852815">
+      <img src="http://cs303907.vk.com/u156852815/e_40ae828d.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73740" onclick="wall.markAsSpam('-20629724_73740', 'abd87a5b77b8ec670c')" onmouseover="wall.activeDeletePost('-20629724_73740', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73740')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/id156852815">Шелдон Купер</a>
+        <div class="wall_reply_text">Кодекс Братана от Барни Стинсона только здесь <a href="http://vkontakte.ru/public33399633">http://vkontakte.ru/public33399633</a></div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73740', 'dac654295dd3386a14'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73740')" onmouseout="wall.likeOut('-20629724_wall_reply73740')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73740"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73740"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73740"><span class="like_link" id="like_link-20629724_wall_reply73740" onclick="wall.like('-20629724_wall_reply73740', 'dac654295dd3386a14'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73740')" onmouseout="wall.likeOut('-20629724_wall_reply73740', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73714?reply=73740" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 18:58</span></a> 
+      </div>
+    </div>
+  </div>
+</div></div>
+  
+</div></div>
+    </div>
+  </div>
+</div><div id="post-20629724_73708" class="post all own" onmouseover="wall.postOver('-20629724_73708')" onmouseout="wall.postOut('-20629724_73708')" onclick="wall.postClick('-20629724_73708', event)">
+  <div class="post_table">
+    <div class="post_image">
+      <a class="post_image" href="/habr"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" width="50" height="50"/></a>
+      
+    </div>
+    <div class="post_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73708" onclick="wall.markAsSpam('-20629724_73708', 'b136bff4925f4698fa');" onmouseover="wall.activeDeletePost('-20629724_73708', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_73708')"></div>
+  </div>
+</div>
+      <div class="wall_text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <span class="explain"> &raquo; <a class="lnk" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fsocial_networks%2F136013%2F&h=eb682d224e177c8918&post=-20629724_73708" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73708', {i: -1})"><span class="a">Социальные сети / Сайт Reddit закрывается 18 января с 8:00 до 20:00 в знак протеста..</span></a></span><div id="wpt-20629724_73708"><div class="wall_post_text">Социальный новостной сайт Reddit продолжает войну против SOPA, в которой, как ни удивительно, одерживает победу за победой. Организованный бойкот против..</div></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk-20629724_73708_-1" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fsocial_networks%2F136013%2F&h=eb682d224e177c8918&post=-20629724_73708" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73708', {i: '-1'})">
     <b class="fl_l "></b>Ссылка
     <span class="a">habrahabr.ru</span>
   </a>
 </div></div>
-       <div class="like_wrap fl_r" onmouseover="wall.likeOver('-20629724_40595')" onmouseout="wall.likeOut('-20629724_40595')" onclick="wall.like('-20629724_40595', '4bd54f2d87439486f3'); event.cancelBubble = true;">
-  <span class="like_link fl_l" id="like_link-20629724_40595"></span>
-  <div class=" fl_l" id="like_icon-20629724_40595"></div>
-  <span class="like_count fl_l" id="like_count-20629724_40595">11</span>
-</div>
-       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
-  <small><a href="/wall-20629724_40595" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 3:19</span></a></small>
-</div>
-<div class="replies_wrap" id="replies_wrap-20629724_40595" style="">
-  <div id="replies-20629724_40595"><a class="wr_header" onclick="return wall.showReplies('-20629724_40595', false, false, event);" offs="3/9" href="/wall-20629724_40595?offset=last&f=replies">
-  <div class="wrh_text" id="wrh_text-20629724_40595">Показать все 9 комментариев</div>
-  <div class="progress wrh_prg" id="wrh_prg-20629724_40595"></div>
-</a><div id="post-20629724_40772" class="reply clear" onmouseover="wall.actsOver('-20629724_40772')" onmouseout="wall.actsOut('-20629724_40772')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/mobyman" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs11288.vk.com/u4072644/e_a6a1320e.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/mobyman" onclick="return nav.go(this, event)">Илья Егоров</a>
-          <div class="wall_reply_text"><a class="wall_reply_greeting" href="/daulbaev" onclick="return wall.showReply('-20629724_40595', '-20629724_40768')">Талгат</a>, <a href="/away.php?to=http%3A%2F%2Fvm88.ru%2Fhabr.htm&h=556de6692f7f25713d" target="_blank" target="_blank">http://vm88.ru/habr.htm</a> а это в чем?&#33;</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40772"><a onclick="wall.markAsSpam('-20629724_40772', 'a3afbd9208aad22707');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40595?reply=40772" onclick="return nav.go(this, event)">сегодня в 12:05</a> <a href="/daulbaev" class="reply_to" onclick="return wall.showReply('-20629724_40595', '-20629724_40768')">Талгату</a>
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40781" class="reply clear" onmouseover="wall.actsOver('-20629724_40781')" onmouseout="wall.actsOut('-20629724_40781')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/ulmanss" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs10733.vk.com/u5425250/e_0f98aba2.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/ulmanss" onclick="return nav.go(this, event)">Sergey Ulman</a>
-          <div class="wall_reply_text">это htm xDDDD</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40781"><a onclick="wall.markAsSpam('-20629724_40781', 'd53699e38f5a3f0bd9');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40595?reply=40781" onclick="return nav.go(this, event)">сегодня в 13:03</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40788" class="reply clear" onmouseover="wall.actsOver('-20629724_40788')" onmouseout="wall.actsOut('-20629724_40788')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/varg242" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs10589.vk.com/u103935777/e_909861e1.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/varg242" onclick="return nav.go(this, event)">Роман Апрельский</a>
-          <div class="wall_reply_text">Держите вот: <a href="/away.php?to=http%3A%2F%2Fbit.ly%2FnGANCU&h=4ec19e130a20d9fbb7" target="_blank" target="_blank">http://bit.ly/nGANCU</a></div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40788"><a onclick="wall.markAsSpam('-20629724_40788', '15ef5c1be57122dac9');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40595?reply=40788" onclick="return nav.go(this, event)">сегодня в 15:02</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><input type="hidden" id="start_reply-20629724_40595" value="40772"/></div>
-  
-</div></div>
-     </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40587" class="post all own" onmouseover="wall.postOver('-20629724_40587')" onmouseout="wall.postOut('-20629724_40587')">
-  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-     <td class="image">
-       <a class="post_image" href="/habr" onclick="return nav.go(this, event)"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" /></a>
-       
-     </td>
-     <td class="info">
-       <div class="fl_r">
-  <div class="delete_post">
-    <div id="delete_post-20629724_40587" onclick="wall.markAsSpam('-20629724_40587', 'a480069dfdf9ce2ea5');" onmouseover="wall.activeDeletePost('-20629724_40587', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_40587')"></div>
+      <div class="post_like_wrap fl_r" onmouseover="wall.postLikeOver('-20629724_73708')" onmouseout="wall.postLikeOut('-20629724_73708')" onclick="wall.like('-20629724_73708', '21b153ddf536bcbc9e'); event.cancelBubble = true;">
+  <div class="post_like">
+    <span class="post_like_link fl_l" id="like_link-20629724_73708"></span>
+    <i class="post_like_icon  fl_l" id="like_icon-20629724_73708"></i>
+    <span class="post_like_count fl_l" id="like_count-20629724_73708">7</span>
   </div>
 </div>
-       <div class="text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <div class="wall_post_text">Облачные вычисления / Что делать если в Ваш Amazon EC2 instance ударила молния?</div><div class="post_media" ><a class="photo" onclick="return showPhoto('-20629724_266193829', 'ff122b5118728e749a', {temp: {x_src: &quot;http://cs4649.vk.com/u93388/-5/x_0d1da6d4.jpg&quot;}}, event)"><img src="http://cs4649.vk.com/u93388/-5/s_ea118a95.jpg" /></a></div><div class="media_desc">
-  <a class="lnk" id="post_media_lnk-20629724_40587" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fcloud_computing%2F126729%2F&h=7da3d60b8428d3e81d" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_40587')">
+      <div class="replies"><div class="reply_link_wrap" id="wpe_bottom-20629724_73708">
+  <small><a href="/wall-20629724_73708" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 15:37</span></a></small>
+</div>
+<div class="replies_wrap clear" id="replies_wrap-20629724_73708" style="">
+  <div id="replies-20629724_73708"><input type="hidden" id="start_reply-20629724_73708" value="73712"/><div id="post-20629724_73712" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73712')" onmouseout="wall.actsOut('-20629724_73712')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/alterra07">
+      <img src="http://cs10490.vk.com/u26137831/e_2a013016.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73712" onclick="wall.markAsSpam('-20629724_73712', 'c75a1cc06e3c7305e7')" onmouseover="wall.activeDeletePost('-20629724_73712', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73712')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/alterra07">Алим Глашев</a>
+        <div class="wall_reply_text">у этого угэ 2 млрд просмотров, не хера себе</div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73712', 'c285be0201e428ce08'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73712')" onmouseout="wall.likeOut('-20629724_wall_reply73712')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73712"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73712"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73712"><span class="like_link" id="like_link-20629724_wall_reply73712" onclick="wall.like('-20629724_wall_reply73712', 'c285be0201e428ce08'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73712')" onmouseout="wall.likeOut('-20629724_wall_reply73712', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73708?reply=73712" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 16:01</span></a> 
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73741" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73741')" onmouseout="wall.actsOut('-20629724_73741')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/id156852815">
+      <img src="http://cs303907.vk.com/u156852815/e_40ae828d.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73741" onclick="wall.markAsSpam('-20629724_73741', '23e1fe19110ee84ccc')" onmouseover="wall.activeDeletePost('-20629724_73741', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73741')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/id156852815">Шелдон Купер</a>
+        <div class="wall_reply_text">Кодекс Братана от Барни Стинсона только здесь <a href="http://vkontakte.ru/public33399633">http://vkontakte.ru/public33399633</a></div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73741', '6cfd25646ea37cbdde'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73741')" onmouseout="wall.likeOut('-20629724_wall_reply73741')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73741"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73741"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73741"><span class="like_link" id="like_link-20629724_wall_reply73741" onclick="wall.like('-20629724_wall_reply73741', '6cfd25646ea37cbdde'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73741')" onmouseout="wall.likeOut('-20629724_wall_reply73741', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73708?reply=73741" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 18:58</span></a> 
+      </div>
+    </div>
+  </div>
+</div></div>
+  
+</div></div>
+    </div>
+  </div>
+</div><div id="post-20629724_73695" class="post all own" onmouseover="wall.postOver('-20629724_73695')" onmouseout="wall.postOut('-20629724_73695')" onclick="wall.postClick('-20629724_73695', event)">
+  <div class="post_table">
+    <div class="post_image">
+      <a class="post_image" href="/habr"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" width="50" height="50"/></a>
+      
+    </div>
+    <div class="post_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73695" onclick="wall.markAsSpam('-20629724_73695', '067d07f5bb4d1bc0a4');" onmouseover="wall.activeDeletePost('-20629724_73695', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_73695')"></div>
+  </div>
+</div>
+      <div class="wall_text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <span class="explain"> &raquo; <a class="lnk" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fcompany%2Fbadoo%2Fblog%2F135966%2F&h=853b8984e94497a39c&post=-20629724_73695" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73695', {i: -1})"><span class="a">Блог компании Badoo / Clustered index в InnoDB и оптимизация запросов</span></a></span><div id="wpt-20629724_73695"><div class="wall_post_text">В последнее время в сети часто пишут про clustered index в InnoDB и таблицах MySQL, но, несмотря на это, на практике используют довольно редко. В данной..</div><div class="post_media clear_fix post_thumbs_num1" ><div class="page_media_thumb page_media_photo page_media_thumb1 fl_l"><a class="photo" onclick="return showPhoto('-20629724_275572617', 'wall-20629724_73695', {temp: {x_src: &quot;http://cs6034.vk.com/u93388/-5/x_515420ae.jpg&quot;}}, event)"><img src="http://cs6034.vk.com/u93388/-5/x_515420ae.jpg" /></a></div></div></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk-20629724_73695_-1" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fcompany%2Fbadoo%2Fblog%2F135966%2F&h=853b8984e94497a39c&post=-20629724_73695" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73695', {i: '-1'})">
     <b class="fl_l "></b>Ссылка
     <span class="a">habrahabr.ru</span>
   </a>
 </div></div>
-       <div class="like_wrap fl_r" onmouseover="wall.likeOver('-20629724_40587')" onmouseout="wall.likeOut('-20629724_40587')" onclick="wall.like('-20629724_40587', '559864b5915c584608'); event.cancelBubble = true;">
-  <span class="like_link fl_l" id="like_link-20629724_40587"></span>
-  <div class=" fl_l" id="like_icon-20629724_40587"></div>
-  <span class="like_count fl_l" id="like_count-20629724_40587">3</span>
-</div>
-       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
-  <small><a href="/wall-20629724_40587" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 1:39</span></a></small>
-</div>
-<div class="replies_wrap" id="replies_wrap-20629724_40587" style="">
-  <div id="replies-20629724_40587"><div id="post-20629724_40590" class="reply clear" onmouseover="wall.actsOver('-20629724_40590')" onmouseout="wall.actsOut('-20629724_40590')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/yesimbeetlee" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs11216.vk.com/u1055049/e_b6ae01db.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/yesimbeetlee" onclick="return nav.go(this, event)">Денис Жук</a>
-          <div class="wall_reply_text">нихуя не понял((</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40590"><a onclick="wall.markAsSpam('-20629724_40590', 'e8c37290508d0c3cde');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40587?reply=40590" onclick="return nav.go(this, event)">сегодня в 1:54</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40591" class="reply clear" onmouseover="wall.actsOver('-20629724_40591')" onmouseout="wall.actsOut('-20629724_40591')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/ak.twister" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs5436.vk.com/u2432127/e_5c3ab9fa.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/ak.twister" onclick="return nav.go(this, event)">Александр Сергеевич</a>
-          <div class="wall_reply_text">это случается</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40591"><a onclick="wall.markAsSpam('-20629724_40591', '48da9edcb3b6a900fa');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40587?reply=40591" onclick="return nav.go(this, event)">сегодня в 1:59</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><input type="hidden" id="start_reply-20629724_40587" value="40590"/></div>
-  
-</div></div>
-     </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40524" class="post all own" onmouseover="wall.postOver('-20629724_40524')" onmouseout="wall.postOut('-20629724_40524')">
-  <table class="post_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-     <td class="image">
-       <a class="post_image" href="/habr" onclick="return nav.go(this, event)"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" /></a>
-       
-     </td>
-     <td class="info">
-       <div class="fl_r">
-  <div class="delete_post">
-    <div id="delete_post-20629724_40524" onclick="wall.markAsSpam('-20629724_40524', '316e9a6ab36fa513c0');" onmouseover="wall.activeDeletePost('-20629724_40524', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_40524')"></div>
+      <div class="post_like_wrap fl_r" onmouseover="wall.postLikeOver('-20629724_73695')" onmouseout="wall.postLikeOut('-20629724_73695')" onclick="wall.like('-20629724_73695', '91aa09502033dabf69'); event.cancelBubble = true;">
+  <div class="post_like">
+    <span class="post_like_link fl_l" id="like_link-20629724_73695"></span>
+    <i class="post_like_icon  fl_l" id="like_icon-20629724_73695"></i>
+    <span class="post_like_count fl_l" id="like_count-20629724_73695">9</span>
   </div>
 </div>
-       <div class="text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <div class="wall_post_text">Учебный процесс в IT / 90% людей не знают про Ctrl+F</div><div class="media_desc">
-  <a class="lnk" id="post_media_lnk-20629724_40524" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2Fstudy%2F126731%2F&h=171fc89a1cfc8489f9" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_40524')">
+      <div class="replies"><div class="reply_link_wrap" id="wpe_bottom-20629724_73695">
+  <small><a href="/wall-20629724_73695" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 13:49</span></a></small>
+</div>
+<div class="replies_wrap clear" id="replies_wrap-20629724_73695" style="">
+  <div id="replies-20629724_73695"><input type="hidden" id="start_reply-20629724_73695" value="73700"/><div id="post-20629724_73700" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73700')" onmouseout="wall.actsOut('-20629724_73700')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/yadrishnikov_yaroslav">
+      <img src="http://cs5565.vk.com/u4863838/e_b3f802af.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73700" onclick="wall.markAsSpam('-20629724_73700', 'fa59c744038a87b20f')" onmouseover="wall.activeDeletePost('-20629724_73700', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73700')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/yadrishnikov_yaroslav">Ярослав Ядрышников</a>
+        <div class="wall_reply_text"><a href="/away.php?to=http%3A%2F%2Falltheragefaces.com%2Fimg%2Ffaces%2Flarge%2Ffuck-yeah-clean-l.png&h=8f7c81b63f213f08d5" target="_blank" target="_blank">http://alltheragefaces.com/img/faces/large/fuck-yeah...</a></div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73700', 'bb80fbc51c3474bfdf'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73700')" onmouseout="wall.likeOut('-20629724_wall_reply73700')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73700"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73700"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73700"><span class="like_link" id="like_link-20629724_wall_reply73700" onclick="wall.like('-20629724_wall_reply73700', 'bb80fbc51c3474bfdf'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73700')" onmouseout="wall.likeOut('-20629724_wall_reply73700', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73695?reply=73700" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 13:56</span></a> 
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73707" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73707')" onmouseout="wall.actsOut('-20629724_73707')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/id138270002">
+      <img src="http://cs5705.vk.com/u138270002/e_62a2f994.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73707" onclick="wall.markAsSpam('-20629724_73707', '4a71267c48f99537f5')" onmouseover="wall.activeDeletePost('-20629724_73707', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73707')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/id138270002">Санёк Осипкин</a>
+        <div class="wall_reply_text">вступайте тут супер ведётся продажа и обмен фингеров не пожилеете<br><a href="http://vkontakte.ru/club33931353">http://vkontakte.ru/club33931353</a></div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73707', '73222ac04345639ffb'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73707')" onmouseout="wall.likeOut('-20629724_wall_reply73707')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73707"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73707"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73707"><span class="like_link" id="like_link-20629724_wall_reply73707" onclick="wall.like('-20629724_wall_reply73707', '73222ac04345639ffb'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73707')" onmouseout="wall.likeOut('-20629724_wall_reply73707', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73695?reply=73707" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 15:08</span></a> 
+      </div>
+    </div>
+  </div>
+</div><div id="post-20629724_73742" class="reply reply_dived clear " onmouseover="wall.actsOver('-20629724_73742')" onmouseout="wall.actsOut('-20629724_73742')" >
+  <div class="reply_table">
+    <a class="reply_image" href="/id156852815">
+      <img src="http://cs303907.vk.com/u156852815/e_40ae828d.jpg" width="50" height="50" class="reply_image" />
+    </a>
+    <div class="reply_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73742" onclick="wall.markAsSpam('-20629724_73742', '0904f1b0845ad4c842')" onmouseover="wall.activeDeletePost('-20629724_73742', 'Это спам')" onmouseout="wall.deactiveDeletePost('-20629724_73742')"></div>
+  </div>
+</div>
+      <div class="reply_text">
+        <a class="author" href="/id156852815">Шелдон Купер</a>
+        <div class="wall_reply_text">Кодекс Братана от Барни Стинсона только здесь <a href="http://vkontakte.ru/public33399633">http://vkontakte.ru/public33399633</a></div>
+        
+      </div>
+      <div class="info_footer">
+        <div class="like_wrap fl_r" onclick="wall.like('-20629724_wall_reply73742', 'f8685bb5313c7777a2'); event.cancelBubble = true;" onmouseover="wall.likeOver('-20629724_wall_reply73742')" onmouseout="wall.likeOut('-20629724_wall_reply73742')">
+  <i class="no_likes fl_l" id="like_icon-20629724_wall_reply73742"></i>
+  <span class="like_count fl_l" id="like_count-20629724_wall_reply73742"></span>
+</div>
+        <span class="fl_r reply_actions" id="actions-20629724_73742"><span class="like_link" id="like_link-20629724_wall_reply73742" onclick="wall.like('-20629724_wall_reply73742', 'f8685bb5313c7777a2'); event.cancelBubble = true;"  onmouseover="wall.likeOver('-20629724_wall_reply73742')" onmouseout="wall.likeOut('-20629724_wall_reply73742', {tthide: 1})"></span></span>
+        <a class="wd_lnk" href="/wall-20629724_73695?reply=73742" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 18:58</span></a> 
+      </div>
+    </div>
+  </div>
+</div></div>
+  
+</div></div>
+    </div>
+  </div>
+</div><div id="post-20629724_73692" class="post all own" onmouseover="wall.postOver('-20629724_73692')" onmouseout="wall.postOut('-20629724_73692')" onclick="wall.postClick('-20629724_73692', event)">
+  <div class="post_table">
+    <div class="post_image">
+      <a class="post_image" href="/habr"><img src="http://cs11159.vk.com/g20629724/e_443fb3be.jpg" width="50" height="50"/></a>
+      
+    </div>
+    <div class="post_info">
+      <div class="fl_r delete_post_wrap">
+  <div class="delete_post">
+    <div id="delete_post-20629724_73692" onclick="wall.markAsSpam('-20629724_73692', '028cbab29fa7271e32');" onmouseover="wall.activeDeletePost('-20629724_73692', 'Отметить как спам')" onmouseout="wall.deactiveDeletePost('-20629724_73692')"></div>
+  </div>
+</div>
+      <div class="wall_text"><a class="author" href="/habr" onclick="return nav.go(this, event)">Хабрахабр</a> <span class="explain"> &raquo; <a class="lnk" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2FHaskell%2F136007%2F&h=a641861434c12f8fdb&post=-20629724_73692" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73692', {i: -1})"><span class="a">Haskell / Фреймворк для генерации рекурсивных сказок на языке Haskell</span></a></span><div id="wpt-20629724_73692"><div class="wall_post_text">Данная статья в какой-то мере является переработкой и улучшением эссе № 14 из моей книги «14 занимательных эссе о языке Haskell и функциональном программировании»...</div></div><div class="media_desc">
+  <a class="lnk" id="post_media_lnk-20629724_73692_-1" href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fblogs%2FHaskell%2F136007%2F&h=a641861434c12f8fdb&post=-20629724_73692" target="_blank" onmouseover="wall.postTooltip(this, '-20629724_73692', {i: '-1'})">
     <b class="fl_l "></b>Ссылка
     <span class="a">habrahabr.ru</span>
   </a>
 </div></div>
-       <div class="like_wrap fl_r" onmouseover="wall.likeOver('-20629724_40524')" onmouseout="wall.likeOut('-20629724_40524')" onclick="wall.like('-20629724_40524', '6dffb00b9c954500bd'); event.cancelBubble = true;">
-  <span class="like_link fl_l" id="like_link-20629724_40524"></span>
-  <div class=" fl_l" id="like_icon-20629724_40524"></div>
-  <span class="like_count fl_l" id="like_count-20629724_40524">72</span>
+      <div class="post_like_wrap fl_r" onmouseover="wall.postLikeOver('-20629724_73692')" onmouseout="wall.postLikeOut('-20629724_73692')" onclick="wall.like('-20629724_73692', 'f94c1f2476b42d1536'); event.cancelBubble = true;">
+  <div class="post_like">
+    <span class="post_like_link fl_l" id="like_link-20629724_73692"></span>
+    <i class="post_like_icon  fl_l" id="like_icon-20629724_73692"></i>
+    <span class="post_like_count fl_l" id="like_count-20629724_73692">5</span>
+  </div>
 </div>
-       <div class="replies" onclick="event.cancelBubble = true;"><div class="reply_link_wrap">
-  <small><a href="/wall-20629724_40524" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 0:29</span></a></small>
+      <div class="replies"><div class="reply_link_wrap" id="wpe_bottom-20629724_73692">
+  <small><a href="/wall-20629724_73692" onclick="return nav.go(this, event)"><span class="rel_date">сегодня в 13:01</span></a></small>
 </div>
-<div class="replies_wrap" id="replies_wrap-20629724_40524" style="">
-  <div id="replies-20629724_40524"><a class="wr_header" onclick="return wall.showReplies('-20629724_40524', false, false, event);" offs="3/69" href="/wall-20629724_40524?offset=last&f=replies">
-  <div class="wrh_text" id="wrh_text-20629724_40524">Показать все 69 комментариев</div>
-  <div class="progress wrh_prg" id="wrh_prg-20629724_40524"></div>
-</a><div id="post-20629724_40792" class="reply clear" onmouseover="wall.actsOver('-20629724_40792')" onmouseout="wall.actsOut('-20629724_40792')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/arseny.sokolnikov" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs9849.vk.com/u3517294/e_a09e31c8.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/arseny.sokolnikov" onclick="return nav.go(this, event)">Арсений Сокольников</a>
-          <div class="wall_reply_text">Ctrl + T</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40792"><a onclick="wall.markAsSpam('-20629724_40792', '235b33162192e5e91b');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40524?reply=40792" onclick="return nav.go(this, event)">сегодня в 16:15</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40794" class="reply clear" onmouseover="wall.actsOver('-20629724_40794')" onmouseout="wall.actsOut('-20629724_40794')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/chekmantushka" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs4918.vk.com/u19711743/e_ab00864c.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/chekmantushka" onclick="return nav.go(this, event)">Иван Спирин</a>
-          <div class="wall_reply_text">Esc несколько раз)</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40794"><a onclick="wall.markAsSpam('-20629724_40794', 'b73f609a9661abfab9');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40524?reply=40794" onclick="return nav.go(this, event)">сегодня в 16:21</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><div id="post-20629724_40798" class="reply clear" onmouseover="wall.actsOver('-20629724_40798')" onmouseout="wall.actsOut('-20629724_40798')">
-  <table class="reply_table" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="image">
-        <a class="reply_image" href="/rastafaraii" onclick="return nav.go(this, event)">
-          <img border="0" src="http://cs5323.vk.com/u36421117/e_38d2ea81.jpg" />
-        </a>
-      </td>
-      <td class="info">
-        <div class="reply_text">
-          <a class="author" href="/rastafaraii" onclick="return nav.go(this, event)">Федор Решетников</a>
-          <div class="wall_reply_text">ctrl + t тоже всегда юзаю) <br>не представляю даже, как можно без ctrl+f жить))</div>
-          
-        </div>
-        <div class="info_footer">
-          <span class="fl_r actions" id="actions-20629724_40798"><a onclick="wall.markAsSpam('-20629724_40798', 'd4366c5e4a76830dd7');">Это спам</a></span>
-          <a class="wd_lnk" href="/wall-20629724_40524?reply=40798" onclick="return nav.go(this, event)">сегодня в 16:52</a> 
-        </div>
-      </td>
-    </tr>
-  </table>
-</div><input type="hidden" id="start_reply-20629724_40524" value="40792"/></div>
+<div class="replies_wrap clear" id="replies_wrap-20629724_73692" style="display: none">
+  <div id="replies-20629724_73692"><input type="hidden" id="start_reply-20629724_73692" value=""/></div>
   
 </div></div>
-     </td>
-    </tr>
-  </table>
+    </div>
+  </div>
 </div></div><a class="more_link clear" id="wall_more_link" onclick="wall.showMore(10);"><div class="progress" id="wall_more_progress"></div><div>к предыдущим записям</div></a></div>
 </div></div>
   </div>
@@ -898,70 +1133,70 @@ var StaticFiles = {
   </div>
   <div class="p_header_bottom">
     <span class="fl_r"></span>
-    29<span style="font-size:60%"> </span>907 подписчиков
+    49<span style="font-size:60%"> </span>526 подписчиков
   </div>
 </a>
   <div class="module_body clear_fix">
     <div class="people_row">
 <div class="fl_l people_cell">
-  <a class="ava" href="/decadance" onclick="return nav.go(this, event, {cl_id: 0})">
-    <img width="50" height="50" src="http://cs11082.vk.com/u01479/e_9b04fbd8.jpg"/>
+  <a class="ava" href="/id519" onclick="return nav.go(this, event, {cl_id: 0})">
+    <img width="50" height="50" src="http://cs10109.vk.com/u00519/e_4017ef38.jpg"/>
   </a>
   <div class="name_field">
-    <a href="/decadance" onclick="return nav.go(this, event)">
-      Анастасия<br />
+    <a href="/id519" onclick="return nav.go(this, event)">
+      Кристина<br />
       <small></small>
     </a>
   </div>
 </div><div class="fl_l people_cell">
-  <a class="ava" href="/leost" onclick="return nav.go(this, event, {cl_id: 0})">
-    <img width="50" height="50" src="http://cs9819.vk.com/u01113/e_794c8a52.jpg"/>
+  <a class="ava" href="/id1091" onclick="return nav.go(this, event, {cl_id: 0})">
+    <img width="50" height="50" src="http://cs10381.vk.com/u01091/e_689e97b9.jpg"/>
   </a>
   <div class="name_field">
-    <a href="/leost" onclick="return nav.go(this, event)">
-      Лео<br />
+    <a href="/id1091" onclick="return nav.go(this, event)">
+      Сергей<br />
       <small></small>
     </a>
   </div>
 </div><div class="fl_l people_cell">
-  <a class="ava" href="/xpyct" onclick="return nav.go(this, event, {cl_id: 0})">
-    <img width="50" height="50" src="http://cs11205.vk.com/u01602/e_1849712d.jpg"/>
+  <a class="ava" href="/id1496" onclick="return nav.go(this, event, {cl_id: 0})">
+    <img width="50" height="50" src="http://cs11096.vk.com/u01496/e_e0f6dc96.jpg"/>
   </a>
   <div class="name_field">
-    <a href="/xpyct" onclick="return nav.go(this, event)">
-      Дмитрий<br />
+    <a href="/id1496" onclick="return nav.go(this, event)">
+      Яна<br />
       <small></small>
     </a>
   </div>
 </div>
 </div><div class="people_row">
 <div class="fl_l people_cell">
-  <a class="ava" href="/id1772" onclick="return nav.go(this, event, {cl_id: 0})">
-    <img width="50" height="50" src="http://cs10285.vk.com/u01772/e_0b7662c8.jpg"/>
+  <a class="ava" href="/id1331" onclick="return nav.go(this, event, {cl_id: 0})">
+    <img width="50" height="50" src="http://cs10916.vk.com/u01331/e_3ddf63bd.jpg"/>
   </a>
   <div class="name_field">
-    <a href="/id1772" onclick="return nav.go(this, event)">
-      Алексей<br />
+    <a href="/id1331" onclick="return nav.go(this, event)">
+      Елена<br />
       <small></small>
     </a>
   </div>
 </div><div class="fl_l people_cell">
-  <a class="ava" href="/asdemidovich" onclick="return nav.go(this, event, {cl_id: 0})">
-    <img width="50" height="50" src="http://cs10954.vk.com/u01351/e_fe610e15.jpg"/>
+  <a class="ava" href="/id34" onclick="return nav.go(this, event, {cl_id: 0})">
+    <img width="50" height="50" src="http://cs9588.vk.com/u00034/e_bbf32866.jpg"/>
   </a>
   <div class="name_field">
-    <a href="/asdemidovich" onclick="return nav.go(this, event)">
-      Alex<br />
+    <a href="/id34" onclick="return nav.go(this, event)">
+      Татьяна<br />
       <small></small>
     </a>
   </div>
 </div><div class="fl_l people_cell">
-  <a class="ava" href="/ninonino" onclick="return nav.go(this, event, {cl_id: 0})">
-    <img width="50" height="50" src="http://cs10491.vk.com/u00891/e_7bc8682b.jpg"/>
+  <a class="ava" href="/id510" onclick="return nav.go(this, event, {cl_id: 0})">
+    <img width="50" height="50" src="http://cs9644.vk.com/u00510/e_f9fca563.jpg"/>
   </a>
   <div class="name_field">
-    <a href="/ninonino" onclick="return nav.go(this, event)">
-      Алексей<br />
+    <a href="/id510" onclick="return nav.go(this, event)">
+      Анатолий<br />
       <small></small>
     </a>
   </div>
@@ -975,14 +1210,14 @@ var StaticFiles = {
     Контакты
   </div>
   <div class="p_header_bottom">
-    <span class="fl_r">Все</span>
+    <span class="fl_r"></span>
     1 контакт
   </div>
 </a>
   <div class="module_body clear_fix">
     <div class="line_cell clear_fix">
   <div class="fl_l thumb">
-    <a href="/boomburum" onclick="return nav.go(this, event)"><img src="http://cs5841.vk.com/u146891/e_6429adec.jpg" /></a>
+    <a href="/boomburum" onclick="return nav.go(this, event)"><img src="http://cs5314.vk.com/u146891/e_3e840c34.jpg" /></a>
   </div>
   <div class="fl_l desc_info">
     <div class="people_name"><a href="/boomburum" onclick="return nav.go(this, event)">Лёха Шевелёв</a></div>
@@ -997,17 +1232,41 @@ var StaticFiles = {
     Ссылки
   </div>
   <div class="p_header_bottom">
-    <span class="fl_r">Все</span>
-    1 страница
+    <span class="fl_r"></span>
+    4 страницы
   </div>
 </a>
   <div class="module_body clear_fix">
     <div class="line_cell clear_fix">
   <div class="fl_l thumb">
-    <a href="/away.php?to=http%3A%2F%2Ftwitter.com%2Fhabrahabr&h=48c669eac606ea94bb" target="_blank"><img src="http://cs4636.vk.com/u146891/-11/s_fabf9a74.jpg" /></a>
+    <a href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fregister%2F&h=c4b157016cad9fc21c" target="_blank"><img src="/images/lnkouter32.gif" /></a>
   </div>
   <div class="fl_l desc_info">
-    <div class="group_name"><a href="/away.php?to=http%3A%2F%2Ftwitter.com%2Fhabrahabr&h=48c669eac606ea94bb" target="_blank">Хабрахабр в Твиттере</a></div>
+    <div class="group_name"><a href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Fregister%2F&h=c4b157016cad9fc21c" target="_blank">Хабрахабр: регистрация (ОТКРЫТА&#33;)</a></div>
+    <div class="group_desc">habrahabr.ru</div>
+  </div>
+</div><div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Finfo%2Fadvertising%2Fcorporate%2F&h=463c2a142d77e3ed82" target="_blank"><img src="http://cs4636.vk.com/u146891/-11/s_b6cba1b0.jpg" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="group_name"><a href="/away.php?to=http%3A%2F%2Fhabrahabr.ru%2Finfo%2Fadvertising%2Fcorporate%2F&h=463c2a142d77e3ed82" target="_blank">Хабрахабр: услуги компаниям</a></div>
+    <div class="group_desc">habrahabr.ru</div>
+  </div>
+</div><div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/away.php?to=http%3A%2F%2Ftoster.ru%2F&h=643d8c1897af3567bc" target="_blank"><img src="http://cs4636.vk.com/u146891/-11/s_ae7d4f72.jpg" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="group_name"><a href="/away.php?to=http%3A%2F%2Ftoster.ru%2F&h=643d8c1897af3567bc" target="_blank">Хабрахабр: .тостер</a></div>
+    <div class="group_desc">toster.ru</div>
+  </div>
+</div><div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/away.php?to=http%3A%2F%2Ftwitter.com%2F%23%21%2Fhabrahabr&h=c920028d6b3f744ad0" target="_blank"><img src="/images/lnkouter32.gif" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="group_name"><a href="/away.php?to=http%3A%2F%2Ftwitter.com%2F%23%21%2Fhabrahabr&h=c920028d6b3f744ad0" target="_blank">Хабрахабр: Twitter</a></div>
     <div class="group_desc">twitter.com</div>
   </div>
 </div>
@@ -1019,18 +1278,68 @@ var StaticFiles = {
     Фотоальбомы
   </div>
   <div class="p_header_bottom">
-    <span class="fl_r">Все</span>
+    <span class="fl_r"></span>
     1 альбом
   </div>
 </a>
   <div class="module_body clear_fix">
     <div class="fl_l clear_fix clear album_row">
   <div class="fl_l thumb">
-    <a href="/album-20629724_119127592" onclick="return nav.go(this, event)"><div><img src="http://cs5898.vk.com/u23131954/119127592/s_b4e409ca.jpg" /></div></a>
+    <a href="/album-20629724_119127592" onclick="return nav.go(this, event)"><div><img src="http://cs9531.vk.com/u146891/119127592/s_ba63c8d4.jpg" /></div></a>
   </div>
   <div class="fl_l info">
-    <div><a href="/album-20629724_119127592" onclick="return nav.go(this, event)">Без названия</a></div>
-    <div class="updated">Обновлён 27 июля 2011</div>
+    <div><a href="/album-20629724_119127592" onclick="return nav.go(this, event)">Каменты</a></div>
+    <div class="updated">Обновлён 14 ноября 2011</div>
+  </div>
+</div>
+  </div>
+</div><div class="module clear page_list_module" id="public_events">
+  <a href="" onclick="Public.showEvents();return false;" class="module_header">
+  <div class="header_top clear_fix">
+    <span class="right_link fl_r"  onmouseover="this.parentNode.parentNode.href=''" onmouseout="this.parentNode.parentNode.href=''"></span>
+    Мероприятия
+  </div>
+  <div class="p_header_bottom">
+    <span class="fl_r"></span>
+    2 мероприятия
+  </div>
+</a>
+  <div class="module_body clear_fix">
+    <div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/event31527654" onclick="return nav.go(this, event)"><img src="http://cs9531.vk.com/g31527654/e_3bb79b03.jpg" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="group_name"><a href="/event31527654" onclick="return nav.go(this, event)">.тостер {web-разработка} / 28.10.2011</a></div>
+    <div class="group_desc">28 окт 2011 в 9:00</div>
+  </div>
+</div><div class="line_cell clear_fix">
+  <div class="fl_l thumb">
+    <a href="/event31751963" onclick="return nav.go(this, event)"><img src="http://cs9531.vk.com/g31751963/e_5959544e.jpg" /></a>
+  </div>
+  <div class="fl_l desc_info">
+    <div class="group_name"><a href="/event31751963" onclick="return nav.go(this, event)">.тостер {мобильные приложения} / 02.12.2011</a></div>
+    <div class="group_desc">2 дек 2011 в 9:00</div>
+  </div>
+</div>
+  </div>
+</div><div class="module clear topics_module" id="public_topics">
+  <a href="/board20629724"  class="module_header">
+  <div class="header_top clear_fix">
+    <span class="right_link fl_r"  onmouseover="this.parentNode.parentNode.href='/board20629724'" onmouseout="this.parentNode.parentNode.href='/board20629724'"></span>
+    Обсуждения
+  </div>
+  <div class="p_header_bottom">
+    <span class="fl_r"></span>
+    1 обсуждение
+  </div>
+</a>
+  <div class="module_body clear_fix">
+    <div class="clear_fix topic_row">
+  <div class="icon fl_l"></div>
+  <div class="info fl_l">
+    <div><a class="topic_title" href="/topic-20629724_25284533" onclick="return nav.go(this, event)">Каких блогов вам не хватает на сайте?</a></div>
+    <div><small>вчера в 3:24<span class="divide">|</span><a href="/topic-20629724_25284533?offset=last&scroll=1" onclick="return nav.go(this, event)">70 комментариев</a></small></div>
   </div>
 </div>
   </div>
@@ -1041,9 +1350,9 @@ var StaticFiles = {
 </div></div>
     </div>
 
-    <div id="footer_wrap" class="fl_r">
+    <div id="footer_wrap" class="fl_r" style="width: 661px;">
       <p id="footer">
-  <div class="copy_lang"><a href="/help.php?page=about">ВКонтакте</a> &copy; 2006-2011 <a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 3, hash: 'd92dacc9c9d7866208'})">English</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 0, hash: 'd92dacc9c9d7866208'})">Русский</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 1, hash: 'd92dacc9c9d7866208'})">Українська</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 4, hash: 'd92dacc9c9d7866208'})">Espa&#241;ol</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 6, hash: 'd92dacc9c9d7866208'})">Deutsch</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 18, hash: 'd92dacc9c9d7866208'})">&#27721;&#35821;</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 12, hash: 'd92dacc9c9d7866208'})">Portugu&#234;s</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 16, hash: 'd92dacc9c9d7866208'})">Fran&#231;ais</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 20, hash: 'd92dacc9c9d7866208'})">&#26085;&#26412;&#35486;</a><a onclick="showBox('lang.php', {act: 'lang_dialog'}, {noreload: true})">все языки &raquo;</a></div>
+  <div class="copy_lang"><a href="/help.php?page=about">ВКонтакте</a> &copy; 2006-2012 <a onclick="ajax.post('al_index.php', {act: 'change_lang', lang_id: 3, hash: 'd92dacc9c9d7866208'})">English</a><a onclick="ajax.post('al_index.php', {act: 'change_lang', lang_id: 0, hash: 'd92dacc9c9d7866208'})">Русский</a><a onclick="ajax.post('al_index.php', {act: 'change_lang', lang_id: 1, hash: 'd92dacc9c9d7866208'})">Українська</a><a onclick="showBox('lang.php', {act: 'lang_dialog'}, {noreload: true})">все языки &raquo;</a></div>
   <div>
     
     
@@ -1060,15 +1369,25 @@ var StaticFiles = {
       document.getElementsByTagName('body')[0].innerHTML = '';
     } else {
       domReady();
-      updateMoney(false);
+      updateMoney(0);
 gSearch.init();
-if (window.qArr && qArr[5]) qArr[5] = [5, "по товарам", "", "goods", 0x00000100];var qf = ge('quick_login_form'), ql = ge('quick_login'), qe = ge('quick_email'), qp = ge('quick_pass');
+if (window.qArr && qArr[5]) qArr[5] = [5, "по товарам", "", "goods", 0x00000100];
+if (browser.iphone || browser.ipad || browser.ipod) {
+  setStyle(bodyNode, {webkitTextSizeAdjust: 'none'});
+}var qf = ge('quick_login_form'), ql = ge('quick_login'), qe = ge('quick_email'), qp = ge('quick_pass');
+var qlb = ge('quick_login_button'), prgBtn = qlb;
 
-window.onload = function() {
+var qinit = function() {
   setTimeout(function() {
     ql.insertBefore(ce('div', {innerHTML: '<iframe class="upload_frame" id="quick_login_frame" name="quick_login_frame"></iframe>'}), qf);
     qf.target = 'quick_login_frame';
   }, 1);
+}
+
+if (window.top && window.top != window) {
+  window.onload = qinit;
+} else {
+  setTimeout(qinit, 0);
 }
 
 qf.onsubmit = function() {
@@ -1080,6 +1399,8 @@ qf.onsubmit = function() {
     elfocus(qp);
     return false;
   }
+  lockButton(window.__qfBtn = prgBtn);
+  prgBtn = qlb;
   return true;
 }
 
@@ -1089,26 +1410,38 @@ window.focusLoginInput = function() {
 }
 window.changeQuickRegButton = function(noShow) {
   if (noShow) {
-    hide('top_reg_link');
+    hide('top_reg_link', 'quick_reg_button');
     show('top_search_link');
   } else {
     hide('top_search_link');
-    show('top_reg_link');
+    show('top_reg_link', 'quick_reg_button');
   }
 }
-window.submitQuickLoginForm = function(email, pass) {
-  ge('quick_email').value = email;
-  ge('quick_pass').value = pass;
-  ge('quick_login_form').submit();
+window.submitQuickLoginForm = function(email, pass, opts) {
+  setQuickLoginData(email, pass, opts);
+  if (opts && opts.prg) prgBtn = opts.prg;
+  if (qf.onsubmit()) qf.submit();
+}
+window.setQuickLoginData = function(email, pass, opts) {
+  if (email !== undefined) ge('quick_email').value = email;
+  if (pass !== undefined) ge('quick_pass').value = pass;
+  var params = opts && opts.params || {};
+  for (var i in params) {
+    var el = ge('quick_login_' + i);
+    if (el) {
+      val(el, params[i]);
+    } else {
+      qf.appendChild(ce('input', {type: 'hidden', name: i, id: 'quick_login_' + i, value: params[i]}));
+    }
+  }
 }
 
-var qlb = ge('quick_login_button');
 if (qlb) {
   qlb.onclick = function() { if (qf.onsubmit()) qf.submit(); };
 }
 
 if (browser.opera_mobile) show('quick_expire');
-public.init({"public_id":20629724,"public_link":"\/habr","reply_names":{"87333515":["<a class=\"mem_link\" href=\"\/vfr13\" onclick=\"return nav.go(this, event)\">Владимиру Фролову<\/a>","Владимир, "],"26832294":["<a class=\"mem_link\" href=\"\/sulin.artem\" onclick=\"return nav.go(this, event)\">Артёму Сулину<\/a>","Артём, "],"47511967":["<a class=\"mem_link\" href=\"\/id47511967\" onclick=\"return nav.go(this, event)\">Guf Guf<\/a>","Guf, "],"143201233":["<a class=\"mem_link\" href=\"\/id143201233\" onclick=\"return nav.go(this, event)\">Мему Мемычу<\/a>","Мем, "],"1757536":["<a class=\"mem_link\" href=\"\/asaelko\" onclick=\"return nav.go(this, event)\">Глебу Богдевичу<\/a>","Глеб, "],"5484524":["<a class=\"mem_link\" href=\"\/maniere\" onclick=\"return nav.go(this, event)\">Илье Кебе<\/a>","Илья, "],"7547730":["<a class=\"mem_link\" href=\"\/parketgo\" onclick=\"return nav.go(this, event)\">Кириллу Гаврилюку<\/a>","Кирилл, "],"12846859":["<a class=\"mem_link\" href=\"\/backdoor\" onclick=\"return nav.go(this, event)\">Сергею Мазуру<\/a>","Сергей, "],"96618018":["<a class=\"mem_link\" href=\"\/id96618018\" onclick=\"return nav.go(this, event)\">Максиму Мейтарджяну<\/a>","Максим, "],"4072644":["<a class=\"mem_link\" href=\"\/mobyman\" onclick=\"return nav.go(this, event)\">Илье Егорову<\/a>","Илья, "],"5425250":["<a class=\"mem_link\" href=\"\/ulmanss\" onclick=\"return nav.go(this, event)\">Sergey Ulman<\/a>","Sergey, "],"103935777":["<a class=\"mem_link\" href=\"\/varg242\" onclick=\"return nav.go(this, event)\">Роману Апрельскому<\/a>","Роман, "],"1055049":["<a class=\"mem_link\" href=\"\/yesimbeetlee\" onclick=\"return nav.go(this, event)\">Денису Жуку<\/a>","Денис, "],"2432127":["<a class=\"mem_link\" href=\"\/ak.twister\" onclick=\"return nav.go(this, event)\">Александру Сергеевичу<\/a>","Александр, "],"3517294":["<a class=\"mem_link\" href=\"\/arseny.sokolnikov\" onclick=\"return nav.go(this, event)\">Арсению Сокольникову<\/a>","Арсений, "],"19711743":["<a class=\"mem_link\" href=\"\/chekmantushka\" onclick=\"return nav.go(this, event)\">Ивану Спирину<\/a>","Иван, "],"36421117":["<a class=\"mem_link\" href=\"\/rastafaraii\" onclick=\"return nav.go(this, event)\">Федору Решетникову<\/a>","Федор, "]},"max_post_len":280,"post_hash":"bdc522548e98a70ba5","media_types":false,"wall_type":"own","wall_counts":["","%s сообщение","%s сообщения","%s сообщений"],"all_link":"к записям ","own_link":"ко всем записям","share":{"url":"","hash":"","rhash":""},"photo_hash":null,"liked":false,"enterHash":"565c89f87b95632507","info_headers":{"info_module_tab":"<h4 class=\"simple\">\n  <div class=\"top_right_link fl_r\"><\/div>\n  <div class=\"fl_l\">\n    <div class=\"top_header\">Хабрахабр<\/div>\n    <div class=\"public_type\">СМИ<\/div>\n  <\/div>\n<\/h4>"},"tab_actions":null,"otherCount":"Подписались 29<span style=\"font-size:60%\"> <\/span>908 человек","back":"Хабрахабр"});
+public.init({"public_id":20629724,"public_link":"\/habr","reply_names":{"5660307":["<a class=\"mem_link\" href=\"\/olololosha1488\">Евгению Островскому<\/a>","Евгений, "],"26137831":["<a class=\"mem_link\" href=\"\/alterra07\">Алиму Глашеву<\/a>","Алим, "],"9844012":["<a class=\"mem_link\" href=\"\/lollipuf\">Марату Бакину<\/a>","Марат, "],"9233042":["<a class=\"mem_link\" href=\"\/adam.move.itch\">Adam Itch<\/a>","Adam, "],"63253179":["<a class=\"mem_link\" href=\"\/ctacbl4\">Стасу Винклеру<\/a>","Стас, "],"71408472":["<a class=\"mem_link\" href=\"\/odmen\">Максиму Омарову<\/a>","Максим, "],"3892621":["<a class=\"mem_link\" href=\"\/paulfcdd\">Паше Новикову<\/a>","Паша, "],"28861892":["<a class=\"mem_link\" href=\"\/alexschedrov\">Александру Щедрову<\/a>","Александр, "],"1233654":["<a class=\"mem_link\" href=\"\/id1233654\">Дмитрию Андреевичу<\/a>","Дмитрий, "],"8603949":["<a class=\"mem_link\" href=\"\/v.olexienko\">Валерію Олексієнко<\/a>","Валерій, "],"102672564":["<a class=\"mem_link\" href=\"\/uzumi\">Тамерлану Таову<\/a>","Тамерлан, "],"295499":["<a class=\"mem_link\" href=\"\/id295499\">Андрею none<\/a>","Андрей, "],"156852815":["<a class=\"mem_link\" href=\"\/id156852815\">Шелдону Куперу<\/a>","Шелдон, "],"2944308":["<a class=\"mem_link\" href=\"\/armenium\">Армену Ходжояну<\/a>","Армен, "],"4863838":["<a class=\"mem_link\" href=\"\/yadrishnikov_yaroslav\">Ярославу Ядрышникову<\/a>","Ярослав, "],"138270002":["<a class=\"mem_link\" href=\"\/id138270002\">Саньку Осипкину<\/a>","Санёк, "]},"max_post_len":280,"post_hash":"bdc522548e98a70ba5","media_types":false,"wall_type":"own","wall_no":"Нет записей","wall_counts":["","%s сообщение","%s сообщения","%s сообщений"],"all_link":"к записям Осипкину","own_link":"ко всем записям","share":{"url":"","hash":"","rhash":""},"photo_hash":null,"liked":false,"enterHash":"565c89f87b95632507","info_headers":{"info_module_tab":"<h4 class=\"simple\">\n  <div class=\"top_right_link fl_r\"><\/div>\n  <div class=\"fl_l\">\n    <div class=\"top_header\">Хабрахабр<\/div>\n    <div class=\"public_type\">СМИ<\/div>\n  <\/div>\n<\/h4>"},"tab_actions":"","otherCount":"Подписались 49<span style=\"font-size:60%\"> <\/span>527 человек","back":"Хабрахабр"});
 cur.lang = extend(cur.lang || {}, {
   show_full: 'показать подробную информацию',
   hide_full: 'скрыть подробную информацию',
@@ -1124,8 +1457,35 @@ extend(cur, {
     Public.showPlaces(1);
   }
 });
-zNav({}, {});
-handlePageParams({"id":0,"level":2,"loc":"?act=s&pid=20629724&subdir=habr"});
+if (1) {
+  hide('support_link_td');
+}
+var ts_input = ge('ts_input'), oldFF = browser.mozilla && parseInt(browser.version) < 8;
+if (browser.mozilla && !oldFF) {
+  setStyle(ts_input, {padding: (vk.rtl ? '3px 22px 4px 4px' : '3px 4px 4px 22px')});
+}
+placeholderSetup(ts_input, {back: false, reload: true});
+if (browser.opera || browser.msie || oldFF) {
+  setStyle(ts_input, {padding: (vk.rtl ? '3px 22px 4px 4px' : '3px 4px 4px 22px')});
+}
+if (browser.chrome) {
+  setStyle(ts_input, {padding: (vk.rtl ? '4px 23px 3px 2px' : '4px 3px 3px 23px')});
+}
+TopSearch.init();
+if (browser.msie8 || browser.msie7) {
+  var st = {border: '1px solid #a6b6c6'};
+  if (hasClass(ge('ts_wrap'), 'vk')) {
+    if (vk.rtl) st.left = '1px';
+    else st.right = '0px';
+  } else {
+    if (vk.rtl) st.right = '146px';
+    else st.left = '146px';
+  }
+  setStyle(ge('ts_cont_wrap'), st);
+}
+window.tsHintsEnabled = 1;
+zNav([], {});
+handlePageParams({"id":0,"level":2,"loc":"?act=s&pid=20629724&subdir=habr","width":791,"width_dec":160,"width_dec_footer":130});addEvent(document, 'click', onDocumentClick);
     }
   </script>
 </body>

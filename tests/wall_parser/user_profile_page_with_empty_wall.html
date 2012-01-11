@@ -3,35 +3,40 @@
 
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<script type="text/javascript" src="/al_loader.php?act=nav&v=4648"></script>
+<script type="text/javascript" src="/js/loader_nav7295_0.js"></script>
 
-<link rel="shortcut icon" href="/images/faviconnew.ico" />
+<link rel="shortcut icon" href="/images/faviconvnew.ico" />
 
 <meta http-equiv="content-type" content="text/html; charset=windows-1251" />
 <meta name="description" content=" " />
 
-<title>Дмитрий Конищев</title>
+<title>Григорий Бакунов</title>
 
 <noscript><meta http-equiv="refresh" content="0; URL=/badbrowser.php"></noscript>
 
-<link rel="stylesheet" type="text/css" href="/css/al/common.css?178" />
+<link rel="stylesheet" type="text/css" href="/css/al/common.css?253" />
 <!--[if lte IE 6]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(/css/al/ie6.css?19); /* ]]> */</style><![endif]-->
 <!--[if IE 7]><style type="text/css" media="screen">/* <![CDATA[ */ @import url(/css/al/ie7.css?13); /* ]]> */</style><![endif]-->
 
 <script type="text/javascript">
 var vk = {
+  ad: 1,
+  adupd: 120000, // 2 min
   al: parseInt('4') || 4,
   id: 0,
-  intnat: '' ? true : false,
-  host: 'vkontakte.ru',
+  intnat: '1' ? true : false,
+  host: 'vk.com',
   lang: 0,
   rtl: parseInt('') || 0,
-  version: 4648,
+  version: 7295,
   zero: false,
-  contlen: 11214,
+  contlen: 6250,
   loginscheme: 'https',
   ip_h: '147335987a8beff6d2',
-  navPrefix: '/'
+  vc_h: '2cac0652c8d215c492ef596c5dc9e536',
+  navPrefix: '/',
+  dt: parseInt('') || 0,
+  time: [2012, 1, 11, 23, 39]
 }
 
 window.locDomain = vk.host.match(/[a-zA-Z]+\.[a-zA-Z]+\.?$/)[0];
@@ -45,15 +50,15 @@ if (vk.al != 1 && ___htest.length && ___htest.substr(0, 1) == vk.navPrefix) {
 }
 
 var StaticFiles = {
-  'common.js' : {v: 486},
-  'common.css': {v: 178},
+  'common.js' : {v: 691},
+  'common.css': {v: 253},
   'ie6.css'   : {v: 19},
   'ie7.css'   : {v: 13}
-  ,'lang0_0.js':{v:4221},'profile.css':{v:70},'page.css':{v:127},'profile.js':{v:71},'page.js':{v:174}
+  ,'lang0_0.js':{v:5501},'profile.css':{v:114},'page.css':{v:250},'profile.js':{v:107},'page.js':{v:312}
 }
 
 </script>
-<link type="text/css" rel="stylesheet" href="/css/al/profile.css?70"></link><link type="text/css" rel="stylesheet" href="/css/al/page.css?127"></link><script type="text/javascript" src="/js/al/common.js?486"></script><script type="text/javascript" src="/js/lang0_0.js?4221"></script><script type="text/javascript" src="/js/al/profile.js?71"></script><script type="text/javascript" src="/js/al/page.js?174"></script>
+<link type="text/css" rel="stylesheet" href="/css/al/profile.css?114"></link><link type="text/css" rel="stylesheet" href="/css/al/page.css?250"></link><script type="text/javascript" src="/js/al/common.js?691"></script><script type="text/javascript" src="/js/lang0_0.js?5501"></script><link rel="meta" type="application/rdf+xml" title="FOAF" href="/foaf.php?id=78983895" /><script type="text/javascript" src="/js/al/profile.js?107"></script><script type="text/javascript" src="/js/al/page.js?312"></script>
 
 </head>
 
@@ -65,22 +70,23 @@ var StaticFiles = {
   <div id="box_layer_bg" class="fixed"></div><div id="box_layer_wrap" class="scroll_fix_wrap fixed"><div id="box_layer"><div id="box_loader"><div class="loader"></div><div class="back"></div></div></div></div>
 
   <div id="stl_left"></div><div id="stl_side"></div>
-  
+
   <script type="text/javascript">domStarted();</script>
 
-  <div class="scroll_fix_wrap" id="page_wrap"><div id="top_info_wrap"></div>
+  <div class="scroll_fix_wrap" id="page_wrap">
 <div><div class="scroll_fix">
-  <div id="page_layout">
-    <div id="page_header" class="p_head p_head_l0">
+  <div id="page_layout" style="width: 791px;">
+    <div id="page_header" class="p_head1 p_head_l0">
       <div class="back"></div>
       <div class="left"></div>
       <div class="right"></div>
       <div class="content">
         <div id="top_nav" class="head_nav">
-  <a id="top_home_link" class="top_home_link fl_l" href="/" onclick="return nav.go(this, event)" class="fl_l" style=""></a>
+  <a id="top_home_link" class="top_home_link fl_l" href="/" class="fl_l" style=""></a>
   <div id="top_links">
-    <a id="top_reg_link" class="fl_r top_nav_link" href="/reg0" style="" onclick="return !showBox('al_register.php', {act: 'register_box'}, {params: {width: 514}, stat: ['reg.css']}, event)">Как стать участником?</a>
-    <a id="top_search_link" class="fl_r top_nav_link" href="/search" style="display: none" onclick="return nav.go(this, event)">Поиск друзей</a>
+    <div class="fl_r" id="top_menu_wrap" style="">
+      <a id="top_reg_link" class="fl_r top_nav_link" href="/join" style="" onclick="return !showBox('join.php', {act: 'box', from: nav.strLoc}, {}, event)">регистрация</a>
+    </div>
     <a class="fl_l top_nav_link" href="" id="top_back_link" onclick="return nav.go(this, event, {back: true})"></a>
   </div>
 </div>
@@ -96,9 +102,10 @@ var StaticFiles = {
     <input type="hidden" name="expire" id="quick_expire_input" value="" />
     <input type="hidden" name="captcha_sid" id="quick_captcha_sid" value="" />
     <input type="hidden" name="captcha_key" id="quick_captcha_key" value="" />
-    <input type="hidden" name="from_host" value="vkontakte.ru" />
+    <input type="hidden" name="from_host" value="vk.com" />
+    <input type="hidden" name="from_protocol" value="http" />
     <input type="hidden" name="ip_h" value="147335987a8beff6d2" />
-    <div class="label">E-mail или Логин:</div>
+    <div class="label">Телефон или e-mail:</div>
     <div class="labeled"><input type="text" name="email" class="text" onfocus="show('quick_expire')" id="quick_email" /></div>
     <div class="label">Пароль:</div>
     <div class="labeled"><input type="password" name="pass" class="text" onfocus="show('quick_expire')" id="quick_pass" /></div>
@@ -106,15 +113,16 @@ var StaticFiles = {
     <input type="submit" class="submit" />
   </form>
   <div class="button_blue button_wide"><button id="quick_login_button">Войти</button></div>
-  <div class="clear forgot"><a href="/login?act=forgot" target="_top">Забыли пароль?</a></div>
+  <div class="button_blue button_wide" id="quick_reg_button" style=""><button onclick="top.showBox('join.php', {act: 'box', from: nav.strLoc})">Регистрация</button></div>
+  <div class="clear forgot"><a href="/restore" target="_top">Забыли пароль?</a></div>
 </div>
     </div>
 
-    <div id="page_body" class="fl_r">
+    <div id="page_body" class="fl_r" style="width: 631px;">
       <div id="header_wrap2">
         <div id="header_wrap1">
           <div id="header" style="">
-            <h1 id="title"><b class="fl_r">Online</b>Дмитрий Конищев</h1>
+            <h1 id="title">Григорий Бакунов</h1>
           </div>
         </div>
       </div>
@@ -124,133 +132,44 @@ var StaticFiles = {
     <div id="content"><div id="profile">
   
   <div class="narrow_column fl_l" id="profile_narrow">
-    <div id="profile_avatar"><a id="profile_photo_link" href="/photo122138358_210178628" onclick="return showPhoto('122138358_210178628', 'album122138358_0/rev', {temp: {x_src: &quot;http://cs9567.vkontakte.ru/u122138358/-6/x_63a622f6.jpg&quot;}}, event)"><img src="http://cs9567.vkontakte.ru/u122138358/a_4fd18ce6.jpg" /></a></div><div class="msg guest_actions">
-Чтобы отправить Дмитрию сообщение, Вам необходимо <a onclick="focusLoginInput()">войти в систему</a>.
-</div><div class="rate_empty_line"></div><div class="module clear page_list_module" id="profile_idols">
-  <a href="/fans.php?act=idols&mid=122138358" onclick="return Profile.showIdols(event);" class="module_header">
-  <div class="header_top clear_fix">
-    <span class="right_link fl_r"  onmouseover="this.parentNode.parentNode.href=''" onmouseout="this.parentNode.parentNode.href='/fans.php?act=idols&mid=122138358'"></span>
-    Подписки
-  </div>
-  <div class="p_header_bottom">
-    <span class="fl_r">Все</span>
-    2 страницы
-  </div>
-</a>
-  <div class="module_body clear_fix">
-    <div class="line_cell clear_fix">
-  <div class="fl_l thumb">
-    <a href="/trahninormal" onclick="return nav.go(this, event)"><img src="http://cs5355.vkontakte.ru/g23433159/e_9612339a.jpg" /></a>
-  </div>
-  <div class="fl_l desc_info">
-    <div class="group_name"><a href="/trahninormal" onclick="return nav.go(this, event)">Трахни нормальность</a></div>
-    <div class="group_desc">Общественное движение</div>
-  </div>
-</div><div class="line_cell clear_fix">
-  <div class="fl_l thumb">
-    <a href="/glubokie" onclick="return nav.go(this, event)"><img src="http://cs4168.vkontakte.ru/g24949771/e_b7c4e678.jpg" /></a>
-  </div>
-  <div class="fl_l desc_info">
-    <div class="group_name"><a href="/glubokie" onclick="return nav.go(this, event)">Глубокие</a></div>
-    <div class="group_desc">Галерея</div>
-  </div>
-</div>
-  </div>
-</div>
+    <div id="profile_avatar"><img height="267" width="200" src="http://cs4383.vk.com/u78983895/a_912f563f.jpg" /></div><div class="msg guest_actions">
+Чтобы отправить Григорию сообщение, Вам необходимо <a onclick="focusLoginInput()">войти в систему</a> или <a href="/join" onclick="return !showBox('join.php', {act: 'box', from: nav.strLoc}, {}, event)">зарегистрироваться</a>.
+</div><div id="profile_counts" class="counts_module"><div><a class="videos" onclick="return cur.needLoginBox()" href="/video?section=tagged&id=78983895"><span class="fl_r thumb"></span><span class="fl_r">1</span>Видеозаписи с Григорием</a></div><div><a class="fans"onclick="return Profile.showFans(event);" href="/fans.php?act=fans&mid=78983895"><span class="fl_r thumb"></span><span class="fl_r">12</span>Подписчики Григория</a></div></div><div class="rate_empty_line"></div>
   </div>
   <div class="wide_column fl_r" id="profile_wide">
     <div id="profile_info">
   <h4 class="simple">
-    <span class="fl_r"><a id="profile_full_link" onclick="Profile.hideFull()">скрыть подробную информацию</a></span>
-    Дмитрий  Конищев
+    <span class="fl_r"></span>
+    Григорий  Бакунов
     
   </h4>
-  <div id="profile_short">
+  <div id="profile_short" >
     <div class="profile_info"><div class="clear_fix ">
-  <div class="label fl_l">Родной город:</div>
-  <div class="labeled fl_l">Жуковский</div>
-</div><div class="clear_fix miniblock">
-  <div class="label fl_l">Семейное положение:</div>
-  <div class="labeled fl_l">не женат</div>
-</div></div>
-  </div>
-</div><div id="profile_full_info" style="">
-  <h4>
-  
-  <b>Контактная информация</b>
-</h4>
-<div class="profile_info">
-  <div class="clear_fix ">
   <div class="label fl_l">Город:</div>
-  <div class="labeled fl_l">Жуковский</div>
+  <div class="labeled fl_l">Москва</div>
 </div><div class="clear_fix miniblock">
   <div class="label fl_l">Моб. телефон:</div>
-  <div class="labeled fl_l"><span>Информация скрыта</span></div>
-</div>
-</div>
-  
-  <h4>
-  
-  <b>Личная информация</b>
-</h4>
-<div class="profile_info">
-  <div class="clear_fix ">
-  <div class="label fl_l">Интересы:</div>
-  <div class="labeled fl_l">Английский язык, Личностный рост, Программирование, Профессиональный рост, Психология, Саморазвитие, Amazon EC2, Amazon S3, C, C++, Cloud computing, Linux, MongoDB, NoSQL, Open Source, Python, Qt, Shell scripting, UNIX</div>
+  <div class="labeled fl_l">456465654654654</div>
 </div><div class="clear_fix miniblock">
-  <div class="label fl_l">О себе:</div>
-  <div class="labeled fl_l">Google+ - <a href="/away.php?to=https%3A%2F%2Fplus.google.com%2F117508430140925454932%2Fabout&h=7878b6986b1fbf7376" target="_blank" target="_blank">https://plus.google.com/117508430140925454932/about</a><br>Facebook - <a href="/away.php?to=http%3A%2F%2Ffacebook.com%2Fdmitry.konishchev&h=69d5ec6cb8da1b5e26" target="_blank" target="_blank">http://facebook.com/dmitry.konishchev</a><br>Мой Круг - <a href="/away.php?to=http%3A%2F%2Fkonishchevdmitry.moikrug.ru%2F&h=89971e18ee7d6bae9f" target="_blank" target="_blank">http://konishchevdmitry.moikrug.ru/</a><br>Git Hub - <a href="/away.php?to=http%3A%2F%2Fgithub.com%2FKonishchevDmitry&h=dd6a95b17f5b765ebe" target="_blank" target="_blank">http://github.com/KonishchevDmitry</a><br>Блог - <a href="/away.php?to=http%3A%2F%2Fkonishchevdmitry.blogspot.com%2F&h=bfbb5744f964dcb86b" target="_blank" target="_blank">http://konishchevdmitry.blogspot.com/</a><br>Twitter - <a href="/away.php?to=http%3A%2F%2Ftwitter.com%2Fkonishchev&h=942ae2580997d9efe5" target="_blank" target="_blank">http://twitter.com/konishchev</a></div>
-</div>
-</div>
-  <h4>
-  
-  <b>Образование</b>
-</h4>
-<div class="profile_info">
-  <div class="clear_fix ">
-  <div class="label fl_l">Вуз:</div>
-  <div class="labeled fl_l">МАИ &quot;Стрела&quot; '10</div>
+  <div class="label fl_l">Дом. телефон:</div>
+  <div class="labeled fl_l">6546546546546</div>
 </div><div class="clear_fix miniblock">
-  <div class="label fl_l">Факультет:</div>
-  <div class="labeled fl_l">Вычислительные машины, комплексы, системы, сети</div>
+  <div class="label fl_l">ICQ:</div>
+  <div class="labeled fl_l">54645645</div>
 </div><div class="clear_fix miniblock">
-  <div class="label fl_l">Форма обучения:</div>
-  <div class="labeled fl_l">Дневное отделение</div>
-</div><div class="clear_fix miniblock">
-  <div class="label fl_l">Статус:</div>
-  <div class="labeled fl_l">Выпускник (специалист)</div>
-</div><div class="clear_fix block">
-  <div class="label fl_l">Школа:</div>
-  <div class="labeled fl_l">№ 8 '04<br>Жуковский, 1994-2004 (а)<br>физ-мат</div>
-</div>
-</div>
-  
-  <h4>
-  
-  <b>Карьера</b>
-</h4>
-<div class="profile_info">
-  <div class="clear_fix ">
-  <div class="label fl_l">Место работы:</div>
-  <div class="labeled fl_l">НИИ Приборостроения им. Тихомирова<br>Жуковский, 2006-2007<br>Техник</div>
-</div><div class="clear_fix block">
-  <div class="label fl_l">Место работы:</div>
-  <div class="labeled fl_l">НИИ Приборостроения им. Тихомирова<br>Жуковский, 2007-2010<br>Инженер</div>
-</div><div class="clear_fix block">
-  <div class="label fl_l">Место работы:</div>
-  <div class="labeled fl_l">ЗАО &quot;КРОК Инкорпорейтед&quot;<br>Москва, с 2010 г.<br>Инженер департамента вычислительных систем</div>
-</div>
-</div>
-  
+  <div class="label fl_l">Веб-сайт:</div>
+  <div class="labeled fl_l">http://6546456546456</div>
+</div></div>
+  </div>
 </div><div class="wall_module" id="profile_wall">
   <div class="module_header wall_header">
-  <a id="page_wall_header" class="header_top clear_fix" onclick="if (checkEvent(event)) return true; return wall.switchWall()">
-    <span class="fl_r" id="page_wall_switch"></span>
-    Стена<span id="page_wall_posts_count" onclick="if (checkEvent(event)) return true; nav.go(this.parentNode, event); return cancelEvent(event);"></span>
+  <a id="page_wall_header" class="header_top clear_fix">
+    <span class="right_link fl_r" id="page_wall_switch" onclick="if (checkEvent(event)) return true; return wall.switchWall(event);"></span>
+    <b id="page_wall_posts_count">Нет записей</b>
   </a>
 </div>
   
-  <div class="clear_fix"><div id="page_wall_posts" class="wall_posts own"><input type="hidden" id="page_wall_count_own" value="" /><div id="page_no_wall">На стене пока нет ни одной записи.</div></div><a class="more_link clear" id="wall_more_link" onclick="wall.showMore(10);"><div class="progress" id="wall_more_progress"></div><div>к предыдущим записям</div></a></div>
+  <div class="clear_fix"><div id="page_wall_posts" class="wall_posts own"><input type="hidden" id="page_wall_count_own" value="0" /><div id="page_no_wall">На стене пока нет ни одной записи.</div></div><a class="more_link clear" id="wall_more_link" onclick="wall.showMore(10);"><div class="progress" id="wall_more_progress"></div><div>к предыдущим записям</div></a></div>
 </div>
   </div>
   <br class="clear" />
@@ -260,23 +179,14 @@ var StaticFiles = {
 </div></div>
     </div>
 
-    <div id="footer_wrap" class="fl_r">
-      <div id="bottom_nav">
-  <a href="/help.php?page=about">о сайте</a>
-  <a href="/techsupp.php">техподдержка</a>
-  <a href="/blog.php">блог</a>
-  <a href="/help.php?page=terms">правила</a>
-  <a href="/ads.php">реклама</a>
-  <a href="/developers.php">разработчикам</a>
-  <a href="/jobs.php">вакансии</a>
-</div>
-<div id="footer" class="clear">
-  <div class="copy_lang"><a href="/help.php?page=about">ВКонтакте</a> &copy; 2006-2011 <a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 0, hash: 'd92dacc9c9d7866208'})">Русский</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 1, hash: 'd92dacc9c9d7866208'})">Українська</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 2, hash: 'd92dacc9c9d7866208'})">Беларуская (тарашкевiца)</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 3, hash: 'd92dacc9c9d7866208'})">English</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 11, hash: 'd92dacc9c9d7866208'})">Српски</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 10, hash: 'd92dacc9c9d7866208'})">Magyar</a><a onclick="ajax.post('lang.php', {act: 'change_lang', lang_id: 57, hash: 'd92dacc9c9d7866208'})">Az&#601;rbaycan</a><a onclick="showBox('lang.php', {act: 'lang_dialog'}, {noreload: true})">все языки &raquo;</a></div>
+    <div id="footer_wrap" class="fl_r" style="width: 661px;">
+      <p id="footer">
+  <div class="copy_lang"><a href="/help.php?page=about">ВКонтакте</a> &copy; 2006-2012 <a onclick="ajax.post('al_index.php', {act: 'change_lang', lang_id: 3, hash: 'd92dacc9c9d7866208'})">English</a><a onclick="ajax.post('al_index.php', {act: 'change_lang', lang_id: 0, hash: 'd92dacc9c9d7866208'})">Русский</a><a onclick="ajax.post('al_index.php', {act: 'change_lang', lang_id: 1, hash: 'd92dacc9c9d7866208'})">Українська</a><a onclick="showBox('lang.php', {act: 'lang_dialog'}, {noreload: true})">все языки &raquo;</a></div>
   <div>
     
     
   </div>
-</div>
+</p>
     </div>
     <div class="clear"></div>
   </div>
@@ -288,15 +198,25 @@ var StaticFiles = {
       document.getElementsByTagName('body')[0].innerHTML = '';
     } else {
       domReady();
-      updateMoney(false);
+      updateMoney(0);
 gSearch.init();
-if (window.qArr && qArr[5]) qArr[5] = [5, "по товарам", "", "goods", 0x00000100];var qf = ge('quick_login_form'), ql = ge('quick_login'), qe = ge('quick_email'), qp = ge('quick_pass');
+if (window.qArr && qArr[5]) qArr[5] = [5, "по товарам", "", "goods", 0x00000100];
+if (browser.iphone || browser.ipad || browser.ipod) {
+  setStyle(bodyNode, {webkitTextSizeAdjust: 'none'});
+}var qf = ge('quick_login_form'), ql = ge('quick_login'), qe = ge('quick_email'), qp = ge('quick_pass');
+var qlb = ge('quick_login_button'), prgBtn = qlb;
 
-window.onload = function() {
+var qinit = function() {
   setTimeout(function() {
     ql.insertBefore(ce('div', {innerHTML: '<iframe class="upload_frame" id="quick_login_frame" name="quick_login_frame"></iframe>'}), qf);
     qf.target = 'quick_login_frame';
   }, 1);
+}
+
+if (window.top && window.top != window) {
+  window.onload = qinit;
+} else {
+  setTimeout(qinit, 0);
 }
 
 qf.onsubmit = function() {
@@ -308,6 +228,8 @@ qf.onsubmit = function() {
     elfocus(qp);
     return false;
   }
+  lockButton(window.__qfBtn = prgBtn);
+  prgBtn = qlb;
   return true;
 }
 
@@ -317,20 +239,32 @@ window.focusLoginInput = function() {
 }
 window.changeQuickRegButton = function(noShow) {
   if (noShow) {
-    hide('top_reg_link');
+    hide('top_reg_link', 'quick_reg_button');
     show('top_search_link');
   } else {
     hide('top_search_link');
-    show('top_reg_link');
+    show('top_reg_link', 'quick_reg_button');
   }
 }
-window.submitQuickLoginForm = function(email, pass) {
-  ge('quick_email').value = email;
-  ge('quick_pass').value = pass;
-  ge('quick_login_form').submit();
+window.submitQuickLoginForm = function(email, pass, opts) {
+  setQuickLoginData(email, pass, opts);
+  if (opts && opts.prg) prgBtn = opts.prg;
+  if (qf.onsubmit()) qf.submit();
+}
+window.setQuickLoginData = function(email, pass, opts) {
+  if (email !== undefined) ge('quick_email').value = email;
+  if (pass !== undefined) ge('quick_pass').value = pass;
+  var params = opts && opts.params || {};
+  for (var i in params) {
+    var el = ge('quick_login_' + i);
+    if (el) {
+      val(el, params[i]);
+    } else {
+      qf.appendChild(ce('input', {type: 'hidden', name: i, id: 'quick_login_' + i, value: params[i]}));
+    }
+  }
 }
 
-var qlb = ge('quick_login_button');
 if (qlb) {
   qlb.onclick = function() { if (qf.onsubmit()) qf.submit(); };
 }
@@ -350,9 +284,36 @@ cur.lang = extend(cur.lang || {}, {
   create_poll: 'Опрос',
   dont_attach: 'Не прикреплять'
 });
-Profile.init({"user_id":"122138358","loc":"konishchevdmitry","back":"Дмитрий Конищев","reply_names":[],"max_post_len":280,"post_hash":"b11c98c351a16f0d7f","media_types":false,"wall_type":"own","wall_counts":["","%s запись","%s записи","%s записей"],"all_link":"к записям Дмитрия","own_link":"ко всем записям","share":{"url":false,"hash":false,"rhash":false},"photos_count":1,"skip_one":0,"photos":[],"info":["<div class=\"profile_info\"><div class=\"clear_fix \">\n  <div class=\"label fl_l\">Родной город:<\/div>\n  <div class=\"labeled fl_l\">Жуковский<\/div>\n<\/div><div class=\"clear_fix miniblock\">\n  <div class=\"label fl_l\">Семейное положение:<\/div>\n  <div class=\"labeled fl_l\">не женат<\/div>\n<\/div><\/div>","<div class=\"profile_info\"><div class=\"clear_fix \">\n  <div class=\"label fl_l\">Родной город:<\/div>\n  <div class=\"labeled fl_l\">Жуковский<\/div>\n<\/div><div class=\"clear_fix miniblock\">\n  <div class=\"label fl_l\">Семейное положение:<\/div>\n  <div class=\"labeled fl_l\">не женат<\/div>\n<\/div><\/div>"],"mail_cache":"","fr_click":null});
-zNav({}, {});
-handlePageParams({"id":0,"level":2,"loc":"?subdir=konishchevdmitry"});
+Profile.init({"user_id":78983895,"loc":null,"back":"Григорий Бакунов","reply_names":[],"max_post_len":280,"post_hash":"416da182487fd6ecd4","media_types":false,"wall_type":"own","wall_no":"Нет записей","wall_counts":["","%s запись","%s записи","%s записей"],"all_link":"к записям Григория","own_link":"ко всем записям","share":{"url":false,"hash":false,"rhash":false},"upload":false,"photos_count":0,"skip_one":0,"photos":[],"info":["<div class=\"profile_info\"><div class=\"clear_fix \">\n  <div class=\"label fl_l\">Город:<\/div>\n  <div class=\"labeled fl_l\">Москва<\/div>\n<\/div><div class=\"clear_fix miniblock\">\n  <div class=\"label fl_l\">Моб. телефон:<\/div>\n  <div class=\"labeled fl_l\">456465654654654<\/div>\n<\/div><div class=\"clear_fix miniblock\">\n  <div class=\"label fl_l\">Дом. телефон:<\/div>\n  <div class=\"labeled fl_l\">6546546546546<\/div>\n<\/div><div class=\"clear_fix miniblock\">\n  <div class=\"label fl_l\">ICQ:<\/div>\n  <div class=\"labeled fl_l\">54645645<\/div>\n<\/div><div class=\"clear_fix miniblock\">\n  <div class=\"label fl_l\">Веб-сайт:<\/div>\n  <div class=\"labeled fl_l\">http:\/\/6546456546456<\/div>\n<\/div><\/div>",""],"mail_cache":"","fr_click":null});
+if (1) {
+  hide('support_link_td');
+}
+var ts_input = ge('ts_input'), oldFF = browser.mozilla && parseInt(browser.version) < 8;
+if (browser.mozilla && !oldFF) {
+  setStyle(ts_input, {padding: (vk.rtl ? '3px 22px 4px 4px' : '3px 4px 4px 22px')});
+}
+placeholderSetup(ts_input, {back: false, reload: true});
+if (browser.opera || browser.msie || oldFF) {
+  setStyle(ts_input, {padding: (vk.rtl ? '3px 22px 4px 4px' : '3px 4px 4px 22px')});
+}
+if (browser.chrome) {
+  setStyle(ts_input, {padding: (vk.rtl ? '4px 23px 3px 2px' : '4px 3px 3px 23px')});
+}
+TopSearch.init();
+if (browser.msie8 || browser.msie7) {
+  var st = {border: '1px solid #a6b6c6'};
+  if (hasClass(ge('ts_wrap'), 'vk')) {
+    if (vk.rtl) st.left = '1px';
+    else st.right = '0px';
+  } else {
+    if (vk.rtl) st.right = '146px';
+    else st.left = '146px';
+  }
+  setStyle(ge('ts_cont_wrap'), st);
+}
+window.tsHintsEnabled = 1;
+zNav([], {});
+handlePageParams({"id":0,"level":2,"loc":"?id=78983895","width":791,"width_dec":160,"width_dec_footer":130});addEvent(document, 'click', onDocumentClick);
     }
   </script>
 </body>
