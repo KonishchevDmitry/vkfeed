@@ -3,6 +3,7 @@
 '''Parses a vk.com wall page.'''
 
 import cgi
+import datetime
 import logging
 import re
 import urllib
@@ -88,9 +89,13 @@ class WallPageParser(HTMLPageParser):
     ''', re.DOTALL | re.IGNORECASE | re.VERBOSE)
     '''A regular expression for expanding a "Show more..." link.'''
 
+    __ignore_errors = True
+    """Ignore insignificant errors."""
 
-    def __init__(self):
+
+    def __init__(self, ignore_errors = True):
         HTMLPageParser.__init__(self)
+        self.__ignore_errors = ignore_errors
 
 
     def handle_root(self, tag, attrs, empty):
@@ -291,12 +296,14 @@ class WallPageParser(HTMLPageParser):
 
         if tag['name'] == 'div' and self.__has_class(attrs, 'text', 'wall_text'):
             tag['new_tag_handler'] = self.__handle_post_text
+        elif tag['name'] == 'div' and self.__has_class(attrs, 'replies'):
+            tag['new_tag_handler'] = self.__handle_post_replies
         else:
             tag['new_tag_handler'] = self.__handle_post_table_info
 
 
     def __handle_post_text(self, tag, attrs, empty):
-        '''Handles a tag inside of <div class="post_table"><div class="post_table"><div class="wall_text">.'''
+        '''Handles a tag inside of <div class="post_table"><div class="post_info"><div class="wall_text">.'''
 
         if tag['name'] == 'a' and self.__has_class(attrs, 'author'):
             tag['data_handler'] = self.__handle_post_author
@@ -338,6 +345,154 @@ class WallPageParser(HTMLPageParser):
         self.__get_cur_post()['text'] += data
 
 
+
+    def __handle_post_replies(self, tag, attrs, empty):
+        '''Handles a tag inside of <div class="post_table"><div class="post_info"><div class="replies">.'''
+
+        if tag['name'] == 'div' and self.__has_class(attrs, 'reply_link_wrap'):
+            tag['new_tag_handler'] = self.__handle_post_link
+        else:
+            tag['new_tag_handler'] = self.__handle_post_replies
+
+
+    def __handle_post_link(self, tag, attrs, empty):
+        '''Handles a tag inside of <div class="post_table"><div class="post_info"><div class="replies"><div class="reply_link_wrap">.'''
+
+        if tag['name'] == 'span' and self.__has_class(attrs, 'rel_date'):
+            tag['data_handler'] = self.__handle_post_date
+        else:
+            tag['new_tag_handler'] = self.__handle_post_link
+
+
+    def __handle_post_date(self, tag, data):
+        '''Handles data inside of post replies tag.'''
+
+        replacements = (
+            ( 'jan.', '1'  ),
+            ( 'feb.', '2'  ),
+            ( 'mar.', '3'  ),
+            ( 'apr.', '4'  ),
+            ( 'may',  '5'  ),
+            ( 'jun.', '6'  ),
+            ( 'jul.', '7'  ),
+            ( 'aug.', '8'  ),
+            ( 'sep.', '9'  ),
+            ( 'oct.', '10' ),
+            ( 'nov.', '11' ),
+            ( 'dec.', '12' ),
+
+            ( u'янв', '1'  ),
+            ( u'фев', '2'  ),
+            ( u'мар', '3'  ),
+            ( u'апр', '4'  ),
+            ( u'мая', '5'  ),
+            ( u'июн', '6'  ),
+            ( u'июл', '7'  ),
+            ( u'авг', '8'  ),
+            ( u'сен', '9'  ),
+            ( u'окт', '10' ),
+            ( u'ноя', '11' ),
+            ( u'дек', '12' ),
+
+            ( u'два',     '2' ),
+            ( u'две',     '2' ),
+            ( u'три',     '3' ),
+            ( u'четыре',  '4' ),
+            ( u'пять',    '5' ),
+            ( u'шесть',   '6' ),
+            ( u'семь',    '7' ),
+            ( u'восемь',  '8' ),
+            ( u'девять',  '9' ),
+            ( u'десять', '10' ),
+
+            ( u'two',   '2' ),
+            ( u'three', '3' ),
+            ( u'four',  '4' ),
+            ( u'five',  '5' ),
+            ( u'six',   '6' ),
+            ( u'seven', '7' ),
+            ( u'eight', '8' ),
+            ( u'nine',  '9' ),
+            ( u'ten',  '10' ),
+
+            ( u'вчера',   'yesterday' ),
+            ( u'сегодня', 'today' ),
+            ( u' в ',     ' at ' )
+        )
+
+        date_string = data.strip().lower()
+
+        is_pm = date_string.endswith(' pm')
+        if date_string.endswith(' am') or date_string.endswith(' pm'):
+            date_string = date_string[:-3]
+
+        tz_delta = datetime.timedelta(hours = 4) # MSK timezone
+        today = datetime.datetime.utcnow() + tz_delta
+
+        for token, replacement in replacements:
+            date_string = date_string.replace(token, replacement)
+
+        try:
+            match = re.match(ur"(\d+ ){0,1}([^ ]+) (?:назад|ago)", date_string)
+
+            if match:
+                value = match.group(1)
+                if value:
+                    value = int(value.strip())
+                else:
+                    value = 1
+
+                unit = match.group(2)
+
+                if unit in (u"секунд", u"секунду", u"секунды", "second", "seconds"):
+                    date = today - datetime.timedelta(seconds = value)
+                elif unit in (u"минут", u"минуту", u"минуты", "minute", "minutes"):
+                    date = today - datetime.timedelta(minutes = value)
+                elif unit in (u"час", u"часа", u"часов", "hour", "hours"):
+                    date = today - datetime.timedelta(hours = value)
+                elif unit in (u"день", u"дня", u"дней", "day", "days"):
+                    date = today - datetime.timedelta(days = value)
+                elif unit in (u"неделю", u"недели", u"недель", "week", "weeks"):
+                    date = today - datetime.timedelta(weeks = value)
+                else:
+                    raise Error("Invalid time dimension: {0}.", unit)
+            else:
+                try:
+                    date = datetime.datetime.strptime(date_string, "today at %H:%M")
+                    date = datetime.datetime.combine(today, date.time())
+                except ValueError:
+                    try:
+                        date = datetime.datetime.strptime(date_string, u"yesterday at %H:%M")
+                        date = datetime.datetime.combine(today - datetime.timedelta(days = 1), date.time())
+                    except ValueError:
+                        try:
+                            date = datetime.datetime.strptime("%s %s" % (today.year, date_string), "%Y %d %m at %H:%M")
+                        except ValueError:
+                            date = datetime.datetime.strptime(date_string, "%d %m %Y")
+                            date += tz_delta
+
+            if is_pm:
+                date += datetime.timedelta(hours = 12)
+
+            date -= tz_delta
+
+            if date - datetime.timedelta(minutes = 1) > today:
+                if date - datetime.timedelta(days = 1) <= today:
+                    date -= datetime.timedelta(days = 1)
+                else:
+                    last_year_date = datetime.datetime(date.year - 1, date.month, date.day, date.hour, date.minute, date.second, date.microsecond, date.tzinfo)
+                    if last_year_date <= today:
+                        date = last_year_date
+
+            self.__get_cur_post()['date'] = date
+        except Exception, e:
+            if self.__ignore_errors:
+                LOG.exception("Failed to parse date %s.", data)
+            else:
+                raise e
+
+
+
     def __handle_post_end(self, tag):
         '''Handles end of <div id="post...">.'''
 
@@ -358,6 +513,7 @@ class WallPageParser(HTMLPageParser):
         '''Adds a new post to the wall.'''
 
         self.__data['posts'].append({
+            'id':   post_id,
             'url':  constants.VK_URL + 'wall' + post_id,
             'text': '',
         })

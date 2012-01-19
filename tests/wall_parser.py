@@ -13,7 +13,7 @@ class TestWallParser(unittest.TestCase):
 
 
     def setUp(self):
-        self.__parser = WallPageParser()
+        self.__parser = WallPageParser(ignore_errors = False)
 
 
     def test_invalid_page(self):

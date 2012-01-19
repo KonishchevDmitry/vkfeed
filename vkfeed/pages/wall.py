@@ -4,6 +4,7 @@
 '''Generates an RSS feed with wall posts.'''
 
 import cgi
+import datetime
 import httplib
 import logging
 
@@ -140,7 +141,8 @@ class WallPage(webapp.RequestHandler):
                   title = post['title'],
                   link = post['url'],
                   description = post['text'],
-                  guid = PyRSS2Gen.Guid(post['url'])
+                  guid = PyRSS2Gen.Guid(post['url']),
+                  pubDate = post.get("date", datetime.datetime.utcnow())
                 ) for post in data['posts']
             ]
         )
