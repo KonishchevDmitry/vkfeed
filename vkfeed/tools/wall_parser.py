@@ -323,20 +323,23 @@ class WallPageParser(HTMLPageParser):
     def __handle_post_data_container(self, tag, attrs, empty):
         '''Handles a tag inside of post data tag.'''
 
-        stripped_tag = self.__strip_tag(tag['name'], attrs, empty)
+        if tag['name'] == 'div' and self.__has_class(attrs, 'page_post_queue_narrow'):
+            pass # Ignore image thumbnails
+        else:
+            stripped_tag = self.__strip_tag(tag['name'], attrs, empty)
 
-        if stripped_tag:
-            def end_tag_handler(tag):
-                self.__get_cur_post()['text'] += stripped_tag[1]
+            if stripped_tag:
+                def end_tag_handler(tag):
+                    self.__get_cur_post()['text'] += stripped_tag[1]
 
-            self.__get_cur_post()['text'] += stripped_tag[0]
-            tag['new_tag_handler'] = self.__handle_post_data_container
-            tag['data_handler'] = self.__handle_post_data
+                self.__get_cur_post()['text'] += stripped_tag[0]
+                tag['new_tag_handler'] = self.__handle_post_data_container
+                tag['data_handler'] = self.__handle_post_data
 
-            if empty:
-                end_tag_handler(tag)
-            else:
-                tag['end_tag_handler'] = end_tag_handler
+                if empty:
+                    end_tag_handler(tag)
+                else:
+                    tag['end_tag_handler'] = end_tag_handler
 
 
     def __handle_post_data(self, tag, data):
