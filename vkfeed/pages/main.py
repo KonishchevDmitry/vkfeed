@@ -28,7 +28,7 @@ class MainPage(webapp.RequestHandler):
         match = re.match(r'''^
             \s*
             (?:https?://(?:www\.)?(?:vk\.com|vkontakte\.ru)/)?
-            (?P<profile_id>[a-zA-Z][a-zA-Z0-9._-]+[a-zA-Z0-9])/?
+            (?P<profile_id>[a-zA-Z0-9._-]+)/?
             \s*
         $''', profile_url, re.IGNORECASE | re.VERBOSE)
 
