@@ -41,6 +41,18 @@ class WallPage(webapp.RequestHandler):
             url = constants.VK_URL + cgi.escape(profile_name)
             url_html = '<a href="%s" target="_blank">%s</a>' % (url, url)
 
+            # https://api.vkontakte.ru/method/wall.get?owner_id=122138358&extended=1
+            #import json
+            #data = json.loads(open("../lenvk.rss").read())
+            #data = json.loads(open("../music_video.json").read())
+            #from vkfeed.tools import wall_reader
+            #data = {
+            #    'user_name': 'TODO',
+            #    #'posts': wall_reader.read(21128281, data),
+            #    'posts': wall_reader.read(1266630, data),
+            #    'user_photo': 'TODO',
+            #}
+
             if profile_name == 'feed':
                 http_status = httplib.NOT_FOUND
                 user_error = u'Страница %s не является профилем пользователя или группы.' % url_html
@@ -142,7 +154,7 @@ class WallPage(webapp.RequestHandler):
                   link = post['url'],
                   description = post['text'],
                   guid = PyRSS2Gen.Guid(post['url']),
-                  pubDate = post.get("date", datetime.datetime.utcnow())
+                  pubDate = post.get('date', datetime.datetime.utcnow())
                 ) for post in data['posts']
             ]
         )
