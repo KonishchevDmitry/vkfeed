@@ -20,7 +20,7 @@ class HTTPNotFoundError(Error):
         Error.__init__(self, *args, **kwargs)
 
 
-def fetch_url(url):
+def fetch_url(url, content_type = 'text/html'):
     '''Fetches the specified URL.'''
 
     LOG.info('Fetching "%s"...', url)
@@ -37,27 +37,33 @@ def fetch_url(url):
             raise error_class('The server returned error: %s (%s).',
                 httplib.responses.get(page.status_code, 'Unknown error'), page.status_code)
 
-    content_encoding = 'UTF-8'
+    content = page.content
 
     for key in page.headers:
         if key.lower() == 'content-type':
-            content_type, content_type_params = cgi.parse_header(page.headers[key])
+            value, params = cgi.parse_header(page.headers[key])
 
-            if content_type != 'text/html':
-                raise Error('The server returned a page with invalid content type: %s', content_type)
+            if value != content_type:
+                raise Error('The server returned a page with invalid content type: %s', value)
 
-            for param in content_type_params:
-                if param.lower() == 'charset':
-                    content_encoding = content_type_params[param]
+            if content_type.startswith('text/'):
+                for param in params:
+                    if param.lower() == 'charset':
+                        content_encoding = params[param]
+                        break
+                else:
+                    content_encoding = 'UTF-8'
+
+                try:
+                    content = content.decode(content_encoding)
+                except UnicodeDecodeError:
+                    raise Error('The server returned a page in invalid encoding.')
 
             break
     else:
         raise Error('The server returned a page with missing content type.')
 
-    try:
-        return page.content.decode(content_encoding)
-    except UnicodeDecodeError:
-        raise Error('The server returned a page in invalid encoding.')
+    return content
 
 
 def render_template(name, params = {}):

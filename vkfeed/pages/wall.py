@@ -7,6 +7,7 @@ import cgi
 import datetime
 import httplib
 import logging
+import urllib
 
 from google.appengine.ext import webapp
 
@@ -15,7 +16,6 @@ from PyRSS2Gen import PyRSS2Gen
 from vkfeed import constants
 from vkfeed.core import Error
 import vkfeed.util
-from vkfeed.tools.wall_parser import WallPageParser, ParseError, PrivateGroupError, ProfileNotAvailableError, ServerError
 
 LOG = logging.getLogger(__name__)
 
@@ -39,63 +39,59 @@ class WallPage(webapp.RequestHandler):
             LOG.info('Requested feed for "%s".', profile_name)
 
             url = constants.VK_URL + cgi.escape(profile_name)
-            url_html = '<a href="%s" target="_blank">%s</a>' % (url, url)
 
-            # https://api.vkontakte.ru/method/wall.get?owner_id=122138358&extended=1
-            #import json
-            #data = json.loads(open("../lenvk.rss").read())
-            #data = json.loads(open("../music_video.json").read())
-            #from vkfeed.tools import wall_reader
-            #data = {
-            #    'user_name': 'TODO',
-            #    #'posts': wall_reader.read(21128281, data),
-            #    'posts': wall_reader.read(1266630, data),
-            #    'user_photo': 'TODO',
-            #}
+            if True:
+                # TODO
+                from vkfeed.tools import wall_reader
+                data = wall_reader.read(profile_name)
+            else:
+                from vkfeed.tools.wall_parser import WallPageParser, ParseError, PrivateGroupError, ProfileNotAvailableError, ServerError
 
-            if profile_name == 'feed':
-                http_status = httplib.NOT_FOUND
-                user_error = u'Страница %s не является профилем пользователя или группы.' % url_html
-                raise Error('Unsupported page.')
+                url_html = '<a href="%s" target="_blank">%s</a>' % (url, url)
 
-            try:
-                profile_page = vkfeed.util.fetch_url(url)
-            except vkfeed.util.HTTPNotFoundError:
-                http_status = httplib.NOT_FOUND
-                user_error = u'Пользователя или группы %s не существует.' % url_html
-                raise
-            except Error:
-                http_status = httplib.BAD_GATEWAY
-                user_error = u'Не удалось загрузить страницу %s.' % url_html
-                unknown_user_error = True
-                raise
+                if profile_name == 'feed':
+                    http_status = httplib.NOT_FOUND
+                    user_error = u'Страница %s не является профилем пользователя или группы.' % url_html
+                    raise Error('Unsupported page.')
 
-            try:
-                data = WallPageParser().parse(profile_page)
-            except PrivateGroupError, e:
-                http_status = httplib.NOT_FOUND
-                user_error = u'Группа %s является закрытой группой.' % url_html
-                raise
-            except ProfileNotAvailableError, e:
-                http_status = httplib.NOT_FOUND
-                user_error = u'Страница пользователя %s удалена или доступна только авторизованным пользователям.' % url_html
-                raise
-            except ServerError, e:
-                LOG.debug(u'Page contents:\n%s', profile_page)
-                http_status = httplib.BAD_GATEWAY
-                user_error = u'Сервер %s вернул ошибку%s' % (url_html, ':<br />' + e.server_error if e.server_error else '.')
-                unknown_user_error = True
-                raise
-            except ParseError, e:
-                LOG.debug(u'Page contents:\n%s', profile_page)
-                http_status = httplib.NOT_FOUND
-                user_error = u'Сервер вернул страницу, на которой не удалось найти стену с сообщениями пользователя.'
-                unknown_user_error = True
-                raise
+                try:
+                    profile_page = vkfeed.util.fetch_url(url)
+                except vkfeed.util.HTTPNotFoundError:
+                    http_status = httplib.NOT_FOUND
+                    user_error = u'Пользователя или группы %s не существует.' % url_html
+                    raise
+                except Error:
+                    http_status = httplib.BAD_GATEWAY
+                    user_error = u'Не удалось загрузить страницу %s.' % url_html
+                    unknown_user_error = True
+                    raise
 
-            data['url'] = url
-            if 'user_photo' not in data:
-                data['user_photo'] = constants.APP_URL + 'images/vk-rss-logo.png'
+                try:
+                    data = WallPageParser().parse(profile_page)
+                except PrivateGroupError, e:
+                    http_status = httplib.NOT_FOUND
+                    user_error = u'Группа %s является закрытой группой.' % url_html
+                    raise
+                except ProfileNotAvailableError, e:
+                    http_status = httplib.NOT_FOUND
+                    user_error = u'Страница пользователя %s удалена или доступна только авторизованным пользователям.' % url_html
+                    raise
+                except ServerError, e:
+                    LOG.debug(u'Page contents:\n%s', profile_page)
+                    http_status = httplib.BAD_GATEWAY
+                    user_error = u'Сервер %s вернул ошибку%s' % (url_html, ':<br />' + e.server_error if e.server_error else '.')
+                    unknown_user_error = True
+                    raise
+                except ParseError, e:
+                    LOG.debug(u'Page contents:\n%s', profile_page)
+                    http_status = httplib.NOT_FOUND
+                    user_error = u'Сервер вернул страницу, на которой не удалось найти стену с сообщениями пользователя.'
+                    unknown_user_error = True
+                    raise
+
+                data['url'] = url
+                if 'user_photo' not in data:
+                    data['user_photo'] = constants.APP_URL + 'images/vk-rss-logo.png'
 
             feed = self.__generate_feed(data)
         except Exception, e:
