@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# TODO FIXME
+# TODO FIXME: 2.7
 
-'''Parses a vk.com wall page.'''
+'''Reads a wall of the specified user using VKontakte API.'''
 
 import json
 import datetime
@@ -12,7 +12,6 @@ import urllib
 import vkfeed.util
 from vkfeed import constants
 from vkfeed.core import Error
-from vkfeed.tools.html_parser import HTMLPageParser
 
 LOG = logging.getLogger(__name__)
 LOG.setLevel(logging.INFO)
@@ -21,7 +20,6 @@ _USER_LINK_RE = re.compile(r'\[(id\d+)\|([^\]]+)\]')
 '''Matches a user link in post text.'''
 
 
-# TODO
 class ConnectionError(Error):
     '''Raised when we fail to get a data from the server.'''
 
@@ -35,37 +33,13 @@ class ServerError(Error):
         Error.__init__(self, *args, **kwargs)
 
 
-# TODO
-def api(method, **kwargs):
-    url = '{0}method/{1}?language=0&'.format(constants.API_URL, method) + urllib.urlencode(kwargs)
-
-    try:
-        data = vkfeed.util.fetch_url(url, content_type = 'application/json')
-    except Exception as e:
-        raise ConnectionError('Failed to fetch %s: %s.', url, e)
-
-    try:
-        data = json.loads(data)
-    except Exception as e:
-        raise ConnectionError('Failed to parse JSON data: %s.', e)
-
-    if 'error' in data:
-        raise ServerError(data['error']['error_msg'])
-
-    return data['response']
-
-# TODO FIXME: 2.7
-
-
 def read(profile_name):
-    #user = [{u'first_name': u'\u0414\u043c\u0438\u0442\u0440\u0438\u0439', u'last_name': u'\u0428\u0438\u043f\u0438\u043b\u043e\u0432', u'uid': 1266630, u'photo_big': u'http://cs302104.userapi.com/u1266630/a_72f4d335.jpg'}][0]
-    user = api('users.get', uids = profile_name, fields = 'photo_big')[0]
-    #wall = json.loads(open("../music_video.json").read())['response']['wall'][1:]
-    LOG.error(api('wall.get', owner_id = user['uid'], extended = 1)) # TODO [0]
-    wall = api('wall.get', owner_id = user['uid'], extended = 1)['wall'][1:]
-
 # TODO
-# User was deleted or banned
+    user = [{u'first_name': u'\u0414\u043c\u0438\u0442\u0440\u0438\u0439', u'last_name': u'\u0428\u0438\u043f\u0438\u043b\u043e\u0432', u'uid': 1266630, u'photo_big': u'http://cs302104.userapi.com/u1266630/a_72f4d335.jpg'}][0]
+    #user = _api('users.get', uids = profile_name, fields = 'photo_big')[0]
+# TODO
+    wall = json.loads(open("../music_video.json").read())['response']['wall'][1:]
+    #wall = _api('wall.get', owner_id = user['uid'], extended = 1)['wall'][1:]
 
 # TODO
 #       u'reply_owner_id': 2126980,
@@ -76,6 +50,7 @@ def read(profile_name):
 
     posts = []
     for post in wall:
+# TODO
 #        if post['from_id'] != user['uid']:
 #            LOG.debug('Ignore post %s from user %s.', post['id'], post['from_id'])
 #            continue
@@ -143,7 +118,7 @@ def read(profile_name):
             'title': user['first_name'] + ' ' + user['last_name'],
             'url': '{0}wall{1}_{2}'.format(constants.VK_URL, post['from_id'], post['id']),
             'text': description,
-            'date': datetime.datetime.fromtimestamp(post['date']), # TODO: tz
+            'date': datetime.datetime.fromtimestamp(post['date']), # TODO: check tz
         })
 
     return {
@@ -152,4 +127,34 @@ def read(profile_name):
         'user_photo': user['photo_big'],
         'posts': posts,
     }
+
+
+def _api(method, **kwargs):
+    '''Calls the specified VKontakte API method.'''
+
+    url = '{0}method/{1}?language=0&'.format(constants.API_URL, method) + urllib.urlencode(kwargs)
+
+    try:
+        data = vkfeed.util.fetch_url(url, content_type = 'application/json')
+
+        try:
+            data = json.loads(data)
+        except Exception as e:
+            raise Error('Failed to parse JSON data: %s.', e)
+    except Exception as e:
+        raise ConnectionError('API call %s failed: %s', url, e)
+
+    if 'error' in data or 'response' not in data:
+        error = data.get('error', {}).get('error_msg', '').strip()
+
+        if error:
+            if error == 'User was deleted or banned':
+                error = u'Пользователь удален или забанен'
+        else:
+            error = u'Ошибка вызова API'
+
+        # TODO test
+        raise ServerError(error)
+
+    return data['response']
 

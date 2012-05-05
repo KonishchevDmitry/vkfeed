@@ -38,15 +38,29 @@ class WallPage(webapp.RequestHandler):
         try:
             LOG.info('Requested feed for "%s".', profile_name)
 
-            url = constants.VK_URL + cgi.escape(profile_name)
+            use_api = True
 
-            if True:
-                # TODO
+            if use_api:
+                # Use VKontakte API
+
                 from vkfeed.tools import wall_reader
-                data = wall_reader.read(profile_name)
+
+                try:
+                    data = wall_reader.read(profile_name)
+                except wall_reader.ConnectionError as e:
+                    http_status = httplib.BAD_GATEWAY
+                    user_error = u'Ошибка соединения с сервером <a href="%s" target="_blank">%s</a>.' % (constants.API_URL, constants.API_URL)
+                    raise
+                except wall_reader.ServerError as e:
+                    http_status = httplib.NOT_FOUND
+                    user_error = u'Сервер вернул ошибку: %s.' % e
+                    raise
             else:
+                # Parse HTML from site
+
                 from vkfeed.tools.wall_parser import WallPageParser, ParseError, PrivateGroupError, ProfileNotAvailableError, ServerError
 
+                url = constants.VK_URL + cgi.escape(profile_name)
                 url_html = '<a href="%s" target="_blank">%s</a>' % (url, url)
 
                 if profile_name == 'feed':
@@ -103,7 +117,7 @@ class WallPage(webapp.RequestHandler):
             else:
                 log_function = LOG.exception
 
-            log_function('Unable to generate a feed for "%s": %s', url, e)
+            log_function('Unable to generate a feed for "%s": %s', profile_name, e)
 
             if user_error:
                 self.error(http_status)
