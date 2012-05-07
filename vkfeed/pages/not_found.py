@@ -4,18 +4,19 @@
 
 import httplib
 
-from google.appengine.ext import webapp
+import webapp2
 
 import vkfeed.util
 
 
-class NotFoundPage(webapp.RequestHandler):
+class NotFoundPage(webapp2.RequestHandler):
     '''Generates "404 - Page Not Found" page.'''
 
     def get(self):
         '''Processes the request.'''
 
         self.error(httplib.NOT_FOUND)
+        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
         self.response.out.write(vkfeed.util.render_template('error.html', {
             'error': u'''
                 <p>Страница не найдена.</p>

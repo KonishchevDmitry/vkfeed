@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# TODO FIXME: 2.7
 
 '''Reads a wall of the specified user using VKontakte API.'''
 
@@ -35,21 +34,18 @@ class ServerError(Error):
 
 def read(profile_name):
 # TODO
-    user = [{u'first_name': u'\u0414\u043c\u0438\u0442\u0440\u0438\u0439', u'last_name': u'\u0428\u0438\u043f\u0438\u043b\u043e\u0432', u'uid': 1266630, u'photo_big': u'http://cs302104.userapi.com/u1266630/a_72f4d335.jpg'}][0]
-    #user = _api('users.get', uids = profile_name, fields = 'photo_big')[0]
+    #user = [{u'first_name': u'\u0414\u043c\u0438\u0442\u0440\u0438\u0439', u'last_name': u'\u0428\u0438\u043f\u0438\u043b\u043e\u0432', u'uid': 1266630, u'photo_big': u'http://cs302104.userapi.com/u1266630/a_72f4d335.jpg'}][0]
+    user = _api('users.get', uids = profile_name, fields = 'photo_big')[0]
 # TODO
-    wall = json.loads(open("../music_video.json").read())['response']['wall'][1:]
-    #wall = _api('wall.get', owner_id = user['uid'], extended = 1)['wall'][1:]
+    #wall = json.loads(open('../music_video.json').read())['response']['wall'][1:]
+    reply = _api('wall.get', owner_id = user['uid'], extended = 1)
 
-# TODO
-#       u'reply_owner_id': 2126980,
-#                u'reply_post_id': 1818,
-#                "profiles":[{"uid":122138358,"first_name":"Дмитрий","last_name":"Конищев","photo":"http:\/\/cs10188.userapi.com\/u122138358\/e_24a65600.jpg","photo_medium_rec":"http:\/\/cs10188.userapi.com\/u122138358\/d_7ae3d52b.jpg","sex":2,"online":1}],"groups":[]}}
-#В ответ на запись Насти
-#http://vk.com/wall2126980_1818
+    profiles = {}
+    for profile in reply['profiles']:
+        profiles[profile['uid']] = profile['first_name'] + ' ' + profile['last_name']
 
     posts = []
-    for post in wall:
+    for post in reply['wall'][1:]:
 # TODO
 #        if post['from_id'] != user['uid']:
 #            LOG.debug('Ignore post %s from user %s.', post['id'], post['from_id'])
@@ -57,6 +53,21 @@ def read(profile_name):
 
         supported = []
         unsupported = []
+
+        if 'attachment' in post and post['text'] == post['attachment'][post['attachment']['type']].get('title'):
+            post['text'] = ''
+
+        if 'reply_owner_id' in post and 'reply_post_id' in post:
+            post['text'] += ('<br />' if post['text'] else '') + \
+                u'<i>В ответ на <a href="{vk_url}wall{profile_id}_{post_id}">запись</a> пользователя <b><a href="{vk_url}id{profile_id}">{user_name}</a></b></i>.'.format(
+                    vk_url = constants.VK_URL, profile_id = post['reply_owner_id'], post_id = post['reply_post_id'],user_name = profiles[post['reply_owner_id']])
+# TODO
+#       u'reply_owner_id': 2126980,
+#                u'reply_post_id': 1818,
+#                "profiles":[{"uid":122138358,"first_name":"Дмитрий","last_name":"Конищев","photo":"http:\/\/cs10188.userapi.com\/u122138358\/e_24a65600.jpg","photo_medium_rec":"http:\/\/cs10188.userapi.com\/u122138358\/d_7ae3d52b.jpg","sex":2,"online":1}],"groups":[]}}
+#В ответ на запись Насти
+#http://vk.com/wall2126980_1818
+
 
         for attachment in post.get('attachments', []):
             info = attachment[attachment['type']]
@@ -92,6 +103,12 @@ def read(profile_name):
                     '<img style="border-style: none; display: block;" src="{photo_src}" /></a>'.format(
                         vk_url = constants.VK_URL, profile_id = user['uid'], post_id = post['id'],
                         photo_owner = info['owner_id'], photo_id = info['pid'], photo_src = info['src']))
+            elif attachment['type'] == 'video':
+                supported.append(
+                    '<a href="{vk_url}video{info[owner_id]}_{info[vid]}">'
+                        '<img style="border-style: none; display: block;" src="{info[image]}" />'
+                        u'<b>{info[title]} ({duration})</b>'
+                    '</a>'.format(vk_url = constants.VK_URL, info = info, duration = '{:02d}:{:02d}'.format(info['duration'] / 60, info['duration'] % 60)))
 
             elif attachment['type'] == 'audio':
                 unsupported.append(u'<b>Аудиозапись: <a href="{vk_url}search?{query}">{title}</a></b>'.format(
@@ -105,12 +122,9 @@ def read(profile_name):
                 unsupported.append(u'<b>Страница: {0}</b>'.format(info['title']))
             elif attachment['type'] == 'poll':
                 unsupported.append(u'<b>Опрос: {0}</b>'.format(info['question']))
-            elif attachment['type'] == 'video':
-                unsupported.append(u'<b>Видео: <a href="{vk_url}video{owner_id}_{video_id}">{title}</a></b>'.format(
-                    vk_url = constants.VK_URL, owner_id = attachment['video']['owner_id'], video_id = attachment['video']['vid'], title = attachment['video']['title']))
 
-        description = u"".join(supported)
-        description += _USER_LINK_RE.sub(r'<a href="{0}\1">\2</a>'.format(constants.VK_URL), post['text'])
+        description = u''.join(supported)
+        description += _USER_LINK_RE.sub(r'<b><a href="{0}\1">\2</a></b>'.format(constants.VK_URL), post['text'])
         if unsupported:
             description += u'<br />' + u'<br />'.join(unsupported)
 
@@ -140,9 +154,9 @@ def _api(method, **kwargs):
         try:
             data = json.loads(data)
         except Exception as e:
-            raise Error('Failed to parse JSON data: %s.', e)
+            raise Error('Failed to parse JSON data: {0}.', e)
     except Exception as e:
-        raise ConnectionError('API call %s failed: %s', url, e)
+        raise ConnectionError('API call {0} failed: {1}', url, e)
 
     if 'error' in data or 'response' not in data:
         error = data.get('error', {}).get('error_msg', '').strip()

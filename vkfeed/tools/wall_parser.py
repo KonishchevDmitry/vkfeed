@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-'''Parses a vk.com wall page.'''
+'''Parses VKontakte wall pages.'''
 
 import cgi
 import datetime
@@ -27,7 +27,7 @@ class PrivateGroupError(Error):
     '''Raised if the provided page is a private group.'''
 
     def __init__(self):
-        Error.__init__(self, "This is a private group.")
+        Error.__init__(self, 'This is a private group.')
 
 
 class ProfileNotAvailableError(Error):
@@ -44,7 +44,7 @@ class ServerError(Error):
     '''Raised if the provided page contains a user friendly server error.'''
 
     def __init__(self, server_error):
-        Error.__init__(self, "Server returned an error.")
+        Error.__init__(self, 'Server returned an error.')
         self.server_error = server_error
 
 
@@ -52,7 +52,7 @@ class _StopParsing(Exception):
     '''Raised to stop parsing process.'''
 
     def __init__(self):
-        Exception.__init__(self, "Parsing stopped.")
+        Exception.__init__(self, 'Parsing stopped.')
 
 
 
@@ -90,7 +90,7 @@ class WallPageParser(HTMLPageParser):
     '''A regular expression for expanding a "Show more..." link.'''
 
     __ignore_errors = True
-    """Ignore insignificant errors."""
+    '''Ignore insignificant errors.'''
 
 
     def __init__(self, ignore_errors = True):
@@ -152,11 +152,11 @@ class WallPageParser(HTMLPageParser):
 
             class_attr_regex_template = r'''
                 \s+class=(?:
-                    %(class)s
+                    {name}
                     |
-                    '(?:[^']*\s+)?%(class)s(?:\s+[^']*)?'
+                    '(?:[^']*\s+)?{name}(?:\s+[^']*)?'
                     |
-                    "(?:[^"]*\s+)?%(class)s(?:\s+[^"]*)?"
+                    "(?:[^"]*\s+)?{name}(?:\s+[^"]*)?"
                 )
             '''
 
@@ -175,7 +175,7 @@ class WallPageParser(HTMLPageParser):
             if re.search(r'''
                 <div''' +
                     self.tag_attrs_regex +
-                    class_attr_regex_template % { 'class': 'profile_deleted' } +
+                    class_attr_regex_template.format(name = 'profile_deleted') +
                     self.tag_attrs_regex + r'''
                 \s*>
             ''', html, re.IGNORECASE | re.VERBOSE):
@@ -191,7 +191,7 @@ class WallPageParser(HTMLPageParser):
                 .*
                 <div''' +
                     self.tag_attrs_regex +
-                    class_attr_regex_template % { 'class': 'body' } +
+                    class_attr_regex_template.format(name = 'body') +
                     self.tag_attrs_regex + r'''
                 \s*>
                     (.*?)
@@ -262,7 +262,7 @@ class WallPageParser(HTMLPageParser):
             self.__has_class(attrs, 'post')
         ):
             if empty:
-                raise ParseError('Post "%s" div tag is empty.', attrs['id'])
+                raise ParseError('Post "{0}" div tag is empty.', attrs['id'])
 
             self.__add_post( attrs['id'][len('post'):] )
 
@@ -436,7 +436,7 @@ class WallPageParser(HTMLPageParser):
             date_string = date_string.replace(token, replacement)
 
         try:
-            match = re.match(ur"(\d+ ){0,1}([^ ]+) (?:назад|ago)", date_string)
+            match = re.match(ur'(\d+ ){0,1}([^ ]+) (?:назад|ago)', date_string)
 
             if match:
                 value = match.group(1)
@@ -447,31 +447,31 @@ class WallPageParser(HTMLPageParser):
 
                 unit = match.group(2)
 
-                if unit in (u"секунд", u"секунду", u"секунды", "second", "seconds"):
+                if unit in (u'секунд', u'секунду', u'секунды', 'second', 'seconds'):
                     date = today - datetime.timedelta(seconds = value)
-                elif unit in (u"минут", u"минуту", u"минуты", "minute", "minutes"):
+                elif unit in (u'минут', u'минуту', u'минуты', 'minute', 'minutes'):
                     date = today - datetime.timedelta(minutes = value)
-                elif unit in (u"час", u"часа", u"часов", "hour", "hours"):
+                elif unit in (u'час', u'часа', u'часов', 'hour', 'hours'):
                     date = today - datetime.timedelta(hours = value)
-                elif unit in (u"день", u"дня", u"дней", "day", "days"):
+                elif unit in (u'день', u'дня', u'дней', 'day', 'days'):
                     date = today - datetime.timedelta(days = value)
-                elif unit in (u"неделю", u"недели", u"недель", "week", "weeks"):
+                elif unit in (u'неделю', u'недели', u'недель', 'week', 'weeks'):
                     date = today - datetime.timedelta(weeks = value)
                 else:
-                    raise Error("Invalid time dimension: {0}.", unit)
+                    raise Error('Invalid time dimension: {0}.', unit)
             else:
                 try:
-                    date = datetime.datetime.strptime(date_string, "today at %H:%M")
+                    date = datetime.datetime.strptime(date_string, 'today at %H:%M')
                     date = datetime.datetime.combine(today, date.time())
                 except ValueError:
                     try:
-                        date = datetime.datetime.strptime(date_string, u"yesterday at %H:%M")
+                        date = datetime.datetime.strptime(date_string, u'yesterday at %H:%M')
                         date = datetime.datetime.combine(today - datetime.timedelta(days = 1), date.time())
                     except ValueError:
                         try:
-                            date = datetime.datetime.strptime("%s %s" % (today.year, date_string), "%Y %d %m at %H:%M")
+                            date = datetime.datetime.strptime('{0} {1}'.format(today.year, date_string), '%Y %d %m at %H:%M')
                         except ValueError:
-                            date = datetime.datetime.strptime(date_string, "%d %m %Y")
+                            date = datetime.datetime.strptime(date_string, '%d %m %Y')
                             date += tz_delta
 
             if is_pm:
@@ -488,9 +488,9 @@ class WallPageParser(HTMLPageParser):
                         date = last_year_date
 
             self.__get_cur_post()['date'] = date
-        except Exception, e:
+        except Exception as e:
             if self.__ignore_errors:
-                LOG.exception("Failed to parse date %s.", data)
+                LOG.exception('Failed to parse date %s.', data)
             else:
                 raise e
 
@@ -582,11 +582,11 @@ class WallPageParser(HTMLPageParser):
             elif attr in ('id', 'class') or attr.startswith('on'):
                 continue
 
-            tag_data += u' %s="%s"' % (attr, cgi.escape(value, quote = True))
+            tag_data += u' {0}="{1}"'.format(attr, cgi.escape(value, quote = True))
         # Stripping the tag attributes <--
 
         return (
-            tag_data + '%s>' % (' /' if empty else ''),
-            '' if empty else '</%s>' % tag_name
+            tag_data + (' />' if empty else '>'),
+            '' if empty else '</{0}>'.format(tag_name)
         )
 

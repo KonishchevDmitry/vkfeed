@@ -19,7 +19,7 @@ class TestHTMLPageParser(unittest.TestCase):
 
         for page_name in os.listdir(page_dir):
             page_path = os.path.join(page_dir, page_name)
-            print 'Testing "%s"...' % page_path
+            print 'Testing "{0}"...'.format(page_path)
             HTMLPageParser().parse(open(page_path).read().decode('utf-8'))
 
 

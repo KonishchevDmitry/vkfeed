@@ -4,18 +4,19 @@
 
 import re
 
-from google.appengine.ext import webapp
+import webapp2
 
 import vkfeed.util
 
 
-class MainPage(webapp.RequestHandler):
+class MainPage(webapp2.RequestHandler):
     '''Generates the main page.'''
 
 
     def get(self):
         '''Processes a GET request.'''
 
+        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
         self.response.out.write(vkfeed.util.render_template('main.html', {
             'show_like_buttons': True }))
 
@@ -35,6 +36,7 @@ class MainPage(webapp.RequestHandler):
         if match:
             self.redirect('/feed/' + match.group('profile_id') + '/wall')
         else:
+            self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
             self.response.out.write(vkfeed.util.render_template('main.html', {
                 'post_error': u'''
                     Неверно указан URL профиля.

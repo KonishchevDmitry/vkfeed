@@ -9,7 +9,7 @@ import httplib
 import logging
 import urllib
 
-from google.appengine.ext import webapp
+import webapp2
 
 from PyRSS2Gen import PyRSS2Gen
 
@@ -20,7 +20,7 @@ import vkfeed.util
 LOG = logging.getLogger(__name__)
 
 
-class WallPage(webapp.RequestHandler):
+class WallPage(webapp2.RequestHandler):
     '''Generates an RSS feed.'''
 
 
@@ -49,11 +49,11 @@ class WallPage(webapp.RequestHandler):
                     data = wall_reader.read(profile_name)
                 except wall_reader.ConnectionError as e:
                     http_status = httplib.BAD_GATEWAY
-                    user_error = u'Ошибка соединения с сервером <a href="%s" target="_blank">%s</a>.' % (constants.API_URL, constants.API_URL)
+                    user_error = u'Ошибка соединения с сервером <a href="{0}" target="_blank">{0}</a>.'.format(constants.API_URL)
                     raise
                 except wall_reader.ServerError as e:
                     http_status = httplib.NOT_FOUND
-                    user_error = u'Сервер вернул ошибку: %s.' % e
+                    user_error = u'Сервер вернул ошибку: {0}.'.format(e)
                     raise
             else:
                 # Parse HTML from site
@@ -61,42 +61,42 @@ class WallPage(webapp.RequestHandler):
                 from vkfeed.tools.wall_parser import WallPageParser, ParseError, PrivateGroupError, ProfileNotAvailableError, ServerError
 
                 url = constants.VK_URL + cgi.escape(profile_name)
-                url_html = '<a href="%s" target="_blank">%s</a>' % (url, url)
+                url_html = '<a href="{0}" target="_blank">{0}</a>'.format(url)
 
                 if profile_name == 'feed':
                     http_status = httplib.NOT_FOUND
-                    user_error = u'Страница %s не является профилем пользователя или группы.' % url_html
+                    user_error = u'Страница {0} не является профилем пользователя или группы.'.format(url_html)
                     raise Error('Unsupported page.')
 
                 try:
                     profile_page = vkfeed.util.fetch_url(url)
                 except vkfeed.util.HTTPNotFoundError:
                     http_status = httplib.NOT_FOUND
-                    user_error = u'Пользователя или группы %s не существует.' % url_html
+                    user_error = u'Пользователя или группы {0} не существует.'.format(url_html)
                     raise
                 except Error:
                     http_status = httplib.BAD_GATEWAY
-                    user_error = u'Не удалось загрузить страницу %s.' % url_html
+                    user_error = u'Не удалось загрузить страницу {0}.'.format(url_html)
                     unknown_user_error = True
                     raise
 
                 try:
                     data = WallPageParser().parse(profile_page)
-                except PrivateGroupError, e:
+                except PrivateGroupError as e:
                     http_status = httplib.NOT_FOUND
-                    user_error = u'Группа %s является закрытой группой.' % url_html
+                    user_error = u'Группа {0} является закрытой группой.'.format(url_html)
                     raise
-                except ProfileNotAvailableError, e:
+                except ProfileNotAvailableError as e:
                     http_status = httplib.NOT_FOUND
-                    user_error = u'Страница пользователя %s удалена или доступна только авторизованным пользователям.' % url_html
+                    user_error = u'Страница пользователя {0} удалена или доступна только авторизованным пользователям.'.format(url_html)
                     raise
-                except ServerError, e:
+                except ServerError as e:
                     LOG.debug(u'Page contents:\n%s', profile_page)
                     http_status = httplib.BAD_GATEWAY
-                    user_error = u'Сервер %s вернул ошибку%s' % (url_html, ':<br />' + e.server_error if e.server_error else '.')
+                    user_error = u'Сервер {0} вернул ошибку{1}'.format(url_html, ':<br />' + e.server_error if e.server_error else '.')
                     unknown_user_error = True
                     raise
-                except ParseError, e:
+                except ParseError as e:
                     LOG.debug(u'Page contents:\n%s', profile_page)
                     http_status = httplib.NOT_FOUND
                     user_error = u'Сервер вернул страницу, на которой не удалось найти стену с сообщениями пользователя.'
@@ -108,7 +108,7 @@ class WallPage(webapp.RequestHandler):
                     data['user_photo'] = constants.APP_URL + 'images/vk-rss-logo.png'
 
             feed = self.__generate_feed(data)
-        except Exception, e:
+        except Exception as e:
             if isinstance(e, Error):
                 if user_error and not unknown_user_error:
                     log_function = LOG.warning
@@ -121,22 +121,23 @@ class WallPage(webapp.RequestHandler):
 
             if user_error:
                 self.error(http_status)
-                error = u'<p>Ошибка при генерации RSS-ленты.</p><p>%s</p>' % user_error
+                error = u'<p>Ошибка при генерации RSS-ленты:</p><p>{0}</p>'.format(user_error)
                 if unknown_user_error:
                     error += u'''<p>
                         Пожалуйста, убедитесь, что вы правильно указали профиль
                         пользователя или группы, и что данный профиль является
                         общедоступным. Если все указано верно, и ошибка
                         повторяется, пожалуйста, свяжитесь с <a
-                        href="mailto:%s">администратором</a>.
-                    </p>''' % cgi.escape(constants.ADMIN_EMAIL, quote = True)
+                        href="mailto:{0}">администратором</a>.
+                    </p>'''.format(cgi.escape(constants.ADMIN_EMAIL, quote = True))
             else:
                 self.error(httplib.INTERNAL_SERVER_ERROR)
                 error = u'''
                     При генерации RSS-ленты произошла внутренняя ошибка сервера.
-                    Если ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:%s">администратором</a>.
-                ''' % (cgi.escape(constants.ADMIN_EMAIL, quote = True))
+                    Если ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:{0}">администратором</a>.
+                '''.format(cgi.escape(constants.ADMIN_EMAIL, quote = True))
 
+            self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
             self.response.out.write(vkfeed.util.render_template('error.html', { 'error': error }))
         else:
             self.response.headers['Content-Type'] = 'application/rss+xml'
@@ -149,13 +150,13 @@ class WallPage(webapp.RequestHandler):
         rss = PyRSS2Gen.RSS2(
             title = data['user_name'],
             link = data['url'],
-            description = u'Сообщения со стены пользователя %s' % data['user_name'],
+            description = u'Сообщения со стены пользователя ' + data['user_name'],
 
             image = PyRSS2Gen.Image(
                 url = data['user_photo'],
                 title = data['user_name'],
                 link = data['url'],
-                description = u'Сообщения со стены пользователя %s' % data['user_name']
+                description = u'Сообщения со стены пользователя ' + data['user_name']
             ),
 
             items = [

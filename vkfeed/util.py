@@ -27,14 +27,14 @@ def fetch_url(url, content_type = 'text/html'):
 
     try:
         page = urlfetch.fetch(url, headers = { 'Accept-Language': 'ru,en' })
-    except urlfetch.Error, e:
-        raise Error('Failed to fetch the page: %s.', e)
+    except urlfetch.Error as e:
+        raise Error('Failed to fetch the page: {0}.', e)
     else:
         if page.status_code == httplib.OK:
             LOG.info('"%s" has been successfully fetched.', url)
         else:
             error_class = HTTPNotFoundError if page.status_code == httplib.NOT_FOUND else Error
-            raise error_class('The server returned error: %s (%s).',
+            raise error_class('The server returned error: {0} ({1}).',
                 httplib.responses.get(page.status_code, 'Unknown error'), page.status_code)
 
     content = page.content
@@ -44,7 +44,7 @@ def fetch_url(url, content_type = 'text/html'):
             value, params = cgi.parse_header(page.headers[key])
 
             if value != content_type:
-                raise Error('The server returned a page with invalid content type: %s', value)
+                raise Error('The server returned a page with invalid content type: {0}.', value)
 
             if content_type.startswith('text/'):
                 for param in params:
@@ -69,5 +69,5 @@ def fetch_url(url, content_type = 'text/html'):
 def render_template(name, params = {}):
     '''Renders the specified template.'''
 
-    return template.render(os.path.join('../templates', name), params)
+    return template.render(os.path.join('templates', name), params)
 

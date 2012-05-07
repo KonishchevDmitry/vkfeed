@@ -3,8 +3,8 @@
 # Runs all application's tests.
 #
 
-# Force python2.5 for Google App Engine if available.
-PYTHON="$(which python2.5 || echo -n python)"
+# Force python2.7 for Google App Engine if available.
+PYTHON="$(which python2.7 || echo -n python)"
 
 cd tests
 
