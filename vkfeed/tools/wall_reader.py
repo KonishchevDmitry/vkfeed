@@ -15,8 +15,15 @@ from vkfeed.core import Error
 LOG = logging.getLogger(__name__)
 LOG.setLevel(logging.INFO)
 
-_USER_LINK_RE = re.compile(r'\[(id\d+)\|([^\]]+)\]')
-'''Matches a user link in post text.'''
+
+_TEXT_URL_RE = re.compile(r'(^|\s|>)(https?://[^"]+?)(\.?(?:<|\s|$))')
+'''Matches a URL in a plain text.'''
+
+_DOMAIN_ONLY_TEXT_URL_RE = re.compile(r'(^|\s|>)((?:[a-z0-9](?:[-a-z0-9]*[a-z0-9])?\.)+[a-z0-9](?:[-a-z0-9]*[a-z0-9])/[^"]+?)(\.?(?:<|\s|$))')
+'''Matches a URL without protocol specification in a plain text.'''
+
+_USER_LINK_RE = re.compile(r'\[((?:id|club)\d+)\|([^\]]+)\]')
+'''Matches a user link in a post text.'''
 
 
 class ConnectionError(Error):
@@ -28,27 +35,45 @@ class ConnectionError(Error):
 class ServerError(Error):
     '''Raised when the server reports an error.'''
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, code, *args, **kwargs):
         Error.__init__(self, *args, **kwargs)
+        self.code = code
 
 
+# TODO: user friends
 def read(profile_name):
-# TODO
-    #user = [{u'first_name': u'\u0414\u043c\u0438\u0442\u0440\u0438\u0439', u'last_name': u'\u0428\u0438\u043f\u0438\u043b\u043e\u0432', u'uid': 1266630, u'photo_big': u'http://cs302104.userapi.com/u1266630/a_72f4d335.jpg'}][0]
-    user = _api('users.get', uids = profile_name, fields = 'photo_big')[0]
-# TODO
-    #wall = json.loads(open('../music_video.json').read())['response']['wall'][1:]
-    reply = _api('wall.get', owner_id = user['uid'], extended = 1)
+    '''Reads a wall of the specified user.'''
 
-    profiles = {}
-    for profile in reply['profiles']:
-        profiles[profile['uid']] = profile['first_name'] + ' ' + profile['last_name']
+    user = _get_user(profile_name)
+    reply = _api('wall.get', owner_id = user['id'], extended = 1)
+
+# TODO: remove
+    #wall = json.loads(open('../music_video.json').read())['response']['wall'][1:]
+# TODO: remove
+#    import pprint
+#    LOG.error(pprint.pformat(reply))
+
+    users = {}
+
+    for profile in reply.get('profiles', []):
+        users[profile['uid']] = {
+            'name':  profile['first_name'] + ' ' + profile['last_name'],
+            'photo': profile['photo'],
+        }
+
+    for profile in reply.get('groups', []):
+        users[-profile['gid']] = {
+            'name':  profile['name'],
+            'photo': profile['photo'],
+        }
+
+    img_style = 'style="border-style: none; display: block;"'
 
     posts = []
     for post in reply['wall'][1:]:
-# TODO
-#        if post['from_id'] != user['uid']:
-#            LOG.debug('Ignore post %s from user %s.', post['id'], post['from_id'])
+# TODO: enable
+#        if post['from_id'] != user['id']:
+#            LOG.debug(u'Ignore post %s from user %s.', post['id'], post['from_id'])
 #            continue
 
         supported = []
@@ -57,96 +82,127 @@ def read(profile_name):
         if 'attachment' in post and post['text'] == post['attachment'][post['attachment']['type']].get('title'):
             post['text'] = ''
 
-        if 'reply_owner_id' in post and 'reply_post_id' in post:
-            post['text'] += ('<br />' if post['text'] else '') + \
-                u'<i>В ответ на <a href="{vk_url}wall{profile_id}_{post_id}">запись</a> пользователя <b><a href="{vk_url}id{profile_id}">{user_name}</a></b></i>.'.format(
-                    vk_url = constants.VK_URL, profile_id = post['reply_owner_id'], post_id = post['reply_post_id'],user_name = profiles[post['reply_owner_id']])
-# TODO
-#       u'reply_owner_id': 2126980,
-#                u'reply_post_id': 1818,
-#                "profiles":[{"uid":122138358,"first_name":"Дмитрий","last_name":"Конищев","photo":"http:\/\/cs10188.userapi.com\/u122138358\/e_24a65600.jpg","photo_medium_rec":"http:\/\/cs10188.userapi.com\/u122138358\/d_7ae3d52b.jpg","sex":2,"online":1}],"groups":[]}}
-#В ответ на запись Насти
-#http://vk.com/wall2126980_1818
-
-
         for attachment in post.get('attachments', []):
             info = attachment[attachment['type']]
 
             if attachment['type'] == 'app':
                 supported.append(
-                    '<a href="{vk_url}app{id}">'
-                    '<img style="border-style: none; display: block;" src="{photo_src}" /></a>'.format(
-                        vk_url = constants.VK_URL, id = info['app_id'], photo_src = info['src']))
+                    u'<a href="{vk_url}app{info[app_id]}"><img {img_style} src="{info[src]}" /></a>'.format(
+                        vk_url = constants.VK_URL, info = info, img_style = img_style))
             elif attachment['type'] == 'graffiti':
                 supported.append(
-                    '<a href="{vk_url}graffiti{id}">'
-                    '<img style="border-style: none; display: block;" src="{photo_src}" /></a>'.format(
-                        vk_url = constants.VK_URL, id = info['gid'], photo_src = info['src']))
+                    u'<a href="{vk_url}graffiti{info[gid]}"><img {img_style} src="{info[src]}" /></a>'.format(
+                        vk_url = constants.VK_URL, info = info, img_style = img_style))
             elif attachment['type'] == 'link':
-                html = u'Ссылка: <b><a href="{url}">{title}</a></b><p>'.format(
-                    url = info['url'], title = info['title'])
+                info['description'] = _parse_text(info['description']) or info['title']
 
-                if info.get('image_src') and info.get('description'):
-                    html += u'<table><tr><td><img src="{image_src}" /></td><td>{description}</td></tr></table>'.format(
-                        image_src = info['image_src'], description = info['description'])
+                html = u'<b>Ссылка: <a href="{info[url]}">{info[title]}</a></b><p>'.format(info = info)
+
+                if info.get('image_src') and info['description']:
+                    html += (
+                        u'<table cellpadding="0" cellspacing="0"><tr valign="top">'
+                            '<td><a href="{info[url]}"><img {img_style} src="{info[image_src]}" /></a></td>'
+                            '<td style="padding-left: 10px;">{info[description]}</td>'
+                        '</tr></table>'.format(info = info, img_style = img_style))
                 elif info.get('image_src'):
-                    html += '<img src="{image_src}" style="display: block;" />'.format(image_src = info['image_src'])
-                elif info.get('description'):
+                    html += u'<a href="{info[url]}"><img {img_style} src="{info[image_src]}" /></a>'.format(
+                        info = info, img_style = img_style)
+                elif info['description']:
                     html += info['description']
 
                 html += '</p>'
 
                 supported.append(html)
             elif attachment['type'] in ('photo', 'posted_photo'):
-                supported.append(
-                    '<a href="{vk_url}id{profile_id}?z=photo{photo_owner}_{photo_id}%2Fwall{profile_id}_{post_id}">'
-                    '<img style="border-style: none; display: block;" src="{photo_src}" /></a>'.format(
-                        vk_url = constants.VK_URL, profile_id = user['uid'], post_id = post['id'],
-                        photo_owner = info['owner_id'], photo_id = info['pid'], photo_src = info['src']))
+                photo_id = info.get('pid', info.get('id', 0))
+
+                # Photo may have id = 0 and owner_id = 0 if it for example
+                # generated by an application.
+                if photo_id == 0 or info['owner_id'] == 0:
+                    supported.append(
+                        u'<a href="{vk_url}wall{profile_id}_{post_id}"><img {img_style} src="{info[src]}" /></a>'.format(
+                            vk_url = constants.VK_URL, profile_id = user['id'], post_id = post['id'], img_style = img_style, info = info))
+                else:
+                    supported.append(
+                        u'<a href="{vk_url}wall{profile_id}_{post_id}?z=photo{info[owner_id]}_{photo_id}%2Fwall{profile_id}_{post_id}">'
+                        '<img {img_style} src="{info[src]}" /></a>'.format(
+                            vk_url = constants.VK_URL, profile_id = user['id'], photo_id = photo_id, info = info, post_id = post['id'], img_style = img_style))
             elif attachment['type'] == 'video':
                 supported.append(
-                    '<a href="{vk_url}video{info[owner_id]}_{info[vid]}">'
-                        '<img style="border-style: none; display: block;" src="{info[image]}" />'
-                        u'<b>{info[title]} ({duration})</b>'
-                    '</a>'.format(vk_url = constants.VK_URL, info = info, duration = '{:02d}:{:02d}'.format(info['duration'] / 60, info['duration'] % 60)))
+                    u'<a href="{vk_url}video{info[owner_id]}_{info[vid]}">'
+                        '<img {img_style} src="{info[image]}" />'
+                        '<b>{info[title]} ({duration})</b>'
+                    '</a>'.format(
+                        vk_url = constants.VK_URL, info = info, img_style = img_style,
+                        duration = _get_duration(info['duration'])))
 
             elif attachment['type'] == 'audio':
                 unsupported.append(u'<b>Аудиозапись: <a href="{vk_url}search?{query}">{title}</a></b>'.format(
-                    vk_url = constants.VK_URL, query = urllib.urlencode({ 'c[q]': info['title'], 'c[section]': 'audio' }),
-                    title = u'{0} - {1} ({2})'.format(info['performer'], info['title'], info['duration'])))
+                    vk_url = constants.VK_URL, query = urllib.urlencode({
+                        'c[q]': (info['performer'] + ' - ' + info['title']).encode('utf-8'),
+                        'c[section]': 'audio'
+                    }), title = u'{} - {} ({})'.format(info['performer'], info['title'], _get_duration(info['duration']))))
             elif attachment['type'] == 'doc':
-                unsupported.append(u'<b>Документ: {0}</b>'.format(info['title']))
+                unsupported.append(u'<b>Документ: {}</b>'.format(info['title']))
             elif attachment['type'] == 'note':
-                unsupported.append(u'<b>Заметка: {0}</b>'.format(info['title']))
+                unsupported.append(u'<b>Заметка: {}</b>'.format(info['title']))
             elif attachment['type'] == 'page':
-                unsupported.append(u'<b>Страница: {0}</b>'.format(info['title']))
+                unsupported.append(u'<b>Страница: {}</b>'.format(info['title']))
             elif attachment['type'] == 'poll':
-                unsupported.append(u'<b>Опрос: {0}</b>'.format(info['question']))
+                unsupported.append(u'<b>Опрос: {}</b>'.format(info['question']))
 
-        description = u''.join(supported)
-        description += _USER_LINK_RE.sub(r'<b><a href="{0}\1">\2</a></b>'.format(constants.VK_URL), post['text'])
+        text = ''
+
+        if supported:
+            text += '<p>' + '</p><p>'.join(supported) + '</p>'
+
+        text += _parse_text(post['text'])
+
         if unsupported:
-            description += u'<br />' + u'<br />'.join(unsupported)
+            text += '<p>' + '</p><p>'.join(unsupported) + '</p>'
+
+        if 'copy_owner_id' in post and 'copy_post_id' in post:
+            text = u'<p><b><a href="{profile_url}">{user_name}</a></b> пишет:</p>'.format(
+                profile_url = _get_profile_url(post['copy_owner_id']), user_name = users[post['copy_owner_id']]['name']) + text
+
+            if 'copy_text' in post:
+                text = u'<p>{}</p><div style="margin-left: 1em;">{}</div>'.format(post['copy_text'], text)
+
+        if 'reply_owner_id' in post and 'reply_post_id' in post:
+            text += (
+                u'<p><i>'
+                    u'В ответ на <a href="{vk_url}wall{post[reply_owner_id]}_{post[reply_post_id]}">запись</a> '
+                    u'пользователя <b><a href="{profile_url}">{user_name}</a></b>.'
+                '</i></p>'.format(vk_url = constants.VK_URL, post = post,
+                    profile_url = _get_profile_url(post['reply_owner_id']), user_name = users[post['reply_owner_id']]['name']))
+
+        text = (
+            u'<table cellpadding="0" cellspacing="0"><tr valign="top">'
+                '<td><a href="{url}"><img {img_style} src="{photo}" /></a></td>'
+                '<td style="padding-left: 10px;">{text}</td>'
+            '</tr></table>'.format(
+                url = _get_profile_url(post['from_id']), img_style = img_style,
+                photo = users[post['from_id']]['photo'], text = text))
 
         posts.append({
-            'title': user['first_name'] + ' ' + user['last_name'],
-            'url': '{0}wall{1}_{2}'.format(constants.VK_URL, post['from_id'], post['id']),
-            'text': description,
-            'date': datetime.datetime.fromtimestamp(post['date']), # TODO: check tz
+            'title': users[post['from_id']]['name'],
+            'url':   u'{0}wall{1}_{2}'.format(constants.VK_URL, user['id'], post['id']),
+            'text':  text,
+            'date':  datetime.datetime.fromtimestamp(post['date']), # TODO: check tz
         })
 
     return {
-        'url': constants.VK_URL + profile_name,
-        'user_name': user['first_name'] + ' ' + user['last_name'],
-        'user_photo': user['photo_big'],
-        'posts': posts,
+        'url':        constants.VK_URL + profile_name,
+        'user_name':  user['name'],
+        'user_photo': user['photo'],
+        'posts':      posts,
     }
 
 
 def _api(method, **kwargs):
     '''Calls the specified VKontakte API method.'''
 
-    url = '{0}method/{1}?language=0&'.format(constants.API_URL, method) + urllib.urlencode(kwargs)
+    url = u'{0}method/{1}?language=0&'.format(constants.API_URL, method) + urllib.urlencode(kwargs)
 
     try:
         data = vkfeed.util.fetch_url(url, content_type = 'application/json')
@@ -154,9 +210,9 @@ def _api(method, **kwargs):
         try:
             data = json.loads(data)
         except Exception as e:
-            raise Error('Failed to parse JSON data: {0}.', e)
+            raise Error(u'Failed to parse JSON data: {0}.', e)
     except Exception as e:
-        raise ConnectionError('API call {0} failed: {1}', url, e)
+        raise ConnectionError(u'API call {0} failed: {1}', url, e)
 
     if 'error' in data or 'response' not in data:
         error = data.get('error', {}).get('error_msg', '').strip()
@@ -167,8 +223,71 @@ def _api(method, **kwargs):
         else:
             error = u'Ошибка вызова API'
 
-        # TODO test
-        raise ServerError(error)
+        raise ServerError(data.get('error', {}).get('error_code'), error)
 
     return data['response']
+
+
+def _get_duration(seconds):
+    '''Returns audio/video duration string.'''
+
+    hours = seconds / 60 / 60
+    minutes = seconds / 60 % 60
+    seconds = seconds % 60
+
+    if hours:
+        return '{:02d}:{:02d}:{:02d}'.format(hours, minutes, seconds)
+    else:
+        return '{:02d}:{:02d}'.format(minutes, seconds)
+
+
+def _get_profile_url(profile_id):
+    '''Returns URL to profile with the specified ID.'''
+
+    return constants.VK_URL + ( 'club' if profile_id < 0 else 'id' ) + str(abs(profile_id))
+
+
+def _get_user(profile_name):
+    '''Returns user info by profile name.'''
+
+    try:
+        # TODO: remove
+        #user = [{u'first_name': u'\u0414\u043c\u0438\u0442\u0440\u0438\u0439', u'last_name': u'\u0428\u0438\u043f\u0438\u043b\u043e\u0432', u'uid': 1266630, u'photo_big': u'http://cs302104.userapi.com/u1266630/a_72f4d335.jpg'}][0]
+
+        user = _api('users.get', uid = profile_name, fields = 'photo_big')[0]
+
+        return {
+            'id':    user['uid'],
+            'name':  user['first_name'] + ' ' + user['last_name'],
+            'photo': user['photo_big'],
+        }
+    except ServerError as e:
+        # Invalid user ID
+        if e.code == 113:
+            try:
+                user = _api('groups.getById', gid = profile_name, fields = 'photo_big')[0]
+
+                return {
+                    'id':    -user['gid'],
+                    'name':  user['name'],
+                    'photo': user['photo_big'],
+                }
+            except ServerError as e:
+                # Invalid group ID
+                if e.code == 125:
+                    raise ServerError(113, u'Пользователя не существует')
+                else:
+                    raise e
+        else:
+            raise e
+
+
+def _parse_text(text):
+    '''Parses a post text.'''
+
+    text = _TEXT_URL_RE.sub(r'\1<a href="\2">\2</a>\3', text)
+    text = _DOMAIN_ONLY_TEXT_URL_RE.sub(r'\1<a href="http://\2">\2</a>\3', text)
+    text = _USER_LINK_RE.sub(r'<b><a href="{}\1">\2</a></b>'.format(constants.VK_URL), text)
+
+    return text
 

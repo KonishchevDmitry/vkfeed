@@ -36,7 +36,7 @@ class WallPage(webapp2.RequestHandler):
         unknown_user_error = False
 
         try:
-            LOG.info('Requested feed for "%s".', profile_name)
+            LOG.info(u'Requested feed for "%s".', profile_name)
 
             use_api = True
 
@@ -61,7 +61,7 @@ class WallPage(webapp2.RequestHandler):
                 from vkfeed.tools.wall_parser import WallPageParser, ParseError, PrivateGroupError, ProfileNotAvailableError, ServerError
 
                 url = constants.VK_URL + cgi.escape(profile_name)
-                url_html = '<a href="{0}" target="_blank">{0}</a>'.format(url)
+                url_html = u'<a href="{0}" target="_blank">{0}</a>'.format(url)
 
                 if profile_name == 'feed':
                     http_status = httplib.NOT_FOUND
@@ -117,7 +117,7 @@ class WallPage(webapp2.RequestHandler):
             else:
                 log_function = LOG.exception
 
-            log_function('Unable to generate a feed for "%s": %s', profile_name, e)
+            log_function(u'Unable to generate a feed for "%s": %s', profile_name, e)
 
             if user_error:
                 self.error(http_status)
