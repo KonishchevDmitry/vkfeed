@@ -53,7 +53,7 @@ class WallPage(webapp2.RequestHandler):
                     raise
                 except wall_reader.ServerError as e:
                     http_status = httplib.NOT_FOUND
-                    user_error = u'Сервер вернул ошибку: {0}.'.format(e)
+                    user_error = unicode(e)
                     raise
             else:
                 # Parse HTML from site

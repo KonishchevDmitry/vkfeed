@@ -20,7 +20,6 @@ handlers:
   upload: verifications
 
 - url: /.*
-  #script: vkfeed/main.py
   script: vkfeed.main.app
 
 skip_files:

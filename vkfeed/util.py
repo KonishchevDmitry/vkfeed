@@ -26,7 +26,7 @@ def fetch_url(url, content_type = 'text/html'):
     LOG.info('Fetching "%s"...', url)
 
     try:
-        page = urlfetch.fetch(url, headers = { 'Accept-Language': 'ru,en' })
+        page = _fetch_url(url, headers = { 'Accept-Language': 'ru,en' })
     except urlfetch.Error as e:
         raise Error('Failed to fetch the page: {0}.', e)
     else:
@@ -71,3 +71,19 @@ def render_template(name, params = {}):
 
     return template.render(os.path.join('templates', name), params)
 
+
+def _fetch_url(*args, **kwargs):
+    '''
+    Sometimes urlfetch.fetch() raises weird error 'ApplicationError: 5' when it
+    shouldn't. So this wrapper ignores errors and tries to fetch the URL again.
+    '''
+
+    tries = 3
+
+    while True:
+        try:
+            return urlfetch.fetch(*args, **kwargs)
+        except urlfetch.Error as e:
+            if tries <= 1:
+                raise e
+            tries -= 1
