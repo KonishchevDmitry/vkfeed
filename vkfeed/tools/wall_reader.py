@@ -43,7 +43,7 @@ class ServerError(Error):
         self.code = code
 
 
-def read(profile_name):
+def read(profile_name, foreign_posts, show_photo):
     '''Reads a wall of the specified user.'''
 
     user = _get_user(profile_name)
@@ -67,7 +67,7 @@ def read(profile_name):
 
     posts = []
     for post in reply['wall'][1:]:
-        if post['from_id'] != user['id']:
+        if not foreign_posts and post['from_id'] != user['id']:
             LOG.debug(u'Ignore post %s from user %s.', post['id'], post['from_id'])
             continue
 
@@ -178,13 +178,14 @@ def read(profile_name):
                 '</i></p>'.format(vk_url = constants.VK_URL, post = post,
                     profile_url = _get_profile_url(post['reply_owner_id']), user_name = users[post['reply_owner_id']]['name']))
 
-        text = (
-            u'<table cellpadding="0" cellspacing="0"><tr valign="top">'
-                '<td><a href="{url}"><img {img_style} src="{photo}" /></a></td>'
-                '<td style="padding-left: 10px;">{text}</td>'
-            '</tr></table>'.format(
-                url = _get_profile_url(post['from_id']), img_style = img_style,
-                photo = users[post['from_id']]['photo'], text = text))
+        if show_photo:
+            text = (
+                u'<table cellpadding="0" cellspacing="0"><tr valign="top">'
+                    '<td><a href="{url}"><img {img_style} src="{photo}" /></a></td>'
+                    '<td style="padding-left: 10px;">{text}</td>'
+                '</tr></table>'.format(
+                    url = _get_profile_url(post['from_id']), img_style = img_style,
+                    photo = users[post['from_id']]['photo'], text = text))
 
         date = (
             datetime.datetime.fromtimestamp(post['date'])

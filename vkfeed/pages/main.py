@@ -3,6 +3,7 @@
 '''Generates the main page.'''
 
 import re
+import urllib
 
 import webapp2
 
@@ -34,7 +35,17 @@ class MainPage(webapp2.RequestHandler):
         $''', profile_url, re.IGNORECASE | re.VERBOSE)
 
         if match:
-            self.redirect('/feed/' + match.group('profile_id') + '/wall')
+            params = {}
+
+            if self.request.get('foreign_posts') == '1':
+                params['foreign_posts'] = '1'
+
+            if self.request.get('show_photo') != '1':
+                params['show_photo'] = '0'
+
+            params = '?' + urllib.urlencode(params) if params else ''
+
+            self.redirect('/feed/' + match.group('profile_id') + '/wall' + params)
         else:
             self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
             self.response.out.write(vkfeed.util.render_template('main.html', {
