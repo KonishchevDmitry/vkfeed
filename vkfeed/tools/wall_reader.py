@@ -266,12 +266,10 @@ def _get_user(profile_name):
     '''Returns user info by profile name.'''
 
     try:
-        user = _api('users.get', uid = profile_name, fields = 'photo_big')[0]
-
-        return {
-            'id':    user['uid'],
-            'name':  user['first_name'] + ' ' + user['last_name'],
-            'photo': user['photo_big'],
+        profile = _api('users.get', uid = profile_name, fields = 'photo_big,photo_medium,photo')[0]
+        user = {
+            'id':   profile['uid'],
+            'name': profile['first_name'] + ' ' + profile['last_name'],
         }
     except ServerError as e:
         # Invalid user ID
@@ -282,12 +280,10 @@ def _get_user(profile_name):
                 if match is not None:
                     profile_name = 'club' + match.group(1)
 
-                user = _api('groups.getById', gid = profile_name, fields = 'photo_big')[0]
-
-                return {
-                    'id':    -user['gid'],
-                    'name':  user['name'],
-                    'photo': user['photo_big'],
+                profile = _api('groups.getById', gid = profile_name, fields = 'photo_big,photo_medium,photo')[0]
+                user = {
+                    'id':    -profile['gid'],
+                    'name':  profile['name'],
                 }
             except ServerError as e:
                 # Invalid group ID
@@ -297,6 +293,15 @@ def _get_user(profile_name):
                     raise e
         else:
             raise e
+
+    if 'photo_big' in profile:
+        user['photo'] = profile['photo_big']
+    elif 'photo_medium' in profile:
+        user['photo'] = profile['photo_medium']
+    else:
+        user['photo'] = profile['photo']
+
+    return user
 
 
 def _parse_text(text):
