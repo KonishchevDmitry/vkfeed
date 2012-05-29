@@ -28,6 +28,9 @@ _USER_LINK_RE = re.compile(r'\[((?:id|club)\d+)\|([^\]]+)\]')
 _GROUP_ALIAS_RE = re.compile(r'^(?:event|public)(\d+)$')
 '''Matches group ID aliases.'''
 
+_HASH_TAG_RE = re.compile(ur'#[a-zA-Zа-яА-Я0-9\-_]+')
+'''Matches a hash tag.'''
+
 
 class ConnectionError(Error):
     '''Raised when we fail to get a data from the server.'''
@@ -43,7 +46,7 @@ class ServerError(Error):
         self.code = code
 
 
-def read(profile_name, foreign_posts, show_photo):
+def read(profile_name, foreign_posts, show_photo, hash_tag_title):
     '''Reads a wall of the specified user.'''
 
     user = _get_user(profile_name)
@@ -73,6 +76,12 @@ def read(profile_name, foreign_posts, show_photo):
 
         supported = []
         unsupported = []
+
+        title = users[post['from_id']]['name']
+        if hash_tag_title:
+            hash_tags = _HASH_TAG_RE.findall(post['text'])
+            if hash_tags:
+                title = ', '.join(hash_tags)
 
         if 'attachment' in post and post['text'] == post['attachment'][post['attachment']['type']].get('title'):
             post['text'] = ''
@@ -193,7 +202,7 @@ def read(profile_name, foreign_posts, show_photo):
             + datetime.timedelta(hours = 4))
 
         posts.append({
-            'title': users[post['from_id']]['name'],
+            'title': title,
             'url':   u'{0}wall{1}_{2}'.format(constants.VK_URL, user['id'], post['id']),
             'text':  text,
             'date':  date,
