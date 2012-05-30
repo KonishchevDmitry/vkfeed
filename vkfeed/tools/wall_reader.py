@@ -81,7 +81,9 @@ def read(profile_name, foreign_posts, show_photo, hash_tag_title):
         if hash_tag_title:
             hash_tags = _HASH_TAG_RE.findall(post['text'])
             if hash_tags:
-                title = ', '.join(hash_tags)
+                title = ', '.join(
+                    tag[1:].lower() if id else tag[1:].title()
+                    for id, tag in enumerate(hash_tags))
 
         if 'attachment' in post and post['text'] == post['attachment'][post['attachment']['type']].get('title'):
             post['text'] = ''
