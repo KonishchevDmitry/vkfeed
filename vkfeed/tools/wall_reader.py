@@ -46,7 +46,7 @@ class ServerError(Error):
         self.code = code
 
 
-def read(profile_name, foreign_posts, show_photo, hash_tag_title):
+def read(profile_name, foreign_posts, show_photo, hash_tag_title, text_title):
     '''Reads a wall of the specified user.'''
 
     user = _get_user(profile_name)
@@ -77,13 +77,7 @@ def read(profile_name, foreign_posts, show_photo, hash_tag_title):
         supported = []
         unsupported = []
 
-        title = users[post['from_id']]['name']
-        if hash_tag_title:
-            hash_tags = _HASH_TAG_RE.findall(post['text'])
-            if hash_tags:
-                title = ', '.join(
-                    tag[1:].lower() if id else tag[1:].title()
-                    for id, tag in enumerate(hash_tags))
+        title = _get_post_title(users, post, text_title, hash_tag_title)
 
         if 'attachment' in post and post['text'] == post['attachment'][post['attachment']['type']].get('title'):
             post['text'] = ''
@@ -265,6 +259,42 @@ def _get_duration(seconds):
         return '{:02d}:{:02d}:{:02d}'.format(hours, minutes, seconds)
     else:
         return '{:02d}:{:02d}'.format(minutes, seconds)
+
+
+def _get_post_title(users, post, text_title, hash_tag_title):
+    '''Formats title for a post.'''
+
+    title = users[post['from_id']]['name']
+
+    if text_title:
+        text = post['text'].lstrip('.?!').strip()
+        if text:
+            title = _USER_LINK_RE.sub(r'\2', text)
+            limit_pos = len(title)
+
+            pos = title.find('.')
+            if pos != -1:
+                limit_pos = min(limit_pos, pos)
+                if title[limit_pos : limit_pos + 3] == '...':
+                    limit_pos += 3
+
+            pos = title.find('?')
+            if pos != -1:
+                limit_pos = min(limit_pos, pos + 1)
+
+            pos = title.find('!')
+            if pos != -1:
+                limit_pos = min(limit_pos, pos + 1)
+
+            title = title[:limit_pos]
+    elif hash_tag_title:
+        hash_tags = _HASH_TAG_RE.findall(post['text'])
+        if hash_tags:
+            title = ', '.join(
+                tag[1:].lower() if id else tag[1:].title()
+                for id, tag in enumerate(hash_tags))
+
+    return title
 
 
 def _get_profile_url(profile_id):

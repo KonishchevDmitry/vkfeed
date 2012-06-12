@@ -39,9 +39,10 @@ class WallPage(webapp2.RequestHandler):
             show_photo = ( self.request.get('show_photo', '1') != '0' )
             foreign_posts = ( self.request.get('foreign_posts', '0') != '0' )
             hash_tag_title = ( self.request.get('hash_tag_title', '0') != '0' )
+            text_title = ( self.request.get('text_title', '0') != '0' )
 
-            LOG.info(u'Requested feed for "%s" (foreign_posts = %s, show_photo = %s, hash_tag_title = %s).',
-                profile_name, foreign_posts, show_photo, hash_tag_title)
+            LOG.info(u'Requested feed for "%s" (foreign_posts = %s, show_photo = %s, hash_tag_title = %s, text_title = %s).',
+                profile_name, foreign_posts, show_photo, hash_tag_title, text_title)
 
             use_api = True
 
@@ -51,7 +52,7 @@ class WallPage(webapp2.RequestHandler):
                 from vkfeed.tools import wall_reader
 
                 try:
-                    data = wall_reader.read(profile_name, foreign_posts, show_photo, hash_tag_title)
+                    data = wall_reader.read(profile_name, foreign_posts, show_photo, hash_tag_title, text_title)
                 except wall_reader.ConnectionError as e:
                     http_status = httplib.BAD_GATEWAY
                     user_error = u'Ошибка соединения с сервером <a href="{0}" target="_blank">{0}</a>.'.format(constants.API_URL)
