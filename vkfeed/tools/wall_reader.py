@@ -31,6 +31,9 @@ _GROUP_ALIAS_RE = re.compile(r'^(?:event|public)(\d+)$')
 _HASH_TAG_RE = re.compile(ur'#[a-zA-Zа-яА-Я0-9\-_]+')
 '''Matches a hash tag.'''
 
+_MAX_POSTS_NUM = 10
+'''Maximum number of posts in feed.'''
+
 
 class ConnectionError(Error):
     '''Raised when we fail to get a data from the server.'''
@@ -70,6 +73,9 @@ def read(profile_name, foreign_posts, show_photo, hash_tag_title, text_title):
 
     posts = []
     for post in reply['wall'][1:]:
+        if len(posts) >= _MAX_POSTS_NUM:
+            break
+
         if not foreign_posts and post['from_id'] != user['id']:
             LOG.debug(u'Ignore post %s from user %s.', post['id'], post['from_id'])
             continue
