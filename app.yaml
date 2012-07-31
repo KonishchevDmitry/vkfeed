@@ -15,9 +15,9 @@ handlers:
 - url: /images
   static_dir: images
 
-- url: /((?:google|yandex).*\.html)
-  static_files: verifications/\1
-  upload: verifications
+- url: /((?:google|yandex).*\.html|robots\.txt)
+  static_files: static/\1
+  upload: static
 
 - url: /.*
   script: vkfeed.main.app
