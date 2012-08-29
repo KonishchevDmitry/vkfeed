@@ -3,6 +3,8 @@
 
 '''Tests vk.com wall parser.'''
 
+from __future__ import unicode_literals
+
 import unittest
 
 from vkfeed.tools.wall_parser import WallPageParser, ParseError
@@ -28,7 +30,7 @@ class TestWallParser(unittest.TestCase):
 
         self.__test_parsing(
             open('wall_parser/group_profile_page.html').read().decode('cp1251'), {
-                'user_name':  u'Хабрахабр',
+                'user_name':  'Хабрахабр',
                 'user_photo': 'http://cs11159.vk.com/g20629724/a_ba3bb3dc.jpg',
                 'posts':      10,
             }
@@ -40,7 +42,7 @@ class TestWallParser(unittest.TestCase):
 
         self.__test_parsing(
             open('wall_parser/user_profile_page_with_empty_wall.html').read().decode('cp1251'), {
-                'user_name':  u'Григорий Бакунов',
+                'user_name':  'Григорий Бакунов',
                 'user_photo': 'http://cs4383.vk.com/u78983895/a_912f563f.jpg',
                 'posts':      0,
             }
@@ -52,7 +54,7 @@ class TestWallParser(unittest.TestCase):
 
         self.__test_parsing(
             open('wall_parser/user_profile_page.html').read().decode('cp1251'), {
-                'user_name':  u'Павел Дуров',
+                'user_name':  'Павел Дуров',
                 'user_photo': 'http://vk.com/u00001/a_a964f9a2.jpg',
                 'posts':      10,
             }

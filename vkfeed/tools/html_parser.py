@@ -1,5 +1,7 @@
 '''A convenient class for parsing HTML pages.'''
 
+from __future__ import unicode_literals
+
 from HTMLParser import HTMLParser
 import logging
 import re
@@ -313,4 +315,3 @@ class HTMLPageParser(HTMLParser):
             attrs[attr.lower()] = value
 
         return attrs
-

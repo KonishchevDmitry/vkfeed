@@ -2,6 +2,8 @@
 
 '''Generates "404 - Page Not Found" page.'''
 
+from __future__ import unicode_literals
+
 import httplib
 
 import webapp2
@@ -16,9 +18,9 @@ class NotFoundPage(webapp2.RequestHandler):
         '''Processes the request.'''
 
         self.error(httplib.NOT_FOUND)
-        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
+        self.response.headers[b'Content-Type'] = b'text/html; charset=utf-8'
         self.response.out.write(vkfeed.util.render_template('error.html', {
-            'error': u'''
+            'error': '''
                 <p>Страница не найдена.</p>
 
                 <p>Возможно:</p>

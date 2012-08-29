@@ -1,5 +1,7 @@
 '''Various constants.'''
 
+from __future__ import unicode_literals
+
 ADMIN_EMAIL = 'Dmitry Konishchev <konishchev@gmail.com>'
 '''Email of the administrator.'''
 

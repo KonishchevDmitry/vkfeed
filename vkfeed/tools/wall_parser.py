@@ -2,6 +2,8 @@
 
 '''Parses VKontakte wall pages.'''
 
+from __future__ import unicode_literals
+
 import cgi
 import datetime
 import logging
@@ -384,43 +386,43 @@ class WallPageParser(HTMLPageParser):
             ( 'nov.', '11' ),
             ( 'dec.', '12' ),
 
-            ( u'янв', '1'  ),
-            ( u'фев', '2'  ),
-            ( u'мар', '3'  ),
-            ( u'апр', '4'  ),
-            ( u'мая', '5'  ),
-            ( u'июн', '6'  ),
-            ( u'июл', '7'  ),
-            ( u'авг', '8'  ),
-            ( u'сен', '9'  ),
-            ( u'окт', '10' ),
-            ( u'ноя', '11' ),
-            ( u'дек', '12' ),
+            ( 'янв', '1'  ),
+            ( 'фев', '2'  ),
+            ( 'мар', '3'  ),
+            ( 'апр', '4'  ),
+            ( 'мая', '5'  ),
+            ( 'июн', '6'  ),
+            ( 'июл', '7'  ),
+            ( 'авг', '8'  ),
+            ( 'сен', '9'  ),
+            ( 'окт', '10' ),
+            ( 'ноя', '11' ),
+            ( 'дек', '12' ),
 
-            ( u'два',     '2' ),
-            ( u'две',     '2' ),
-            ( u'три',     '3' ),
-            ( u'четыре',  '4' ),
-            ( u'пять',    '5' ),
-            ( u'шесть',   '6' ),
-            ( u'семь',    '7' ),
-            ( u'восемь',  '8' ),
-            ( u'девять',  '9' ),
-            ( u'десять', '10' ),
+            ( 'два',     '2' ),
+            ( 'две',     '2' ),
+            ( 'три',     '3' ),
+            ( 'четыре',  '4' ),
+            ( 'пять',    '5' ),
+            ( 'шесть',   '6' ),
+            ( 'семь',    '7' ),
+            ( 'восемь',  '8' ),
+            ( 'девять',  '9' ),
+            ( 'десять', '10' ),
 
-            ( u'two',   '2' ),
-            ( u'three', '3' ),
-            ( u'four',  '4' ),
-            ( u'five',  '5' ),
-            ( u'six',   '6' ),
-            ( u'seven', '7' ),
-            ( u'eight', '8' ),
-            ( u'nine',  '9' ),
-            ( u'ten',  '10' ),
+            ( 'two',   '2' ),
+            ( 'three', '3' ),
+            ( 'four',  '4' ),
+            ( 'five',  '5' ),
+            ( 'six',   '6' ),
+            ( 'seven', '7' ),
+            ( 'eight', '8' ),
+            ( 'nine',  '9' ),
+            ( 'ten',  '10' ),
 
-            ( u'вчера',   'yesterday' ),
-            ( u'сегодня', 'today' ),
-            ( u' в ',     ' at ' )
+            ( 'вчера',   'yesterday' ),
+            ( 'сегодня', 'today' ),
+            ( ' в ',     ' at ' )
         )
 
         date_string = data.strip().lower()
@@ -447,15 +449,15 @@ class WallPageParser(HTMLPageParser):
 
                 unit = match.group(2)
 
-                if unit in (u'секунд', u'секунду', u'секунды', 'second', 'seconds'):
+                if unit in ('секунд', 'секунду', 'секунды', 'second', 'seconds'):
                     date = today - datetime.timedelta(seconds = value)
-                elif unit in (u'минут', u'минуту', u'минуты', 'minute', 'minutes'):
+                elif unit in ('минут', 'минуту', 'минуты', 'minute', 'minutes'):
                     date = today - datetime.timedelta(minutes = value)
-                elif unit in (u'час', u'часа', u'часов', 'hour', 'hours'):
+                elif unit in ('час', 'часа', 'часов', 'hour', 'hours'):
                     date = today - datetime.timedelta(hours = value)
-                elif unit in (u'день', u'дня', u'дней', 'day', 'days'):
+                elif unit in ('день', 'дня', 'дней', 'day', 'days'):
                     date = today - datetime.timedelta(days = value)
-                elif unit in (u'неделю', u'недели', u'недель', 'week', 'weeks'):
+                elif unit in ('неделю', 'недели', 'недель', 'week', 'weeks'):
                     date = today - datetime.timedelta(weeks = value)
                 else:
                     raise Error('Invalid time dimension: {0}.', unit)
@@ -465,7 +467,7 @@ class WallPageParser(HTMLPageParser):
                     date = datetime.datetime.combine(today, date.time())
                 except ValueError:
                     try:
-                        date = datetime.datetime.strptime(date_string, u'yesterday at %H:%M')
+                        date = datetime.datetime.strptime(date_string, 'yesterday at %H:%M')
                         date = datetime.datetime.combine(today - datetime.timedelta(days = 1), date.time())
                     except ValueError:
                         try:
@@ -582,11 +584,10 @@ class WallPageParser(HTMLPageParser):
             elif attr in ('id', 'class') or attr.startswith('on'):
                 continue
 
-            tag_data += u' {0}="{1}"'.format(attr, cgi.escape(value, quote = True))
+            tag_data += ' {0}="{1}"'.format(attr, cgi.escape(value, quote = True))
         # Stripping the tag attributes <--
 
         return (
             tag_data + (' />' if empty else '>'),
             '' if empty else '</{0}>'.format(tag_name)
         )
-

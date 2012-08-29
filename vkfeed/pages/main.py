@@ -2,6 +2,8 @@
 
 '''Generates the main page.'''
 
+from __future__ import unicode_literals
+
 import re
 import urllib
 
@@ -17,7 +19,7 @@ class MainPage(webapp2.RequestHandler):
     def get(self):
         '''Processes a GET request.'''
 
-        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
+        self.response.headers[b'Content-Type'] = b'text/html; charset=utf-8'
         self.response.out.write(vkfeed.util.render_template('main.html', {
             'show_like_buttons': True }))
 
@@ -47,13 +49,12 @@ class MainPage(webapp2.RequestHandler):
 
             self.redirect('/feed/' + match.group('profile_id') + '/wall' + params)
         else:
-            self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
+            self.response.headers[b'Content-Type'] = b'text/html; charset=utf-8'
             self.response.out.write(vkfeed.util.render_template('main.html', {
-                'post_error': u'''
+                'post_error': '''
                     Неверно указан URL профиля.
                     Адрес должен быть вида http://vkontakte.ru/имя_профиля.
                     Имя профиля должно удовлетворять требованиям, предъявляемым администрацией ВКонтакте.
                 ''',
                 'show_like_buttons': True,
             }))
-

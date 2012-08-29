@@ -1,5 +1,7 @@
 '''The application's main module.'''
 
+from __future__ import unicode_literals
+
 from webapp2 import WSGIApplication
 
 from vkfeed.pages.main import MainPage
