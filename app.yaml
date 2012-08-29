@@ -33,3 +33,7 @@ skip_files:
 - ^(.*/)?.*/RCS/.*
 - ^(.*/)?\..*
 - ^images.orig(/.*)?
+
+error_handlers:
+- error_code: dos_api_denial
+  file: dos.html

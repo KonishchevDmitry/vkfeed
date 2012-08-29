@@ -1,0 +1,3 @@
+blacklist:
+- subnet: 217.172.29.97
+  description: huge number of requests that spend a lot of free quota
