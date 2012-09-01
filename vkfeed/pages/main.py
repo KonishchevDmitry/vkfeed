@@ -9,7 +9,7 @@ import urllib
 
 import webapp2
 
-import vkfeed.util
+import vkfeed.utils
 
 
 class MainPage(webapp2.RequestHandler):
@@ -20,7 +20,7 @@ class MainPage(webapp2.RequestHandler):
         '''Processes a GET request.'''
 
         self.response.headers[b'Content-Type'] = b'text/html; charset=utf-8'
-        self.response.out.write(vkfeed.util.render_template('main.html', {
+        self.response.out.write(vkfeed.utils.render_template('main.html', {
             'show_like_buttons': True }))
 
 
@@ -50,7 +50,7 @@ class MainPage(webapp2.RequestHandler):
             self.redirect('/feed/' + match.group('profile_id') + '/wall' + params)
         else:
             self.response.headers[b'Content-Type'] = b'text/html; charset=utf-8'
-            self.response.out.write(vkfeed.util.render_template('main.html', {
+            self.response.out.write(vkfeed.utils.render_template('main.html', {
                 'post_error': '''
                     Неверно указан URL профиля.
                     Адрес должен быть вида http://vkontakte.ru/имя_профиля.

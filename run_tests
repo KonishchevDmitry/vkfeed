@@ -9,6 +9,6 @@ PYTHON="$(which python2.7 || echo -n python)"
 cd tests
 
 for test_module in *.py; do
-    PYTHONPATH=.. "$PYTHON" "$test_module"
+    VKFEED_TESTS=yes PYTHONPATH=.. "$PYTHON" "$test_module"
 done
 

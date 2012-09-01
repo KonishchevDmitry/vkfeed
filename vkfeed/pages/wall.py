@@ -8,6 +8,7 @@ import cgi
 import datetime
 import httplib
 import logging
+import time
 
 import webapp2
 
@@ -15,7 +16,7 @@ from PyRSS2Gen import PyRSS2Gen
 
 from vkfeed import constants
 from vkfeed.core import Error
-import vkfeed.util
+import vkfeed.utils
 
 LOG = logging.getLogger(__name__)
 
@@ -31,8 +32,8 @@ class WallPage(webapp2.RequestHandler):
         tokens with expiration time which is not suitable for RSS generator.
         '''
 
-        http_status = None
         user_error = None
+        http_status = httplib.OK
         unknown_user_error = False
 
         try:
@@ -45,14 +46,53 @@ class WallPage(webapp2.RequestHandler):
                 profile_name, foreign_posts, show_photo, hash_tag_title, text_title)
 
             use_api = True
+            if_modified_since = None
 
             if use_api:
                 # Use VKontakte API
 
                 from vkfeed.tools import wall_reader
 
+                cur_time = int(time.time())
+                headers = self.__get_headers()
+                latency = constants.MINUTE_SECONDS
+                min_timestamp = cur_time - constants.WEEK_SECONDS
+
+                for cache_control in headers.get('cache-control', '').split(','):
+                    cache_control = cache_control.strip()
+                    if cache_control.startswith('max-age='):
+                        LOG.info('Applying Cache-Control: %s...', cache_control)
+                        try:
+                            cache_max_age = int(cache_control[len('max-age='):])
+                        except ValueError:
+                            LOG.error('Invalid header: Cache-Control = %s.', cache_control)
+                        else:
+                            if cache_max_age:
+                                min_timestamp = max(min_timestamp, cur_time - cache_max_age - latency)
+
+                if 'if-modified-since' in headers and headers['if-modified-since'] != '0':
+                    LOG.info('Applying If-Modified-Since: %s...', headers['if-modified-since'])
+                    try:
+                        if_modified_since = vkfeed.utils.http_timestamp(headers['if-modified-since'])
+                    except Exception as e:
+                        LOG.error('Invalid header: If-Modified-Since = %s.', headers['if-modified-since'])
+                    else:
+                        min_timestamp = max(min_timestamp, if_modified_since - latency)
+
+                max_age = cur_time - min_timestamp
+                if max_age > constants.DAY_SECONDS:
+                    max_posts_num = 10
+                else:
+                    max_posts_num = 50
+
+                if 'user-agent' in headers and vkfeed.utils.zero_subscribers(headers['user-agent']):
+                    max_posts_num /= 2
+
+                LOG.info('Applying the following limits: max_age=%s, max_posts_num=%s', max_age, max_posts_num)
+
                 try:
-                    data = wall_reader.read(profile_name, foreign_posts, show_photo, hash_tag_title, text_title)
+                    data = wall_reader.read(profile_name,
+                        min_timestamp, max_posts_num, foreign_posts, show_photo, hash_tag_title, text_title)
                 except wall_reader.ConnectionError as e:
                     http_status = httplib.BAD_GATEWAY
                     user_error = 'Ошибка соединения с сервером <a href="{0}" target="_blank">{0}</a>.'.format(constants.API_URL)
@@ -75,8 +115,8 @@ class WallPage(webapp2.RequestHandler):
                     raise Error('Unsupported page.')
 
                 try:
-                    profile_page = vkfeed.util.fetch_url(url)
-                except vkfeed.util.HTTPNotFoundError:
+                    profile_page = vkfeed.utils.fetch_url(url)
+                except vkfeed.utils.HTTPNotFoundError:
                     http_status = httplib.NOT_FOUND
                     user_error = 'Пользователя или группы {0} не существует.'.format(url_html)
                     raise
@@ -113,7 +153,10 @@ class WallPage(webapp2.RequestHandler):
                 if 'user_photo' not in data:
                     data['user_photo'] = constants.APP_URL + 'images/vk-rss-logo.png'
 
-            feed = self.__generate_feed(data)
+            if if_modified_since is not None and not data['posts']:
+                http_status = httplib.NOT_MODIFIED
+            else:
+                feed = self.__generate_feed(data)
         except Exception as e:
             if isinstance(e, Error):
                 if user_error and not unknown_user_error:
@@ -144,10 +187,13 @@ class WallPage(webapp2.RequestHandler):
                 '''.format(cgi.escape(constants.ADMIN_EMAIL, quote = True))
 
             self.response.headers[b'Content-Type'] = b'text/html; charset=utf-8'
-            self.response.out.write(vkfeed.util.render_template('error.html', { 'error': error }))
+            self.response.out.write(vkfeed.utils.render_template('error.html', { 'error': error }))
         else:
-            self.response.headers[b'Content-Type'] = b'application/rss+xml'
-            self.response.out.write(feed)
+            if http_status == httplib.OK:
+                self.response.headers[b'Content-Type'] = b'application/rss+xml'
+                self.response.out.write(feed)
+            else:
+                self.error(http_status)
 
 
     def __generate_feed(self, data):
@@ -177,3 +223,9 @@ class WallPage(webapp2.RequestHandler):
         )
 
         return rss.to_xml('utf-8')
+
+
+    def __get_headers(self):
+        '''Returns lowercased headers.'''
+
+        return { name.lower(): value for name, value in self.request.headers.iteritems() }

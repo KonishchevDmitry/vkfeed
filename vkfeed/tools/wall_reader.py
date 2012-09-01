@@ -10,7 +10,7 @@ import logging
 import re
 import urllib
 
-import vkfeed.util
+import vkfeed.utils
 from vkfeed import constants
 from vkfeed.core import Error
 
@@ -33,9 +33,6 @@ _GROUP_ALIAS_RE = re.compile(r'^(?:event|public)(\d+)$')
 _HASH_TAG_RE = re.compile(ur'#[a-zA-Zа-яА-Я0-9\-_]+')
 '''Matches a hash tag.'''
 
-_MAX_POSTS_NUM = 10
-'''Maximum number of posts in feed.'''
-
 
 class ConnectionError(Error):
     '''Raised when we fail to get a data from the server.'''
@@ -51,7 +48,7 @@ class ServerError(Error):
         self.code = code
 
 
-def read(profile_name, foreign_posts, show_photo, hash_tag_title, text_title):
+def read(profile_name, min_timestamp, max_posts_num, foreign_posts, show_photo, hash_tag_title, text_title):
     '''Reads a wall of the specified user.'''
 
     user = _get_user(profile_name)
@@ -75,8 +72,11 @@ def read(profile_name, foreign_posts, show_photo, hash_tag_title, text_title):
 
     posts = []
     for post in reply['wall'][1:]:
-        if len(posts) >= _MAX_POSTS_NUM:
+        if len(posts) >= max_posts_num:
             break
+
+        if post['date'] < min_timestamp:
+            continue
 
         if not foreign_posts and post['from_id'] != user['id']:
             LOG.debug('Ignore post %s from user %s.', post['id'], post['from_id'])
@@ -226,7 +226,7 @@ def _api(method, **kwargs):
     url = '{0}method/{1}?language=0&'.format(constants.API_URL, method) + urllib.urlencode(kwargs)
 
     try:
-        data = vkfeed.util.fetch_url(url, content_type = 'application/json')
+        data = vkfeed.utils.fetch_url(url, content_type = 'application/json')
 
         try:
             data = json.loads(data)

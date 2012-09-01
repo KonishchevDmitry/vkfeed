@@ -2,13 +2,17 @@
 
 from __future__ import unicode_literals
 
+import calendar
 import cgi
+import datetime
 import httplib
 import logging
 import os
+import re
 
-import google.appengine.api.urlfetch as urlfetch
-from google.appengine.ext.webapp import template
+if not os.getenv('VKFEED_TESTS'):
+    import google.appengine.api.urlfetch as urlfetch
+    from google.appengine.ext.webapp import template
 
 from vkfeed.core import Error
 
@@ -68,10 +72,41 @@ def fetch_url(url, content_type = 'text/html'):
     return content
 
 
+def http_timestamp(date):
+    """Returns a timestamp corresponding to the specified HTTP date.
+
+    FIXME: there is no support for timezone parsing in standard python
+    libraries. Thus, we are supporting a GMT zone only.
+    """
+
+    for fmt in (
+        "%a, %d %b %Y %H:%M:%S GMT", # RFC 1123
+        "%a, %d %b %Y %H:%M:%S GMT+00:00", # RFC 1123
+        "%a, %d %b %Y %H:%M:%S +0000", # ???
+        "%A, %d-%b-%y %H:%M:%S GMT", # RFC 850
+        "%A, %d-%b-%y %H:%M:%S GMT+00:00", # RFC 850
+        "%a %b %d %H:%M:%S %Y" # asctime(3)
+    ):
+        try:
+            timeo = datetime.datetime.strptime(date, fmt)
+        except ValueError:
+            continue
+
+        return calendar.timegm(datetime.datetime.utctimetuple(timeo))
+
+    raise Exception("Invalid HTTP date format")
+
+
 def render_template(name, params = {}):
     '''Renders the specified template.'''
 
     return template.render(os.path.join('templates', name), params)
+
+
+def zero_subscribers(user_agent):
+    '''Returns True if the feed has zero subscribers.'''
+
+    return re.search(r'[^0-9]0\s+(?:reader|subscriber)', user_agent, re.IGNORECASE) is not None
 
 
 def _fetch_url(*args, **kwargs):
