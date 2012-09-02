@@ -10,6 +10,8 @@ import logging
 import re
 import urllib
 
+from google.appengine.api import memcache
+
 import vkfeed.utils
 from vkfeed import constants
 from vkfeed.core import Error
@@ -52,26 +54,12 @@ def read(profile_name, min_timestamp, max_posts_num, foreign_posts, show_photo, 
     '''Reads a wall of the specified user.'''
 
     user = _get_user(profile_name)
-    reply = _api('wall.get', owner_id = user['id'], extended = 1)
-
-    users = {}
-
-    for profile in reply.get('profiles', []):
-        users[profile['uid']] = {
-            'name':  profile['first_name'] + ' ' + profile['last_name'],
-            'photo': profile['photo'],
-        }
-
-    for profile in reply.get('groups', []):
-        users[-profile['gid']] = {
-            'name':  profile['name'],
-            'photo': profile['photo'],
-        }
+    users, wall_posts = _get_wall(user)
 
     img_style = 'style="border-style: none; display: block;"'
 
     posts = []
-    for post in reply['wall'][1:]:
+    for post in wall_posts:
         if len(posts) >= max_posts_num:
             break
 
@@ -314,6 +302,15 @@ def _get_profile_url(profile_id):
 def _get_user(profile_name):
     '''Returns user info by profile name.'''
 
+    user = memcache.get(profile_name, 'users')
+    if user is not None:
+        LOG.info('Got the profile info from memcache.')
+
+        if not user:
+            raise ServerError(113, 'Пользователя не существует.')
+
+        return user
+
     try:
         profile = _api('users.get', uid = profile_name, fields = 'photo_big,photo_medium,photo')[0]
         user = {
@@ -337,6 +334,7 @@ def _get_user(profile_name):
             except ServerError as e:
                 # Invalid group ID
                 if e.code == 125:
+                    memcache.set(profile_name, {}, namespace = 'users', time = constants.HOUR_SECONDS)
                     raise ServerError(113, 'Пользователя не существует.')
                 else:
                     raise e
@@ -350,7 +348,62 @@ def _get_user(profile_name):
     else:
         user['photo'] = profile['photo']
 
+    memcache.set(profile_name, user, namespace = 'users', time = constants.DAY_SECONDS)
+
     return user
+
+
+def _get_wall(user):
+    '''Returns wall posts of the specified user.'''
+
+#    wall = memcache.get(str(user['id']), 'walls')
+#    if wall is not None:
+#        LOG.info('Got the wall from memcache.')
+#
+#        if 'error' in wall:
+#            raise ServerError(wall['error']['code'], wall['error']['message'])
+#
+#        return wall['users'], wall['posts']
+
+    try:
+        reply = _api('wall.get', owner_id = user['id'], extended = 1)
+    except ServerError as error:
+#        # 15: The wall is private or blocked
+#        # 18: The user is deleted or banned
+#        if error.code in ( 15, 18 ):
+#            memcache.set(str(user['id']), {
+#                'error': {
+#                    'code':    error.code,
+#                    'message': unicode(error),
+#                }
+#            }, namespace = 'walls', time = constants.HOUR_SECONDS)
+#        else:
+#            # TODO
+#            LOG.error('Got unknown server error %s: %s', error.code, error)
+
+        raise error
+
+    users = {}
+    posts = reply['wall'][1:]
+
+    for profile in reply.get('profiles', []):
+        users[profile['uid']] = {
+            'name':  profile['first_name'] + ' ' + profile['last_name'],
+            'photo': profile['photo'],
+        }
+
+    for profile in reply.get('groups', []):
+        users[-profile['gid']] = {
+            'name':  profile['name'],
+            'photo': profile['photo'],
+        }
+
+#    memcache.set(str(user['id']), {
+#        'users': users,
+#        'posts': posts,
+#    }, namespace = 'walls', time = 10 * constants.MINUTE_SECONDS)
+
+    return users, posts
 
 
 def _parse_text(text):
