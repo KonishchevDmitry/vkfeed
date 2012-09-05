@@ -58,17 +58,20 @@ class WallPage(webapp2.RequestHandler):
                 latency = constants.MINUTE_SECONDS
                 min_timestamp = cur_time - constants.WEEK_SECONDS
 
-                for cache_control in headers.get('cache-control', '').split(','):
-                    cache_control = cache_control.strip()
-                    if cache_control.startswith('max-age='):
-                        LOG.info('Applying Cache-Control: %s...', cache_control)
-                        try:
-                            cache_max_age = int(cache_control[len('max-age='):])
-                        except ValueError:
-                            LOG.error('Invalid header: Cache-Control = %s.', cache_control)
-                        else:
-                            if cache_max_age:
-                                min_timestamp = max(min_timestamp, cur_time - cache_max_age - latency)
+                ## This confuses Google Reader users because it always requests
+                ## feeds with 'Cache-Control: max-age=3600' when adding
+                ## subscriptions and users often gen an empty feed.
+                #for cache_control in headers.get('cache-control', '').split(','):
+                #    cache_control = cache_control.strip()
+                #    if cache_control.startswith('max-age='):
+                #        LOG.info('Applying Cache-Control: %s...', cache_control)
+                #        try:
+                #            cache_max_age = int(cache_control[len('max-age='):])
+                #        except ValueError:
+                #            LOG.error('Invalid header: Cache-Control = %s.', cache_control)
+                #        else:
+                #            if cache_max_age:
+                #                min_timestamp = max(min_timestamp, cur_time - cache_max_age - latency)
 
                 if 'if-modified-since' in headers and headers['if-modified-since'] != '0':
                     LOG.info('Applying If-Modified-Since: %s...', headers['if-modified-since'])
@@ -152,6 +155,8 @@ class WallPage(webapp2.RequestHandler):
                 data['url'] = url
                 if 'user_photo' not in data:
                     data['user_photo'] = constants.APP_URL + 'images/vk-rss-logo.png'
+
+            LOG.info('Return %s items.', len(data['posts']))
 
             if if_modified_since is not None and not data['posts']:
                 http_status = httplib.NOT_MODIFIED
