@@ -21,7 +21,9 @@ class MainPage(webapp2.RequestHandler):
 
         self.response.headers[b'Content-Type'] = b'text/html; charset=utf-8'
         self.response.out.write(vkfeed.utils.render_template('main.html', {
-            'show_like_buttons': True }))
+            'show_like_buttons': True,
+            'include_counters':  True,
+        }))
 
 
     def post(self):
@@ -57,4 +59,5 @@ class MainPage(webapp2.RequestHandler):
                     Имя профиля должно удовлетворять требованиям, предъявляемым администрацией ВКонтакте.
                 ''',
                 'show_like_buttons': True,
+                'include_counters':  True,
             }))
