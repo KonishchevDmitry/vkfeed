@@ -53,21 +53,36 @@ class ServerError(Error):
 def read(profile_name, min_timestamp, max_posts_num, foreign_posts, show_photo, hash_tag_title, text_title):
     '''Reads a wall of the specified user.'''
 
+    users = {}
+    wall_posts = []
     user = _get_user(profile_name)
-    users, wall_posts = _get_wall(user)
+
+    def get_wall(prediction):
+        LOG.info('Predicted to %s.', prediction)
+
+        _get_wall(user, foreign_posts, len(wall_posts), prediction - len(wall_posts), users, wall_posts)
+
+        if len(wall_posts) < max_posts_num and len(wall_posts) == prediction and wall_posts[-1]['date'] > min_timestamp:
+            LOG.warning('Got invalid prediction %s.', prediction)
+            get_wall(min(max(prediction, 5) * 2, max_posts_num))
+
+
+    wall_request_fingerprint = '{0}|{1}|{2}'.format(user['id'], int(foreign_posts), max_posts_num)
+    last_post_num = memcache.get(wall_request_fingerprint, 'post_stat')
+
+    if last_post_num is None:
+        LOG.info('There is no statistics on previous number of posts.')
+        get_wall(10 if max_posts_num > 10 else max_posts_num)
+    else:
+        LOG.info('Previously returned number of posts: %s.', last_post_num)
+        get_wall(min(max_posts_num, last_post_num + 2))
+    wall_posts = wall_posts[:max_posts_num]
 
     img_style = 'style="border-style: none; display: block;"'
 
     posts = []
     for post in wall_posts:
-        if len(posts) >= max_posts_num:
-            break
-
         if post['date'] < min_timestamp:
-            continue
-
-        if not foreign_posts and post['from_id'] != user['id']:
-            LOG.debug('Ignore post %s from user %s.', post['id'], post['from_id'])
             continue
 
         supported = []
@@ -199,6 +214,9 @@ def read(profile_name, min_timestamp, max_posts_num, foreign_posts, show_photo, 
             'text':  text,
             'date':  date,
         })
+
+    if last_post_num != len(posts):
+        memcache.set(wall_request_fingerprint, len(posts), namespace = 'post_stat')
 
     return {
         'url':        constants.VK_URL + profile_name,
@@ -353,9 +371,11 @@ def _get_user(profile_name):
     return user
 
 
-def _get_wall(user):
+def _get_wall(user, foreign_posts, offset, max_posts_num, users, posts):
     '''Returns wall posts of the specified user.'''
 
+# TODO
+## Doesn't work already due to foreign_posts and max_posts_num arguments
 #    wall = memcache.get(str(user['id']), 'walls')
 #    if wall is not None:
 #        LOG.info('Got the wall from memcache.')
@@ -366,7 +386,9 @@ def _get_wall(user):
 #        return wall['users'], wall['posts']
 
     try:
-        reply = _api('wall.get', owner_id = user['id'], extended = 1)
+        reply = _api(
+            'wall.get', owner_id = user['id'], offset = offset, count = max_posts_num,
+            filter = 'all' if foreign_posts else 'owner', extended = 1)
     except ServerError as error:
 #        # 15: The wall is private or blocked
 #        # 18: The user is deleted or banned
@@ -383,8 +405,7 @@ def _get_wall(user):
 
         raise error
 
-    users = {}
-    posts = reply['wall'][1:]
+    posts.extend(reply['wall'][1:])
 
     for profile in reply.get('profiles', []):
         users[profile['uid']] = {
@@ -402,8 +423,6 @@ def _get_wall(user):
 #        'users': users,
 #        'posts': posts,
 #    }, namespace = 'walls', time = 10 * constants.MINUTE_SECONDS)
-
-    return users, posts
 
 
 def _parse_text(text):
