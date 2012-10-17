@@ -374,36 +374,9 @@ def _get_user(profile_name):
 def _get_wall(user, foreign_posts, offset, max_posts_num, users, posts):
     '''Returns wall posts of the specified user.'''
 
-# TODO
-## Doesn't work already due to foreign_posts and max_posts_num arguments
-#    wall = memcache.get(str(user['id']), 'walls')
-#    if wall is not None:
-#        LOG.info('Got the wall from memcache.')
-#
-#        if 'error' in wall:
-#            raise ServerError(wall['error']['code'], wall['error']['message'])
-#
-#        return wall['users'], wall['posts']
-
-    try:
-        reply = _api(
-            'wall.get', owner_id = user['id'], offset = offset, count = max_posts_num,
-            filter = 'all' if foreign_posts else 'owner', extended = 1)
-    except ServerError as error:
-#        # 15: The wall is private or blocked
-#        # 18: The user is deleted or banned
-#        if error.code in ( 15, 18 ):
-#            memcache.set(str(user['id']), {
-#                'error': {
-#                    'code':    error.code,
-#                    'message': unicode(error),
-#                }
-#            }, namespace = 'walls', time = constants.HOUR_SECONDS)
-#        else:
-#            # TODO
-#            LOG.error('Got unknown server error %s: %s', error.code, error)
-
-        raise error
+    reply = _api(
+        'wall.get', owner_id = user['id'], offset = offset, count = max_posts_num,
+        filter = 'all' if foreign_posts else 'owner', extended = 1)
 
     posts.extend(reply['wall'][1:])
 
@@ -418,11 +391,6 @@ def _get_wall(user, foreign_posts, offset, max_posts_num, users, posts):
             'name':  profile['name'],
             'photo': profile['photo'],
         }
-
-#    memcache.set(str(user['id']), {
-#        'users': users,
-#        'posts': posts,
-#    }, namespace = 'walls', time = 10 * constants.MINUTE_SECONDS)
 
 
 def _parse_text(text):
