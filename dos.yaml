@@ -1,3 +1,12 @@
 blacklist:
 - subnet: 217.172.29.97
   description: huge number of requests that spend a lot of free quota
+
+- subnet: 178.158.105.217
+  description: requests to the same feed every 15 seconds
+
+- subnet: 85.118.226.61
+  description: requests to the same feed every 1 minute
+
+- subnet: 67.23.226.169
+  description: a lot of requests to the same feed
