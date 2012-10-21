@@ -44,6 +44,9 @@ class MainPage(webapp2.RequestHandler):
             if self.request.get('foreign_posts') == '1':
                 params['foreign_posts'] = '1'
 
+            if self.request.get('big_photos') == '1':
+                params['big_photos'] = '1'
+
             if self.request.get('show_photo') != '1':
                 params['show_photo'] = '0'
 

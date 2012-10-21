@@ -41,9 +41,10 @@ class WallPage(webapp2.RequestHandler):
             foreign_posts = ( self.request.get('foreign_posts', '0') != '0' )
             hash_tag_title = ( self.request.get('hash_tag_title', '0') != '0' )
             text_title = ( self.request.get('text_title', '0') != '0' )
+            big_photos = ( self.request.get('big_photos', '0') != '0' )
 
-            LOG.info('Requested feed for "%s" (foreign_posts = %s, show_photo = %s, hash_tag_title = %s, text_title = %s).',
-                profile_name, foreign_posts, show_photo, hash_tag_title, text_title)
+            LOG.info('Requested feed for "%s" (foreign_posts = %s, show_photo = %s, hash_tag_title = %s, text_title = %s, big_photos = %s).',
+                profile_name, foreign_posts, show_photo, hash_tag_title, text_title, big_photos)
 
             use_api = True
             if_modified_since = None
@@ -95,7 +96,8 @@ class WallPage(webapp2.RequestHandler):
 
                 try:
                     data = wall_reader.read(profile_name,
-                        min_timestamp, max_posts_num, foreign_posts, show_photo, hash_tag_title, text_title)
+                        min_timestamp, max_posts_num, foreign_posts, show_photo,
+                        hash_tag_title, text_title, big_photos)
                 except wall_reader.ConnectionError as e:
                     http_status = httplib.BAD_GATEWAY
                     user_error = 'Ошибка соединения с сервером <a href="{0}" target="_blank">{0}</a>.'.format(constants.API_URL)
