@@ -5,6 +5,9 @@ blacklist:
 - subnet: 178.158.105.217
   description: requests to the same feed every 15 seconds
 
+- subnet: 81.9.55.76
+  description: requests to the same feed every 5 minutes
+
 - subnet: 85.118.226.61
   description: requests to the same feed every 1 minute
 
