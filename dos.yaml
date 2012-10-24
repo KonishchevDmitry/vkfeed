@@ -10,3 +10,6 @@ blacklist:
 
 - subnet: 67.23.226.169
   description: a lot of requests to the same feed
+
+- subnet: 46.173.209.29
+  description: a lot of requests to the same feed
