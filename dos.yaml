@@ -4,7 +4,6 @@ blacklist:
 - subnet: 217.172.29.97
 - subnet: 46.173.209.29
 - subnet: 67.23.226.169
-- subnet: 80.240.218.168
 - subnet: 81.9.55.76
 - subnet: 85.118.226.61
 - subnet: 89.208.36.12
