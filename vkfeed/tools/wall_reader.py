@@ -331,7 +331,7 @@ def _get_user(profile_name):
         return user
 
     try:
-        profile = _api('users.get', uid = profile_name, fields = 'photo_big,photo_medium,photo')[0]
+        profile = _api('users.get', uids = profile_name, fields = 'photo_big,photo_medium,photo')[0]
         user = {
             'id':   profile['uid'],
             'name': profile['first_name'] + ' ' + profile['last_name'],
