@@ -58,7 +58,7 @@ class MainPage(webapp2.RequestHandler):
             self.response.out.write(vkfeed.utils.render_template('main.html', {
                 'post_error': '''
                     Неверно указан URL профиля.
-                    Адрес должен быть вида http://vkontakte.ru/имя_профиля.
+                    Адрес должен быть вида http://vk.com/имя_профиля.
                     Имя профиля должно удовлетворять требованиям, предъявляемым администрацией ВКонтакте.
                 ''',
                 'show_like_buttons': True,
