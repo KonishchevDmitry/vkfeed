@@ -7,3 +7,4 @@ blacklist:
 - subnet: 81.9.55.76
 - subnet: 85.118.226.61
 - subnet: 89.208.36.12
+- subnet: 77.222.61.242
