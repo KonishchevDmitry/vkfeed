@@ -1,11 +1,20 @@
+# Blacklisted IPs (for a lot of requests)
+#
+# How to renew this list:
+# /opt/google/appengine/appcfg.py --num_days=1 request_logs . gae.log
+# awk '{ print $1 }' gae.log | sort | uniq -c | sort -rn | head | egrep -v "$(awk '/- subnet/ { printf "|%s", $3 }' dos.yaml | sed 's/^|//')"
+
 blacklist:
 - subnet: 178.158.105.217
 - subnet: 195.214.195.59
 - subnet: 217.172.29.97
 - subnet: 46.173.209.29
+- subnet: 5.9.82.230
 - subnet: 67.23.226.169
-- subnet: 81.9.55.76
-- subnet: 85.118.226.61
-- subnet: 89.208.36.12
 - subnet: 77.222.61.242
 - subnet: 77.234.200.218
+- subnet: 81.9.55.76
+- subnet: 82.208.91.154
+- subnet: 85.118.226.61
+- subnet: 89.208.36.12
+- subnet: 91.203.194.78
