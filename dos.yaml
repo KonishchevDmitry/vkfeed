@@ -5,12 +5,16 @@
 # awk '{ print $1 }' gae.log | sort | uniq -c | sort -rn | head -n 20 | egrep -v "$(awk '/- subnet/ { printf "|%s", $3 }' dos.yaml | sed 's/^|//')" | while read number ip; do printf "%5d %15s %35s %s\n" "$number" "$ip" "$(whois $ip | awk -F: '{ if($1 == "OrgName") { printf("%s", $2); exit 0; } }' | sed -r 's/^ +//g')" "$(awk -F '"' "/^$ip/ { printf(\"%s\", \$4); exit 0; }" gae.log)"; done
 
 blacklist:
+- subnet: 128.74.114.174
 - subnet: 178.158.105.217
 - subnet: 195.214.195.59
 - subnet: 204.51.181.213
 - subnet: 216.121.17.66
+- subnet: 216.121.43.113
+- subnet: 216.121.43.124
 - subnet: 217.172.29.97
 - subnet: 46.173.209.29
+- subnet: 46.73.10.88
 - subnet: 46.73.58.101
 - subnet: 5.9.82.230
 - subnet: 67.23.226.169
