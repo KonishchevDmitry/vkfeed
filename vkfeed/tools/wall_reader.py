@@ -337,7 +337,11 @@ def _get_user(profile_name):
         return user
 
     try:
-        profile = _api('users.get', uids = profile_name, fields = 'photo_big,photo_medium,photo')[0]
+        profiles = _api('users.get', uids = profile_name, fields = 'photo_big,photo_medium,photo')
+        if not profiles:
+            raise ServerError(-1, 'Пользователь заблокирован.')
+        profile = profiles[0]
+
         user = {
             'id':   profile['uid'],
             'name': profile['first_name'] + ' ' + profile['last_name'],
@@ -351,14 +355,18 @@ def _get_user(profile_name):
                 if match is not None:
                     profile_name = 'club' + match.group(1)
 
-                profile = _api('groups.getById', gid = profile_name, fields = 'photo_big,photo_medium,photo')[0]
+                profiles = _api('groups.getById', gid = profile_name, fields = 'photo_big,photo_medium,photo')
+                if not profiles:
+                    raise ServerError(-1, 'Сообщество заблокировано.')
+                profile = profiles[0]
+
                 user = {
                     'id':    -profile['gid'],
                     'name':  profile['name'],
                 }
             except ServerError as e:
                 # Invalid group ID
-                if e.code == 125:
+                if e.code in (100, 125):
                     memcache.set(profile_name, {}, namespace = 'users', time = constants.HOUR_SECONDS)
                     raise ServerError(113, 'Пользователя не существует.')
                 else:
