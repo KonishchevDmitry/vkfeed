@@ -99,17 +99,20 @@ def read(profile_name, min_timestamp, max_posts_num, foreign_posts, show_photo, 
             post.get('attachments', []), 0)
 
         for attachment in post.get('attachments', []):
-            info = attachment[attachment['type']]
+            # Notice: attachment object is not always stored in
+            # attachment[attachment["type"]] - sometimes it's stored under a
+            # different key, so we can't obtain it here for all attachment types.
 
             if attachment['type'] == 'app':
                 supported.append(
                     '<a href="{vk_url}app{info[app_id]}"><img {img_style} src="{info[src]}" /></a>'.format(
-                        vk_url = constants.VK_URL, info = info, img_style = img_style))
+                        vk_url = constants.VK_URL, info = attachment[attachment['type']], img_style = img_style))
             elif attachment['type'] == 'graffiti':
                 supported.append(
                     '<a href="{vk_url}graffiti{info[gid]}"><img {img_style} src="{info[src]}" /></a>'.format(
-                        vk_url = constants.VK_URL, info = info, img_style = img_style))
+                        vk_url = constants.VK_URL, info = attachment[attachment['type']], img_style = img_style))
             elif attachment['type'] == 'link':
+                info = attachment[attachment['type']]
                 info['description'] = _parse_text(info['description']) or info['title']
 
                 html = '<b>Ссылка: <a href="{info[url]}">{info[title]}</a></b><p>'.format(info = info)
@@ -130,6 +133,7 @@ def read(profile_name, min_timestamp, max_posts_num, foreign_posts, show_photo, 
 
                 supported.append(html)
             elif attachment['type'] in ('photo', 'posted_photo'):
+                info = attachment[attachment['type']]
                 photo_id = info.get('pid', info.get('id', 0))
                 photo_src = info['src_big'] if photo_count == 1 or big_photos else info['src']
 
@@ -147,6 +151,7 @@ def read(profile_name, min_timestamp, max_posts_num, foreign_posts, show_photo, 
                             vk_url = constants.VK_URL, profile_id = user['id'], photo_id = photo_id,
                             info = info, post_id = post['id'], img_style = img_style, photo_src = photo_src))
             elif attachment['type'] == 'video':
+                info = attachment[attachment['type']]
                 supported.append(
                     '<a href="{vk_url}video{info[owner_id]}_{info[vid]}">'
                         '<img {img_style} src="{info[image]}" />'
@@ -156,19 +161,20 @@ def read(profile_name, min_timestamp, max_posts_num, foreign_posts, show_photo, 
                         duration = _get_duration(info['duration'])))
 
             elif attachment['type'] == 'audio':
+                info = attachment[attachment['type']]
                 unsupported.append('<b>Аудиозапись: <a href="{vk_url}search?{query}">{title}</a></b>'.format(
                     vk_url = constants.VK_URL, query = urllib.urlencode({
                         'c[q]': (info['performer'] + ' - ' + info['title']).encode('utf-8'),
                         'c[section]': 'audio'
                     }), title = '{} - {} ({})'.format(info['performer'], info['title'], _get_duration(info['duration']))))
             elif attachment['type'] == 'doc':
-                unsupported.append('<b>Документ: {}</b>'.format(info['title']))
+                unsupported.append('<b>Документ: {}</b>'.format(attachment[attachment['type']]['title']))
             elif attachment['type'] == 'note':
-                unsupported.append('<b>Заметка: {}</b>'.format(info['title']))
+                unsupported.append('<b>Заметка: {}</b>'.format(attachment[attachment['type']]['title']))
             elif attachment['type'] == 'page':
-                unsupported.append('<b>Страница: {}</b>'.format(info['title']))
+                unsupported.append('<b>Страница: {}</b>'.format(attachment[attachment['type']]['title']))
             elif attachment['type'] == 'poll':
-                unsupported.append('<b>Опрос: {}</b>'.format(info['question']))
+                unsupported.append('<b>Опрос: {}</b>'.format(attachment[attachment['type']]['question']))
 
         text = ''
 
