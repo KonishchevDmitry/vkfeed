@@ -32,6 +32,13 @@ class WallPage(webapp2.RequestHandler):
         tokens with expiration time which is not suitable for RSS generator.
         '''
 
+        headers = self.__get_headers()
+
+        # Google Reader bot still crawls the Web. Reject it to save bandwidth.
+        if headers.get('user-agent', '').lstrip().startswith('Feedfetcher-Google;'):
+            self.error(httplib.FORBIDDEN)
+            return
+
         user_error = None
         http_status = httplib.OK
         unknown_user_error = False
@@ -55,7 +62,6 @@ class WallPage(webapp2.RequestHandler):
                 from vkfeed.tools import wall_reader
 
                 cur_time = int(time.time())
-                headers = self.__get_headers()
                 latency = constants.MINUTE_SECONDS
                 min_timestamp = cur_time - constants.WEEK_SECONDS
 
