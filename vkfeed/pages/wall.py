@@ -33,9 +33,17 @@ class WallPage(webapp2.RequestHandler):
         '''
 
         headers = self.__get_headers()
+        user_agent = headers.get('user-agent')
 
-        # Google Reader bot still crawls the Web. Reject it to save bandwidth.
-        if headers.get('user-agent', '').lstrip().startswith('Feedfetcher-Google;'):
+        if user_agent and (
+            # Google Reader bot still crawls the Web. Reject it to save
+            # bandwidth.
+            user_agent.lstrip().startswith('Feedfetcher-Google;') or
+
+            # YandexBlogs bot sends a lot of requests (2/minute) for some
+            # feeds. The support doesn't respond adequately.
+            'YandexBlogs' in user_agent
+        ):
             self.error(httplib.FORBIDDEN)
             return
 
@@ -95,7 +103,7 @@ class WallPage(webapp2.RequestHandler):
                 else:
                     max_posts_num = 50
 
-                if 'user-agent' in headers and vkfeed.utils.zero_subscribers(headers['user-agent']):
+                if user_agent and vkfeed.utils.zero_subscribers(user_agent):
                     max_posts_num /= 2
 
                 LOG.info('Applying the following limits: max_age=%s, max_posts_num=%s', max_age, max_posts_num)
