@@ -33,12 +33,15 @@ class WallPage(webapp2.RequestHandler):
         '''
 
         headers = self.__get_headers()
-        user_agent = headers.get('user-agent')
+        user_agent = headers.get('user-agent', '').strip()
 
         if user_agent and (
             # Google Reader bot still crawls the Web. Reject it to save
             # bandwidth.
-            user_agent.lstrip().startswith('Feedfetcher-Google;') or
+            user_agent.startswith('Feedfetcher-Google;') or
+
+            # FeedNotifier updates feeds every minute
+            user_agent.startswith('FeedNotifier/') or
 
             # YandexBlogs bot sends a lot of requests (2/minute) for some
             # feeds. The support doesn't respond adequately.
