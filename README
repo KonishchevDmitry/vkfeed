@@ -2,3 +2,9 @@ vkfeed is a Google App Engine application that allows you to subscribe to
 vk.com public wall posts via RSS.
 
 It is hosted at http://vkontakte-feed.appspot.com/.
+
+You can deploy it on your own Google App Engine account by:
+* Clone the repository (git clone git@github.com:KonishchevDmitry/vkfeed.git);
+* Change all copyrights to your own (git grep 'Dmitry Konishchev');
+* Modify app.yaml for your account (https://developers.google.com/appengine/docs/python/config/appconfig);
+* Deploy (https://developers.google.com/appengine/docs/python/gettingstartedpython27/uploading).
