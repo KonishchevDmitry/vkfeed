@@ -26,6 +26,9 @@ _TEXT_URL_RE = re.compile(r'(^|\s|>)(https?://[^"]+?)(\.?(?:<|\s|$))')
 _DOMAIN_ONLY_TEXT_URL_RE = re.compile(r'(^|\s|>)((?:[a-z0-9](?:[-a-z0-9]*[a-z0-9])?\.)+[a-z0-9](?:[-a-z0-9]*[a-z0-9])/[^"]+?)(\.?(?:<|\s|$))')
 '''Matches a URL without protocol specification in a plain text.'''
 
+_NEW_LINE_RE = re.compile(r'<br(?:\s*/)?>', re.IGNORECASE)
+'''Matches a user link in a post text.'''
+
 _USER_LINK_RE = re.compile(r'\[((?:id|club)\d+)\|([^\]]+)\]')
 '''Matches a user link in a post text.'''
 
@@ -288,7 +291,9 @@ def _get_post_title(users, post, text_title, hash_tag_title):
     title = users[post['from_id']]['name']
 
     if text_title:
-        text = post['text'].lstrip('.?!').strip()
+        text = post['text'].lstrip('.?!')
+        text = _NEW_LINE_RE.sub(' ', text).strip()
+
         if text:
             title = _USER_LINK_RE.sub(r'\2', text)
             limit_pos = len(title)
