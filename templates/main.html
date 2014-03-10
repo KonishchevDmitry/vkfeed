@@ -6,9 +6,84 @@
     <script type="text/javascript">
         var formInputFocused = false;
 
-        function setFormInputFocus() {
-            if(!formInputFocused)
+        function setFormInputFocus () {
+            if (!formInputFocused) {
                 document.profile_url_form.profile_url.focus();
+            }
+        }
+
+        function onready () {
+            'use strict';
+        
+            function getCookie (name) {
+                name += '=';
+                var cookies = document.cookie.split(';');
+                for(var i=0; i<cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    if(0 === cookie.indexOf(name)) {
+                        return cookie.substring(name.length, cookie.length);
+                    }
+                }
+            }
+
+            function setCookie (name, value) {
+                var d = new Date();
+                d.setTime(d.getTime() + 365 * 24 * 3600 * 1000);
+                document.cookie = name + '=' + value + '; ' + 'expires=' + d.toGMTString();
+            }
+
+            function getFormDefaults () {
+                var foreignPosts = getCookie('profile_url_form_foreign_posts');
+                if (foreignPosts) {
+                    return {
+                        foreignPosts: 'true' === foreignPosts,
+                        bigPhotos: 'true' === getCookie('profile_url_form_big_photos'),
+                        showPhoto: 'true' === getCookie('profile_url_form_show_photo')
+                    };
+                }
+            }
+
+            function setFormValues (values) {
+                var elements = document.forms.profile_url_form.elements;
+                elements.foreign_posts.checked = values.foreignPosts;
+                elements.big_photos.checked = values.bigPhotos;
+                elements.show_photo.checked = values.showPhoto;
+            }
+
+            function getFormValues () {
+                var elements = document.forms.profile_url_form.elements;
+                return {
+                    foreignPosts: elements.foreign_posts.checked,
+                    bigPhotos: elements.big_photos.checked,
+                    showPhoto: elements.show_photo.checked
+                };
+            }
+
+            function setDefaults (defaults) {
+                setCookie('profile_url_form_foreign_posts', defaults.foreignPosts);
+                setCookie('profile_url_form_big_photos', defaults.bigPhotos);
+                setCookie('profile_url_form_show_photo', defaults.showPhoto);
+            }
+
+            function delegateEvents () {
+                document.forms.profile_url_form.onsubmit = function () {
+                    setDefaults(getFormValues());
+                };
+            }
+
+            var defaults = getFormDefaults();
+            if (defaults) {
+                setFormValues(defaults);
+            }
+
+            delegateEvents();
+        }
+
+        if (document.readyState === 'complete') {
+            onready();
+        } else {
+            window.addEventListener('onload', onready, false);
+            window.addEventListener('DOMContentLoaded', onready, false);
         }
     </script>
 {% endblock %}
@@ -31,7 +106,7 @@
                         <input type="text" name="profile_url" style="width: 100%" onfocus="formInputFocused = true;" />
                     </td>
                     <td>
-                        <input type="submit" style="margin-left: 0" value="Сгенерировать RSS-ленту" />
+                        <input type="submit" class="profile_url_form_submit" style="margin-left: 0" value="Сгенерировать RSS-ленту" />
                     </td>
                 </tr>
                 <tr>
