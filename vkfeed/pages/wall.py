@@ -102,9 +102,9 @@ class WallPage(webapp2.RequestHandler):
 
                 max_age = cur_time - min_timestamp
                 if max_age > constants.DAY_SECONDS:
-                    max_posts_num = 10
+                    max_posts_num = 1000
                 else:
-                    max_posts_num = 50
+                    max_posts_num = 5000
 
                 if user_agent and vkfeed.utils.zero_subscribers(user_agent):
                     max_posts_num /= 2
