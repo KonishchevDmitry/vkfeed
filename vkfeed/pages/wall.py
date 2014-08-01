@@ -72,6 +72,7 @@ class WallPage(webapp2.RequestHandler):
 
                 from vkfeed.tools import wall_reader
 
+                max_posts_num = 50
                 cur_time = int(time.time())
                 latency = constants.MINUTE_SECONDS
                 min_timestamp = cur_time - constants.WEEK_SECONDS
@@ -101,14 +102,6 @@ class WallPage(webapp2.RequestHandler):
                         min_timestamp = max(min_timestamp, if_modified_since - latency)
 
                 max_age = cur_time - min_timestamp
-                if max_age > constants.DAY_SECONDS:
-                    max_posts_num = 10
-                else:
-                    max_posts_num = 50
-
-                if user_agent and vkfeed.utils.zero_subscribers(user_agent):
-                    max_posts_num /= 2
-
                 LOG.info('Applying the following limits: max_age=%s, max_posts_num=%s', max_age, max_posts_num)
 
                 try:
