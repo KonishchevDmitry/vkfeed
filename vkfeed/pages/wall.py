@@ -199,16 +199,11 @@ class WallPage(webapp2.RequestHandler):
                     error += '''<p>
                         Пожалуйста, убедитесь, что вы правильно указали профиль
                         пользователя или группы, и что данный профиль является
-                        общедоступным. Если все указано верно, и ошибка
-                        повторяется, пожалуйста, свяжитесь с <a
-                        href="mailto:{0}">администратором</a>.
-                    </p>'''.format(cgi.escape(constants.ADMIN_EMAIL, quote = True))
+                        общедоступным.
+                    </p>'''
             else:
                 self.error(httplib.INTERNAL_SERVER_ERROR)
-                error = '''
-                    При генерации RSS-ленты произошла внутренняя ошибка сервера.
-                    Если ошибка повторяется, пожалуйста, свяжитесь с <a href="mailto:{0}">администратором</a>.
-                '''.format(cgi.escape(constants.ADMIN_EMAIL, quote = True))
+                error = '''При генерации RSS-ленты произошла внутренняя ошибка сервера.'''
 
             self.response.headers[b'Content-Type'] = b'text/html; charset=utf-8'
             self.response.out.write(vkfeed.utils.render_template('error.html', { 'error': error }))

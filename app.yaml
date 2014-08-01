@@ -15,8 +15,8 @@ handlers:
 - url: /images
   static_dir: images
 
-- url: /((?:google|yandex).*\.html|robots\.txt)
-  static_files: static/\1
+- url: /robots\.txt
+  static_files: static/robots.txt
   upload: static
 
 - url: /.*
