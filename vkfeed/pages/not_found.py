@@ -35,6 +35,5 @@ class NotFoundPage(webapp2.RequestHandler):
                     попытайтесь найти интересующую вас информацию там.
                 </p>
             ''',
-            'include_counters': True,
         }))
 
