@@ -156,12 +156,12 @@ def read(profile_name, min_timestamp, max_posts_num, foreign_posts, show_photo, 
             elif attachment['type'] == 'video':
                 info = attachment[attachment['type']]
                 supported.append(
-                    '<a href="{vk_url}video{info[owner_id]}_{info[vid]}">'
+                    '<a href="{vk_url}wall{profile_id}_{post_id}?z=video{info[owner_id]}_{info[vid]}">'
                         '<img {img_style} src="{info[image]}" />'
                         '<b>{info[title]} ({duration})</b>'
                     '</a>'.format(
-                        vk_url = constants.VK_URL, info = info, img_style = img_style,
-                        duration = _get_duration(info['duration'])))
+                        vk_url = constants.VK_URL, profile_id = user['id'], post_id = post['id'], info = info,
+                        img_style = img_style, duration = _get_duration(info['duration'])))
 
             elif attachment['type'] == 'audio':
                 info = attachment[attachment['type']]

@@ -4,6 +4,8 @@
 
 {% block head %}
     <script type="text/javascript">
+        'use strict';
+
         var formInputFocused = false;
 
         function setFormInputFocus () {
@@ -13,14 +15,12 @@
         }
 
         function onready () {
-            'use strict';
-        
             function getCookie (name) {
                 name += '=';
                 var cookies = document.cookie.split(';');
-                for(var i=0; i<cookies.length; i++) {
+                for (var i = 0; i < cookies.length; i++) {
                     var cookie = cookies[i].trim();
-                    if(0 === cookie.indexOf(name)) {
+                    if (0 === cookie.indexOf(name)) {
                         return cookie.substring(name.length, cookie.length);
                     }
                 }
@@ -32,7 +32,7 @@
                 document.cookie = name + '=' + value + '; ' + 'expires=' + d.toGMTString();
             }
 
-            function getFormDefaults () {
+            function getDefaults () {
                 var foreignPosts = getCookie('profile_url_form_foreign_posts');
                 if (foreignPosts) {
                     return {
@@ -71,7 +71,7 @@
                 };
             }
 
-            var defaults = getFormDefaults();
+            var defaults = getDefaults();
             if (defaults) {
                 setFormValues(defaults);
             }
@@ -79,7 +79,7 @@
             delegateEvents();
         }
 
-        if (document.readyState === 'complete') {
+        if ('complete' === document.readyState) {
             onready();
         } else {
             window.addEventListener('onload', onready, false);
