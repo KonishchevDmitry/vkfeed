@@ -213,10 +213,7 @@ def read(profile_name, min_timestamp, max_posts_num, foreign_posts, show_photo, 
                     url = _get_profile_url(post['from_id']), img_style = img_style,
                     photo = users[post['from_id']]['photo'], text = text))
 
-        date = (
-            datetime.datetime.fromtimestamp(post['date'])
-            # Take MSK timezone into account
-            + datetime.timedelta(hours = 4))
+        date = datetime.datetime.fromtimestamp(post['date'])
 
         posts.append({
             'title': title,
